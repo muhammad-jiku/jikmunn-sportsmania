@@ -1,12 +1,24 @@
+require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 
 //  app initialize
 const app = express();
+
 //  port
 const port = process.env.PORT || 5000;
 
+// cors config
+const corsConfig = {
+  origin: true,
+  credentials: true,
+};
+
 //  middlewares
 app.use(express.json());
+app.use(cors(corsConfig));
+app.options('*', cors(corsConfig));
+app.disable('x-powered-by'); // less hackers know about our stack
 
 //  displaying welcome message
 app.get('/', (req, res) => {
