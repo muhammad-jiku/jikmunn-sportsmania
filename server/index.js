@@ -1,4 +1,5 @@
 const app = require('./app');
+const databaseConnect = require('./utils/dbConnect');
 
 //  port
 const port = process.env.PORT || 5000;
@@ -9,6 +10,9 @@ process.on('uncaughtException', (err) => {
   console.log(`Shutting down the server due to Uncaught Exception`);
   process.exit(1);
 });
+
+// Connecting to database
+databaseConnect();
 
 //  listening to the port
 const server = app.listen(port, () => {
