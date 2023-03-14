@@ -31,6 +31,6 @@ productRouter.route('/product/:id').get(getProductDetails);
 
 productRouter.route('/review').put(createProductReview);
 
-productRouter.route('/reviews').get(getProductReviews).deleteput(deleteReview);
+productRouter.route('/reviews').get(getProductReviews).delete(deleteReview);
 
 module.exports = productRouter;
