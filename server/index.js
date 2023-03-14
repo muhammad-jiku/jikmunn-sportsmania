@@ -1,42 +1,26 @@
-require('dotenv').config();
-const cors = require('cors');
-const express = require('express');
-
-//  app initialize
-const app = express();
+const app = require('./app');
 
 //  port
 const port = process.env.PORT || 5000;
 
-// cors config
-const corsConfig = {
-  origin: true,
-  credentials: true,
-};
-
-//  middlewares
-app.use(express.json());
-app.use(cors(corsConfig));
-app.options('*', cors(corsConfig));
-app.disable('x-powered-by'); // less hackers know about our stack
-
-//  displaying welcome message
-app.get('/', (req, res) => {
-  res.status(300).json({
-    message: 'Welcome here!',
-  });
+// Handling Uncaught Exception
+process.on('uncaughtException', (err) => {
+  console.log(`Error: ${err.message}`);
+  console.log(`Shutting down the server due to Uncaught Exception`);
+  process.exit(1);
 });
 
 //  listening to the port
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-// if express fail to handle any error for that there's global errorHandler
+// if express fail to handle any error for that there's global errorHandler: Unhandled Promise Rejection
 process.on('unhandledRejection', (err) => {
-  console.log(err.name);
-  console.log(err.message);
-  app.close(() => {
+  console.log(`Error: ${err.message}`);
+  console.log(`Shutting down the server due to Unhandled Promise Rejection`);
+
+  server.close(() => {
     process.exit(1);
   });
 });
