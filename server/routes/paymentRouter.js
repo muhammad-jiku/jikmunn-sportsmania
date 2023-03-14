@@ -12,4 +12,4 @@ paymentRouter.route('/payment/process').post(processPayment);
 
 paymentRouter.route('/stripeapikey').get(sendStripeApiKey);
 
-module.exports = router;
+module.exports = paymentRouter;
