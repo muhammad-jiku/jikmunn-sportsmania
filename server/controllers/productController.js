@@ -1,41 +1,57 @@
 // Create Product -- Admin
 const createProduct = (req, res, next) => {
-  console.log('create product');
+  res.send({
+    message: 'create product',
+  });
 };
 
 // Get All Product
 const getAllProducts = (req, res, next) => {
-  console.log('get all products');
+  res.send({
+    message: 'get all products',
+  });
 };
 
 // Get Product Details
 const getProductDetails = (req, res, next) => {
-  console.log('product details');
+  res.send({
+    message: 'product details',
+  });
 };
 
 // Update Product -- Admin
 const updateProduct = (req, res, next) => {
-  console.log('update product');
+  res.send({
+    message: 'update product',
+  });
 };
 
 // Delete Product
 const deleteProduct = (req, res, next) => {
-  console.log('delete product');
+  res.send({
+    message: 'delete product',
+  });
 };
 
 // Create New Review or Update the review
 const createProductReview = (req, res, next) => {
-  console.log('create product review');
+  res.send({
+    message: 'create product review',
+  });
 };
 
 // Get All Reviews of a product
 const getProductReviews = (req, res, next) => {
-  console.log('product reviews');
+  res.send({
+    message: 'product reviews',
+  });
 };
 
 // Delete Review
 const deleteReview = (req, res, next) => {
-  console.log('delete review');
+  res.send({
+    message: 'delete review',
+  });
 };
 
 module.exports = {

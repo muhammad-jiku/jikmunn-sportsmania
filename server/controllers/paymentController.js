@@ -1,9 +1,13 @@
 const processPayment = (req, res, next) => {
-  console.log('processing payment');
+  res.send({
+    message: 'processing payment',
+  });
 };
 
 const sendStripeApiKey = (req, res, next) => {
-  console.log('sending stripe key');
+  res.send({
+    message: 'sending stripe key',
+  });
 };
 
 module.exports = {

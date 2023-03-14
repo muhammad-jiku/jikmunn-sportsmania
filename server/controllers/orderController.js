@@ -1,35 +1,49 @@
 // Create new Order
 const newOrder = (req, res, next) => {
-  console.log('new order');
+  res.send({
+    message: 'new order',
+  });
 };
 
 // get Single Order
 const getSingleOrder = (req, res, next) => {
-  console.log('get single order');
+  res.send({
+    message: 'get single order',
+  });
 };
 
 // get logged in user  Orders
 const myOrders = (req, res, next) => {
-  console.log('my orders');
+  res.send({
+    message: 'my orders',
+  });
 };
 
 // get all Orders -- Admin
 const getAllOrders = (req, res, next) => {
-  console.log('get all oreders');
+  res.send({
+    message: 'get all oreders',
+  });
 };
 
 // update Order Status -- Admin
 const updateOrder = (req, res, next) => {
-  console.log('update order');
+  res.send({
+    message: 'update order',
+  });
 };
 
 const updateStock = (id, quantity) => {
-  console.log('update stock');
+  res.send({
+    message: 'update stock',
+  });
 };
 
 // delete Order -- Admin
 const deleteOrder = (req, res, next) => {
-  console.log('delete order');
+  res.send({
+    message: 'delete order',
+  });
 };
 
 module.exports = {

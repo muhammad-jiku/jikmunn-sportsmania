@@ -1,61 +1,85 @@
 // Register a User
 const registerUser = (req, res, next) => {
-  console.log('register a user');
+  res.send({
+    message: 'register a user',
+  });
 };
 
 // Login User
 const loginUser = (req, res, next) => {
-  console.log('login user');
+  res.send({
+    message: 'login user',
+  });
 };
 
 // Logout User
 const logout = (req, res, next) => {
-  console.log('logout user');
+  res.send({
+    message: 'logout user',
+  });
 };
 
 // Forgot Password
 const forgotPassword = (req, res, next) => {
-  console.log('forgot password');
+  res.send({
+    message: 'forgot password',
+  });
 };
 
 // Reset Password
 const resetPassword = (req, res, next) => {
-  console.log('reset password');
+  res.send({
+    message: 'reset password',
+  });
 };
 
 // Get User Detail
 const getUserDetails = (req, res, next) => {
-  console.log('get user details');
+  res.send({
+    message: 'get user details',
+  });
 };
 
 // update User password
 const updatePassword = (req, res, next) => {
-  console.log('update password');
+  res.send({
+    message: 'update password',
+  });
 };
 
 // update User Profile
 const updateProfile = (req, res, next) => {
-  console.log('update profile');
+  res.send({
+    message: 'update profile',
+  });
 };
 
 // Get all users(admin)
 const getAllUser = (req, res, next) => {
-  console.log('get all users');
+  res.send({
+    message: 'get all users',
+  });
 };
 
 // Get single user (admin)
 const getSingleUser = (req, res, next) => {
-  console.log('get single user');
+  res.send({
+    message: 'get single user',
+  });
 };
 
 // update User Role -- Admin
 const updateUserRole = (req, res, next) => {
-  console.log('update user role');
+  res.send({
+    message: 'update user role',
+  });
 };
 
 // Delete User --Admin
 const deleteUser = (req, res, next) => {
-  console.log('delete user');
+  res.send({
+    message: 'delete user',
+  });
 };
 
 module.exports = {
