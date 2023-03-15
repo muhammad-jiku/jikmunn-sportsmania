@@ -48,6 +48,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+//  Hashing Password
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();
@@ -66,6 +67,11 @@ userSchema.methods.getJWTToken = function () {
       expiresIn: process.env.JWT_EXPIRE,
     }
   );
+};
+
+// Compare Password
+userSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
 };
 
 const User = mongoose.model.Users || new mongoose.model('User', userSchema);
