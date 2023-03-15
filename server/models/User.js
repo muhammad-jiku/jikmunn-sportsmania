@@ -32,6 +32,8 @@ const userSchema = new mongoose.Schema(
       url: {
         type: String,
         required: true,
+        default:
+          'https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg',
       },
     },
     role: {
@@ -50,7 +52,6 @@ userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();
   }
-
   this.password = await bcrypt.hash(this.password, 10);
 });
 
@@ -65,28 +66,6 @@ userSchema.methods.getJWTToken = function () {
       expiresIn: process.env.JWT_EXPIRE,
     }
   );
-};
-
-// Compare Password
-
-userSchema.methods.comparePassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
-};
-
-// Generating Password Reset Token
-userSchema.methods.getResetPasswordToken = function () {
-  // Generating Token
-  const resetToken = crypto.randomBytes(64).toString('hex');
-
-  // Hashing and adding resetPasswordToken to userSchema
-  this.resetPasswordToken = crypto
-    .createHash('sha256')
-    .update(resetToken)
-    .digest('hex');
-
-  this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
-
-  return resetToken;
 };
 
 const User = mongoose.model.Users || new mongoose.model('User', userSchema);

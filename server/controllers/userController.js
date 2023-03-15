@@ -1,10 +1,26 @@
-// Register a User
-const registerUser = (req, res, next) => {
-  res.send({
-    message: 'register a user',
-  });
-};
+const AsyncError = require('../middlewares/bugError/AsyncError');
+const User = require('../models/User');
 
+// Register a User
+const registerUser = AsyncError(async (req, res, next) => {
+  const { name, email, password, avatar } = await req.body;
+  const { public_id } = await avatar;
+
+  const user = await User.create({
+    name,
+    email,
+    password,
+    avatar: {
+      public_id,
+    },
+  });
+  const token = user.getJWTToken();
+  res.status(201).json({
+    success: true,
+    user,
+    token,
+  });
+});
 // Login User
 const loginUser = (req, res, next) => {
   res.send({
