@@ -1,7 +1,12 @@
+const Product = require('../models/Product');
+
 // Create Product -- Admin
-const createProduct = (req, res, next) => {
-  res.send({
-    message: 'create product',
+const createProduct = async (req, res, next) => {
+  const product = await Product.create(req.body);
+
+  res.status(201).json({
+    success: true,
+    product,
   });
 };
 
