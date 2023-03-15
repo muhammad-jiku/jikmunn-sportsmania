@@ -28,9 +28,13 @@ const getAdminProducts = async (req, res, next) => {
 };
 
 // Get Product Details
-const getProductDetails = (req, res, next) => {
-  res.send({
-    message: 'product details',
+const getProductDetails = async (req, res, next) => {
+  const id = req.params.id;
+  const product = await Product.findById({ _id: id });
+
+  res.status(200).json({
+    success: true,
+    product,
   });
 };
 
