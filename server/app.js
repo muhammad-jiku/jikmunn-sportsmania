@@ -5,10 +5,11 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 
-const productRouter = require('./routes/productRouter');
 const userRouter = require('./routes/userRouter');
 const orderRouter = require('./routes/orderRouter');
+const productRouter = require('./routes/productRouter');
 const paymentRouter = require('./routes/paymentRouter');
+const errorMiddleware = require('./middlewares/bugError/errorMiddleware');
 
 //  app initialize
 const app = express();
@@ -32,16 +33,19 @@ app.use(cors(corsConfig));
 app.options('*', cors(corsConfig));
 app.disable('x-powered-by'); // less hackers know about our stack
 
-app.use('/api/v1', productRouter);
-app.use('/api/v1', userRouter);
-app.use('/api/v1', orderRouter);
-app.use('/api/v1', paymentRouter);
-
 //  displaying welcome message
 app.get('/', (req, res) => {
   res.send({
     message: 'Welcome here!',
   });
 });
+
+app.use('/api/v1', productRouter);
+app.use('/api/v1', userRouter);
+app.use('/api/v1', orderRouter);
+app.use('/api/v1', paymentRouter);
+
+// Middleware for Errors
+app.use(errorMiddleware);
 
 module.exports = app;

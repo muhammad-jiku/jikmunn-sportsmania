@@ -1,14 +1,16 @@
+const AsyncError = require('../middlewares/bugError/AsyncError');
+const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
 const Product = require('../models/Product');
 
 // Create Product -- Admin
-const createProduct = async (req, res, next) => {
+const createProduct = AsyncError(async (req, res, next) => {
   const product = await Product.create(req.body);
 
   res.status(201).json({
     success: true,
     product,
   });
-};
+});
 
 // Get All Product
 const getAllProducts = (req, res, next) => {
@@ -18,19 +20,23 @@ const getAllProducts = (req, res, next) => {
 };
 
 // Get All Product (Admin)
-const getAdminProducts = async (req, res, next) => {
+const getAdminProducts = AsyncError(async (req, res, next) => {
   const products = await Product.find({});
 
   res.status(200).json({
     success: true,
     products,
   });
-};
+});
 
 // Get Product Details
 const getProductDetails = async (req, res, next) => {
   const id = req.params.id;
   const product = await Product.findById({ _id: id });
+
+  if (!product) {
+    return next(new ErrorHandler('Product not found', 404));
+  }
 
   res.status(200).json({
     success: true,
@@ -39,7 +45,7 @@ const getProductDetails = async (req, res, next) => {
 };
 
 // Update Product -- Admin
-const updateProduct = async (req, res, next) => {
+const updateProduct = AsyncError(async (req, res, next) => {
   const id = req.params.id;
   const updatedProductInfo = req.body;
   const opts = {
@@ -48,6 +54,10 @@ const updateProduct = async (req, res, next) => {
   };
 
   let product = await Product.findById({ _id: id });
+
+  if (!product) {
+    return next(new ErrorHandler('Product not found', 404));
+  }
 
   product = await Product.findByIdAndUpdate(
     { _id: id },
@@ -63,18 +73,24 @@ const updateProduct = async (req, res, next) => {
     success: true,
     product: updatedProductInfo,
   });
-};
+});
 
 // Delete Product
-const deleteProduct = async (req, res, next) => {
+const deleteProduct = AsyncError(async (req, res, next) => {
   const id = req.params.id;
-  await Product.deleteOne({ _id: id });
+  const product = await Product.findById({ _id: id });
+
+  if (!product) {
+    return next(new ErrorHandler('Product not found', 404));
+  } else {
+    await Product.deleteOne({ _id: id });
+  }
 
   res.status(200).json({
     success: true,
     message: 'Product Delete Successfully',
   });
-};
+});
 
 // Create New Review or Update the review
 const createProductReview = (req, res, next) => {
