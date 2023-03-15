@@ -66,9 +66,13 @@ const updateProduct = async (req, res, next) => {
 };
 
 // Delete Product
-const deleteProduct = (req, res, next) => {
-  res.send({
-    message: 'delete product',
+const deleteProduct = async (req, res, next) => {
+  const id = req.params.id;
+  await Product.deleteOne({ _id: id });
+
+  res.status(200).json({
+    success: true,
+    message: 'Product Delete Successfully',
   });
 };
 
