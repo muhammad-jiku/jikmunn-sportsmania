@@ -17,6 +17,16 @@ const getAllProducts = (req, res, next) => {
   });
 };
 
+// Get All Product (Admin)
+const getAdminProducts = async (req, res, next) => {
+  const products = await Product.find({});
+
+  res.status(200).json({
+    success: true,
+    products,
+  });
+};
+
 // Get Product Details
 const getProductDetails = (req, res, next) => {
   res.send({
@@ -62,6 +72,7 @@ const deleteReview = (req, res, next) => {
 module.exports = {
   createProduct,
   getAllProducts,
+  getAdminProducts,
   getProductDetails,
   updateProduct,
   deleteProduct,

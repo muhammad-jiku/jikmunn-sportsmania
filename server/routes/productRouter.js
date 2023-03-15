@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   getAllProducts,
+  getAdminProducts,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -16,9 +17,7 @@ const productRouter = express.Router({
 
 productRouter.route('/products').get(getAllProducts);
 
-// productRouter
-//   .route('/admin/products')
-//   .get( getAdminProducts);
+productRouter.route('/admin/products').get(getAdminProducts);
 
 productRouter.route('/admin/product/new').post(createProduct);
 
