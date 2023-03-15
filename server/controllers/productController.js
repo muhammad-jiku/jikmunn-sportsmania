@@ -39,9 +39,29 @@ const getProductDetails = async (req, res, next) => {
 };
 
 // Update Product -- Admin
-const updateProduct = (req, res, next) => {
-  res.send({
-    message: 'update product',
+const updateProduct = async (req, res, next) => {
+  const id = req.params.id;
+  const updatedProductInfo = req.body;
+  const opts = {
+    runValidators: true,
+    new: true,
+  };
+
+  let product = await Product.findById({ _id: id });
+
+  product = await Product.findByIdAndUpdate(
+    { _id: id },
+    {
+      $set: updatedProductInfo,
+    },
+    {
+      opts,
+    }
+  ).exec();
+
+  res.status(200).json({
+    success: true,
+    product: updatedProductInfo,
   });
 };
 
