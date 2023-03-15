@@ -36,7 +36,16 @@ const productSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please Enter Product Category'],
     },
-    Stock: {
+    sizes: {
+      type: String,
+      required: [true, 'Please Enter Product Size'],
+      enum: {
+        values: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
+        message: 'Size must be defined',
+      },
+      default: 'S',
+    },
+    stock: {
       type: Number,
       required: [true, 'Please Enter product Stock'],
       maxLength: [4, 'Stock cannot exceed 4 characters'],
