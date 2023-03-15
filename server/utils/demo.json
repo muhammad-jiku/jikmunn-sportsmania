@@ -1,0 +1,178 @@
+[
+  {
+    "name": "jersey 1",
+    "description": "Argentina World Cup Jersey",
+    "price": { "$numberInt": "150" },
+    "ratings": { "$numberInt": "0" },
+    "images": [
+      {
+        "public_id": "ytug74f51aagahgsh5312fyhiljfakjghakhg",
+        "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEia6lmnPl6z6hgz7Tj49JGyYi0901Faaw0wrc7YsIF1TQAKsl5aLLjjygWNo8QyIZtjATLCRUYhBmLwren10tZKEZ7_rBsUctzvEpIQQMn0AgHCmJrHnLZZjIUi7Gt8ZVEOHVqGd9DBpXpR2k5DPRKKEI_OuTJ-lRtGpFlitPPEWTQFPPSWFX-LZgEK/s1000/argentina-2022-world-cup-kit-14.jpg"
+      }
+    ],
+    "category": "football",
+    "size": "L",
+    "stock": { "$numberInt": "10" },
+    "numOfReviews": { "$numberInt": "0" }
+  },
+  {
+    "name": "jersey 10",
+    "description": "Argentina World Cup Jersey",
+    "price": { "$numberInt": "150" },
+    "ratings": { "$numberInt": "0" },
+    "images": [
+      {
+        "public_id": "ytug74f51aagahgsh5312fyhiljfakjghakhg",
+        "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEia6lmnPl6z6hgz7Tj49JGyYi0901Faaw0wrc7YsIF1TQAKsl5aLLjjygWNo8QyIZtjATLCRUYhBmLwren10tZKEZ7_rBsUctzvEpIQQMn0AgHCmJrHnLZZjIUi7Gt8ZVEOHVqGd9DBpXpR2k5DPRKKEI_OuTJ-lRtGpFlitPPEWTQFPPSWFX-LZgEK/s1000/argentina-2022-world-cup-kit-14.jpg"
+      }
+    ],
+    "category": "football",
+    "size": "M",
+    "stock": { "$numberInt": "10" },
+    "numOfReviews": { "$numberInt": "0" }
+  },
+  {
+    "name": "jersey 1.0",
+    "description": "Argentina World Cup Jersey",
+    "price": { "$numberInt": "199" },
+    "ratings": { "$numberInt": "0" },
+    "images": [
+      {
+        "public_id": "ytug74f51aagahgsh5312fyhiljfakjghakhg",
+        "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEia6lmnPl6z6hgz7Tj49JGyYi0901Faaw0wrc7YsIF1TQAKsl5aLLjjygWNo8QyIZtjATLCRUYhBmLwren10tZKEZ7_rBsUctzvEpIQQMn0AgHCmJrHnLZZjIUi7Gt8ZVEOHVqGd9DBpXpR2k5DPRKKEI_OuTJ-lRtGpFlitPPEWTQFPPSWFX-LZgEK/s1000/argentina-2022-world-cup-kit-14.jpg"
+      }
+    ],
+    "category": "football",
+    "size": "XXL",
+    "stock": { "$numberInt": "10" },
+    "numOfReviews": { "$numberInt": "0" }
+  },
+  {
+    "name": "jersey 1",
+    "description": "Argentina World Cup Jersey",
+    "price": { "$numberInt": "350" },
+    "ratings": { "$numberInt": "0" },
+    "images": [
+      {
+        "public_id": "ytug74f51aagahgsh5312fyhiljfakjghakhg",
+        "url": "https://i2-prod.dailystar.co.uk/incoming/article27857239.ece/ALTERNATES/s1200c/0_Lionel-Messi.jpg"
+      }
+    ],
+    "category": "football",
+    "size": "M",
+    "stock": { "$numberInt": "110" },
+    "numOfReviews": { "$numberInt": "0" }
+  },
+  {
+    "name": "jersey 1",
+    "description": "Argentina World Cup Jersey",
+    "price": { "$numberInt": "350" },
+    "ratings": { "$numberInt": "0" },
+    "images": [
+      {
+        "public_id": "ytug74f51aagahgsh5312fyhiljfakjghakhg",
+        "url": "https://i2-prod.dailystar.co.uk/incoming/article27857239.ece/ALTERNATES/s1200c/0_Lionel-Messi.jpg"
+      }
+    ],
+    "category": "football",
+    "size": "M",
+    "stock": { "$numberInt": "110" },
+    "numOfReviews": { "$numberInt": "0" }
+  },
+  {
+    "name": "jersey 1",
+    "description": "Argentina World Cup Jersey",
+    "price": { "$numberInt": "350" },
+    "ratings": { "$numberInt": "0" },
+    "images": [
+      {
+        "public_id": "ytug74f51aagahgsh5312fyhiljfakjghakhg",
+        "url": "https://i2-prod.dailystar.co.uk/incoming/article27857239.ece/ALTERNATES/s1200c/0_Lionel-Messi.jpg"
+      }
+    ],
+    "category": "football",
+    "size": "M",
+    "stock": { "$numberInt": "110" },
+    "numOfReviews": { "$numberInt": "0" }
+  },
+  {
+    "name": "jersey 1",
+    "description": "Argentina World Cup Jersey",
+    "price": { "$numberInt": "189" },
+    "ratings": { "$numberInt": "0" },
+    "images": [
+      {
+        "public_id": "ytug74f51aagahgsh5312fyhiljfakjghakhg",
+        "url": "https://i2-prod.dailystar.co.uk/incoming/article27857239.ece/ALTERNATES/s1200c/0_Lionel-Messi.jpg"
+      }
+    ],
+    "category": "football",
+    "size": "M",
+    "stock": { "$numberInt": "110" },
+    "numOfReviews": { "$numberInt": "0" }
+  },
+  {
+    "name": "jersey 1",
+    "description": "Bangladesh World Cup Jersey",
+    "price": { "$numberInt": "125" },
+    "ratings": { "$numberInt": "0" },
+    "images": [
+      {
+        "public_id": "ytug74f51aagahgsh5312fyhiljfakjghakhg",
+        "url": "https://resources.pulse.icc-cricket.com/players/284/201.png"
+      }
+    ],
+    "category": "Cricket",
+    "size": "S",
+    "stock": { "$numberInt": "11" },
+    "numOfReviews": { "$numberInt": "0" }
+  },
+  {
+    "name": "jersey 1",
+    "description": "Bangladesh World Cup Jersey",
+    "price": { "$numberInt": "125" },
+    "ratings": { "$numberInt": "0" },
+    "images": [
+      {
+        "public_id": "ytug74f51aagahgsh5312fyhiljfakjghakhg",
+        "url": "https://resources.pulse.icc-cricket.com/players/284/201.png"
+      }
+    ],
+    "category": "Cricket",
+    "size": "M",
+    "stock": { "$numberInt": "11" },
+    "numOfReviews": { "$numberInt": "0" }
+  },
+  {
+    "name": "jersey 1",
+    "description": "Bangladesh World Cup Jersey",
+    "price": { "$numberInt": "125" },
+    "ratings": { "$numberInt": "0" },
+    "images": [
+      {
+        "public_id": "ytug74f51aagahgsh5312fyhiljfakjghakhg",
+        "url": "https://resources.pulse.icc-cricket.com/players/284/201.png"
+      }
+    ],
+    "category": "Cricket",
+    "size": "M",
+    "stock": { "$numberInt": "11" },
+    "numOfReviews": { "$numberInt": "0" }
+  },
+  {
+    "name": "jersey 1",
+    "description": "Bangladesh World Cup Jersey",
+    "price": { "$numberInt": "125" },
+    "ratings": { "$numberInt": "0" },
+    "images": [
+      {
+        "public_id": "ytug74f51aagahgsh5312fyhiljfakjghakhg",
+        "url": "https://resources.pulse.icc-cricket.com/players/284/201.png"
+      }
+    ],
+    "category": "Cricket",
+    "size": "L",
+    "stock": { "$numberInt": "11" },
+    "numOfReviews": { "$numberInt": "0" }
+  }
+]

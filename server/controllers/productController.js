@@ -1,6 +1,7 @@
 const AsyncError = require('../middlewares/bugError/AsyncError');
 const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
 const Product = require('../models/Product');
+const ApiFeatures = require('../utils/ApiFeatures');
 
 // Create Product -- Admin
 const createProduct = AsyncError(async (req, res, next) => {
@@ -13,11 +14,30 @@ const createProduct = AsyncError(async (req, res, next) => {
 });
 
 // Get All Product
-const getAllProducts = (req, res, next) => {
-  res.send({
-    message: 'get all products',
+const getAllProducts = AsyncError(async (req, res, next) => {
+  const resultPerPage = 4;
+  const productsCount = await Product.countDocuments();
+
+  const apiFeature = new ApiFeatures(Product.find(), req.query)
+    .search()
+    .filter();
+
+  let products = await apiFeature.query;
+
+  let filteredProductsCount = products.length;
+
+  apiFeature.pagination(resultPerPage);
+
+  products = await apiFeature.query.clone();
+
+  res.status(200).json({
+    success: true,
+    products,
+    productsCount,
+    resultPerPage,
+    filteredProductsCount,
   });
-};
+});
 
 // Get All Product (Admin)
 const getAdminProducts = AsyncError(async (req, res, next) => {
