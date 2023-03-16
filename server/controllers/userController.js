@@ -229,11 +229,32 @@ const getSingleUser = AsyncError(async (req, res, next) => {
 });
 
 // update User Role -- Admin
-const updateUserRole = (req, res, next) => {
-  res.send({
-    message: 'update user role',
+const updateUserRole = AsyncError(async (req, res, next) => {
+  const { id } = await req.params;
+  const { name, email, role } = await req.body;
+  const newUserData = {
+    name,
+    email,
+    role,
+  };
+  const opts = {
+    runValidators: true,
+    new: true,
+  };
+
+  await User.findByIdAndUpdate(
+    { _id: id },
+    { $set: newUserData },
+    {
+      opts,
+    }
+  ).exec();
+
+  res.status(200).json({
+    success: true,
+    newUserData,
   });
-};
+});
 
 // Delete User --Admin
 const deleteUser = (req, res, next) => {

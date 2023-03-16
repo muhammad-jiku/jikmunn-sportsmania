@@ -46,7 +46,7 @@ userRouter
 userRouter
   .route('/admin/user/:id')
   .get(isAuthenticatedUser, authorizeRoles('admin'), getSingleUser)
-  .put(updateUserRole)
+  .put(isAuthenticatedUser, authorizeRoles('admin'), updateUserRole)
   .delete(deleteUser);
 
 module.exports = userRouter;
