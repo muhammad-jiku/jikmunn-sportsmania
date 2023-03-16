@@ -1,6 +1,7 @@
 const AsyncError = require('../middlewares/bugError/AsyncError');
 const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
 const User = require('../models/User');
+const sendEmail = require('../utils/sendEmail');
 const sendToken = require('../utils/sendToken');
 
 // Register a User
@@ -18,6 +19,7 @@ const registerUser = AsyncError(async (req, res, next) => {
   });
   sendToken(user, 201, res);
 });
+
 // Login User
 const loginUser = AsyncError(async (req, res, next) => {
   const { email, password } = await req.body;
@@ -53,11 +55,49 @@ const logout = AsyncError(async (req, res, next) => {
 });
 
 // Forgot Password
-const forgotPassword = (req, res, next) => {
-  res.send({
-    message: 'forgot password',
+const forgotPassword = AsyncError(async (req, res, next) => {
+  const { email } = await req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return next(new ErrorHandler('User not found', 404));
+  }
+
+  // Get ResetPassword Token
+  const resetToken = await user.getResetPasswordToken();
+
+  await user.save({
+    validateBeforeSave: false,
   });
-};
+
+  const resetPasswordUrl = `${req.protocol}://${req.get(
+    'host'
+  )}/password/reset/${resetToken}`;
+
+  const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: `Sports Mania Password Recovery`,
+      message,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `Email sent to ${user.email} successfully`,
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save({
+      validateBeforeSave: false,
+    });
+
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
 
 // Reset Password
 const resetPassword = (req, res, next) => {
