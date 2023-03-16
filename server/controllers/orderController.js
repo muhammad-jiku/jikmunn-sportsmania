@@ -1,4 +1,5 @@
 const AsyncError = require('../middlewares/bugError/AsyncError');
+const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
 const Order = require('../models/Order');
 
 // Create new Order
@@ -32,11 +33,22 @@ const newOrder = AsyncError(async (req, res, next) => {
 });
 
 // get Single Order
-const getSingleOrder = (req, res, next) => {
-  res.send({
-    message: 'get single order',
+const getSingleOrder = AsyncError(async (req, res, next) => {
+  const { id } = await req.params;
+  const order = await Order.findById({ _id: id }).populate(
+    'user',
+    'name email'
+  );
+
+  if (!order) {
+    return next(new ErrorHandler('Order not found with this Id', 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    order,
   });
-};
+});
 
 // get logged in user  Orders
 const myOrders = (req, res, next) => {
