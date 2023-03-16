@@ -8,7 +8,10 @@ const {
   deleteOrder,
 } = require('../controllers/orderController');
 
-const { isAuthenticatedUser } = require('../middlewares/auth/AuthMiddleware');
+const {
+  isAuthenticatedUser,
+  authorizeRoles,
+} = require('../middlewares/auth/AuthMiddleware');
 
 const orderRouter = express.Router({
   caseSensitive: true,
@@ -20,7 +23,9 @@ orderRouter.route('/order/:id').get(isAuthenticatedUser, getSingleOrder);
 
 orderRouter.route('/orders/me').get(isAuthenticatedUser, myOrders);
 
-orderRouter.route('/admin/orders').get(getAllOrders);
+orderRouter
+  .route('/admin/orders')
+  .get(isAuthenticatedUser, authorizeRoles('admin'), getAllOrders);
 
 orderRouter.route('/admin/order/:id').put(updateOrder).delete(deleteOrder);
 
