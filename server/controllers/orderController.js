@@ -1,9 +1,35 @@
+const AsyncError = require('../middlewares/bugError/AsyncError');
+const Order = require('../models/Order');
+
 // Create new Order
-const newOrder = (req, res, next) => {
-  res.send({
-    message: 'new order',
+const newOrder = AsyncError(async (req, res, next) => {
+  const {
+    shippingInfo,
+    orderItems,
+    paymentInfo,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+  } = await req.body;
+
+  const order = await Order.create({
+    shippingInfo,
+    orderItems,
+    paymentInfo,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+    paidAt: Date.now(),
+    user: req.user._id,
   });
-};
+
+  res.status(201).json({
+    success: true,
+    order,
+  });
+});
 
 // get Single Order
 const getSingleOrder = (req, res, next) => {

@@ -8,11 +8,13 @@ const {
   deleteOrder,
 } = require('../controllers/orderController');
 
+const { isAuthenticatedUser } = require('../middlewares/auth/AuthMiddleware');
+
 const orderRouter = express.Router({
   caseSensitive: true,
 });
 
-orderRouter.route('/order/new').post(newOrder);
+orderRouter.route('/order/new').post(isAuthenticatedUser, newOrder);
 
 orderRouter.route('/order/:id').get(getSingleOrder);
 
