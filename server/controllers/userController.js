@@ -204,11 +204,14 @@ const updateProfile = AsyncError(async (req, res, next) => {
 });
 
 // Get all users(admin)
-const getAllUser = (req, res, next) => {
-  res.send({
-    message: 'get all users',
+const getAllUser = AsyncError(async (req, res, next) => {
+  const users = await User.find({});
+
+  res.status(200).json({
+    success: true,
+    users,
   });
-};
+});
 
 // Get single user (admin)
 const getSingleUser = (req, res, next) => {

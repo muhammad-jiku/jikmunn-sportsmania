@@ -13,7 +13,11 @@ const {
   updateUserRole,
   deleteUser,
 } = require('../controllers/userController');
-const { isAuthenticatedUser } = require('../middlewares/auth/AuthMiddleware');
+
+const {
+  isAuthenticatedUser,
+  authorizeRoles,
+} = require('../middlewares/auth/AuthMiddleware');
 
 const userRouter = express.Router({
   caseSensitive: true,
@@ -35,7 +39,9 @@ userRouter.route('/password/update').put(isAuthenticatedUser, updatePassword);
 
 userRouter.route('/me/update').put(isAuthenticatedUser, updateProfile);
 
-userRouter.route('/admin/users').get(getAllUser);
+userRouter
+  .route('/admin/users')
+  .get(isAuthenticatedUser, authorizeRoles('admin'), getAllUser);
 
 userRouter
   .route('/admin/user/:id')
