@@ -257,11 +257,21 @@ const updateUserRole = AsyncError(async (req, res, next) => {
 });
 
 // Delete User --Admin
-const deleteUser = (req, res, next) => {
-  res.send({
-    message: 'delete user',
+const deleteUser = AsyncError(async (req, res, next) => {
+  const { id } = await req.params;
+  const user = await User.findById({ _id: id });
+
+  if (!user) {
+    return next(new ErrorHandler(`User does not exist with Id: ${id}`, 400));
+  } else {
+    await User.deleteOne({ _id: id });
+  }
+
+  res.status(200).json({
+    success: true,
+    message: 'User Deleted Successfully',
   });
-};
+});
 
 module.exports = {
   registerUser,
