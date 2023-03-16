@@ -2,9 +2,9 @@ const express = require('express');
 const {
   registerUser,
   loginUser,
+  logout,
   forgotPassword,
   resetPassword,
-  logout,
   getUserDetails,
   updatePassword,
   updateProfile,
@@ -22,11 +22,11 @@ userRouter.route('/register').post(registerUser);
 
 userRouter.route('/login').post(loginUser);
 
+userRouter.route('/logout').get(logout);
+
 userRouter.route('/password/forgot').post(forgotPassword);
 
 userRouter.route('/password/reset/:token').put(resetPassword);
-
-userRouter.route('/logout').get(logout);
 
 userRouter.route('/me').get(getUserDetails);
 
