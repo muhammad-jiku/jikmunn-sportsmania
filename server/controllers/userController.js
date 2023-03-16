@@ -214,11 +214,19 @@ const getAllUser = AsyncError(async (req, res, next) => {
 });
 
 // Get single user (admin)
-const getSingleUser = (req, res, next) => {
-  res.send({
-    message: 'get single user',
+const getSingleUser = AsyncError(async (req, res, next) => {
+  const { id } = await req.params;
+  const user = await User.findById({ _id: id });
+
+  if (!user) {
+    return next(new ErrorHandler(`User does not exist with Id: ${id}`));
+  }
+
+  res.status(200).json({
+    success: true,
+    user,
   });
-};
+});
 
 // update User Role -- Admin
 const updateUserRole = (req, res, next) => {

@@ -45,7 +45,7 @@ userRouter
 
 userRouter
   .route('/admin/user/:id')
-  .get(getSingleUser)
+  .get(isAuthenticatedUser, authorizeRoles('admin'), getSingleUser)
   .put(updateUserRole)
   .delete(deleteUser);
 
