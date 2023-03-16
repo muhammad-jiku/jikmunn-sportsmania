@@ -142,7 +142,7 @@ const resetPassword = AsyncError(async (req, res, next) => {
 
 // Get User Detail
 const getUserDetails = AsyncError(async (req, res, next) => {
-  const id = req.user.id;
+  const { id } = await req.user;
   const user = await User.findById({
     _id: id,
   });
@@ -152,12 +152,27 @@ const getUserDetails = AsyncError(async (req, res, next) => {
     user,
   });
 });
+
 // update User password
-const updatePassword = (req, res, next) => {
-  res.send({
-    message: 'update password',
-  });
-};
+const updatePassword = AsyncError(async (req, res, next) => {
+  const { id } = await req.user;
+  const { oldPassword, newPassword, confirmPassword } = await req.body;
+  const user = await User.findById({ _id: id }).select('+password');
+
+  const isPasswordMatched = await user.comparePassword(oldPassword);
+
+  if (!isPasswordMatched) {
+    return next(new ErrorHandler('Old password is incorrect', 400));
+  }
+
+  if (newPassword !== confirmPassword) {
+    return next(new ErrorHandler('password does not match', 400));
+  }
+  user.password = newPassword;
+
+  await user.save();
+  sendToken(user, 200, res);
+});
 
 // update User Profile
 const updateProfile = (req, res, next) => {

@@ -31,7 +31,7 @@ userRouter.route('/password/reset/:token').put(resetPassword);
 
 userRouter.route('/me').get(isAuthenticatedUser, getUserDetails);
 
-userRouter.route('/password/update').put(updatePassword);
+userRouter.route('/password/update').put(isAuthenticatedUser, updatePassword);
 
 userRouter.route('/me/update').put(updateProfile);
 
