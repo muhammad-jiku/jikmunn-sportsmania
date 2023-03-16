@@ -175,11 +175,33 @@ const updatePassword = AsyncError(async (req, res, next) => {
 });
 
 // update User Profile
-const updateProfile = (req, res, next) => {
-  res.send({
-    message: 'update profile',
+const updateProfile = AsyncError(async (req, res, next) => {
+  const { id } = await req.user;
+  const { name, email, avatar } = await req.body;
+  // const { public_id, url } = await avatar;
+  const newUserData = {
+    name,
+    email,
+  };
+  const opts = {
+    runValidators: true,
+    new: true,
+  };
+
+  const user = await User.findByIdAndUpdate(
+    { _id: id },
+    { $set: newUserData },
+    {
+      opts,
+    }
+  ).exec();
+
+  res.status(200).json({
+    success: true,
+    user,
+    newUserData,
   });
-};
+});
 
 // Get all users(admin)
 const getAllUser = (req, res, next) => {

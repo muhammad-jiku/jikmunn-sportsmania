@@ -33,7 +33,7 @@ userRouter.route('/me').get(isAuthenticatedUser, getUserDetails);
 
 userRouter.route('/password/update').put(isAuthenticatedUser, updatePassword);
 
-userRouter.route('/me/update').put(updateProfile);
+userRouter.route('/me/update').put(isAuthenticatedUser, updateProfile);
 
 userRouter.route('/admin/users').get(getAllUser);
 
