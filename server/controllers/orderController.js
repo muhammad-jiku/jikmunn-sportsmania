@@ -51,11 +51,15 @@ const getSingleOrder = AsyncError(async (req, res, next) => {
 });
 
 // get logged in user  Orders
-const myOrders = (req, res, next) => {
-  res.send({
-    message: 'my orders',
+const myOrders = AsyncError(async (req, res, next) => {
+  const { _id } = await req.user;
+  const orders = await Order.find({ user: _id });
+
+  res.status(200).json({
+    success: true,
+    orders,
   });
-};
+});
 
 // get all Orders -- Admin
 const getAllOrders = (req, res, next) => {
