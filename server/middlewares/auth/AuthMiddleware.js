@@ -5,7 +5,7 @@ const ErrorHandler = require('../bugError/ErrorHandler');
 
 const isAuthenticatedUser = AsyncError(async (req, res, next) => {
   const { token } = await req.cookies;
-  console.log('token', token); 
+  console.log('token', token);
   if (!token) {
     return next(new ErrorHandler('Please Login to access this resource', 401));
   }

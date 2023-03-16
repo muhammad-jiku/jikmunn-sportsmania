@@ -13,6 +13,7 @@ const {
   updateUserRole,
   deleteUser,
 } = require('../controllers/userController');
+const { isAuthenticatedUser } = require('../middlewares/auth/AuthMiddleware');
 
 const userRouter = express.Router({
   caseSensitive: true,
@@ -28,7 +29,7 @@ userRouter.route('/password/forgot').post(forgotPassword);
 
 userRouter.route('/password/reset/:token').put(resetPassword);
 
-userRouter.route('/me').get(getUserDetails);
+userRouter.route('/me').get(isAuthenticatedUser, getUserDetails);
 
 userRouter.route('/password/update').put(updatePassword);
 

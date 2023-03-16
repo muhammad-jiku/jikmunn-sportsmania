@@ -141,12 +141,17 @@ const resetPassword = AsyncError(async (req, res, next) => {
 });
 
 // Get User Detail
-const getUserDetails = (req, res, next) => {
-  res.send({
-    message: 'get user details',
+const getUserDetails = AsyncError(async (req, res, next) => {
+  const id = req.user.id;
+  const user = await User.findById({
+    _id: id,
   });
-};
 
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});
 // update User password
 const updatePassword = (req, res, next) => {
   res.send({
