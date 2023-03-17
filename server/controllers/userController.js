@@ -104,7 +104,7 @@ const forgotPassword = AsyncError(async (req, res, next) => {
 const resetPassword = AsyncError(async (req, res, next) => {
   const { token } = await req.params;
   const { password, confirmPassword } = await req.body;
-  console.log(token, password, confirmPassword);
+  // console.log(token, password, confirmPassword);
   // creating token hash
   const resetPasswordToken = crypto
     .createHash('sha256')

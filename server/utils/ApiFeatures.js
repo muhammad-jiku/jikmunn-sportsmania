@@ -27,7 +27,7 @@ class ApiFeatures {
           //   },
         }
       : {};
-    console.log('keyword', keyword);
+    // console.log('keyword', keyword);
     this.query = this.query.find({
       ...keyword,
     });
@@ -38,16 +38,16 @@ class ApiFeatures {
     const queryCopy = {
       ...this.queryStr,
     };
-    console.log('queryCopy', queryCopy);
+    // console.log('queryCopy', queryCopy);
     //   Removing some fields for category
     const removeFields = ['keyword', 'page', 'limit'];
     removeFields.forEach((key) => delete queryCopy[key]);
-    console.log('remove fileds', removeFields);
+    // console.log('remove fileds', removeFields);
 
     // Filter For Price and Rating
     let queryStr = JSON.stringify(queryCopy);
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
-    console.log('queryStr', queryStr);
+    // console.log('queryStr', queryStr);
     this.query = this.query.find(JSON.parse(queryStr));
 
     return this;
@@ -59,8 +59,8 @@ class ApiFeatures {
     const skip = resultPerPage * (currentPage - 1);
 
     this.query = this.query.limit(resultPerPage).skip(skip);
-    console.log('currentPage', currentPage);
-    console.log('skip', skip);
+    // console.log('currentPage', currentPage);
+    // console.log('skip', skip);
     return this;
   }
 }
