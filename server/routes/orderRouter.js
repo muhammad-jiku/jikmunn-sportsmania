@@ -30,6 +30,6 @@ orderRouter
 orderRouter
   .route('/admin/order/:id')
   .put(isAuthenticatedUser, authorizeRoles('admin'), updateOrder)
-  .delete(deleteOrder);
+  .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteOrder);
 
 module.exports = orderRouter;

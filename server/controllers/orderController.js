@@ -123,11 +123,21 @@ const updateStock = async (id, quantity) => {
 };
 
 // delete Order -- Admin
-const deleteOrder = (req, res, next) => {
-  res.send({
-    message: 'delete order',
+const deleteOrder = AsyncError(async (req, res, next) => {
+  const { id } = await req.params;
+  const order = await Order.findById({ _id: id });
+
+  if (!order) {
+    return next(new ErrorHandler('Order not found with this Id', 404));
+  } else {
+    await Order.deleteOne({ _id: id });
+  }
+
+  res.status(200).json({
+    success: true,
+    message: 'Order Delete Successfully',
   });
-};
+});
 
 module.exports = {
   newOrder,
