@@ -159,11 +159,19 @@ const createProductReview = AsyncError(async (req, res, next) => {
 });
 
 // Get All Reviews of a product
-const getProductReviews = (req, res, next) => {
-  res.send({
-    message: 'product reviews',
+const getProductReviews = AsyncError(async (req, res, next) => {
+  const { id } = await req.query;
+  const product = await Product.findById({ _id: id });
+
+  if (!product) {
+    return next(new ErrorHandler('Product not found', 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    reviews: product.reviews,
   });
-};
+});
 
 // Delete Review
 const deleteReview = (req, res, next) => {
