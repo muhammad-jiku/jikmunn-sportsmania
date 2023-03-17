@@ -1,6 +1,7 @@
 const AsyncError = require('../middlewares/bugError/AsyncError');
 const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
 const Order = require('../models/Order');
+const Product = require('../models/Product');
 
 // Create new Order
 const newOrder = AsyncError(async (req, res, next) => {
@@ -78,15 +79,46 @@ const getAllOrders = AsyncError(async (req, res, next) => {
 });
 
 // update Order Status -- Admin
-const updateOrder = (req, res, next) => {
-  res.send({
-    message: 'update order',
-  });
-};
+const updateOrder = AsyncError(async (req, res, next) => {
+  const { id } = await req.params;
+  const { status } = await req.body;
+  const order = await Order.findById({ _id: id });
 
-const updateStock = (id, quantity) => {
-  res.send({
-    message: 'update stock',
+  if (!order) {
+    return next(new ErrorHandler('Order not found with this Id', 404));
+  }
+
+  if (order.orderStatus === 'Delivered') {
+    return next(new ErrorHandler('You have already delivered this order', 400));
+  }
+
+  if (status === 'Shipped') {
+    order.orderItems.forEach(async (o) => {
+      await updateStock(o.product, o.quantity);
+    });
+  }
+  order.orderStatus = status;
+
+  if (status === 'Delivered') {
+    order.deliveredAt = Date.now();
+  }
+
+  const updatedOrder = await order.save({
+    validateBeforeSave: false,
+  });
+  res.status(200).json({
+    success: true,
+    order,
+    updatedOrder,
+  });
+});
+
+const updateStock = async (id, quantity) => {
+  const product = await Product.findById({ _id: id });
+  product.stock -= quantity;
+
+  await product.save({
+    validateBeforeSave: false,
   });
 };
 

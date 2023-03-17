@@ -27,6 +27,9 @@ orderRouter
   .route('/admin/orders')
   .get(isAuthenticatedUser, authorizeRoles('admin'), getAllOrders);
 
-orderRouter.route('/admin/order/:id').put(updateOrder).delete(deleteOrder);
+orderRouter
+  .route('/admin/order/:id')
+  .put(isAuthenticatedUser, authorizeRoles('admin'), updateOrder)
+  .delete(deleteOrder);
 
 module.exports = orderRouter;
