@@ -18,9 +18,40 @@ import person1 from '../../../assets/avatar_1.png';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from 'react-router-dom';
 
-const pages = ['Home', 'Products', 'Contact', 'About'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Login', 'Logout'];
+const pages = [
+  {
+    title: 'Home',
+    path: '/',
+  },
+  {
+    title: 'Products',
+    path: '/products',
+  },
+  {
+    title: 'Contact',
+    path: '/contact',
+  },
+  {
+    title: 'About',
+    path: '/about',
+  },
+];
+
+const settings = [
+  {
+    title: 'Profile',
+    path: '/dashboard/profile',
+  },
+  {
+    title: 'Login',
+    path: '/login',
+  },
+  {
+    title: 'Logout',
+  },
+];
 
 const Logo = styled('img')(({ theme }) => ({
   width: '15rem',
@@ -51,10 +82,26 @@ const Navbar = () => {
     <AppBar position="static" className="header" color="secondary">
       <Toolbar className="toolbar">
         {/*  Logo */}
-        <Logo src={logo} sx={{ display: { xs: 'none', md: 'flex' } }} />
+        <Logo
+          src={logo}
+          sx={{
+            display: {
+              xs: 'none',
+              md: 'flex',
+            },
+          }}
+        />
 
         {/* Menus */}
-        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: {
+              xs: 'flex',
+              md: 'none',
+            },
+          }}
+        >
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -83,9 +130,19 @@ const Navbar = () => {
               display: { xs: 'block', md: 'none' },
             }}
           >
-            {pages.map((page) => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">{page}</Typography>
+            {pages.map(({ title, path }) => (
+              <MenuItem key={title} onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">
+                  <Link
+                    to={path}
+                    style={{
+                      textDecoration: 'none',
+                      color: '#000',
+                    }}
+                  >
+                    {title}
+                  </Link>
+                </Typography>
               </MenuItem>
             ))}
           </Menu>
@@ -99,11 +156,18 @@ const Navbar = () => {
           href="/"
           sx={{
             // mr: 2,
-            display: { xs: 'flex', md: 'none' },
+            display: {
+              xs: 'flex',
+              md: 'none',
+            },
             flexGrow: 1,
             fontFamily: 'monospace',
             fontWeight: 300,
-            fontSize: { xs: 18, sm: 22, md: 'auto' },
+            fontSize: {
+              xs: 18,
+              sm: 22,
+              md: 'auto',
+            },
             // letterSpacing: '0.125rem',
             color: 'inherit',
             textDecoration: 'none',
@@ -111,10 +175,19 @@ const Navbar = () => {
         >
           Sports Mania
         </Typography>
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          {pages.map((page) => (
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: {
+              xs: 'none',
+              md: 'flex',
+            },
+          }}
+        >
+          {pages.map(({ title, path }) => (
             <Button
-              key={page}
+              key={title}
+              href={path}
               onClick={handleCloseNavMenu}
               sx={{
                 my: 2,
@@ -124,7 +197,7 @@ const Navbar = () => {
                 fontWeight: 400,
               }}
             >
-              {page}
+              {title}
             </Button>
           ))}
         </Box>
@@ -134,7 +207,9 @@ const Navbar = () => {
           sx={{
             flexGrow: 0,
             ml: 2,
-            display: { xs: 'flex' },
+            display: {
+              xs: 'flex',
+            },
           }}
         >
           <Tooltip title="Cart">
@@ -148,12 +223,19 @@ const Navbar = () => {
             </IconButton>
           </Tooltip>
           <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <IconButton
+              onClick={handleOpenUserMenu}
+              sx={{
+                p: 0,
+              }}
+            >
               <Avatar alt="Remy Sharp" src={person1} />
             </IconButton>
           </Tooltip>
           <Menu
-            sx={{ mt: '45px' }}
+            sx={{
+              mt: '45px',
+            }}
             id="menu-appbar"
             anchorEl={anchorElUser}
             anchorOrigin={{
@@ -168,9 +250,27 @@ const Navbar = () => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
+            {settings.map(({ title, path }) => (
+              <MenuItem key={title} onClick={handleCloseUserMenu}>
+                {path ? (
+                  <>
+                    <Typography textAlign="center">
+                      <Link
+                        to={path}
+                        style={{
+                          textDecoration: 'none',
+                          color: '#000',
+                        }}
+                      >
+                        {title}
+                      </Link>
+                    </Typography>
+                  </>
+                ) : (
+                  <>
+                    <Button>{title}</Button>
+                  </>
+                )}
               </MenuItem>
             ))}
           </Menu>
