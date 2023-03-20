@@ -82,15 +82,17 @@ const Navbar = () => {
     <AppBar position="static" className="header" color="secondary">
       <Toolbar className="toolbar">
         {/*  Logo */}
-        <Logo
-          src={logo}
-          sx={{
-            display: {
-              xs: 'none',
-              md: 'flex',
-            },
-          }}
-        />
+        <Link to={`/`}>
+          <Logo
+            src={logo}
+            sx={{
+              display: {
+                xs: 'none',
+                md: 'flex',
+              },
+            }}
+          />
+        </Link>
 
         {/* Menus */}
         <Box
