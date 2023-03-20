@@ -36,15 +36,19 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: `secondary.dark`,
+        mt: 'auto',
         color: 'white',
+        backgroundColor: `secondary.dark`,
         p: {
           xs: 4,
           md: 10,
         },
         pt: 12,
         pb: 12,
-        fontSize: { xs: '12px', md: '14px' },
+        fontSize: {
+          xs: '12px',
+          md: '14px',
+        },
       }}
     >
       <Grid container spacing={2} justifyContent="center">
@@ -120,17 +124,11 @@ const Footer = () => {
           <Stack>
             <SubscribeTf
               color="primary"
-              label="Email address"
+              label="Email Address"
               variant="standard"
             />
             <Button
-              startIcon={
-                <SendIcon
-                  sx={{
-                    color: `${theme.palette.primary.main}`,
-                  }}
-                />
-              }
+              startIcon={<SendIcon />}
               sx={{
                 mt: 4,
                 mb: 4,
