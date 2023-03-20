@@ -270,7 +270,19 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <Button>{title}</Button>
+                    <Button
+                      sx={{
+                        color: 'white',
+                        backgroundColor: 'secondary.main',
+                        fontWeight: 400,
+                        '&:hover': {
+                          backgroundColor: 'white',
+                          color: 'secondary.main',
+                        },
+                      }}
+                    >
+                      {title}
+                    </Button>
                   </>
                 )}
               </MenuItem>

@@ -28,6 +28,10 @@ const Footer = () => {
     '.MuiInputLabel-root': {
       color: `${theme.palette.primary.main}`,
     },
+    input: {
+      color: `${theme.palette.primary.main}`,
+    },
+    // fontColor: `${theme.palette.primary.main}`,
 
     '.MuiInput-root::before': {
       borderBottom: `1px solid ${theme.palette.primary.main}`,
@@ -38,7 +42,7 @@ const Footer = () => {
       sx={{
         mt: 'auto',
         color: 'white',
-        backgroundColor: `secondary.dark`,
+        backgroundColor: `secondary.main`,
         p: {
           xs: 4,
           md: 10,
@@ -122,11 +126,7 @@ const Footer = () => {
         <Grid item md={6} lg={4}>
           <FooterTitle variant="body1">newsletter</FooterTitle>
           <Stack>
-            <SubscribeTf
-              color="primary"
-              label="Email Address"
-              variant="standard"
-            />
+            <SubscribeTf label="Email Address" variant="standard" />
             <Button
               startIcon={<SendIcon />}
               sx={{
