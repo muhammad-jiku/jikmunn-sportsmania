@@ -99,7 +99,8 @@ const Banner = () => {
           This is the best online sports shop where you can find your favorite
           player or team's jersey, kit, retro shirt, and also toys for kids.
         </BannerDescription>
-        <BannerShopButton color="primary">
+
+        <BannerShopButton color="primary" href="#products">
           Shop Now{' '}
           <ShoppingCartIcon
             sx={{
