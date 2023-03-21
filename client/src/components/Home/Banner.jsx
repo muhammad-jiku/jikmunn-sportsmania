@@ -1,6 +1,7 @@
 import { Box, Button, styled, Typography } from '@mui/material';
 import React from 'react';
 import SportsManiaBanner from '../../assets/sportsBanner.jpeg';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Banner = () => {
   const BannerContainer = styled(Box)(({ matches, theme }) => ({
@@ -49,7 +50,7 @@ const Banner = () => {
   const BannerDescription = styled(Typography)(({ theme }) => ({
     lineHeight: 1.25,
     letterSpacing: 1.25,
-    marginBottom: '3em',
+    marginBottom: '1em',
     fontWeight: 400,
     fontSize: '18px',
     textAlign: 'justify',
@@ -59,7 +60,6 @@ const Banner = () => {
     [theme.breakpoints.down('md')]: {
       lineHeight: 1.15,
       letterSpacing: 1.15,
-      marginBottom: '1.5em',
     },
   }));
 
@@ -99,8 +99,14 @@ const Banner = () => {
           This is the best online sports shop where you can find your favorite
           player or team's jersey, kit, retro shirt, and also toys for kids.
         </BannerDescription>
-
-        <BannerShopButton color="primary">Shop Now</BannerShopButton>
+        <BannerShopButton color="primary">
+          Shop Now{' '}
+          <ShoppingCartIcon
+            sx={{
+              ml: 1,
+            }}
+          />
+        </BannerShopButton>
       </BannerContent>
     </BannerContainer>
   );

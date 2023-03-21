@@ -55,8 +55,8 @@ const Footer = () => {
         },
       }}
     >
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item md={6} lg={4}>
+      <Grid container spacing={4} justifyContent="center">
+        <Grid item sm={6} md={6} lg={4}>
           <FooterTitle variant="body1">About us</FooterTitle>
           <Typography variant="caption2">
             Thanks for visiting us. You can also connect with us via social
@@ -73,7 +73,7 @@ const Footer = () => {
             <InstagramIcon />
           </Box>
         </Grid>
-        <Grid item md={6} lg={2}>
+        <Grid item sm={3} md={3} lg={2}>
           <FooterTitle variant="body1">information</FooterTitle>
           <List>
             <ListItemText>
@@ -98,7 +98,7 @@ const Footer = () => {
             </ListItemText>
           </List>
         </Grid>
-        <Grid item md={6} lg={2}>
+        <Grid item sm={3} md={3} lg={2}>
           <FooterTitle variant="body1">my account</FooterTitle>
           <List>
             <ListItemText>
@@ -123,7 +123,7 @@ const Footer = () => {
             </ListItemText>
           </List>
         </Grid>
-        <Grid item md={6} lg={4}>
+        <Grid item sm={6} md={6} lg={4}>
           <FooterTitle variant="body1">newsletter</FooterTitle>
           <Stack>
             <SubscribeTf label="Email Address" variant="standard" />
