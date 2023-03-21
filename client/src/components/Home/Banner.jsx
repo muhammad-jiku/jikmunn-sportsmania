@@ -1,51 +1,48 @@
 import { Box, Button, styled, Typography } from '@mui/material';
 import React from 'react';
-import SportsManiaBanner from '../../assets/white-banner.jpg';
+import SportsManiaBanner from '../../assets/sportsBanner.jpeg';
 
 const Banner = () => {
   const BannerContainer = styled(Box)(({ matches, theme }) => ({
     display: 'flex',
     justifyContent: 'center',
-    width: '100%',
-    height: '100%',
     padding: '0px 0px',
-    // background: Colors.light_gray,
-    [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    // backgroundImage: `url(/images/banner/banner.png)`,
-    // backgroundRepeat: "no-repeat",
-    // backgroundPosition: "center",
-    // backgroundSize: "cover"
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundImage: `url(${SportsManiaBanner})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    width: '100%',
+    height: '40vh',
+    minHeight: '150vh',
   }));
 
   const BannerContent = styled(Box)(() => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    maxWidth: 420,
-    padding: '30px',
-  }));
-
-  const BannerImage = styled(Box)(({ src, theme }) => ({
-    // src: `url(${src})`,
-    backgroundImage: `url(${src})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    opacity: '0.5',
-    width: '100%',
-    height: '40vh',
-    minHeight: '150vh',
+    maxWidth: 600,
+    padding: '0 30px',
   }));
 
   const BannerTitle = styled(Typography)(({ matches, theme }) => ({
     lineHeight: 1.5,
-    fontSize: '72px',
-    marginBottom: '20px',
+    fontSize: '40px',
+    fontWeight: 800,
+    marginBottom: '6px',
     [theme.breakpoints.down('sm')]: {
-      fontSize: '42px',
+      fontSize: '22px',
+    },
+  }));
+
+  const BannerSubtitle = styled(Typography)(({ matches, theme }) => ({
+    lineHeight: 1.5,
+    fontSize: '30px',
+    fontWeight: 600,
+    marginBottom: '6px',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '20px',
     },
   }));
 
@@ -53,6 +50,12 @@ const Banner = () => {
     lineHeight: 1.25,
     letterSpacing: 1.25,
     marginBottom: '3em',
+    fontWeight: 400,
+    fontSize: '18px',
+    textAlign: 'justify',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '16px',
+    },
     [theme.breakpoints.down('md')]: {
       lineHeight: 1.15,
       letterSpacing: 1.15,
@@ -73,30 +76,32 @@ const Banner = () => {
     ],
   })(({ theme }) => ({
     padding: '20px 0px',
-    //   color: Colors.white,
-    fontWeight: 'bold',
-    fontSize: '16px',
+    fontWeight: 400,
+    fontSize: '20px',
     [theme.breakpoints.down('sm')]: {
       padding: '10px 0px',
-      fontSize: '14px',
+      fontSize: '18px',
     },
   }));
 
   return (
-    // <BannerImage src={`${SportsManiaBanner}`} />
     <BannerContainer>
-      <BannerImage src={`${SportsManiaBanner}`} />
-      {/* <BannerContent>
-             <Typography variant="h6">Huge Collection</Typography>
-             <BannerTitle variant="h2">New Bags</BannerTitle>
+      <BannerContent>
+        <BannerTitle variant="h2">
+          Welcome to{' '}
+          <Typography variant="span" color="primary">
+            Sports Mania!
+          </Typography>
+        </BannerTitle>
+        <BannerSubtitle variant="h6">Huge Sports Collection</BannerSubtitle>
+        <BannerDescription variant="subtitle">
+          You will find here amazing collections of sports around the globe.
+          This is the best online sports shop where you can find your favorite
+          player or team's jersey, kit, retro shirt, and also toys for kids.
+        </BannerDescription>
 
-             <BannerDescription variant="subtitle">
-               Torem ipsum dolor sit amet, consectetur adipisicing elitsed do eiusmo
-               tempor incididunt ut labore et dolore magna
-             </BannerDescription>
-
-             <BannerShopButton color="primary">Shop Now</BannerShopButton>
-           </BannerContent> */}
+        <BannerShopButton color="primary">Shop Now</BannerShopButton>
+      </BannerContent>
     </BannerContainer>
   );
 };
