@@ -9,22 +9,22 @@ import {
   productReviewsReducer,
   productsReducer,
   reviewReducer,
-} from '../reducers/productReducers';
+} from '../reducers/productReducer';
 import {
   allUsersReducer,
   forgotPasswordReducer,
   profileReducer,
   userDetailsReducer,
   userReducer,
-} from '../reducers/userReducers';
-import { cartReducer } from '../reducers/cartReducers';
+} from '../reducers/userReducer';
+import { cartReducer } from '../reducers/cartReducer';
 import {
   allOrdersReducer,
   myOrdersReducer,
   newOrderReducer,
   orderDetailsReducer,
   orderReducer,
-} from '../reducers/orderReducers';
+} from '../reducers/orderReducer';
 
 const reducer = combineReducers({
   products: productsReducer,
@@ -53,7 +53,7 @@ let initialState = {
 
 const middleware = [thunk];
 
-export const store = createStore(
+export const sportsStore = createStore(
   reducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
