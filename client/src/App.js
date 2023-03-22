@@ -3,12 +3,12 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Navbar, Footer } from './components/Shared';
 import {
-  AboutPage,
-  ContactPage,
   HomePage,
+  ContactPage,
+  AboutPage,
+  ProductPage,
   LoginPage,
   NotFoundPage,
-  ProductsPage,
 } from './pages';
 
 function App() {
@@ -17,9 +17,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
