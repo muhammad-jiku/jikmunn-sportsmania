@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Footer, Navbar } from './components/Shared';
+import { Navbar, Footer } from './components/Shared';
 import {
   AboutPage,
   ContactPage,

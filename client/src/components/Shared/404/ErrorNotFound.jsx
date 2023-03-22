@@ -1,6 +1,6 @@
 import { Box, Button, styled, Typography } from '@mui/material';
 import React from 'react';
-import NotFound from '../../../assets/NotFound.gif';
+import NotFound from '../../../assets/gifs/NotFound.gif';
 
 const ErrorNotFound = () => {
   const NotFoundContainer = styled(Box)(({ matches, theme }) => ({
@@ -15,14 +15,6 @@ const ErrorNotFound = () => {
 
   const NotFoundImage = styled('img')(({ src, theme }) => ({
     src: `url(${src})`,
-    // backgroundImage: `url(${src})`,
-    // backgroundRepeat: 'no-repeat',
-    // backgroundPosition: 'center',
-    // backgroundSize: 'cover',
-    // opacity: '0.5',
-    // width: '100%',
-    // height: '40vh',
-    // minHeight: '150vh',
   }));
 
   const NotFoundTitle = styled(Typography)(({ matches, theme }) => ({

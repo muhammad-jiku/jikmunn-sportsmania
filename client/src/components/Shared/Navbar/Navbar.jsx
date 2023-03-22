@@ -13,8 +13,8 @@ import {
   Button,
 } from '@mui/material';
 import './Navbar.scss';
-import logo from '../../../assets/logo.png';
-import person1 from '../../../assets/avatar_1.png';
+import logo from '../../../assets/images/logo.png';
+import person1 from '../../../assets/images/avatar_1.png';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';

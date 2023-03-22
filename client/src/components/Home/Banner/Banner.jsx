@@ -1,6 +1,6 @@
 import { Box, Button, styled, Typography } from '@mui/material';
 import React from 'react';
-import SportsManiaBanner from '../../assets/sportsBanner.jpeg';
+import SportsManiaBanner from '../../../assets/images/sportsBanner.jpeg';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Banner = () => {
