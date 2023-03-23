@@ -4,9 +4,10 @@ import './App.css';
 import { Navbar, Footer } from './components/Shared';
 import {
   HomePage,
+  ProductPage,
+  ProductDetailsPage,
   ContactPage,
   AboutPage,
-  ProductPage,
   LoginPage,
   NotFoundPage,
 } from './pages';
@@ -17,9 +18,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<ProductPage />} />
+        <Route path="/product/:id" element={<ProductDetailsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

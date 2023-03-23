@@ -26,6 +26,10 @@ const pages = [
     path: '/',
   },
   {
+    title: 'Products',
+    path: '/products',
+  },
+  {
     title: 'Contact',
     path: '/contact',
   },
