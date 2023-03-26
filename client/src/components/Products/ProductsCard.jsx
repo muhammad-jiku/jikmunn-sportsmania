@@ -33,7 +33,7 @@ const ProductsCard = ({ product }) => {
   return (
     <Card
       sx={{
-        maxWidth: 275,
+        maxWidth: 225,
       }}
     >
       <CardMedia
@@ -49,14 +49,34 @@ const ProductsCard = ({ product }) => {
         <Typography variant="h7">Price: ${product?.price}</Typography>
         <br />
         <Typography variant="h7">
-          Status: {product?.stock >= 10 ? 'In Stock' : 'Out of Stock'}
+          Status:{' '}
+          {product?.stock >= 10 ? (
+            <Typography variant="span" color={'green'}>
+              In Stock{' '}
+            </Typography>
+          ) : (
+            <Typography variant="span" color={'red'}>
+              Out of Stock{' '}
+            </Typography>
+          )}
         </Typography>
         <br />
       </CardContent>
       <CardActions disableSpacing>
-        <Button variant="contained" fullWidth>
+        <Button
+          variant="outlined"
+          fullWidth
+          sx={{
+            fontSize: '12px',
+          }}
+        >
           Add to cart{' '}
-          <ShoppingCartIcon sx={{ ml: 1 }} aria-label="add to cart" />
+          <ShoppingCartIcon
+            sx={{
+              ml: 1,
+            }}
+            aria-label="add to cart"
+          />
         </Button>
         <ExpandMore
           expand={expanded}

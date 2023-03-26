@@ -2,8 +2,15 @@ import {
   Box,
   Button,
   Container,
+  Divider,
+  Drawer,
   Grid,
   IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Pagination,
   TextField,
   Typography,
@@ -15,6 +22,8 @@ import { Loader } from '../Shared';
 import ProductsCard from './ProductsCard';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
@@ -25,6 +34,9 @@ const Products = ({ match }) => {
   const [price, setPrice] = useState([0, 25000]);
   const [category, setCategory] = useState('football');
   const [ratings, setRatings] = useState(0);
+  const [drawierStatus, setDrawerStatus] = useState({
+    left: false,
+  });
 
   const {
     products,
@@ -38,6 +50,54 @@ const Products = ({ match }) => {
   console.log(match);
 
   //   const keyword = match.params.keyword;
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+
+    setDrawerStatus({ ...drawierStatus, [anchor]: open });
+  };
+
+  // const list = (anchor) => (
+  //   <Box
+  //     sx={{
+  //       width: 250,
+  //     }}
+  //     role="presentation"
+  //     onClick={toggleDrawer(anchor, false)}
+  //     onKeyDown={toggleDrawer(anchor, false)}
+  //   >
+  //     <List>
+  //       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+  //         <ListItem key={text} disablePadding>
+  //           <ListItemButton>
+  //             <ListItemIcon>
+  //               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+  //             </ListItemIcon>
+  //             <ListItemText primary={text} />
+  //           </ListItemButton>
+  //         </ListItem>
+  //       ))}
+  //     </List>
+  //     <Divider />
+  //     <List>
+  //       {['All mail', 'Trash', 'Spam'].map((text, index) => (
+  //         <ListItem key={text} disablePadding>
+  //           <ListItemButton>
+  //             <ListItemIcon>
+  //               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+  //             </ListItemIcon>
+  //             <ListItemText primary={text} />
+  //           </ListItemButton>
+  //         </ListItem>
+  //       ))}
+  //     </List>
+  //   </Box>
+  // );
 
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);
@@ -82,7 +142,6 @@ const Products = ({ match }) => {
           </Typography>
           <Container
             sx={{
-              // width: 300,
               display: 'flex',
               justifyContent: 'center',
               marginBottom: 2,
@@ -99,7 +158,6 @@ const Products = ({ match }) => {
                 id="search-bar"
                 className="text"
                 onInput={(e) => {
-                  // setSearchQuery(e.target.value);
                   console.log(e.target.value);
                 }}
                 label="Search Item..."
@@ -112,32 +170,18 @@ const Products = ({ match }) => {
                     md: 700,
                   },
                 }}
-                // fullWidth
               />
               <IconButton type="submit" aria-label="search">
                 <SearchIcon />
               </IconButton>
             </form>
-            {/* <IconButton type="submit" aria-label="search">
-              <FilterAltIcon />{' '}
-              <Typography
-                variant="span"
-                sx={{
-                  display: {
-                    xs: 'none',
-                    md: 'flex',
-                  },
-                }}
-              >
-                Filter
-              </Typography>
-            </IconButton> */}
             <Button
               variant="text"
               sx={{
                 ml: -2,
                 fontSize: '14px',
               }}
+              onClick={toggleDrawer('left', true)}
             >
               <FilterAltIcon />{' '}
               <Typography
@@ -151,7 +195,83 @@ const Products = ({ match }) => {
               >
                 Filter
               </Typography>
-            </Button>
+            </Button>{' '}
+            <Drawer
+              anchor={'left'}
+              open={drawierStatus['left']}
+              onClose={toggleDrawer('left', false)}
+            >
+              <Box
+                sx={{
+                  width: 250,
+                }}
+                role="presentation"
+                onClick={toggleDrawer('left', false)}
+                onKeyDown={toggleDrawer('left', false)}
+              >
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <InboxIcon />
+                      </ListItemIcon>
+                      <ListItemText>Inbox</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <MailIcon />
+                      </ListItemIcon>
+                      <ListItemText>Starred</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <InboxIcon />
+                      </ListItemIcon>
+                      <ListItemText>Send email</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <MailIcon />
+                      </ListItemIcon>
+                      <ListItemText>Drafts</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+                <Divider />
+                <List>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <InboxIcon />
+                      </ListItemIcon>
+                      <ListItemText>All mail</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <MailIcon />
+                      </ListItemIcon>
+                      <ListItemText>Trash</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <InboxIcon />
+                      </ListItemIcon>
+                      <ListItemText>Spam</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              </Box>
+            </Drawer>
           </Container>
           <Grid
             container
@@ -159,11 +279,10 @@ const Products = ({ match }) => {
               xs: 2,
               md: 3,
             }}
-            // display="flex"
-            // flexDirection={'column'}
-            // alignItems="center"
             justifyContent="center"
-            sx={{ margin: `20px 4px 10px 4px` }}
+            sx={{
+              margin: `20px 4px 10px 4px`,
+            }}
             columns={{
               xs: 4,
               sm: 8,
@@ -188,13 +307,15 @@ const Products = ({ match }) => {
               sx={{
                 mt: 2,
               }}
+              size="small"
               count={resultPerPage}
               activePage={currentPage}
               itemsCountPerPage={resultPerPage}
               totalItemsCount={productsCount}
               onChange={setCurrentPageNo}
-              variant="outlined"
-              shape="rounded"
+              // variant="outlined"
+              // shape="rounded"
+              shape="circular"
             />
           </Grid>
         </Container>
