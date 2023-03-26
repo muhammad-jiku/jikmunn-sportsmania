@@ -1,10 +1,11 @@
 import React from 'react';
+import { ProductDetails } from '../../components/Products';
 
 const ProductDetailsPage = () => {
   return (
-    <div>
-      <h1>Product Details Page</h1>
-    </div>
+    <>
+      <ProductDetails />
+    </>
   );
 };
 

@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import { Container, Grid, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, getProducts } from '../../../actions/productAction';
+import { getProducts, clearErrors } from '../../../actions/productAction';
 import { Loader } from '../../Shared';
+import ProductsCard from '../../Products/ProductsCard';
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -9,7 +11,6 @@ const Products = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
       dispatch(clearErrors());
     }
     dispatch(getProducts());
@@ -20,63 +21,57 @@ const Products = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div id="products">
+        <Container
+          id="products"
+          display="flex"
+          // justifyContent="center"
+          justifycontent="center"
+          sx={{
+            p: 4,
+          }}
+        >
           {console.log(products)}
-          <h1>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates
-            libero exercitationem sunt laudantium facere numquam rerum pariatur,
-            molestiae similique dolorum eos praesentium provident neque quos?
-            Harum deserunt sequi accusantium delectus!
-          </h1>{' '}
-          <h1>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates
-            libero exercitationem sunt laudantium facere numquam rerum pariatur,
-            molestiae similique dolorum eos praesentium provident neque quos?
-            Harum deserunt sequi accusantium delectus!
-          </h1>{' '}
-          <h1>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates
-            libero exercitationem sunt laudantium facere numquam rerum pariatur,
-            molestiae similique dolorum eos praesentium provident neque quos?
-            Harum deserunt sequi accusantium delectus!
-          </h1>{' '}
-          <h1>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates
-            libero exercitationem sunt laudantium facere numquam rerum pariatur,
-            molestiae similique dolorum eos praesentium provident neque quos?
-            Harum deserunt sequi accusantium delectus!
-          </h1>{' '}
-          <h1>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates
-            libero exercitationem sunt laudantium facere numquam rerum pariatur,
-            molestiae similique dolorum eos praesentium provident neque quos?
-            Harum deserunt sequi accusantium delectus!
-          </h1>{' '}
-          <h1>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates
-            libero exercitationem sunt laudantium facere numquam rerum pariatur,
-            molestiae similique dolorum eos praesentium provident neque quos?
-            Harum deserunt sequi accusantium delectus!
-          </h1>{' '}
-          <h1>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates
-            libero exercitationem sunt laudantium facere numquam rerum pariatur,
-            molestiae similique dolorum eos praesentium provident neque quos?
-            Harum deserunt sequi accusantium delectus!
-          </h1>{' '}
-          <h1>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates
-            libero exercitationem sunt laudantium facere numquam rerum pariatur,
-            molestiae similique dolorum eos praesentium provident neque quos?
-            Harum deserunt sequi accusantium delectus!
-          </h1>{' '}
-          <h1>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates
-            libero exercitationem sunt laudantium facere numquam rerum pariatur,
-            molestiae similique dolorum eos praesentium provident neque quos?
-            Harum deserunt sequi accusantium delectus!
-          </h1>
-        </div>
+          <Typography
+            variant="h4"
+            sx={{
+              mb: 2,
+            }}
+          >
+            Our Products
+          </Typography>
+          <Grid
+            container
+            spacing={{
+              xs: 2,
+              md: 3,
+            }}
+            // display="flex"
+            // flexDirection={'column'}
+            // alignItems="center"
+            justifyContent="center"
+            sx={{ margin: `20px 4px 10px 4px` }}
+            columns={{
+              xs: 4,
+              sm: 8,
+              md: 12,
+            }}
+          >
+            {products?.map((product, idx) => (
+              <Grid
+                item
+                key={idx}
+                xs={6}
+                sm={3}
+                md={3}
+                display="flex"
+                flexDirection={'column'}
+                alignItems="center"
+              >
+                <ProductsCard product={product} />
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
       )}
     </>
   );
