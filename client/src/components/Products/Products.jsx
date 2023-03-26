@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from '@mui/material';
+import { Container, Grid, Pagination, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, getProducts } from '../../actions/productAction';
@@ -100,6 +100,18 @@ const Products = ({ match }) => {
                 <ProductsCard product={product} />
               </Grid>
             ))}
+            <Pagination
+              sx={{
+                mt: 2,
+              }}
+              count={resultPerPage}
+              activePage={currentPage}
+              itemsCountPerPage={resultPerPage}
+              totalItemsCount={productsCount}
+              onChange={setCurrentPageNo}
+              variant="outlined"
+              shape="rounded"
+            />
           </Grid>
         </Container>
       )}

@@ -56,6 +56,13 @@ const settings = [
 const Logo = styled('img')(({ theme }) => ({
   width: '15rem',
   minWidth: '10rem',
+  // [theme.breakpoints.down('md')]: {
+  //   width: '350px',
+  // },
+  // [theme.breakpoints.down('sm')]: {
+  //   width: '11rem',
+  //   align: 'center',
+  // },
 }));
 
 const Navbar = () => {
@@ -93,7 +100,6 @@ const Navbar = () => {
             }}
           />
         </Link>
-
         {/* Menus */}
         <Box
           sx={{
@@ -149,7 +155,6 @@ const Navbar = () => {
             ))}
           </Menu>
         </Box>
-
         {/*  Pages */}
         <Typography
           variant="h5"
@@ -203,7 +208,6 @@ const Navbar = () => {
             </Button>
           ))}
         </Box>
-
         {/* Profile menu */}
         <Box
           sx={{
