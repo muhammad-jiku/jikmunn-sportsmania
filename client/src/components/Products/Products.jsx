@@ -32,7 +32,8 @@ const Products = ({ match }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
-  const [category, setCategory] = useState('football');
+  const [keyword, setKeyword] = useState('');
+  const [category, setCategory] = useState('');
   const [ratings, setRatings] = useState(0);
   const [drawierStatus, setDrawerStatus] = useState({
     left: false,
@@ -99,8 +100,10 @@ const Products = ({ match }) => {
   //   </Box>
   // );
 
-  const setCurrentPageNo = (e) => {
-    setCurrentPage(e);
+  const setCurrentPageNo = (e, value) => {
+    // console.log(e.target.value);
+    console.log(value);
+    setCurrentPage(value);
   };
 
   const priceHandler = (event, newPrice) => {
@@ -113,8 +116,8 @@ const Products = ({ match }) => {
     if (error) {
       dispatch(clearErrors());
     }
-    dispatch(getProducts());
-  }, [dispatch, error]);
+    dispatch(getProducts(keyword, currentPage, price, category, ratings));
+  }, [dispatch, keyword, currentPage, price, category, ratings, error]);
 
   return (
     <>
@@ -130,7 +133,7 @@ const Products = ({ match }) => {
             p: 4,
           }}
         >
-          {console.log(products, productsCount, resultPerPage)}
+          {console.log(products, productsCount, resultPerPage, count)}
 
           <Typography
             variant="h4"
@@ -177,6 +180,7 @@ const Products = ({ match }) => {
             </form>
             <Button
               variant="text"
+              title="Filter"
               sx={{
                 ml: -2,
                 fontSize: '14px',
@@ -195,7 +199,7 @@ const Products = ({ match }) => {
               >
                 Filter
               </Typography>
-            </Button>{' '}
+            </Button>
             <Drawer
               anchor={'left'}
               open={drawierStatus['left']}
@@ -308,10 +312,8 @@ const Products = ({ match }) => {
                 mt: 2,
               }}
               size="small"
-              count={resultPerPage}
-              activePage={currentPage}
-              itemsCountPerPage={resultPerPage}
-              totalItemsCount={productsCount}
+              count={productsCount / resultPerPage}
+              page={currentPage}
               onChange={setCurrentPageNo}
               // variant="outlined"
               // shape="rounded"
