@@ -1,9 +1,20 @@
-import { Container, Grid, Pagination, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  IconButton,
+  Pagination,
+  TextField,
+  Typography,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, getProducts } from '../../actions/productAction';
 import { Loader } from '../Shared';
 import ProductsCard from './ProductsCard';
+import SearchIcon from '@mui/icons-material/Search';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
@@ -69,6 +80,79 @@ const Products = ({ match }) => {
           >
             Our Products
           </Typography>
+          <Container
+            sx={{
+              // width: 300,
+              display: 'flex',
+              justifyContent: 'center',
+              marginBottom: 2,
+            }}
+          >
+            <form
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                padding: '0 10px',
+              }}
+            >
+              <TextField
+                id="search-bar"
+                className="text"
+                onInput={(e) => {
+                  // setSearchQuery(e.target.value);
+                  console.log(e.target.value);
+                }}
+                label="Search Item..."
+                variant="standard"
+                placeholder="Search Item..."
+                sx={{
+                  width: {
+                    xs: 180,
+                    sm: 350,
+                    md: 700,
+                  },
+                }}
+                // fullWidth
+              />
+              <IconButton type="submit" aria-label="search">
+                <SearchIcon />
+              </IconButton>
+            </form>
+            {/* <IconButton type="submit" aria-label="search">
+              <FilterAltIcon />{' '}
+              <Typography
+                variant="span"
+                sx={{
+                  display: {
+                    xs: 'none',
+                    md: 'flex',
+                  },
+                }}
+              >
+                Filter
+              </Typography>
+            </IconButton> */}
+            <Button
+              variant="text"
+              sx={{
+                ml: -2,
+                fontSize: '14px',
+              }}
+            >
+              <FilterAltIcon />{' '}
+              <Typography
+                variant="span"
+                sx={{
+                  display: {
+                    xs: 'none',
+                    md: 'flex',
+                  },
+                }}
+              >
+                Filter
+              </Typography>
+            </Button>
+          </Container>
           <Grid
             container
             spacing={{
