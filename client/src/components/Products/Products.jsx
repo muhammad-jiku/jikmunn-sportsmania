@@ -4,11 +4,8 @@ import {
   Container,
   Drawer,
   Grid,
-  IconButton,
   List,
   ListItem,
-  ListItemButton,
-  ListItemIcon,
   ListItemText,
   Pagination,
   Slider,
@@ -20,10 +17,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, getProducts } from '../../actions/productAction';
 import { Loader } from '../Shared';
 import ProductsCard from './ProductsCard';
-import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
-const Products = ({ match }) => {
+const Products = () => {
   const dispatch = useDispatch();
 
   const categories = ['Cricket', 'Football'];
@@ -46,10 +42,6 @@ const Products = ({ match }) => {
     filteredProductsCount,
   } = useSelector((state) => state.products);
 
-  console.log(match);
-
-  //   const keyword = match.params.keyword;
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === 'keydown' &&
@@ -70,7 +62,6 @@ const Products = ({ match }) => {
   };
 
   const RatingsHandler = (e, selectedRatings) => {
-    console.log(selectedRatings);
     setRatings(selectedRatings);
   };
 
@@ -85,7 +76,6 @@ const Products = ({ match }) => {
 
   return (
     <>
-      {loading && <Loader />}
       <Container
         id="products"
         display="flex"
@@ -95,18 +85,14 @@ const Products = ({ match }) => {
           p: 4,
         }}
       >
-        {loading ? null : (
-          <>
-            <Typography
-              variant="h4"
-              sx={{
-                mb: 2,
-              }}
-            >
-              Our Products
-            </Typography>
-          </>
-        )}
+        <Typography
+          variant="h4"
+          sx={{
+            mb: 2,
+          }}
+        >
+          Our Products
+        </Typography>
 
         <Container
           sx={{
@@ -115,60 +101,53 @@ const Products = ({ match }) => {
             marginBottom: 2,
           }}
         >
-          {loading ? null : (
-            <>
-              <form
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  padding: '0 10px',
-                }}
-              >
-                <TextField
-                  id="search-bar"
-                  className="text"
-                  onInput={(e) => {
-                    console.log(e.target.value);
-                  }}
-                  label="Search Item..."
-                  variant="standard"
-                  placeholder="Search Item..."
-                  sx={{
-                    width: {
-                      xs: 180,
-                      sm: 350,
-                      md: 700,
-                    },
-                  }}
-                />
-                <IconButton type="submit" aria-label="search">
-                  <SearchIcon />
-                </IconButton>
-              </form>
-              <Button
-                variant="text"
-                title="Filter"
-                sx={{
-                  ml: -2,
-                  fontSize: '14px',
-                }}
-                onClick={toggleDrawer('left', true)}
-              >
-                <FilterAltIcon />{' '}
-                <Typography
-                  variant="span"
-                  sx={{
-                    display: {
-                      xs: 'none',
-                      md: 'flex',
-                    },
-                  }}
-                >
-                  Filter
-                </Typography>
-              </Button>
-            </>
-          )}
+          <form
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              padding: '0 10px',
+            }}
+          >
+            <TextField
+              id="search-bar"
+              className="text"
+              name="keyword"
+              value={keyword}
+              onInput={(e) => setKeyword(e.target.value)}
+              label="Search Item..."
+              variant="standard"
+              placeholder="Search Item..."
+              sx={{
+                width: {
+                  xs: 180,
+                  sm: 350,
+                  md: 700,
+                },
+              }}
+            />
+          </form>
+          <Button
+            variant="text"
+            title="Filter"
+            sx={{
+              ml: -2,
+              fontSize: '14px',
+            }}
+            onClick={toggleDrawer('left', true)}
+          >
+            <FilterAltIcon />{' '}
+            <Typography
+              variant="span"
+              sx={{
+                display: {
+                  xs: 'none',
+                  md: 'flex',
+                },
+              }}
+            >
+              Filter
+            </Typography>
+          </Button>
 
           <Drawer
             anchor={'left'}
@@ -208,7 +187,7 @@ const Products = ({ match }) => {
                     <ListItem key={idx}>
                       <ListItemText
                         onClick={() => {
-                          console.log(cat);
+                          // console.log(cat);
                           setCategory(cat);
                         }}
                       >
@@ -235,41 +214,41 @@ const Products = ({ match }) => {
             </Box>
           </Drawer>
         </Container>
-        <Grid
-          container
-          spacing={{
-            xs: 2,
-            md: 3,
-          }}
-          justifyContent="center"
-          sx={{
-            margin: `20px 4px 10px 4px`,
-          }}
-          columns={{
-            xs: 4,
-            sm: 8,
-            md: 12,
-          }}
-        >
-          {products?.map((product, idx) => (
-            <Grid
-              item
-              key={idx}
-              xs={6}
-              sm={3}
-              md={3}
-              display="flex"
-              flexDirection={'column'}
-              alignItems="center"
-            >
-              <ProductsCard product={product} />
-            </Grid>
-          ))}
-        </Grid>
-        {console.log('count...', count)}
-        {console.log('result per page', resultPerPage)}
-        {loading ? null : (
+        {loading ? (
+          <Loader />
+        ) : (
           <>
+            <Grid
+              container
+              spacing={{
+                xs: 2,
+                md: 3,
+              }}
+              justifyContent="center"
+              sx={{
+                margin: `20px 4px 10px 4px`,
+              }}
+              columns={{
+                xs: 4,
+                sm: 8,
+                md: 12,
+              }}
+            >
+              {products?.map((product, idx) => (
+                <Grid
+                  item
+                  key={idx}
+                  xs={6}
+                  sm={3}
+                  md={3}
+                  display="flex"
+                  flexDirection={'column'}
+                  alignItems="center"
+                >
+                  <ProductsCard product={product} />
+                </Grid>
+              ))}
+            </Grid>
             {resultPerPage < count && (
               <Pagination
                 sx={{

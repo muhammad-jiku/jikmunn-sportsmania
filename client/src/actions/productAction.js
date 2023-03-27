@@ -12,41 +12,42 @@ axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 // Get All Products (also with search, filter)
 export const getProducts =
-  // () =>
+  (
+    keyword = '',
+    currentPage = 1,
+    priceRange = [0, 500],
+    category,
+    ratings = 0
+  ) =>
+  async (dispatch) => {
+    try {
+      await dispatch({
+        type: ALL_PRODUCT_REQUEST,
+      });
 
+      let link = `/api/v1/products?page=${currentPage}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&ratings[gte]=${ratings}`;
 
-    (keyword, currentPage = 1, priceRange = [0, 500], category, ratings = 0) =>
-    async (dispatch) => {
-      try {
-        dispatch({
-          type: ALL_PRODUCT_REQUEST,
-        });
-
-        let link = `/api/v1/products?page=${currentPage}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&ratings[gte]=${ratings}`;
-
-        if (keyword) {
-          link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&ratings[gte]=${ratings}`;
-        }
-
-        if (category) {
-          // link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&category=${category}&ratings[gte]=${ratings}`;
-
-          link = `/api/v1/products?page=${currentPage}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&category=${category}&ratings[gte]=${ratings}`;
-        }
-
-        const { data } = await axios.get(link);
-
-        dispatch({
-          type: ALL_PRODUCT_SUCCESS,
-          payload: data,
-        });
-      } catch (error) {
-        dispatch({
-          type: ALL_PRODUCT_FAIL,
-          payload: error.response.data.message,
-        });
+      if (keyword) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&ratings[gte]=${ratings}`;
       }
-    };
+
+      if (category) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&category=${category}&ratings[gte]=${ratings}`;
+      }
+
+      const { data } = await axios.get(link);
+
+      await dispatch({
+        type: ALL_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      await dispatch({
+        type: ALL_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
 
 // Get All Products For Admin
 export const getAdminProduct = () => async (dispatch) => {};
