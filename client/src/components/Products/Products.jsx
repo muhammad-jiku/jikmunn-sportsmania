@@ -65,15 +65,10 @@ const Products = ({ match }) => {
   };
 
   const setCurrentPageNo = (e, value) => {
-    // console.log(e.target.value);
-    console.log(value);
     setCurrentPage(value);
   };
 
   const priceRangeHandler = (e, newPriceRange) => {
-    // console.log(e);
-    console.log('newPrice', newPriceRange);
-    console.log(priceRange);
     setPriceRange(newPriceRange);
   };
 
@@ -180,84 +175,47 @@ const Products = ({ match }) => {
           >
             <Box
               sx={{
-                width: 250,
+                width: 280,
               }}
               role="presentation"
               // onClick={toggleDrawer('left', false)}
               // onKeyDown={toggleDrawer('left', false)}
             >
-              <List>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <Typography variant="h6">Price</Typography>
-                  </ListItemButton>
-                </ListItem>
-                <Box sx={{ ml: 3, width: 200 }}>
-                  <Slider
-                    aria-labelledby="range-slider"
-                    getAriaLabel={() => 'Price range'}
-                    value={priceRange}
-                    onChange={priceRangeHandler}
-                    valueLabelDisplay="auto"
-                    // getAriaValueText={valuetext}
-                    // step={100}
-                    // marks
-                    min={1}
-                    max={500}
-                  />
-                </Box>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <MailIcon />
-                    </ListItemIcon>
-                    <ListItemText>Starred</ListItemText>
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <InboxIcon />
-                    </ListItemIcon>
-                    <ListItemText>Send email</ListItemText>
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <MailIcon />
-                    </ListItemIcon>
-                    <ListItemText>Drafts</ListItemText>
-                  </ListItemButton>
-                </ListItem>
-              </List>
-              <Divider />
-              <List>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <InboxIcon />
-                    </ListItemIcon>
-                    <ListItemText>All mail</ListItemText>
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <MailIcon />
-                    </ListItemIcon>
-                    <ListItemText>Trash</ListItemText>
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      <InboxIcon />
-                    </ListItemIcon>
-                    <ListItemText>Spam</ListItemText>
-                  </ListItemButton>
-                </ListItem>
-              </List>
+              {/* slider */}
+              <Box sx={{ p: 2 }}>
+                <Typography variant="h6">Price</Typography>
+                <Slider
+                  aria-labelledby="range-slider"
+                  getAriaLabel={() => 'Price range'}
+                  value={priceRange}
+                  onChange={priceRangeHandler}
+                  valueLabelDisplay="auto"
+                  // getAriaValueText={valuetext}
+                  // step={100}
+                  // marks
+                  min={1}
+                  max={500}
+                  sx={{ ml: 2, width: 200 }}
+                />
+              </Box>
+              {/* category */}
+              <Box sx={{ paddingX: 2 }}>
+                <Typography variant="h6">Category</Typography>
+                <List>
+                  {categories.map((cat, idx) => (
+                    <ListItem key={idx}>
+                      <ListItemText
+                        onClick={() => {
+                          console.log(cat);
+                          setCategory(cat);
+                        }}
+                      >
+                        {cat}
+                      </ListItemText>
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
             </Box>
           </Drawer>
         </Container>
