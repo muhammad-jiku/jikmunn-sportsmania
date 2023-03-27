@@ -88,220 +88,218 @@ const Products = ({ match }) => {
 
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <Container
-          id="products"
-          display="flex"
-          // justifyContent="center"
-          justifycontent="center"
+      {loading ? <Loader /> : null}
+      <Container
+        id="products"
+        display="flex"
+        // justifyContent="center"
+        justifycontent="center"
+        sx={{
+          p: 4,
+        }}
+      >
+        {console.log(products, productsCount, resultPerPage, count)}
+        {console.log('price.......', priceRange)}
+        <Typography
+          variant="h4"
           sx={{
-            p: 4,
+            mb: 2,
           }}
         >
-          {console.log(products, productsCount, resultPerPage, count)}
-          {console.log('price.......', priceRange)}
-          <Typography
-            variant="h4"
-            sx={{
-              mb: 2,
-            }}
-          >
-            Our Products
-          </Typography>
-          <Container
-            sx={{
+          Our Products
+        </Typography>
+        <Container
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: 2,
+          }}
+        >
+          <form
+            style={{
               display: 'flex',
               justifyContent: 'center',
-              marginBottom: 2,
+              padding: '0 10px',
             }}
           >
-            <form
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                padding: '0 10px',
+            <TextField
+              id="search-bar"
+              className="text"
+              onInput={(e) => {
+                console.log(e.target.value);
               }}
-            >
-              <TextField
-                id="search-bar"
-                className="text"
-                onInput={(e) => {
-                  console.log(e.target.value);
-                }}
-                label="Search Item..."
-                variant="standard"
-                placeholder="Search Item..."
-                sx={{
-                  width: {
-                    xs: 180,
-                    sm: 350,
-                    md: 700,
-                  },
-                }}
-              />
-              <IconButton type="submit" aria-label="search">
-                <SearchIcon />
-              </IconButton>
-            </form>
-            <Button
-              variant="text"
-              title="Filter"
+              label="Search Item..."
+              variant="standard"
+              placeholder="Search Item..."
               sx={{
-                ml: -2,
-                fontSize: '14px',
+                width: {
+                  xs: 180,
+                  sm: 350,
+                  md: 700,
+                },
               }}
-              onClick={toggleDrawer('left', true)}
-            >
-              <FilterAltIcon />{' '}
-              <Typography
-                variant="span"
-                sx={{
-                  display: {
-                    xs: 'none',
-                    md: 'flex',
-                  },
-                }}
-              >
-                Filter
-              </Typography>
-            </Button>
-            <Drawer
-              anchor={'left'}
-              open={drawierStatus['left']}
-              onClose={toggleDrawer('left', false)}
-            >
-              <Box
-                sx={{
-                  width: 250,
-                }}
-                role="presentation"
-                // onClick={toggleDrawer('left', false)}
-                // onKeyDown={toggleDrawer('left', false)}
-              >
-                <List>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <Typography variant="h6">Price</Typography>
-                    </ListItemButton>
-                  </ListItem>
-                  <Box sx={{ ml: 2, width: 200 }}>
-                    <Slider
-                      aria-label="Volume"
-                      // value={value}
-                      onChange={priceRangeHandler}
-                      defaultValue={priceRange}
-                      valueLabelDisplay="auto"
-                      // step={10}
-                      // marks
-                      min={1}
-                      max={500}
-                    />
-                  </Box>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <MailIcon />
-                      </ListItemIcon>
-                      <ListItemText>Starred</ListItemText>
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <InboxIcon />
-                      </ListItemIcon>
-                      <ListItemText>Send email</ListItemText>
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <MailIcon />
-                      </ListItemIcon>
-                      <ListItemText>Drafts</ListItemText>
-                    </ListItemButton>
-                  </ListItem>
-                </List>
-                <Divider />
-                <List>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <InboxIcon />
-                      </ListItemIcon>
-                      <ListItemText>All mail</ListItemText>
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <MailIcon />
-                      </ListItemIcon>
-                      <ListItemText>Trash</ListItemText>
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem disablePadding>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        <InboxIcon />
-                      </ListItemIcon>
-                      <ListItemText>Spam</ListItemText>
-                    </ListItemButton>
-                  </ListItem>
-                </List>
-              </Box>
-            </Drawer>
-          </Container>
-          <Grid
-            container
-            spacing={{
-              xs: 2,
-              md: 3,
-            }}
-            justifyContent="center"
+            />
+            <IconButton type="submit" aria-label="search">
+              <SearchIcon />
+            </IconButton>
+          </form>
+          <Button
+            variant="text"
+            title="Filter"
             sx={{
-              margin: `20px 4px 10px 4px`,
+              ml: -2,
+              fontSize: '14px',
             }}
-            columns={{
-              xs: 4,
-              sm: 8,
-              md: 12,
-            }}
+            onClick={toggleDrawer('left', true)}
           >
-            {products?.map((product, idx) => (
-              <Grid
-                item
-                key={idx}
-                xs={6}
-                sm={3}
-                md={3}
-                display="flex"
-                flexDirection={'column'}
-                alignItems="center"
-              >
-                <ProductsCard product={product} />
-              </Grid>
-            ))}
-          </Grid>
-          <Pagination
-            sx={{
-              mt: 2,
-              p: 2,
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-            size="small"
-            count={productsCount / resultPerPage}
-            page={currentPage}
-            onChange={setCurrentPageNo}
-            // variant="outlined"
-            // shape="rounded"
-            shape="circular"
-          />
+            <FilterAltIcon />{' '}
+            <Typography
+              variant="span"
+              sx={{
+                display: {
+                  xs: 'none',
+                  md: 'flex',
+                },
+              }}
+            >
+              Filter
+            </Typography>
+          </Button>
+          <Drawer
+            anchor={'left'}
+            open={drawierStatus['left']}
+            onClose={toggleDrawer('left', false)}
+          >
+            <Box
+              sx={{
+                width: 250,
+              }}
+              role="presentation"
+              // onClick={toggleDrawer('left', false)}
+              // onKeyDown={toggleDrawer('left', false)}
+            >
+              <List>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <Typography variant="h6">Price</Typography>
+                  </ListItemButton>
+                </ListItem>
+                <Box sx={{ ml: 3, width: 200 }}>
+                  <Slider
+                    aria-labelledby="range-slider"
+                    getAriaLabel={() => 'Price range'}
+                    value={priceRange}
+                    onChange={priceRangeHandler}
+                    valueLabelDisplay="auto"
+                    // getAriaValueText={valuetext}
+                    step={100}
+                    marks
+                    min={1}
+                    max={500}
+                  />
+                </Box>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <MailIcon />
+                    </ListItemIcon>
+                    <ListItemText>Starred</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText>Send email</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <MailIcon />
+                    </ListItemIcon>
+                    <ListItemText>Drafts</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              </List>
+              <Divider />
+              <List>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText>All mail</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <MailIcon />
+                    </ListItemIcon>
+                    <ListItemText>Trash</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText>Spam</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </Box>
+          </Drawer>
         </Container>
-      )}
+        <Grid
+          container
+          spacing={{
+            xs: 2,
+            md: 3,
+          }}
+          justifyContent="center"
+          sx={{
+            margin: `20px 4px 10px 4px`,
+          }}
+          columns={{
+            xs: 4,
+            sm: 8,
+            md: 12,
+          }}
+        >
+          {products?.map((product, idx) => (
+            <Grid
+              item
+              key={idx}
+              xs={6}
+              sm={3}
+              md={3}
+              display="flex"
+              flexDirection={'column'}
+              alignItems="center"
+            >
+              <ProductsCard product={product} />
+            </Grid>
+          ))}
+        </Grid>
+        <Pagination
+          sx={{
+            mt: 2,
+            p: 2,
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+          size="small"
+          count={productsCount / resultPerPage}
+          page={currentPage}
+          onChange={setCurrentPageNo}
+          // variant="outlined"
+          // shape="rounded"
+          shape="circular"
+        />
+      </Container>
     </>
   );
 };
