@@ -45,10 +45,6 @@ const Products = () => {
               xs: 2,
               md: 3,
             }}
-            // display="flex"
-            // flexDirection={'column'}
-            // alignItems="center"
-            justifyContent="center"
             sx={{ margin: `20px 4px 10px 4px` }}
             columns={{
               xs: 4,
@@ -57,18 +53,7 @@ const Products = () => {
             }}
           >
             {products?.map((product, idx) => (
-              <Grid
-                item
-                key={idx}
-                xs={6}
-                sm={3}
-                md={3}
-                display="flex"
-                flexDirection={'column'}
-                alignItems="center"
-              >
-                <ProductsCard product={product} />
-              </Grid>
+              <ProductsCard product={product} idx={idx} />
             ))}
           </Grid>
         </Container>
