@@ -102,7 +102,6 @@ const Products = ({ match }) => {
         >
           {console.log(products, productsCount, resultPerPage, count)}
           {console.log('price.......', priceRange)}
-
           <Typography
             variant="h4"
             sx={{
@@ -285,19 +284,22 @@ const Products = ({ match }) => {
                 <ProductsCard product={product} />
               </Grid>
             ))}
-            <Pagination
-              sx={{
-                mt: 2,
-              }}
-              size="small"
-              count={productsCount / resultPerPage}
-              page={currentPage}
-              onChange={setCurrentPageNo}
-              // variant="outlined"
-              // shape="rounded"
-              shape="circular"
-            />
           </Grid>
+          <Pagination
+            sx={{
+              mt: 2,
+              p: 2,
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+            size="small"
+            count={productsCount / resultPerPage}
+            page={currentPage}
+            onChange={setCurrentPageNo}
+            // variant="outlined"
+            // shape="rounded"
+            shape="circular"
+          />
         </Container>
       )}
     </>
