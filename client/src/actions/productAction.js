@@ -15,21 +15,21 @@ export const getProducts =
   // () =>
 
 
-    (keyword, currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+    (keyword, currentPage = 1, priceRange = [0, 500], category, ratings = 0) =>
     async (dispatch) => {
       try {
         dispatch({
           type: ALL_PRODUCT_REQUEST,
         });
 
-        let link = `/api/v1/products?page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+        let link = `/api/v1/products?page=${currentPage}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&ratings[gte]=${ratings}`;
 
         if (keyword) {
-          link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+          link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&ratings[gte]=${ratings}`;
         }
 
         if (category) {
-          link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+          link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&category=${category}&ratings[gte]=${ratings}`;
         }
 
         const { data } = await axios.get(link);

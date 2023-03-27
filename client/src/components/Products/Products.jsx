@@ -12,6 +12,7 @@ import {
   ListItemIcon,
   ListItemText,
   Pagination,
+  Slider,
   TextField,
   Typography,
 } from '@mui/material';
@@ -31,7 +32,7 @@ const Products = ({ match }) => {
   const categories = ['Cricket', 'Football'];
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [price, setPrice] = useState([0, 25000]);
+  const [priceRange, setPriceRange] = useState([0, 500]);
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState('');
   const [ratings, setRatings] = useState(0);
@@ -63,51 +64,17 @@ const Products = ({ match }) => {
     setDrawerStatus({ ...drawierStatus, [anchor]: open });
   };
 
-  // const list = (anchor) => (
-  //   <Box
-  //     sx={{
-  //       width: 250,
-  //     }}
-  //     role="presentation"
-  //     onClick={toggleDrawer(anchor, false)}
-  //     onKeyDown={toggleDrawer(anchor, false)}
-  //   >
-  //     <List>
-  //       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-  //         <ListItem key={text} disablePadding>
-  //           <ListItemButton>
-  //             <ListItemIcon>
-  //               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-  //             </ListItemIcon>
-  //             <ListItemText primary={text} />
-  //           </ListItemButton>
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //     <Divider />
-  //     <List>
-  //       {['All mail', 'Trash', 'Spam'].map((text, index) => (
-  //         <ListItem key={text} disablePadding>
-  //           <ListItemButton>
-  //             <ListItemIcon>
-  //               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-  //             </ListItemIcon>
-  //             <ListItemText primary={text} />
-  //           </ListItemButton>
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //   </Box>
-  // );
-
   const setCurrentPageNo = (e, value) => {
     // console.log(e.target.value);
     console.log(value);
     setCurrentPage(value);
   };
 
-  const priceHandler = (event, newPrice) => {
-    setPrice(newPrice);
+  const priceRangeHandler = (e, newPriceRange) => {
+    // console.log(e);
+    console.log('newPrice', newPriceRange);
+    console.log(priceRange);
+    setPriceRange(newPriceRange);
   };
 
   let count = filteredProductsCount;
@@ -116,8 +83,8 @@ const Products = ({ match }) => {
     if (error) {
       dispatch(clearErrors());
     }
-    dispatch(getProducts(keyword, currentPage, price, category, ratings));
-  }, [dispatch, keyword, currentPage, price, category, ratings, error]);
+    dispatch(getProducts(keyword, currentPage, priceRange, category, ratings));
+  }, [dispatch, keyword, currentPage, priceRange, category, ratings, error]);
 
   return (
     <>
@@ -134,6 +101,7 @@ const Products = ({ match }) => {
           }}
         >
           {console.log(products, productsCount, resultPerPage, count)}
+          {console.log('price.......', priceRange)}
 
           <Typography
             variant="h4"
@@ -210,18 +178,28 @@ const Products = ({ match }) => {
                   width: 250,
                 }}
                 role="presentation"
-                onClick={toggleDrawer('left', false)}
-                onKeyDown={toggleDrawer('left', false)}
+                // onClick={toggleDrawer('left', false)}
+                // onKeyDown={toggleDrawer('left', false)}
               >
                 <List>
                   <ListItem disablePadding>
                     <ListItemButton>
-                      <ListItemIcon>
-                        <InboxIcon />
-                      </ListItemIcon>
-                      <ListItemText>Inbox</ListItemText>
+                      <Typography variant="h6">Price</Typography>
                     </ListItemButton>
                   </ListItem>
+                  <Box sx={{ ml: 2, width: 200 }}>
+                    <Slider
+                      aria-label="Volume"
+                      // value={value}
+                      onChange={priceRangeHandler}
+                      defaultValue={priceRange}
+                      valueLabelDisplay="auto"
+                      // step={10}
+                      // marks
+                      min={1}
+                      max={500}
+                    />
+                  </Box>
                   <ListItem disablePadding>
                     <ListItemButton>
                       <ListItemIcon>
