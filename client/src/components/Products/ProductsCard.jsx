@@ -48,6 +48,8 @@ const ProductsCard = ({ product }) => {
         <br />
         <Typography variant="h7">Price: ${product?.price}</Typography>
         <br />
+        <Typography variant="h7">Ratings: {product?.ratings}</Typography>
+        <br />
         <Typography variant="h7">
           Status:{' '}
           {product?.stock >= 10 ? (

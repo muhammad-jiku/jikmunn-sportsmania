@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Container,
-  Divider,
   Drawer,
   Grid,
   IconButton,
@@ -23,8 +22,6 @@ import { Loader } from '../Shared';
 import ProductsCard from './ProductsCard';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 
 const Products = ({ match }) => {
   const dispatch = useDispatch();
@@ -70,6 +67,11 @@ const Products = ({ match }) => {
 
   const priceRangeHandler = (e, newPriceRange) => {
     setPriceRange(newPriceRange);
+  };
+
+  const RatingsHandler = (e, selectedRatings) => {
+    console.log(selectedRatings);
+    setRatings(selectedRatings);
   };
 
   let count = filteredProductsCount;
@@ -181,7 +183,7 @@ const Products = ({ match }) => {
               // onClick={toggleDrawer('left', false)}
               // onKeyDown={toggleDrawer('left', false)}
             >
-              {/* slider */}
+              {/* price */}
               <Box sx={{ p: 2 }}>
                 <Typography variant="h6">Price</Typography>
                 <Slider
@@ -215,6 +217,20 @@ const Products = ({ match }) => {
                     </ListItem>
                   ))}
                 </List>
+              </Box>
+              {/* Ratings */}
+              <Box sx={{ paddingX: 2 }}>
+                <Typography variant="h6">Ratings</Typography>
+                <Slider
+                  aria-labelledby="continuous-slider"
+                  getAriaLabel={() => 'Ratings range'}
+                  value={ratings}
+                  onChange={RatingsHandler}
+                  valueLabelDisplay="auto"
+                  min={0}
+                  max={5}
+                  sx={{ ml: 2, width: 200 }}
+                />
               </Box>
             </Box>
           </Drawer>
