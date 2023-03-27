@@ -88,7 +88,7 @@ const Products = ({ match }) => {
 
   return (
     <>
-      {loading ? <Loader /> : null}
+      {loading && <Loader />}
       <Container
         id="products"
         display="flex"
@@ -98,16 +98,19 @@ const Products = ({ match }) => {
           p: 4,
         }}
       >
-        {console.log(products, productsCount, resultPerPage, count)}
-        {console.log('price.......', priceRange)}
-        <Typography
-          variant="h4"
-          sx={{
-            mb: 2,
-          }}
-        >
-          Our Products
-        </Typography>
+        {loading ? null : (
+          <>
+            <Typography
+              variant="h4"
+              sx={{
+                mb: 2,
+              }}
+            >
+              Our Products
+            </Typography>
+          </>
+        )}
+
         <Container
           sx={{
             display: 'flex',
@@ -115,56 +118,61 @@ const Products = ({ match }) => {
             marginBottom: 2,
           }}
         >
-          <form
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              padding: '0 10px',
-            }}
-          >
-            <TextField
-              id="search-bar"
-              className="text"
-              onInput={(e) => {
-                console.log(e.target.value);
-              }}
-              label="Search Item..."
-              variant="standard"
-              placeholder="Search Item..."
-              sx={{
-                width: {
-                  xs: 180,
-                  sm: 350,
-                  md: 700,
-                },
-              }}
-            />
-            <IconButton type="submit" aria-label="search">
-              <SearchIcon />
-            </IconButton>
-          </form>
-          <Button
-            variant="text"
-            title="Filter"
-            sx={{
-              ml: -2,
-              fontSize: '14px',
-            }}
-            onClick={toggleDrawer('left', true)}
-          >
-            <FilterAltIcon />{' '}
-            <Typography
-              variant="span"
-              sx={{
-                display: {
-                  xs: 'none',
-                  md: 'flex',
-                },
-              }}
-            >
-              Filter
-            </Typography>
-          </Button>
+          {loading ? null : (
+            <>
+              <form
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  padding: '0 10px',
+                }}
+              >
+                <TextField
+                  id="search-bar"
+                  className="text"
+                  onInput={(e) => {
+                    console.log(e.target.value);
+                  }}
+                  label="Search Item..."
+                  variant="standard"
+                  placeholder="Search Item..."
+                  sx={{
+                    width: {
+                      xs: 180,
+                      sm: 350,
+                      md: 700,
+                    },
+                  }}
+                />
+                <IconButton type="submit" aria-label="search">
+                  <SearchIcon />
+                </IconButton>
+              </form>
+              <Button
+                variant="text"
+                title="Filter"
+                sx={{
+                  ml: -2,
+                  fontSize: '14px',
+                }}
+                onClick={toggleDrawer('left', true)}
+              >
+                <FilterAltIcon />{' '}
+                <Typography
+                  variant="span"
+                  sx={{
+                    display: {
+                      xs: 'none',
+                      md: 'flex',
+                    },
+                  }}
+                >
+                  Filter
+                </Typography>
+              </Button>
+            </>
+          )}
+
           <Drawer
             anchor={'left'}
             open={drawierStatus['left']}
@@ -192,8 +200,8 @@ const Products = ({ match }) => {
                     onChange={priceRangeHandler}
                     valueLabelDisplay="auto"
                     // getAriaValueText={valuetext}
-                    step={100}
-                    marks
+                    // step={100}
+                    // marks
                     min={1}
                     max={500}
                   />
@@ -284,21 +292,29 @@ const Products = ({ match }) => {
             </Grid>
           ))}
         </Grid>
-        <Pagination
-          sx={{
-            mt: 2,
-            p: 2,
-            display: 'flex',
-            justifyContent: 'center',
-          }}
-          size="small"
-          count={productsCount / resultPerPage}
-          page={currentPage}
-          onChange={setCurrentPageNo}
-          // variant="outlined"
-          // shape="rounded"
-          shape="circular"
-        />
+        {console.log('count...', count)}
+        {console.log('result per page', resultPerPage)}
+        {loading ? null : (
+          <>
+            {resultPerPage < count && (
+              <Pagination
+                sx={{
+                  mt: 2,
+                  p: 2,
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+                size="small"
+                count={productsCount / resultPerPage}
+                page={currentPage}
+                onChange={setCurrentPageNo}
+                // variant="outlined"
+                // shape="rounded"
+                shape="circular"
+              />
+            )}
+          </>
+        )}
       </Container>
     </>
   );
