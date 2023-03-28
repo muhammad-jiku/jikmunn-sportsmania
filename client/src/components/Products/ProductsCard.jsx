@@ -8,6 +8,7 @@ import {
   Collapse,
   Grid,
   IconButton,
+  Rating,
   styled,
   Typography,
 } from '@mui/material';
@@ -59,7 +60,19 @@ const ProductsCard = ({ product, idx }) => {
           <br />
           <Typography variant="h7">Price: ${product?.price}</Typography>
           <br />
-          <Typography variant="h7">Ratings: {product?.ratings}</Typography>
+          <Typography
+            variant="h7"
+            sx={{
+              ml: -1,
+            }}
+          >
+            <Rating
+              name="half-rating-read"
+              defaultValue={product?.ratings}
+              precision={0.5}
+              readOnly
+            />
+          </Typography>
           <br />
           <Typography variant="h7">
             Status:{' '}
