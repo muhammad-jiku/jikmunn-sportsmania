@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Checkbox,
   Container,
   Drawer,
   Grid,
@@ -18,6 +19,7 @@ import { clearErrors, getProducts } from '../../actions/productAction';
 import { Loader } from '../Shared';
 import ProductsCard from './ProductsCard';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -32,6 +34,7 @@ const Products = () => {
   const [drawierStatus, setDrawerStatus] = useState({
     left: false,
   });
+  const [isChecked, setIsChecked] = useState(false);
 
   const {
     products,
@@ -61,8 +64,35 @@ const Products = () => {
     setPriceRange(newPriceRange);
   };
 
+  const categoryHandler = (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    // console.log(newCheckStatus);
+    // setIsChecked(!isChecked);
+    setIsChecked(e.target.checked);
+    console.log(isChecked);
+    if (isChecked === true) {
+      setCategory(e.target.value);
+      console.log('2', isChecked);
+    } else {
+      setCategory('');
+      console.log('3', isChecked);
+    }
+  };
+
   const RatingsHandler = (e, selectedRatings) => {
     setRatings(selectedRatings);
+  };
+
+  const resetFilterHandler = (e) => {
+    e.preventDefault();
+
+    setCurrentPage(1);
+    setPriceRange([0, 500]);
+    setKeyword('');
+    setCategory('');
+    setRatings(0);
+    setIsChecked(false);
   };
 
   let count = filteredProductsCount;
@@ -130,7 +160,7 @@ const Products = () => {
             variant="text"
             title="Filter"
             sx={{
-              ml: -2,
+              ml: -1,
               fontSize: '14px',
             }}
             onClick={toggleDrawer('left', true)}
@@ -185,12 +215,16 @@ const Products = () => {
                 <List>
                   {categories.map((cat, idx) => (
                     <ListItem key={idx}>
-                      <ListItemText
-                        onClick={() => {
-                          // console.log(cat);
-                          setCategory(cat);
-                        }}
-                      >
+                      <ListItemText>
+                        <Checkbox
+                          onChange={categoryHandler}
+                          checked={
+                            cat === category && isChecked === true
+                              ? true
+                              : false
+                          }
+                          value={cat}
+                        />
                         {cat}
                       </ListItemText>
                     </ListItem>
@@ -210,6 +244,35 @@ const Products = () => {
                   max={5}
                   sx={{ ml: 2, width: 200 }}
                 />
+              </Box>
+              {/* Reset Filter */}
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  p: 2,
+                }}
+              >
+                <Button
+                  sx={{
+                    fontSize: '12px',
+                    fontWeight: 400,
+                  }}
+                  variant="contained"
+                  fullWidth
+                  disabled={
+                    keyword === '' &&
+                    category === '' &&
+                    currentPage === 1 &&
+                    ratings === 0 &&
+                    priceRange[0] === 0 &&
+                    priceRange[1] === 500 &&
+                    isChecked === false
+                  }
+                  onClick={resetFilterHandler}
+                >
+                  <FilterAltOffIcon /> Clear Filter
+                </Button>
               </Box>
             </Box>
           </Drawer>
