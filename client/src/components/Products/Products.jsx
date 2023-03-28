@@ -5,6 +5,8 @@ import {
   Container,
   Drawer,
   Grid,
+  IconButton,
+  InputAdornment,
   List,
   ListItem,
   ListItemText,
@@ -20,6 +22,7 @@ import { Loader } from '../Shared';
 import ProductsCard from './ProductsCard';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -115,20 +118,13 @@ const Products = () => {
           p: 4,
         }}
       >
-        <Typography
-          variant="h4"
-          sx={{
-            mb: 2,
-          }}
-        >
-          Our Products
-        </Typography>
-
+        {/*  Search */}
         <Container
           sx={{
             display: 'flex',
             justifyContent: 'center',
-            marginBottom: 2,
+            marginY: 2,
+            paddingY: 2,
           }}
         >
           <form
@@ -153,6 +149,17 @@ const Products = () => {
                   sm: 350,
                   md: 700,
                 },
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    {keyword && (
+                      <IconButton color="primary" onClick={resetFilterHandler}>
+                        <HighlightOffIcon />
+                      </IconButton>
+                    )}
+                  </InputAdornment>
+                ),
               }}
             />
           </form>
@@ -277,10 +284,19 @@ const Products = () => {
             </Box>
           </Drawer>
         </Container>
+
         {loading ? (
           <Loader />
         ) : (
           <>
+            <Typography
+              variant="h4"
+              sx={{
+                mb: 2,
+              }}
+            >
+              Our Products
+            </Typography>
             <Grid
               container
               spacing={{
