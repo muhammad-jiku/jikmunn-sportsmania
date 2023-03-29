@@ -48,4 +48,5 @@ app.use('/api/v1', paymentRouter);
 // Middleware for Errors
 app.use(errorMiddleware);
 
+// exporting module
 module.exports = app;
