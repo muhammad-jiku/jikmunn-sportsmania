@@ -18,9 +18,16 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import profile from '../../../assets/images/avatar_1.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearErrors, registerUser } from '../../../actions/userAction';
 
 const Registration = () => {
+  const dispatch = useDispatch();
+  const { error, loading } = useSelector((state) => state.user);
+
   const [isChecked, setIsChecked] = useState(false);
+  const [avatar, setAvatar] = useState(`${profile}`);
+  const [avatarPreview, setAvatarPreview] = useState(`${profile}`);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -41,6 +48,31 @@ const Registration = () => {
     resolver: zodResolver(registerSchema),
   });
 
+  const handleAvatar = (e) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatarPreview(reader.result);
+        setAvatar(reader.result);
+      }
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  const onSubmitHandler = (values) => {
+    // console.log(values);
+    const userInfo = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      avatar,
+    };
+    console.log(userInfo);
+    dispatch(registerUser(userInfo));
+  };
+
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
@@ -48,10 +80,11 @@ const Registration = () => {
     }
   }, [isSubmitSuccessful, reset]);
 
-  const onSubmitHandler = (values) => {
-    console.log(values);
-  };
-  console.log(errors);
+  useEffect(() => {
+    if (error) {
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   return (
     <Box>
@@ -79,7 +112,8 @@ const Registration = () => {
           >
             <input
               hidden
-              // onChange={onUpload}
+              onChange={handleAvatar}
+              accept="image/*"
               type="file"
               id="profile"
               name="profile"
@@ -87,7 +121,7 @@ const Registration = () => {
             <Avatar
               alt="Change Avatar"
               title="Change Avatar"
-              src={`${profile}`}
+              src={avatarPreview}
               sx={{
                 width: 125,
                 height: 125,
