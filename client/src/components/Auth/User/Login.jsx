@@ -101,6 +101,7 @@ const Login = () => {
               </InputAdornment>
             ),
           }}
+          placeholder="Password"
           error={!!errors['password']}
           helperText={errors['password'] ? errors['password'].message : ''}
           {...register('password')}
@@ -125,6 +126,7 @@ const Login = () => {
               </InputAdornment>
             ),
           }}
+          placeholder="Confirm Password"
           error={!!errors['passwordConfirm']}
           helperText={
             errors['passwordConfirm'] ? errors['passwordConfirm'].message : ''
