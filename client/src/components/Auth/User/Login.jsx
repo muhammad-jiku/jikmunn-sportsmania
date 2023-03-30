@@ -12,8 +12,13 @@ import { useForm } from 'react-hook-form';
 import { loginSchema } from './ValidationSchema';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearErrors, loginUser } from '../../../actions/userAction';
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { error, loading } = useSelector((state) => state.user);
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -33,15 +38,27 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
+  const onSubmitHandler = (values) => {
+    // console.log(values);
+    const userInfo = {
+      email: values.email,
+      password: values.password,
+    };
+    console.log(userInfo);
+    dispatch(loginUser(userInfo));
+  };
+
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
     }
   }, [isSubmitSuccessful, reset]);
 
-  const onSubmitHandler = (values) => {
-    console.log(values);
-  };
+  useEffect(() => {
+    if (error) {
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   return (
     <Box>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+  CLEAR_ERRORS,
   LOGIN_FAIL,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -89,4 +90,8 @@ export const updateUser = (id, userData) => async (dispatch) => {};
 export const deleteUser = (id) => async (dispatch) => {};
 
 // Clearing Errors
-export const clearErrors = () => async (dispatch) => {};
+export const clearErrors = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_ERRORS,
+  });
+};
