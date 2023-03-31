@@ -18,46 +18,42 @@ const Products = () => {
 
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <Container
-          id="products"
-          display="flex"
-          // justifyContent="center"
-          justifycontent="center"
+      <Container
+        id="products"
+        display="flex"
+        // justifyContent="center"
+        justifycontent="center"
+        sx={{
+          p: 4,
+        }}
+      >
+        {/* {console.log(products)} */}
+        <Typography
+          variant="h4"
           sx={{
-            p: 4,
+            mb: 2,
           }}
         >
-          {console.log(products)}
-          <Typography
-            variant="h4"
-            sx={{
-              mb: 2,
-            }}
-          >
-            Our Products
-          </Typography>
-          <Grid
-            container
-            spacing={{
-              xs: 2,
-              md: 3,
-            }}
-            sx={{ margin: `20px 4px 10px 4px` }}
-            columns={{
-              xs: 4,
-              sm: 8,
-              md: 12,
-            }}
-          >
-            {products?.map((product, idx) => (
-              <ProductsCard product={product} idx={idx} />
-            ))}
-          </Grid>
-        </Container>
-      )}
+          Our Products
+        </Typography>
+        <Grid
+          container
+          spacing={{
+            xs: 2,
+            md: 3,
+          }}
+          sx={{ margin: `20px 4px 10px 4px` }}
+          columns={{
+            xs: 4,
+            sm: 8,
+            md: 12,
+          }}
+        >
+          {products?.map((product, idx) => (
+            <ProductsCard product={product} idx={idx} />
+          ))}
+        </Grid>
+      </Container>
     </>
   );
 };

@@ -69,17 +69,17 @@ const Products = () => {
 
   const categoryHandler = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
+    // console.log(e.target.value);
     // console.log(newCheckStatus);
     // setIsChecked(!isChecked);
     setIsChecked(e.target.checked);
-    console.log(isChecked);
+    // console.log(isChecked);
     if (isChecked === true) {
       setCategory(e.target.value);
-      console.log('2', isChecked);
+      // console.log('2', isChecked);
     } else {
       setCategory('');
-      console.log('3', isChecked);
+      // console.log('3', isChecked);
     }
   };
 

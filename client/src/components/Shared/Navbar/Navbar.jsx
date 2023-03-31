@@ -39,20 +39,6 @@ const pages = [
   },
 ];
 
-const settings = [
-  {
-    title: 'Profile',
-    path: '/dashboard/profile',
-  },
-  {
-    title: 'Login',
-    path: '/login',
-  },
-  {
-    title: 'Logout',
-  },
-];
-
 const Logo = styled('img')(({ theme }) => ({
   width: '15rem',
   minWidth: '10rem',
@@ -65,9 +51,11 @@ const Logo = styled('img')(({ theme }) => ({
   // },
 }));
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+
+  console.log(user);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -235,7 +223,10 @@ const Navbar = () => {
                 p: 0,
               }}
             >
-              <Avatar alt="Remy Sharp" src={person1} />
+              <Avatar
+                alt="Remy Sharp"
+                src={user ? user?.avatar?.url : person1}
+              />
             </IconButton>
           </Tooltip>
           <Menu
@@ -256,41 +247,43 @@ const Navbar = () => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            {settings.map(({ title, path }) => (
-              <MenuItem key={title} onClick={handleCloseUserMenu}>
-                {path ? (
-                  <>
+            <MenuItem onClick={handleCloseUserMenu}>
+              <>
+                {user ? (
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >
                     <Typography textAlign="center">
                       <Link
-                        to={path}
+                        to={'/dashboard/profile'}
                         style={{
                           textDecoration: 'none',
                           color: '#000',
                         }}
                       >
-                        {title}
+                        Profile
                       </Link>
                     </Typography>
-                  </>
+                    <Button variant="contained">Logout</Button>
+                  </Box>
                 ) : (
-                  <>
-                    <Button
-                      sx={{
-                        color: 'white',
-                        backgroundColor: 'secondary.main',
-                        fontWeight: 400,
-                        '&:hover': {
-                          backgroundColor: 'white',
-                          color: 'secondary.main',
-                        },
+                  <Typography textAlign="center">
+                    <Link
+                      to={'/login'}
+                      style={{
+                        textDecoration: 'none',
+                        color: '#000',
                       }}
                     >
-                      {title}
-                    </Button>
-                  </>
+                      Login
+                    </Link>
+                  </Typography>
                 )}
-              </MenuItem>
-            ))}
+              </>
+            </MenuItem>
           </Menu>
         </Box>
       </Toolbar>

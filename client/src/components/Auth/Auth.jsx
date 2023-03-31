@@ -5,10 +5,10 @@ import Login from './Login/Login';
 import Registration from './Registration/Registration';
 
 const Auth = () => {
-  const [value, setValue] = useState('login');
+  const [authProcess, setAuthProcess] = useState('login');
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChange = (event, newAuthProcess) => {
+    setAuthProcess(newAuthProcess);
   };
 
   return (
@@ -25,7 +25,7 @@ const Auth = () => {
           typography: 'body1',
         }}
       >
-        <TabContext value={value}>
+        <TabContext value={authProcess}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
               <Tab label="Login" value="login" />
