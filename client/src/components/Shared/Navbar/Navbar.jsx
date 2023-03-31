@@ -19,6 +19,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../../actions/userAction';
 
 const pages = [
   {
@@ -52,6 +54,8 @@ const Logo = styled('img')(({ theme }) => ({
 }));
 
 const Navbar = ({ user }) => {
+  const dispatch = useDispatch();
+
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -71,6 +75,10 @@ const Navbar = ({ user }) => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogoutUser = () => {
+    dispatch(logoutUser());
   };
 
   return (
@@ -267,7 +275,9 @@ const Navbar = ({ user }) => {
                         Profile
                       </Link>
                     </Typography>
-                    <Button variant="contained">Logout</Button>
+                    <Button variant="contained" onClick={handleLogoutUser}>
+                      Logout
+                    </Button>
                   </Box>
                 ) : (
                   <Typography textAlign="center">
