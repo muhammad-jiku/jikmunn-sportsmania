@@ -35,7 +35,7 @@ function App() {
         <Loader />
       ) : (
         <>
-          <Navbar user={user} />
+          <Navbar isAuthenticated={isAuthenticated} user={user} />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<ProductPage />} />

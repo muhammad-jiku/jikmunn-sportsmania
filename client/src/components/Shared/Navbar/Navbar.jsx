@@ -53,12 +53,13 @@ const Logo = styled('img')(({ theme }) => ({
   // },
 }));
 
-const Navbar = ({ user }) => {
+const Navbar = ({ isAuthenticated, user }) => {
   const dispatch = useDispatch();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
 
+  console.log('isAuthenticated', isAuthenticated);
   console.log(user);
 
   const handleOpenNavMenu = (event) => {
@@ -233,7 +234,7 @@ const Navbar = ({ user }) => {
             >
               <Avatar
                 alt="Remy Sharp"
-                src={user ? user?.avatar?.url : person1}
+                src={isAuthenticated && user ? user?.avatar?.url : person1}
               />
             </IconButton>
           </Tooltip>
@@ -257,7 +258,7 @@ const Navbar = ({ user }) => {
           >
             <MenuItem onClick={handleCloseUserMenu}>
               <>
-                {user ? (
+                {isAuthenticated && user ? (
                   <Box
                     sx={{
                       display: 'flex',
