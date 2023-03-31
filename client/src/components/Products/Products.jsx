@@ -20,9 +20,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, getProducts } from '../../actions/productAction';
 import { Loader } from '../Shared';
 import ProductsCard from './ProductsCard';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -158,34 +158,18 @@ const Products = () => {
                         <HighlightOffIcon />
                       </IconButton>
                     )}
+                    <IconButton
+                      color="primary"
+                      onClick={toggleDrawer('left', true)}
+                    >
+                      <FilterListIcon />
+                    </IconButton>
                   </InputAdornment>
                 ),
               }}
             />
           </form>
-          <Button
-            variant="text"
-            title="Filter"
-            sx={{
-              ml: -1,
-              fontSize: '14px',
-            }}
-            onClick={toggleDrawer('left', true)}
-          >
-            <FilterAltIcon />{' '}
-            <Typography
-              variant="span"
-              sx={{
-                display: {
-                  xs: 'none',
-                  md: 'flex',
-                },
-              }}
-            >
-              Filter
-            </Typography>
-          </Button>
-
+          {/* Drawer */}
           <Drawer
             anchor={'left'}
             open={drawierStatus['left']}
@@ -278,13 +262,13 @@ const Products = () => {
                   }
                   onClick={resetFilterHandler}
                 >
-                  <FilterAltOffIcon /> Clear Filter
+                  <FilterListOffIcon /> Clear Filter
                 </Button>
               </Box>
             </Box>
           </Drawer>
         </Container>
-
+        {/* Loading */}
         {loading ? (
           <Loader />
         ) : (

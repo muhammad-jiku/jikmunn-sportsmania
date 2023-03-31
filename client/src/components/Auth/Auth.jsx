@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Box, Container, Tab } from '@mui/material';
 import { TabList, TabPanel, TabContext } from '@mui/lab';
-import Login from './Login';
-import Registration from './Registration';
+import Login from './Login/Login';
+import Registration from './Registration/Registration';
 
 const Auth = () => {
   const [value, setValue] = useState('login');
