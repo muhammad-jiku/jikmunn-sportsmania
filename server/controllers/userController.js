@@ -40,12 +40,14 @@ const loginUser = AsyncError(async (req, res, next) => {
 
   const user = await User.findOne({ email }).select('+password');
   if (!user) {
-    return next(new ErrorHandler('Invalid email or password', 401));
+    // return next(new ErrorHandler('Invalid email or password', 401));
+    return next(new ErrorHandler('Invalid email or password', 400));
   }
 
   const isPasswordMatched = await user.comparePassword(password);
   if (!isPasswordMatched) {
-    return next(new ErrorHandler('Invalid email or password', 401));
+    // return next(new ErrorHandler('Invalid email or password', 401));
+    return next(new ErrorHandler('Invalid email or password', 400));
   }
   sendToken(user, 200, res);
 });
@@ -112,7 +114,7 @@ const forgotPassword = AsyncError(async (req, res, next) => {
 const resetPassword = AsyncError(async (req, res, next) => {
   const { token } = await req.params;
   const { password, confirmPassword } = await req.body;
-  // console.log(token, password, confirmPassword);
+  console.log(token, password, confirmPassword);
   // creating token hash
   const resetPasswordToken = crypto
     .createHash('sha256')
