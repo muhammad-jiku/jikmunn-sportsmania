@@ -15,7 +15,7 @@ import {
 } from './pages';
 import { sportsStore } from './utils/store';
 import WebFont from 'webfontloader';
-import { Dashboard } from './components/Dashboard';
+import { Dashboard, Orders, Profile } from './components/Dashboard';
 
 function App() {
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
@@ -51,7 +51,10 @@ function App() {
                 <Dashboard />
                 // </RequiredAuth>
               }
-            />
+            >
+              <Route index element={<Profile />} />
+              <Route path="myorders" element={<Orders />} />
+            </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />
