@@ -77,7 +77,14 @@ export const loadUser = () => async (dispatch) => {
       type: LOAD_USER_REQUEST,
     });
 
-    const { data } = await axios.get(`/api/v1/me`);
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/me`, config);
 
     dispatch({
       type: LOAD_USER_SUCCESS,

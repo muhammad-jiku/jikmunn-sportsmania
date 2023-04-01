@@ -176,6 +176,7 @@ const Navbar = ({ isAuthenticated, user }) => {
             // letterSpacing: '0.125rem',
             color: 'inherit',
             textDecoration: 'none',
+            cursor: 'pointer',
           }}
         >
           Sports Mania

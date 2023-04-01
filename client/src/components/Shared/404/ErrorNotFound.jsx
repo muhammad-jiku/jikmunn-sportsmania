@@ -1,8 +1,10 @@
 import { Box, Button, styled, Typography } from '@mui/material';
 import React from 'react';
 import NotFound from '../../../assets/gifs/NotFound.gif';
+import { useNavigate } from 'react-router-dom';
 
 const ErrorNotFound = () => {
+  const navigate = useNavigate();
   const NotFoundContainer = styled(Box)(({ matches, theme }) => ({
     display: 'flex',
     justifyContent: 'center',
@@ -54,7 +56,7 @@ const ErrorNotFound = () => {
       <NotFoundTitle variant="h6">
         Ooops! The page you're looking is not found!
       </NotFoundTitle>
-      <GotoHomeButton color="primary" href="/">
+      <GotoHomeButton color="primary" onClick={() => navigate('/')}>
         Go to Home
       </GotoHomeButton>
     </NotFoundContainer>

@@ -16,6 +16,11 @@ const sendToken = (user, statusCode, res) => {
   //   token,
   // });
 
+  // console.log({
+  //   user,
+  //   token,
+  // });
+
   res.status(statusCode).json({
     success: true,
     user,

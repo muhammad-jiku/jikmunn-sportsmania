@@ -17,27 +17,31 @@ const isAuthenticatedUser = AsyncError(async (req, res, next) => {
   // // console.log('user', req.user);
   // next();
 
-  const authHeader = req.headers.authorization;
-  console.log('Auth header ', authHeader);
+  // console.log(req.headers);
+  // console.log(req.cookies);
+
+  const authHeader = await req.headers.authorization;
+  // console.log('Auth header........', authHeader);
   if (!authHeader) {
     // return next(new ErrorHandler('Please Login to access this resource', 401));
     return next(new ErrorHandler('Please Login to access this resource', 400));
   }
-  const token = authHeader.split(' ')[1];
-  console.log(token);
+  const token = await authHeader.split(' ')[1];
+  // console.log('token.........', token);
   if (!token) {
     // return next(new ErrorHandler('Please Login to access this resource', 401));
     return next(new ErrorHandler('Please Login to access this resource', 400));
   }
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
+      // console.log(err);
       return next(new ErrorHandler('Access to this route is forbidden', 403));
     }
     req.decoded = decoded;
-    console.log('decoded ', decoded);
+    // console.log('decoded: ', decoded);
     req.user = await User.findById(decoded.id);
-    console.log('user', req.user);
+    // console.log('user', req.user);
 
     next();
   });
