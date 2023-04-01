@@ -40,6 +40,16 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: 'user',
     },
+    phone: {
+      type: String,
+      // maxLength: [30, 'Phone cannot exceed 30 characters'],
+      minLength: [11, 'Phone should have more than 11 characters'],
+    },
+    address: {
+      type: String,
+      maxLength: [100, 'Address cannot exceed 100 characters'],
+      minLength: [10, 'Address should have more than 10 characters'],
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },

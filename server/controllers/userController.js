@@ -188,20 +188,50 @@ const updatePassword = AsyncError(async (req, res, next) => {
 // update User Profile
 const updateProfile = AsyncError(async (req, res, next) => {
   const { id } = await req.user;
-  const { name, email, avatar } = await req.body;
-  // const { public_id, url } = await avatar;
-  const newUserData = {
+  // const { name, email, avatar } = await req.body;
+  // // const { public_id, url } = await avatar;
+  // const newUserData = {
+  //   name,
+  //   email,
+  // };
+
+  const { name, phone, address, avatar } = await req.body;
+
+  const updatedUserData = {
     name,
-    email,
+    avatar,
+    phone,
+    address,
   };
+
   const opts = {
     runValidators: true,
     new: true,
   };
 
+  if (avatar !== '') {
+    const user = await User.findById({ _id: id });
+
+    const imageId = user.avatar.public_id;
+
+    await cloudinary.v2.uploader.destroy(imageId);
+
+    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+      folder: 'avatars',
+      width: 150,
+      crop: 'scale',
+    });
+
+    updatedUserData.avatar = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+  }
+
   const user = await User.findByIdAndUpdate(
     { _id: id },
-    { $set: newUserData },
+    // { $set: newUserData },
+    { $set: updatedUserData },
     {
       opts,
     }
@@ -210,7 +240,8 @@ const updateProfile = AsyncError(async (req, res, next) => {
   res.status(200).json({
     success: true,
     user,
-    newUserData,
+    // newUserData,
+    updatedUserData,
   });
 });
 
