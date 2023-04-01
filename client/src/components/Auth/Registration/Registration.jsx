@@ -74,7 +74,7 @@ const Registration = () => {
       password: values.password,
       avatar,
     };
-    console.log(userInfo);
+    // console.log(userInfo);
     dispatch(registerUser(userInfo));
   };
 

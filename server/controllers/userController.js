@@ -25,6 +25,7 @@ const registerUser = AsyncError(async (req, res, next) => {
       url: myCloud.secure_url,
     },
   });
+
   sendToken(user, 201, res);
 });
 

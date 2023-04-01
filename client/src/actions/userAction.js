@@ -26,6 +26,9 @@ export const loginUser = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(`/api/v1/login`, userData, config);
+    console.log(data);
+    const token = data?.token;
+    localStorage?.setItem('token', token);
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -51,6 +54,9 @@ export const registerUser = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(`/api/v1/register`, userData, config);
+    console.log(data);
+    const token = data?.token;
+    localStorage?.setItem('token', token);
 
     dispatch({
       type: REGISTER_USER_SUCCESS,

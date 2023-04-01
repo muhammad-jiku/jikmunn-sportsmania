@@ -80,6 +80,7 @@ const Navbar = ({ isAuthenticated, user }) => {
 
   const handleLogoutUser = () => {
     dispatch(logoutUser());
+    localStorage?.removeItem('token');
   };
 
   return (
