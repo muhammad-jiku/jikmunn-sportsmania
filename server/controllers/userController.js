@@ -153,7 +153,7 @@ const resetPassword = AsyncError(async (req, res, next) => {
 // Get User Detail
 const getUserDetails = AsyncError(async (req, res, next) => {
   const { id } = await req.user;
-  console.log(req.user);
+  // console.log(req.user);
   const user = await User.findById({
     _id: id,
   });

@@ -59,8 +59,8 @@ const Navbar = ({ isAuthenticated, user }) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
 
-  console.log('isAuthenticated', isAuthenticated);
-  console.log(user);
+  // console.log('isAuthenticated', isAuthenticated);
+  // console.log(user);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
