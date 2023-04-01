@@ -4,6 +4,7 @@ import { registerSchema } from '../ValidationSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Avatar,
+  Badge,
   Box,
   Button,
   Checkbox,
@@ -21,6 +22,7 @@ import profile from '../../../assets/images/avatar_1.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, registerUser } from '../../../actions/userAction';
 import { useLocation, useNavigate } from 'react-router-dom';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -54,16 +56,32 @@ const Registration = () => {
   });
 
   const handleAvatar = (e) => {
-    const reader = new FileReader();
+    // const reader = new FileReader();
 
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setAvatarPreview(reader.result);
-        setAvatar(reader.result);
-      }
-    };
+    // reader.onload = () => {
+    //   if (reader.readyState === 2) {
+    //     setAvatarPreview(reader.result);
+    //     setAvatar(reader.result);
+    //   }
+    // };
+    // reader.readAsDataURL(e.target.files[0]);
 
-    reader.readAsDataURL(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile instanceof Blob) {
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile);
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatarPreview(reader.result);
+          setAvatar(reader.result);
+        }
+        // do something with the result
+        // console.log(reader.result);
+      };
+    } else {
+      console.error('The selected file is not a valid Blob object.');
+    }
   };
 
   const onSubmitHandler = (values) => {
@@ -113,7 +131,50 @@ const Registration = () => {
             p: 2,
           }}
         >
-          <IconButton
+          <Badge
+            overlap="circular"
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            badgeContent={
+              <IconButton
+                aria-label="upload picture"
+                component="label"
+                htmlFor="profile"
+                sx={{
+                  color: 'white',
+                  backgroundColor: 'primary.main',
+                  '&:hover': {
+                    color: 'primary.main',
+                    backgroundColor: 'white',
+                  },
+                }}
+                size="small"
+              >
+                <input
+                  hidden
+                  onChange={handleAvatar}
+                  accept="image/*"
+                  type="file"
+                  id="profile"
+                  name="profile"
+                />
+                <CameraAltIcon />
+              </IconButton>
+            }
+          >
+            <Avatar
+              alt="Change Avatar"
+              title="Change Avatar"
+              src={avatarPreview}
+              sx={{
+                width: 125,
+                height: 125,
+                border: '1px solid',
+                borderColor: 'secondary',
+                cursor: 'pointer',
+              }}
+            />
+          </Badge>
+          {/* <IconButton
             color="primary"
             aria-label="upload picture"
             component="label"
@@ -139,7 +200,7 @@ const Registration = () => {
                 cursor: 'pointer',
               }}
             />
-          </IconButton>
+          </IconButton> */}
         </Box>
         <TextField
           sx={{ mb: 2 }}
