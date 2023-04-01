@@ -13,10 +13,15 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, loginUser } from '../../../actions/userAction';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { error, loading } = useSelector((state) => state.user);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { error, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -28,6 +33,7 @@ const Login = () => {
   const handleMouseDownPassword = (e) => {
     e.preventDefault();
   };
+
   const {
     register,
     formState: { errors, isSubmitSuccessful },
@@ -47,6 +53,8 @@ const Login = () => {
     dispatch(loginUser(userInfo));
   };
 
+  let from = location.state?.from?.pathname || '/';
+
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
@@ -57,7 +65,12 @@ const Login = () => {
     if (error) {
       dispatch(clearErrors());
     }
-  }, [dispatch, error]);
+    if (isAuthenticated) {
+      navigate(from, {
+        replace: true,
+      });
+    }
+  }, [dispatch, error, isAuthenticated, navigate, from]);
 
   return (
     <Box>

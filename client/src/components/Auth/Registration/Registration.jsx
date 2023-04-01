@@ -20,10 +20,15 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import profile from '../../../assets/images/avatar_1.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, registerUser } from '../../../actions/userAction';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Registration = () => {
   const dispatch = useDispatch();
-  const { error, loading } = useSelector((state) => state.user);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { error, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
 
   const [isChecked, setIsChecked] = useState(false);
   const [avatar, setAvatar] = useState(`${profile}`);
@@ -73,6 +78,8 @@ const Registration = () => {
     dispatch(registerUser(userInfo));
   };
 
+  let from = location.state?.from?.pathname || '/';
+
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
@@ -84,7 +91,12 @@ const Registration = () => {
     if (error) {
       dispatch(clearErrors());
     }
-  }, [dispatch, error]);
+    if (isAuthenticated) {
+      navigate(from, {
+        replace: true,
+      });
+    }
+  }, [dispatch, error, isAuthenticated, navigate, from]);
 
   return (
     <Box>

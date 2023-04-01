@@ -256,18 +256,13 @@ const Navbar = ({ isAuthenticated, user }) => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            <MenuItem onClick={handleCloseUserMenu}>
-              <>
-                {isAuthenticated && user ? (
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                    }}
-                  >
+            <>
+              {isAuthenticated && user ? (
+                <>
+                  <MenuItem onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">
                       <Link
-                        to={'/dashboard/profile'}
+                        to={'/dashboard'}
                         style={{
                           textDecoration: 'none',
                           color: '#000',
@@ -276,11 +271,16 @@ const Navbar = ({ isAuthenticated, user }) => {
                         Profile
                       </Link>
                     </Typography>
+                  </MenuItem>
+
+                  <MenuItem onClick={handleCloseUserMenu}>
                     <Button variant="contained" onClick={handleLogoutUser}>
                       Logout
                     </Button>
-                  </Box>
-                ) : (
+                  </MenuItem>
+                </>
+              ) : (
+                <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
                     <Link
                       to={'/login'}
@@ -292,9 +292,9 @@ const Navbar = ({ isAuthenticated, user }) => {
                       Login
                     </Link>
                   </Typography>
-                )}
-              </>
-            </MenuItem>
+                </MenuItem>
+              )}
+            </>
           </Menu>
         </Box>
       </Toolbar>

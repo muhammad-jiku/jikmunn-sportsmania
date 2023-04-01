@@ -15,6 +15,7 @@ import {
 } from './pages';
 import { sportsStore } from './utils/store';
 import WebFont from 'webfontloader';
+import { Dashboard } from './components/Dashboard';
 
 function App() {
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
@@ -43,6 +44,14 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/dashboard"
+              element={
+                // <RequiredAuth>
+                <Dashboard />
+                // </RequiredAuth>
+              }
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />
