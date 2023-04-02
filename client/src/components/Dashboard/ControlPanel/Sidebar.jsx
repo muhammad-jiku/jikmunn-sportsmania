@@ -73,14 +73,25 @@ const Sidebar = () => {
         </Box>
 
         <Typography
-          sx={{
-            mb: 1.5,
-          }}
+          sx={
+            {
+              // mb: 1.5,
+            }
+          }
           variant="h6"
           color="text.secondary"
         >
           {capitalizedName}
           {/* {user?.name} */}
+        </Typography>
+        <Typography
+          sx={{
+            mb: 1.5,
+          }}
+          variant="h7"
+          color="text.secondary"
+        >
+          Joined On: {String(user?.createdAt).substr(0, 10)}
         </Typography>
         <List>
           <ListItem
