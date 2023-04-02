@@ -18,49 +18,16 @@ import person1 from '../../../assets/images/avatar_1.png';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../../actions/userAction';
 
-const pages = [
-  {
-    title: 'Home',
-    path: '/',
-  },
-  {
-    title: 'Products',
-    path: '/products',
-  },
-  {
-    title: 'Contact',
-    path: '/contact',
-  },
-  {
-    title: 'About',
-    path: '/about',
-  },
-];
-
-const Logo = styled('img')(({ theme }) => ({
-  width: '15rem',
-  minWidth: '10rem',
-  // [theme.breakpoints.down('md')]: {
-  //   width: '350px',
-  // },
-  // [theme.breakpoints.down('sm')]: {
-  //   width: '11rem',
-  //   align: 'center',
-  // },
-}));
-
 const Navbar = ({ isAuthenticated, user }) => {
+  const navigate = useNavigate('');
   const dispatch = useDispatch();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
-
-  // console.log('isAuthenticated', isAuthenticated);
-  // console.log(user);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -81,7 +48,39 @@ const Navbar = ({ isAuthenticated, user }) => {
   const handleLogoutUser = () => {
     dispatch(logoutUser());
     localStorage?.removeItem('token');
+    navigate('/');
   };
+
+  const pages = [
+    {
+      title: 'Home',
+      path: '/',
+    },
+    {
+      title: 'Products',
+      path: '/products',
+    },
+    {
+      title: 'Contact',
+      path: '/contact',
+    },
+    {
+      title: 'About',
+      path: '/about',
+    },
+  ];
+
+  const Logo = styled('img')(({ theme }) => ({
+    width: '15rem',
+    minWidth: '10rem',
+    // [theme.breakpoints.down('md')]: {
+    //   width: '350px',
+    // },
+    // [theme.breakpoints.down('sm')]: {
+    //   width: '11rem',
+    //   align: 'center',
+    // },
+  }));
 
   return (
     <AppBar position="static" className="header" color="secondary">
