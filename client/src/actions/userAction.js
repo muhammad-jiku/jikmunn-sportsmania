@@ -119,6 +119,7 @@ export const logoutUser = () => async (dispatch) => {
 
 // Update Profile
 export const updateProfile = (userData) => async (dispatch) => {
+  console.log(userData);
   try {
     dispatch({
       type: UPDATE_PROFILE_REQUEST,

@@ -32,34 +32,33 @@ function App() {
 
   return (
     <div className="App">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <Navbar isAuthenticated={isAuthenticated} user={user} />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/products" element={<ProductPage />} />
-            <Route path="/product/:id" element={<ProductDetailsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route
-              path="/dashboard"
-              element={
-                // <RequiredAuth>
-                <Dashboard />
-                // </RequiredAuth>
-              }
-            >
-              <Route index element={<Profile />} />
-              <Route path="myorders" element={<Orders />} />
-            </Route>
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-          <Footer />
-        </>
-      )}
+      {/* {loading ? // <Loader />
+      null : ( */}
+      <>
+        <Navbar isAuthenticated={isAuthenticated} user={user} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductPage />} />
+          <Route path="/product/:id" element={<ProductDetailsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/dashboard"
+            element={
+              // <RequiredAuth>
+              <Dashboard />
+              // </RequiredAuth>
+            }
+          >
+            <Route index element={<Profile />} />
+            <Route path="myorders" element={<Orders />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+        <Footer />
+      </>
+      {/* )} */}
     </div>
   );
 }

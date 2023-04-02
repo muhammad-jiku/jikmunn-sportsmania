@@ -235,7 +235,7 @@ const Navbar = ({ isAuthenticated, user }) => {
               }}
             >
               <Avatar
-                alt="Remy Sharp"
+                alt={user ? user?.name : 'Random User'}
                 src={isAuthenticated && user ? user?.avatar?.url : person1}
               />
             </IconButton>

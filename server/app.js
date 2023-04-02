@@ -25,7 +25,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());
 app.use(
-  bodyParser.urlencoded({
+  express.json({
+    limit: '50mb',
+  })
+);
+app.use(
+  express.urlencoded({
+    limit: '50mb',
     extended: true,
   })
 );

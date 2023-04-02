@@ -41,6 +41,7 @@ const Sidebar = () => {
         paddingY: 2,
         border: '1px solid',
         borderColor: 'primary.main',
+        width: 280,
       }}
     >
       <CardContent
@@ -84,7 +85,11 @@ const Sidebar = () => {
         <List>
           <ListItem
             disablePadding
-            sx={{ color: 'primary.main', cursor: 'pointer', p: 1.5 }}
+            sx={{
+              color: 'primary.main',
+              cursor: 'pointer',
+              p: 1.5,
+            }}
             onClick={() => navigate('/dashboard')}
           >
             <InsertEmoticonIcon />

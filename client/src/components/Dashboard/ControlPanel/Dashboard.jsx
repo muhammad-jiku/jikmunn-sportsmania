@@ -9,8 +9,8 @@ const Dashboard = () => {
       sx={{
         p: 2,
         display: 'flex',
-        justifyContent: 'space-between',
-        // width: 280,
+        // justifyContent: 'space-between',
+        // width: 480,
       }}
     >
       <Sidebar />
