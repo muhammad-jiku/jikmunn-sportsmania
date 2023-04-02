@@ -5,14 +5,18 @@ import {
   productsReducer,
   productDetailsReducer,
 } from '../reducers/productReducer';
-import { profileReducer, userReducer } from '../reducers/userReducer';
+import {
+  forgotPasswordReducer,
+  profileReducer,
+  userReducer,
+} from '../reducers/userReducer';
 
 const reducer = combineReducers({
   products: productsReducer,
   productDetails: productDetailsReducer,
   user: userReducer,
   profile: profileReducer,
-  // forgotPassword: forgotPasswordReducer,
+  forgotPassword: forgotPasswordReducer,
   // cart: cartReducer,
   // newOrder: newOrderReducer,
   // myOrders: myOrdersReducer,
