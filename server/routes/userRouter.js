@@ -33,9 +33,9 @@ userRouter.route('/password/forgot').post(forgotPassword);
 
 userRouter.route('/password/reset/:token').put(resetPassword);
 
-userRouter.route('/me').get(isAuthenticatedUser, getUserDetails);
-
 userRouter.route('/password/update').put(isAuthenticatedUser, updatePassword);
+
+userRouter.route('/me').get(isAuthenticatedUser, getUserDetails);
 
 userRouter.route('/me/update').put(isAuthenticatedUser, updateProfile);
 
