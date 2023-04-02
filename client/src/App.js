@@ -16,6 +16,7 @@ import {
 import { sportsStore } from './utils/store';
 import WebFont from 'webfontloader';
 import { Dashboard, Orders, Profile } from './components/Dashboard';
+import { ForgetPassword } from './components/Auth';
 
 function App() {
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
@@ -43,6 +44,7 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/password/forgot" element={<ForgetPassword />} />
           <Route
             path="/dashboard"
             element={
