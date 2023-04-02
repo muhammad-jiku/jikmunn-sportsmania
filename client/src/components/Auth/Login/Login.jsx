@@ -6,6 +6,7 @@ import {
   IconButton,
   InputAdornment,
   TextField,
+  Typography,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { loginSchema } from '../ValidationSchema';
@@ -13,9 +14,10 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, loginUser } from '../../../actions/userAction';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setAuthProcess }) => {
+  console.log(setAuthProcess);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -142,14 +144,51 @@ const Login = () => {
           }
           {...register('passwordConfirm')}
         />
+        <Link to="/password/forgot" style={{ textDecoration: 'none' }}>
+          <Typography
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
+            variant="span"
+            color="text.secondary"
+          >
+            Forget Password?
+          </Typography>
+        </Link>
         <Button
           variant="contained"
           fullWidth
           type="submit"
-          sx={{ py: '0.8rem', mt: '1rem' }}
+          sx={{
+            py: '0.8rem',
+            mt: '1rem',
+          }}
         >
           Login
-        </Button>
+        </Button>{' '}
+        <Typography
+          sx={{
+            m: 1.5,
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+          variant="span"
+          color="text.secondary"
+        >
+          New to
+          <Typography variant="span" color="primary" sx={{ ml: 0.5 }}>
+            SportsMania?{' '}
+            <Typography
+              variant="span"
+              color="primary"
+              sx={{ cursor: 'pointer' }}
+              onClick={() => setAuthProcess('registration')}
+            >
+              Click Here!
+            </Typography>
+          </Typography>
+        </Typography>
       </Box>
     </Box>
   );

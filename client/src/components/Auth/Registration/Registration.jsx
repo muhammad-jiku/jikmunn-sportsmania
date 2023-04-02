@@ -24,7 +24,7 @@ import { clearErrors, registerUser } from '../../../actions/userAction';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
-const Registration = () => {
+const Registration = ({ setAuthProcess }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -306,6 +306,25 @@ const Registration = () => {
         >
           Register
         </Button>
+        <Typography
+          sx={{
+            m: 1.5,
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+          variant="span"
+          color="text.secondary"
+        >
+          Already have an accout?
+          <Typography
+            variant="span"
+            color="primary"
+            sx={{ cursor: 'pointer', ml: 0.5 }}
+            onClick={() => setAuthProcess('login')}
+          >
+            Login Now!
+          </Typography>
+        </Typography>
       </Box>
     </Box>
   );

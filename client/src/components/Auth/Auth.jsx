@@ -7,7 +7,7 @@ import Registration from './Registration/Registration';
 const Auth = () => {
   const [authProcess, setAuthProcess] = useState('login');
 
-  const handleChange = (event, newAuthProcess) => {
+  const handleChange = (e, newAuthProcess) => {
     setAuthProcess(newAuthProcess);
   };
 
@@ -25,6 +25,7 @@ const Auth = () => {
           typography: 'body1',
         }}
       >
+        {console.log(authProcess)}
         <TabContext value={authProcess}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -32,11 +33,12 @@ const Auth = () => {
               <Tab label="Registration" value="registration" />
             </TabList>
           </Box>
-          <TabPanel value="login">
-            <Login />
-          </TabPanel>
-          <TabPanel value="registration">
-            <Registration />
+          <TabPanel value={authProcess}>
+            {authProcess === 'login' ? (
+              <Login setAuthProcess={setAuthProcess} />
+            ) : (
+              <Registration setAuthProcess={setAuthProcess} />
+            )}
           </TabPanel>
         </TabContext>
       </Box>

@@ -99,7 +99,7 @@ const Sidebar = () => {
             sx={{
               color: 'primary.main',
               cursor: 'pointer',
-              p: 1.5,
+              px: 1.5,
             }}
             onClick={() => navigate('/dashboard')}
           >
@@ -111,7 +111,11 @@ const Sidebar = () => {
           </ListItem>
           <ListItem
             disablePadding
-            sx={{ color: 'primary.main', cursor: 'pointer', p: 1.5 }}
+            sx={{
+              color: 'primary.main',
+              cursor: 'pointer',
+              p: 1.5,
+            }}
             onClick={() => navigate('/dashboard/myorders')}
           >
             <ShoppingCartIcon />
