@@ -224,8 +224,8 @@ const Profile = () => {
               <TextField
                 sx={{ mt: 2 }}
                 label="Address"
-                // multiline
-                // rows={3}
+                multiline
+                rows={3}
                 fullWidth
                 required
                 type="text"
@@ -237,17 +237,6 @@ const Profile = () => {
                 helperText={errors['address'] ? errors['address'].message : ''}
                 {...register('address')}
               />
-              {/* <TextField
-            sx={{ mt: 2 }}
-            label="Name"
-            fullWidth
-            required
-            type="text"
-            placeholder="Name"
-            error={!!errors['name']}
-            helperText={errors['name'] ? errors['name'].message : ''}
-            {...register('name')}
-          /> */}
               <Button
                 variant="contained"
                 // fullWidth
