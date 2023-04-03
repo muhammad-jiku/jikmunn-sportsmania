@@ -38,3 +38,14 @@ export const userInfoSchema = object({
     .nonempty('Address is required')
     .min(10, 'Address is too short'),
 });
+
+export const resetSchema = object({
+  password: string()
+    .nonempty('Password is required')
+    .min(6, 'Password must be more than 8 characters')
+    .max(32, 'Password must be less than 32 characters'),
+  passwordConfirm: string().nonempty('Please confirm your password'),
+}).refine((data) => data.password === data.passwordConfirm, {
+  path: ['passwordConfirm'],
+  message: 'Passwords do not match',
+});
