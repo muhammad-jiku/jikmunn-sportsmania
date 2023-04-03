@@ -25,7 +25,7 @@ const Auth = () => {
           typography: 'body1',
         }}
       >
-        {console.log(authProcess)}
+        {/* {console.log(authProcess)} */}
         <TabContext value={authProcess}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} aria-label="lab API tabs example">

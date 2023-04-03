@@ -19,7 +19,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
-  console.log('user', user);
+  // console.log('user', user);
 
   const [name, setName] = useState(user ? user?.name : ``);
   const [email, setEmail] = useState(user ? user?.email : ``);
@@ -108,7 +108,7 @@ const Profile = () => {
         <Loader />
       ) : (
         <Box>
-          {console.log(user)}
+          {/* {console.log(user)} */}
           <Box
             component="form"
             noValidate

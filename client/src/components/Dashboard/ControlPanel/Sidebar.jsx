@@ -19,7 +19,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, error } = useSelector((state) => state.user);
-  console.log(user);
+  // console.log(user);
 
   //  First Capital Letter of the Name
   const name = user?.name;

@@ -17,7 +17,7 @@ import { clearErrors, loginUser } from '../../../actions/userAction';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = ({ setAuthProcess }) => {
-  console.log(setAuthProcess);
+  // console.log(setAuthProcess);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();

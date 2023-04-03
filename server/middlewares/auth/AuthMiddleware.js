@@ -35,7 +35,7 @@ const isAuthenticatedUser = AsyncError(async (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
-      console.log(err);
+      // console.log(err);
       return next(new ErrorHandler('Access to this route is forbidden', 403));
     }
     req.decoded = decoded;

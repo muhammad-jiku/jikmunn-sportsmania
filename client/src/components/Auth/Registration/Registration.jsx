@@ -56,16 +56,6 @@ const Registration = ({ setAuthProcess }) => {
   });
 
   const handleAvatar = (e) => {
-    // const reader = new FileReader();
-
-    // reader.onload = () => {
-    //   if (reader.readyState === 2) {
-    //     setAvatarPreview(reader.result);
-    //     setAvatar(reader.result);
-    //   }
-    // };
-    // reader.readAsDataURL(e.target.files[0]);
-
     const selectedFile = e.target.files[0];
 
     if (selectedFile instanceof Blob) {
@@ -76,8 +66,6 @@ const Registration = ({ setAuthProcess }) => {
           setAvatarPreview(reader.result);
           setAvatar(reader.result);
         }
-        // do something with the result
-        // console.log(reader.result);
       };
     } else {
       console.error('The selected file is not a valid Blob object.');
