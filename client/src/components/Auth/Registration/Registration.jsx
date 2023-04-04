@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { registerSchema } from '../ValidationSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Avatar,
@@ -23,6 +22,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, registerUser } from '../../../actions/userAction';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import { registerSchema } from '../../../utils/ValidationSchema';
 
 const Registration = ({ setAuthProcess }) => {
   const dispatch = useDispatch();

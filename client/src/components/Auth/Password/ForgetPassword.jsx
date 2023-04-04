@@ -4,9 +4,9 @@ import { clearErrors, forgotPassword } from '../../../actions/userAction';
 import { Loader } from '../../Shared';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { forgetPasswordSchema } from '../ValidationSchema';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
+import { forgetPasswordSchema } from '../../../utils/ValidationSchema';
 
 const ForgetPassword = () => {
   const dispatch = useDispatch();

@@ -13,10 +13,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { clearErrors, updatePassword } from '../../../actions/userAction';
-import { updatePasswordSchema } from '../ValidationSchema';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { UPDATE_PASSWORD_RESET } from '../../../constants/userConstant';
+import { updatePasswordSchema } from '../../../utils/ValidationSchema';
 
 const UpdatePassword = () => {
   const navigate = useNavigate();

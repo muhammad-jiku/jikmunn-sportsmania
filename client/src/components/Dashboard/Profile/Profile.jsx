@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, Box, Button, TextField } from '@mui/material';
-import { userInfoSchema } from '../../Auth/ValidationSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import profile from '../../../assets/images/avatar_1.png';
@@ -13,6 +12,7 @@ import {
 import { Loader } from '../../Shared';
 import { UPDATE_PROFILE_RESET } from '../../../constants/userConstant';
 import { useNavigate } from 'react-router-dom';
+import { userInfoSchema } from '../../../utils/ValidationSchema';
 
 const Profile = () => {
   const navigate = useNavigate();

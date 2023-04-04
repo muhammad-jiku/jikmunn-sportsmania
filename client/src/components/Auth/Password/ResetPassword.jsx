@@ -12,10 +12,10 @@ import {
 import { clearErrors, resetPassword } from '../../../actions/userAction';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { resetPasswordSchema } from '../ValidationSchema';
 import { useNavigate, useParams } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { resetPasswordSchema } from '../../../utils/ValidationSchema';
 
 const ResetPassword = () => {
   const { token } = useParams();

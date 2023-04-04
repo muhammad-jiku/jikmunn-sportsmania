@@ -9,12 +9,12 @@ import {
   Typography,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { loginSchema } from '../ValidationSchema';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, loginUser } from '../../../actions/userAction';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { loginSchema } from '../../../utils/ValidationSchema';
 
 const Login = ({ setAuthProcess }) => {
   // console.log(setAuthProcess);
