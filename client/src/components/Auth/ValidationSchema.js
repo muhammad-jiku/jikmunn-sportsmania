@@ -53,3 +53,18 @@ export const resetPasswordSchema = object({
   path: ['passwordConfirm'],
   message: 'Passwords do not match',
 });
+
+export const updatePasswordSchema = object({
+  oldPassword: string()
+    .nonempty('Old password is not provided')
+    .min(6, 'Password must be more than 8 characters')
+    .max(32, 'Password must be less than 32 characters'),
+  newPassword: string()
+    .nonempty('New password is required')
+    .min(6, 'Password must be more than 8 characters')
+    .max(32, 'Password must be less than 32 characters'),
+  passwordConfirm: string().nonempty('Please confirm your password'),
+}).refine((data) => data.newPassword === data.passwordConfirm, {
+  path: ['passwordConfirm'],
+  message: 'Passwords do not match',
+});

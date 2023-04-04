@@ -1,10 +1,11 @@
 import React from 'react';
+import { UpdatePassword } from '../../Auth';
 
 const SecurePassword = () => {
   return (
-    <div>
-      <h1> Secure password!</h1>
-    </div>
+    <>
+      <UpdatePassword />
+    </>
   );
 };
 

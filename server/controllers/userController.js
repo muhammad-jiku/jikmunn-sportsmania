@@ -171,6 +171,7 @@ const getUserDetails = AsyncError(async (req, res, next) => {
 const updatePassword = AsyncError(async (req, res, next) => {
   const { id } = await req.user;
   const { oldPassword, newPassword, passwordConfirm } = await req.body;
+
   const user = await User.findById({ _id: id }).select('+password');
 
   const isPasswordMatched = await user.comparePassword(oldPassword);
@@ -180,7 +181,7 @@ const updatePassword = AsyncError(async (req, res, next) => {
   }
 
   if (newPassword !== passwordConfirm) {
-    return next(new ErrorHandler('password does not match', 400));
+    return next(new ErrorHandler('Password does not match', 400));
   }
   user.password = newPassword;
 
@@ -248,7 +249,7 @@ const updateProfile = AsyncError(async (req, res, next) => {
   });
 });
 
-// Get all users(admin)
+// Get all users (admin)
 const getAllUser = AsyncError(async (req, res, next) => {
   const users = await User.find({});
 
@@ -318,6 +319,7 @@ const deleteUser = AsyncError(async (req, res, next) => {
   });
 });
 
+//  exporting modules
 module.exports = {
   registerUser,
   loginUser,
