@@ -28,7 +28,7 @@ const ForgetPassword = () => {
     const emailInfo = {
       email: values.email,
     };
-    console.log('email...', emailInfo);
+    // console.log('email...', emailInfo);
     dispatch(forgotPassword(emailInfo));
   };
 

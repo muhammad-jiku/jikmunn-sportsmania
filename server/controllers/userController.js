@@ -116,8 +116,8 @@ const forgotPassword = AsyncError(async (req, res, next) => {
 // Reset Password
 const resetPassword = AsyncError(async (req, res, next) => {
   const { token } = await req.params;
-  const { password, confirmPassword } = await req.body;
-  console.log(token, password, confirmPassword);
+  const { password, passwordConfirm } = await req.body;
+
   // creating token hash
   const resetPasswordToken = crypto
     .createHash('sha256')
@@ -140,7 +140,7 @@ const resetPassword = AsyncError(async (req, res, next) => {
     );
   }
 
-  if (password !== confirmPassword) {
+  if (password !== passwordConfirm) {
     return next(new ErrorHandler('Password does not password', 400));
   }
 
@@ -170,7 +170,7 @@ const getUserDetails = AsyncError(async (req, res, next) => {
 // update User password
 const updatePassword = AsyncError(async (req, res, next) => {
   const { id } = await req.user;
-  const { oldPassword, newPassword, confirmPassword } = await req.body;
+  const { oldPassword, newPassword, passwordConfirm } = await req.body;
   const user = await User.findById({ _id: id }).select('+password');
 
   const isPasswordMatched = await user.comparePassword(oldPassword);
@@ -179,7 +179,7 @@ const updatePassword = AsyncError(async (req, res, next) => {
     return next(new ErrorHandler('Old password is incorrect', 400));
   }
 
-  if (newPassword !== confirmPassword) {
+  if (newPassword !== passwordConfirm) {
     return next(new ErrorHandler('password does not match', 400));
   }
   user.password = newPassword;

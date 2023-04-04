@@ -50,8 +50,8 @@ const ResetPassword = () => {
       password: values.password,
       passwordConfirm: values.passwordConfirm,
     };
-    console.log(token, passwordsInfo);
-    // dispatch(resetPassword(token, passwordsInfo));
+    // console.log(token, passwordsInfo);
+    dispatch(resetPassword(token, passwordsInfo));
   };
 
   useEffect(() => {
