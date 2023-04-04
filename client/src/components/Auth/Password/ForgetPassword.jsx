@@ -4,8 +4,8 @@ import { clearErrors, forgotPassword } from '../../../actions/userAction';
 import { Loader } from '../../Shared';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { userInfoSchema } from '../ValidationSchema';
-import { Box, Button, Card, TextField, Typography } from '@mui/material';
+import { forgetPasswordSchema } from '../ValidationSchema';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
 const ForgetPassword = () => {
@@ -21,22 +21,26 @@ const ForgetPassword = () => {
     reset,
     handleSubmit,
   } = useForm({
-    resolver: zodResolver(userInfoSchema),
+    resolver: zodResolver(forgetPasswordSchema),
   });
 
   const onSubmitHandler = (values) => {
-    console.log('email...', values.email);
-    dispatch(forgotPassword(values.email));
+    const emailInfo = {
+      email: values.email,
+    };
+    console.log('email...', emailInfo);
+    dispatch(forgotPassword(emailInfo));
   };
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [isSubmitSuccessful, reset]);
+  // useEffect(() => {
+  //   if (isSubmitSuccessful) {
+  //     reset();
+  //   }
+  // }, [isSubmitSuccessful, reset]);
 
   useEffect(() => {
     if (error) {
+      console.log(error);
       dispatch(clearErrors());
     }
 
@@ -62,50 +66,44 @@ const ForgetPassword = () => {
           <Typography variant="h6" color="primary">
             Forgot Password
           </Typography>
-          <Card
-            variant="outlined"
+
+          <Box
+            component="form"
+            noValidate
+            autoComplete="off"
+            onSubmit={handleSubmit(onSubmitHandler)}
             sx={{
               p: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
             }}
           >
-            <Box
-              component="form"
-              noValidate
-              autoComplete="off"
-              onSubmit={handleSubmit(onSubmitHandler)}
+            <TextField
+              sx={{ mt: 2 }}
+              label="Email"
+              fullWidth
+              required
+              type="email"
+              placeholder="Email"
+              name="email"
+              error={!!errors['email']}
+              helperText={errors['email'] ? errors['email'].message : ''}
+              {...register('email')}
+            />{' '}
+            <Button
+              variant="contained"
+              fullWidth
+              type="submit"
               sx={{
-                // p: 2,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
+                p: 1.8,
+                mt: 2,
+                fontSize: '14px',
               }}
             >
-              <TextField
-                sx={{ mt: 2 }}
-                label="Email"
-                fullWidth
-                required
-                type="email"
-                placeholder="Email"
-                name="email"
-                error={!!errors['email']}
-                helperText={errors['email'] ? errors['email'].message : ''}
-                {...register('email')}
-              />{' '}
-              <Button
-                variant="contained"
-                fullWidth
-                type="submit"
-                sx={{
-                  p: 1.8,
-                  mt: 2,
-                  fontSize: '14px',
-                }}
-              >
-                <SendIcon sx={{ fontSize: '20px', mr: 0.5 }} /> Send
-              </Button>
-            </Box>
-          </Card>
+              <SendIcon sx={{ fontSize: '20px', mr: 0.5 }} /> Send
+            </Button>
+          </Box>
         </Box>
       )}
     </>

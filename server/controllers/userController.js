@@ -67,6 +67,7 @@ const logout = AsyncError(async (req, res, next) => {
 
 // Forgot Password
 const forgotPassword = AsyncError(async (req, res, next) => {
+  // res.header('Access-Control-Allow-Origin', '*');
   const { email } = await req.body;
   const user = await User.findOne({ email });
 
@@ -81,9 +82,11 @@ const forgotPassword = AsyncError(async (req, res, next) => {
     validateBeforeSave: false,
   });
 
-  const resetPasswordUrl = `${req.protocol}://${req.get(
-    'host'
-  )}/api/v1/password/reset/${resetToken}`;
+  // const resetPasswordUrl = `${req.protocol}://${req.get(
+  //   'host'
+  // )}/api/v1/password/reset/${resetToken}`;
+
+  const resetPasswordUrl = `${process.env.CLIENT_URI}/password/reset/${resetToken}`;
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
 

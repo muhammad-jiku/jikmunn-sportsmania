@@ -4,7 +4,6 @@ import { ErrorNotFound, Loader } from '../../Shared';
 import {
   Box,
   Button,
-  Card,
   IconButton,
   InputAdornment,
   TextField,
@@ -13,7 +12,7 @@ import {
 import { clearErrors, resetPassword } from '../../../actions/userAction';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { registerSchema } from '../ValidationSchema';
+import { resetPasswordSchema } from '../ValidationSchema';
 import { useNavigate, useParams } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -43,7 +42,7 @@ const ResetPassword = () => {
     reset,
     handleSubmit,
   } = useForm({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(resetPasswordSchema),
   });
 
   const onSubmitHandler = (values) => {
@@ -51,8 +50,8 @@ const ResetPassword = () => {
       password: values.password,
       passwordConfirm: values.passwordConfirm,
     };
-
-    dispatch(resetPassword(token, passwordsInfo));
+    console.log(token, passwordsInfo);
+    // dispatch(resetPassword(token, passwordsInfo));
   };
 
   useEffect(() => {
@@ -89,98 +88,86 @@ const ResetPassword = () => {
           <Typography variant="h6" color="primary">
             Reset Password
           </Typography>
-          <Card
-            variant="outlined"
+
+          <Box
+            component="form"
+            noValidate
+            autoComplete="off"
+            onSubmit={handleSubmit(onSubmitHandler)}
             sx={{
               p: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
             }}
           >
-            <Box
-              component="form"
-              noValidate
-              autoComplete="off"
-              onSubmit={handleSubmit(onSubmitHandler)}
+            <TextField
+              sx={{ mb: 2 }}
+              label="Password"
+              fullWidth
+              required
+              type={showPassword ? 'text' : 'password'}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              placeholder="Password"
+              error={!!errors['password']}
+              helperText={errors['password'] ? errors['password'].message : ''}
+              {...register('password')}
+            />
+            <TextField
+              sx={{ mb: 2 }}
+              label="Confirm Password"
+              fullWidth
+              required
+              type={showConfirmPassword ? 'text' : 'password'}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowConfirmPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              placeholder="Confirm Password"
+              error={!!errors['passwordConfirm']}
+              helperText={
+                errors['passwordConfirm']
+                  ? errors['passwordConfirm'].message
+                  : ''
+              }
+              {...register('passwordConfirm')}
+            />
+            <Button
+              variant="contained"
+              fullWidth
+              type="submit"
               sx={{
-                // p: 2,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
+                p: 1.8,
+                mt: 2,
+                fontSize: '12px',
               }}
             >
-              <TextField
-                sx={{ mb: 2 }}
-                label="Password"
-                fullWidth
-                required
-                type={showPassword ? 'text' : 'password'}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                placeholder="Password"
-                error={!!errors['password']}
-                helperText={
-                  errors['password'] ? errors['password'].message : ''
-                }
-                {...register('password')}
-              />
-              <TextField
-                sx={{ mb: 2 }}
-                label="Confirm Password"
-                fullWidth
-                required
-                type={showConfirmPassword ? 'text' : 'password'}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowConfirmPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showConfirmPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-                placeholder="Confirm Password"
-                error={!!errors['passwordConfirm']}
-                helperText={
-                  errors['passwordConfirm']
-                    ? errors['passwordConfirm'].message
-                    : ''
-                }
-                {...register('passwordConfirm')}
-              />
-              <Button
-                variant="contained"
-                fullWidth
-                type="submit"
-                sx={{
-                  p: 1.8,
-                  mt: 2,
-                  fontSize: '12px',
-                }}
-              >
-                Update Password
-              </Button>
-            </Box>
-          </Card>
+              Update Password
+            </Button>
+          </Box>
         </Box>
       )}
     </>

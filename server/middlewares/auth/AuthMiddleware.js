@@ -28,23 +28,25 @@ const isAuthenticatedUser = AsyncError(async (req, res, next) => {
   }
   const token = await authHeader.split(' ')[1];
   // console.log('token.........', token);
+  // console.log('secret.....', process.env.JWT_SECRET);
   if (!token) {
     // return next(new ErrorHandler('Please Login to access this resource', 401));
     return next(new ErrorHandler('Please Login to access this resource', 400));
+  } else {
+    jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+      // console.log(decoded);
+      if (err) {
+        // console.log(err);
+        return next(new ErrorHandler('Access to this route is forbidden', 403));
+      }
+      req.decoded = decoded;
+      // console.log('decoded: ', decoded);
+      req.user = await User.findById(decoded.id);
+      // console.log('user', req.user);
+
+      next();
+    });
   }
-
-  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-    if (err) {
-      // console.log(err);
-      return next(new ErrorHandler('Access to this route is forbidden', 403));
-    }
-    req.decoded = decoded;
-    // console.log('decoded: ', decoded);
-    req.user = await User.findById(decoded.id);
-    // console.log('user', req.user);
-
-    next();
-  });
 });
 
 const authorizeRoles = (...roles) => {

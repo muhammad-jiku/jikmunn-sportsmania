@@ -15,12 +15,19 @@ const errorMiddleware = require('./middlewares/bugError/errorMiddleware');
 const app = express();
 
 // cors config
-const corsConfig = {
-  origin: true,
-  credentials: true,
-};
+// const corsConfig = {
+//   origin: true,
+//   // origin: 'http://localhost:3000/',
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   credentials: true,
+// };
 
 //  middlewares
+// app.options('*', cors(corsConfig));
+// app.use(cors(corsConfig));
+// // app.options('*', cors());
+// // app.use(cors(origin, 'http://localhost:3000/'));
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());
@@ -35,8 +42,6 @@ app.use(
     extended: true,
   })
 );
-app.use(cors(corsConfig));
-app.options('*', cors(corsConfig));
 app.disable('x-powered-by'); // less hackers know about our stack
 
 //  displaying welcome message

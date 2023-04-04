@@ -39,7 +39,11 @@ export const userInfoSchema = object({
     .min(10, 'Address is too short'),
 });
 
-export const resetSchema = object({
+export const forgetPasswordSchema = object({
+  email: string().nonempty('Email is required').email('Invalid email'),
+});
+
+export const resetPasswordSchema = object({
   password: string()
     .nonempty('Password is required')
     .min(6, 'Password must be more than 8 characters')
