@@ -1,7 +1,7 @@
 import React from 'react';
 import { UpdatePassword } from '../../Auth';
 
-const SecurePassword = () => {
+const SecureProfile = () => {
   return (
     <>
       <UpdatePassword />
@@ -9,4 +9,4 @@ const SecurePassword = () => {
   );
 };
 
-export default SecurePassword;
+export default SecureProfile;

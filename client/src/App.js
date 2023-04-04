@@ -19,7 +19,7 @@ import {
   Dashboard,
   Orders,
   Profile,
-  SecurePassword,
+  SecureProfile,
 } from './components/Dashboard';
 import { ForgetPassword, ResetPassword } from './components/Auth';
 
@@ -61,7 +61,7 @@ function App() {
           >
             <Route index element={<Profile />} />
             <Route path="myorders" element={<Orders />} />
-            <Route path="password/secure" element={<SecurePassword />} />
+            <Route path="password/secure" element={<SecureProfile />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
