@@ -15,7 +15,12 @@ import {
 } from './pages';
 import { sportsStore } from './utils/store';
 import WebFont from 'webfontloader';
-import { Dashboard, Orders, Profile } from './components/Dashboard';
+import {
+  Dashboard,
+  Orders,
+  Profile,
+  SecurePassword,
+} from './components/Dashboard';
 import { ForgetPassword, ResetPassword } from './components/Auth';
 
 function App() {
@@ -56,6 +61,7 @@ function App() {
           >
             <Route index element={<Profile />} />
             <Route path="myorders" element={<Orders />} />
+            <Route path="password/secure" element={<SecurePassword />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

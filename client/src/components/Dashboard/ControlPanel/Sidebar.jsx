@@ -13,6 +13,7 @@ import profile from '../../../assets/images/avatar_1.png';
 import { clearErrors } from '../../../actions/userAction';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -99,7 +100,7 @@ const Sidebar = () => {
             sx={{
               color: 'primary.main',
               cursor: 'pointer',
-              px: 1.5,
+              pt: 1.5,
             }}
             onClick={() => navigate('/dashboard')}
           >
@@ -114,7 +115,7 @@ const Sidebar = () => {
             sx={{
               color: 'primary.main',
               cursor: 'pointer',
-              p: 1.5,
+              pt: 1.5,
             }}
             onClick={() => navigate('/dashboard/myorders')}
           >
@@ -122,6 +123,21 @@ const Sidebar = () => {
             <Typography variant="span" sx={{ ml: 1 }}>
               {' '}
               My Orders
+            </Typography>
+          </ListItem>
+          <ListItem
+            disablePadding
+            sx={{
+              color: 'primary.main',
+              cursor: 'pointer',
+              pt: 1.5,
+            }}
+            onClick={() => navigate('/dashboard/password/secure')}
+          >
+            <SettingsIcon />
+            <Typography variant="span" sx={{ ml: 1 }}>
+              {' '}
+              Settings
             </Typography>
           </ListItem>
         </List>
