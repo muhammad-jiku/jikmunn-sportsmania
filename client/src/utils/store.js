@@ -5,6 +5,7 @@ import {
   productsReducer,
   productDetailsReducer,
   productReviewsReducer,
+  newReviewReducer,
 } from '../reducers/productReducer';
 import {
   forgotPasswordReducer,
@@ -13,22 +14,22 @@ import {
 } from '../reducers/userReducer';
 
 const reducer = combineReducers({
-  products: productsReducer,
-  productDetails: productDetailsReducer,
   user: userReducer,
   profile: profileReducer,
   forgotPassword: forgotPasswordReducer,
+  // allUsers: allUsersReducer,
+  // userDetails: userDetailsReducer,
+  products: productsReducer,
+  productDetails: productDetailsReducer,
+  // newProduct: newProductReducer,
+  // product: productReducer,
   // cart: cartReducer,
   // newOrder: newOrderReducer,
   // myOrders: myOrdersReducer,
   // orderDetails: orderDetailsReducer,
-  // newReview: newReviewReducer,
-  // newProduct: newProductReducer,
-  // product: productReducer,
   // allOrders: allOrdersReducer,
   // order: orderReducer,
-  // allUsers: allUsersReducer,
-  // userDetails: userDetailsReducer,
+  newReview: newReviewReducer,
   productReviews: productReviewsReducer,
   // review: reviewReducer,
 });
