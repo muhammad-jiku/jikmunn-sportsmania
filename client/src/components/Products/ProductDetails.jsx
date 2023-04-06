@@ -1,24 +1,28 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductDetails, clearErrors } from '../../actions/productAction';
-import { Loader } from '../Shared';
+import { ErrorNotFound, Loader } from '../Shared';
+import { useParams } from 'react-router-dom';
 
-const ProductDetails = ({ match }) => {
+const ProductDetails = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
+  console.log(product);
 
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
     }
 
-    dispatch(getProductDetails(match.params.id));
-  }, [dispatch, match.params.id, error]);
+    dispatch(getProductDetails(id));
+  }, [dispatch, id, error]);
 
   return (
     <>
+      {id !== product?._id && <ErrorNotFound />}
       {loading ? (
         <Loader />
       ) : (
