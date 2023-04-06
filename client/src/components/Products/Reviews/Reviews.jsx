@@ -1,11 +1,32 @@
 import React from 'react';
+import { Box, Typography } from '@mui/material';
 import ReviewsCard from './ReviewsCard';
 
-const Reviews = () => {
+const Reviews = ({ product }) => {
+  console.log(product);
   return (
-    <div>
-      <ReviewsCard />
-    </div>
+    <Box
+      sx={{
+        p: 2,
+        mt: 2,
+      }}
+    >
+      <Typography variant="h5" color="text.secondary">
+        Reviews:
+      </Typography>
+      <Box
+        sx={{
+          p: 2,
+          display: 'flex',
+          justifyContent: 'center',
+          overflowX: 'auto',
+        }}
+      >
+        {product?.reviews?.map((review, idx) => (
+          <ReviewsCard review={review} key={idx} />
+        ))}
+      </Box>
+    </Box>
   );
 };
 

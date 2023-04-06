@@ -182,9 +182,15 @@ const ProductDetails = () => {
               <AddReview open={open} handleClickClose={handleClickClose} />
             </Box>
           </Box>
-          <Box>
-            <Reviews />
-          </Box>
+          {product.reviews && product.reviews[0] ? (
+            <Box>
+              <Reviews product={product} />
+            </Box>
+          ) : (
+            <Typography variant="h6" color="red">
+              No Reviews Yet!
+            </Typography>
+          )}
         </>
       )}
     </>
