@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { Container, Grid, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, clearErrors } from '../../../actions/productAction';
-import { Loader } from '../../Shared';
-import ProductsCard from '../../Products/ProductsCard';
+import ProductsCard from '../../Products/Infos/ProductsCard';
 
 const Products = () => {
   const dispatch = useDispatch();

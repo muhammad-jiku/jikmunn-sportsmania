@@ -17,12 +17,12 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, getProducts } from '../../actions/productAction';
-import { Loader } from '../Shared';
 import ProductsCard from './ProductsCard';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
+import { clearErrors, getProducts } from '../../../actions/productAction';
+import { Loader } from '../../Shared';
 
 const Products = () => {
   const dispatch = useDispatch();
