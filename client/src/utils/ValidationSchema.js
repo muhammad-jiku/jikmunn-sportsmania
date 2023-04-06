@@ -68,3 +68,7 @@ export const updatePasswordSchema = object({
   path: ['passwordConfirm'],
   message: 'Passwords do not match',
 });
+
+export const reviewSchema = object({
+  comment: string().nonempty('Please provide feedback'),
+});

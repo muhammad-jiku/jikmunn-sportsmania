@@ -19,13 +19,12 @@ const ReviewsCard = ({ review }) => {
         width: 300,
       }}
     >
-      <FormatQuoteIcon size="large" color="primary" />
+      <FormatQuoteIcon size="large" color="primary" sx={{ fontSize: '35px' }} />
       <Typography
-        variant="h5"
+        variant="h7"
         color="primary"
         sx={{
-          mb: 4,
-          fontSize: '20px',
+          mb: 6,
         }}
       >
         {review?.comment}

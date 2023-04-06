@@ -49,7 +49,7 @@ const ProductDetails = () => {
     }
 
     dispatch(getProductDetails(id));
-  }, [dispatch, id, error]);
+  }, [dispatch, id, error, product?.reviews]);
 
   return (
     <>
@@ -179,7 +179,11 @@ const ProductDetails = () => {
               >
                 Add Review
               </Button>
-              <AddReview open={open} handleClickClose={handleClickClose} />
+              <AddReview
+                open={open}
+                setOpen={setOpen}
+                handleClickClose={handleClickClose}
+              />
             </Box>
           </Box>
           {product.reviews && product.reviews[0] ? (
