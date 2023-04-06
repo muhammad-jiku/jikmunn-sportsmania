@@ -3,6 +3,9 @@ import {
   ALL_PRODUCT_FAIL,
   ALL_PRODUCT_REQUEST,
   ALL_PRODUCT_SUCCESS,
+  ALL_REVIEW_FAIL,
+  ALL_REVIEW_REQUEST,
+  ALL_REVIEW_SUCCESS,
   CLEAR_ERRORS,
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST,
@@ -83,7 +86,25 @@ export const getProductDetails = (id) => async (dispatch) => {
 export const newReview = (reviewData) => async (dispatch) => {};
 
 // Get All Reviews of a Product
-export const getAllReviews = (id) => async (dispatch) => {};
+export const getAllReviews = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ALL_REVIEW_REQUEST,
+    });
+
+    const { data } = await axios.get(`/api/v1/reviews?id=${id}`);
+
+    dispatch({
+      type: ALL_REVIEW_SUCCESS,
+      payload: data.reviews,
+    });
+  } catch (error) {
+    dispatch({
+      type: ALL_REVIEW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Delete Review of a Product
 export const deleteReviews = (reviewId, productId) => async (dispatch) => {};
