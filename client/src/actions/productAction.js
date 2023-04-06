@@ -3,6 +3,7 @@ import {
   ALL_PRODUCT_FAIL,
   ALL_PRODUCT_REQUEST,
   ALL_PRODUCT_SUCCESS,
+  CLEAR_ERRORS,
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
@@ -88,4 +89,8 @@ export const getAllReviews = (id) => async (dispatch) => {};
 export const deleteReviews = (reviewId, productId) => async (dispatch) => {};
 
 // Clearing Errors
-export const clearErrors = () => async (dispatch) => {};
+export const clearErrors = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_ERRORS,
+  });
+};
