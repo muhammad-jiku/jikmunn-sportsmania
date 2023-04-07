@@ -5,12 +5,14 @@ const databaseConnect = require('./utils/dbConnect');
 //  port
 const port = process.env.PORT || 5000;
 
-// Handling Uncaught Exception
-process.on('uncaughtException', (err) => {
-  console.log(`Error: ${err.message}`);
-  console.log(`Shutting down the server due to Uncaught Exception`);
-  process.exit(1);
-});
+//  deveopment purpose error handling =>
+
+// // Handling Uncaught Exception
+// process.on('uncaughtException', (err) => {
+//   // console.log(`Error: ${err.message}`);
+//   // console.log(`Shutting down the server due to Uncaught Exception`);
+//   process.exit(1);
+// });
 
 // Connecting to database
 databaseConnect();
@@ -27,12 +29,14 @@ const server = app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-// if express fail to handle any error for that there's global errorHandler: Unhandled Promise Rejection
-process.on('unhandledRejection', (err) => {
-  console.log(`Error: ${err.message}`);
-  console.log(`Shutting down the server due to Unhandled Promise Rejection`);
+//  deveopment purpose error handling =>
 
-  server.close(() => {
-    process.exit(1);
-  });
-});
+// // if express fail to handle any error for that there's global errorHandler: Unhandled Promise Rejection
+// process.on('unhandledRejection', (err) => {
+//   // console.log(`Error: ${err.message}`);
+//   // console.log(`Shutting down the server due to Unhandled Promise Rejection`);
+
+//   server.close(() => {
+//     process.exit(1);
+//   });
+// });

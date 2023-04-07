@@ -32,7 +32,7 @@ const ProductDetails = () => {
 
     const qty = quantity + 1;
     setQuantity(qty);
-    console.log(qty);
+    // console.log(qty);
   };
 
   const decreaseQuantity = () => {
@@ -40,15 +40,16 @@ const ProductDetails = () => {
 
     const qty = quantity - 1;
     setQuantity(qty);
-    console.log(qty);
+    // console.log(qty);
   };
 
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
     }
-
+    // if (id === product?._id) {
     dispatch(getProductDetails(id));
+    // }
   }, [
     dispatch,
     id,
@@ -61,12 +62,11 @@ const ProductDetails = () => {
 
   return (
     <>
-      {console.log(product)}
       {loading ? (
         <Loader />
       ) : (
         <>
-          {id !== product?._id && <ErrorNotFound />}
+          {!product && <ErrorNotFound />}
           {product && (
             <>
               <Box
