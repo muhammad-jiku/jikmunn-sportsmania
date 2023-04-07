@@ -49,159 +49,172 @@ const ProductDetails = () => {
     }
 
     dispatch(getProductDetails(id));
-  }, [dispatch, id, error, product, product?.reviews, product?._id]);
+  }, [
+    dispatch,
+    id,
+    error,
+    product,
+    product?.ratings,
+    product?.reviews,
+    product?._id,
+  ]);
 
   return (
     <>
+      {console.log(product)}
       {loading ? (
         <Loader />
       ) : (
         <>
           {id !== product?._id && <ErrorNotFound />}
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: {
-                xs: 'column',
-                md: 'row',
-              },
-              justifyContent: {
-                xs: 'center',
-                md: 'center',
-              },
-              alignItems: 'center',
-              p: 2,
-            }}
-          >
-            <Box
-              sx={{
-                p: 2,
-              }}
-            >
-              {product.images &&
-                product.images.map((item, idx) => (
-                  <img
-                    key={idx}
-                    src={item?.url}
-                    alt={`${product?.name}`}
-                    title={`${product?.name}`}
-                    width={225}
-                    height={305}
-                    loading="lazy"
-                  />
-                ))}
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-                p: 2,
-              }}
-            >
-              <Typography variant="h6">{product?.name}</Typography>
-              <Typography variant="p">{product?.description}</Typography>
-              <Typography variant="span">{product?.category}</Typography>
-              <Typography variant="span">${product?.price}</Typography>
-              <Typography variant="span">
-                Status:{' '}
-                {product?.stock > 10 ? (
-                  <span style={{ color: 'green' }}>In Stock</span>
-                ) : (
-                  <span style={{ color: 'red' }}>Out of Stock</span>
-                )}
-              </Typography>
-              <Typography variant="span" sx={{ ml: -0.5, display: 'flex' }}>
-                <Rating
-                  name="half-rating-read"
-                  defaultValue={product?.ratings}
-                  precision={0.5}
-                  readOnly
-                />{' '}
-                <Typography variant="span" sx={{ ml: 1 }}>
-                  (
-                  {product?.numOfReviews > 1
-                    ? product?.numOfReviews + ' reviews'
-                    : product?.numOfReviews + ' review'}
-                  )
-                </Typography>
-              </Typography>
-              <Typography
-                variant="span"
-                sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}
-              >
-                <Button
-                  variant="outlined"
-                  sx={{
-                    fontSize: '20px',
-                    fontWeight: 700,
-                  }}
-                  onClick={decreaseQuantity}
-                >
-                  —
-                </Button>
-                <TextField
-                  readOnly
-                  type="number"
-                  sx={{
-                    width: 70,
-                  }}
-                  value={quantity}
-                />
-                <Button
-                  variant="outlined"
-                  sx={{
-                    fontSize: '20px',
-                    fontWeight: 700,
-                  }}
-                  onClick={increaseQuantity}
-                >
-                  +
-                </Button>
-                <Button
-                  variant="contained"
-                  sx={{
-                    ml: 3,
-                    // fontSize: '10px',
-                  }}
-                  disabled={product?.stock <= 10}
-                >
-                  Add to cart
-                </Button>
-              </Typography>
-              <Button
-                variant="outlined"
-                onClick={handleClickOpen}
+          {product && (
+            <>
+              <Box
                 sx={{
-                  mt: 2,
-                  cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: {
+                    xs: 'column',
+                    md: 'row',
+                  },
+                  justifyContent: {
+                    xs: 'center',
+                    md: 'center',
+                  },
+                  alignItems: 'center',
+                  p: 2,
                 }}
               >
-                Add Review
-              </Button>
-              <AddReview
-                open={open}
-                setOpen={setOpen}
-                handleClickClose={handleClickClose}
-              />
-            </Box>
-          </Box>
-          {product.reviews && product.reviews[0] ? (
-            <Box>
-              <Reviews product={product} />
-            </Box>
-          ) : (
-            <Typography
-              variant="h5"
-              color="red"
-              textAlign="center"
-              sx={{
-                m: 4,
-              }}
-            >
-              No Reviews Yet!
-            </Typography>
+                <Box
+                  sx={{
+                    p: 2,
+                  }}
+                >
+                  {product.images &&
+                    product.images.map((item, idx) => (
+                      <img
+                        key={idx}
+                        src={item?.url}
+                        alt={`${product?.name}`}
+                        title={`${product?.name}`}
+                        width={225}
+                        height={305}
+                        loading="lazy"
+                      />
+                    ))}
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                    p: 2,
+                  }}
+                >
+                  <Typography variant="h6">{product?.name}</Typography>
+                  <Typography variant="p">{product?.description}</Typography>
+                  <Typography variant="span">{product?.category}</Typography>
+                  <Typography variant="span">${product?.price}</Typography>
+                  <Typography variant="span">
+                    Status:{' '}
+                    {product?.stock > 10 ? (
+                      <span style={{ color: 'green' }}>In Stock</span>
+                    ) : (
+                      <span style={{ color: 'red' }}>Out of Stock</span>
+                    )}
+                  </Typography>
+                  <Typography variant="span" sx={{ ml: -0.5, display: 'flex' }}>
+                    <Rating
+                      name="half-rating-read"
+                      defaultValue={product?.ratings}
+                      precision={0.5}
+                      readOnly
+                    />{' '}
+                    <Typography variant="span" sx={{ ml: 1 }}>
+                      (
+                      {product?.numOfReviews > 1
+                        ? product?.numOfReviews + ' reviews'
+                        : product?.numOfReviews + ' review'}
+                      )
+                    </Typography>
+                  </Typography>
+                  <Typography
+                    variant="span"
+                    sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}
+                  >
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        fontSize: '20px',
+                        fontWeight: 700,
+                      }}
+                      onClick={decreaseQuantity}
+                    >
+                      —
+                    </Button>
+                    <TextField
+                      readOnly
+                      type="number"
+                      sx={{
+                        width: 70,
+                      }}
+                      value={quantity}
+                    />
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        fontSize: '20px',
+                        fontWeight: 700,
+                      }}
+                      onClick={increaseQuantity}
+                    >
+                      +
+                    </Button>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        ml: 3,
+                        // fontSize: '10px',
+                      }}
+                      disabled={product?.stock <= 10}
+                    >
+                      Add to cart
+                    </Button>
+                  </Typography>
+                  <Button
+                    variant="outlined"
+                    onClick={handleClickOpen}
+                    sx={{
+                      mt: 2,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Add Review
+                  </Button>
+                  <AddReview
+                    open={open}
+                    setOpen={setOpen}
+                    handleClickClose={handleClickClose}
+                  />
+                </Box>
+              </Box>
+              {product.reviews && product.reviews[0] ? (
+                <Box>
+                  <Reviews product={product} />
+                </Box>
+              ) : (
+                <Typography
+                  variant="h5"
+                  color="red"
+                  textAlign="center"
+                  sx={{
+                    m: 4,
+                  }}
+                >
+                  No Reviews Yet!
+                </Typography>
+              )}
+            </>
           )}
         </>
       )}
