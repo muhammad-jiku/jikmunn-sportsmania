@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+  CLEAR_ERRORS,
   MY_ORDERS_FAIL,
   MY_ORDERS_REQUEST,
   MY_ORDERS_SUCCESS,
@@ -49,4 +50,8 @@ export const deleteOrder = (id) => async (dispatch) => {};
 export const getOrderDetails = (id) => async (dispatch) => {};
 
 // Clearing Errors
-export const clearErrors = () => async (dispatch) => {};
+export const clearErrors = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_ERRORS,
+  });
+};
