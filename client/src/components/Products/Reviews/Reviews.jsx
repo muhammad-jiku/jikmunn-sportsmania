@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import ReviewsCard from './ReviewsCard';
 
 const Reviews = ({ product }) => {
-  console.log(product);
+  // console.log(product);
   return (
     <Box
       sx={{

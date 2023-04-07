@@ -7,16 +7,18 @@ import { clearErrors, getProductDetails } from '../../../actions/productAction';
 import { ErrorNotFound, Loader } from '../../Shared';
 import AddReview from '../Reviews/AddReview';
 import Reviews from '../Reviews/Reviews';
+import { addItemsToCart } from '../../../actions/cartAction';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  const [quantity, setQuantity] = useState(1);
 
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
+
+  const [open, setOpen] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -43,13 +45,17 @@ const ProductDetails = () => {
     // console.log(qty);
   };
 
+  const handleAddProductToCart = () => {
+    // console.log(id, quantity);
+    dispatch(addItemsToCart(id, quantity));
+  };
+
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
     }
-    // if (id === product?._id) {
+
     dispatch(getProductDetails(id));
-    // }
   }, [
     dispatch,
     id,
@@ -177,6 +183,7 @@ const ProductDetails = () => {
                         // fontSize: '10px',
                       }}
                       disabled={product?.stock <= 10}
+                      onClick={handleAddProductToCart}
                     >
                       Add to cart
                     </Button>
