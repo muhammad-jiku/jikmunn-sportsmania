@@ -14,8 +14,10 @@ import {
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useNavigate } from 'react-router-dom';
 
 const ProductsCard = ({ product, idx }) => {
+  const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
 
   const ExpandMore = styled((props) => {
@@ -95,6 +97,7 @@ const ProductsCard = ({ product, idx }) => {
             sx={{
               fontSize: '12px',
             }}
+            onClick={() => navigate(`/product/${product?._id}`)}
           >
             Add to cart{' '}
             <ShoppingCartIcon

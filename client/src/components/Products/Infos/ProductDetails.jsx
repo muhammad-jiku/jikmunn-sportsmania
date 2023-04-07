@@ -49,7 +49,7 @@ const ProductDetails = () => {
     }
 
     dispatch(getProductDetails(id));
-  }, [dispatch, id, error, product?.reviews]);
+  }, [dispatch, id, error, product, product?.reviews, product?._id]);
 
   return (
     <>
@@ -165,6 +165,7 @@ const ProductDetails = () => {
                     ml: 3,
                     // fontSize: '10px',
                   }}
+                  disabled={product?.stock <= 10}
                 >
                   Add to cart
                 </Button>
@@ -191,7 +192,14 @@ const ProductDetails = () => {
               <Reviews product={product} />
             </Box>
           ) : (
-            <Typography variant="h6" color="red">
+            <Typography
+              variant="h5"
+              color="red"
+              textAlign="center"
+              sx={{
+                m: 4,
+              }}
+            >
               No Reviews Yet!
             </Typography>
           )}
