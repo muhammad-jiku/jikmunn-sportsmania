@@ -78,13 +78,13 @@ const ProductsCard = ({ product, idx }) => {
           <br />
           <Typography variant="h7">
             Status:{' '}
-            {product?.stock >= 10 ? (
-              <Typography variant="span" color={'green'}>
-                In Stock{' '}
-              </Typography>
-            ) : (
+            {product?.stock <= 10 ? (
               <Typography variant="span" color={'red'}>
                 Out of Stock{' '}
+              </Typography>
+            ) : (
+              <Typography variant="span" color={'green'}>
+                In Stock{' '}
               </Typography>
             )}
           </Typography>

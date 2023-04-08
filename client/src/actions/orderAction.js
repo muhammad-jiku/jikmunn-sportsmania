@@ -6,6 +6,8 @@ import {
   MY_ORDERS_SUCCESS,
 } from '../constants/orderConstant';
 
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+
 // Create Order
 export const createOrder = (order) => async (dispatch) => {};
 

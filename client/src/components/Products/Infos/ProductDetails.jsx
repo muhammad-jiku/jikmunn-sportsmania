@@ -123,10 +123,10 @@ const ProductDetails = () => {
                   <Typography variant="span">${product?.price}</Typography>
                   <Typography variant="span">
                     Status:{' '}
-                    {product?.stock > 10 ? (
-                      <span style={{ color: 'green' }}>In Stock</span>
-                    ) : (
+                    {product?.stock <= 10 ? (
                       <span style={{ color: 'red' }}>Out of Stock</span>
+                    ) : (
+                      <span style={{ color: 'green' }}>In Stock</span>
                     )}
                   </Typography>
                   <Typography variant="span" sx={{ ml: -0.5, display: 'flex' }}>
