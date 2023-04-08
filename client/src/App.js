@@ -15,14 +15,14 @@ import {
 } from './pages';
 import { sportsStore } from './utils/store';
 import WebFont from 'webfontloader';
-import {
-  Dashboard,
-  Profile,
-  SecureProfile,
-  Orders,
-  OrderDetails,
-} from './components/Dashboard';
 import { ForgetPassword, ResetPassword } from './components/Auth';
+import {
+  MyDashboard,
+  MyProfile,
+  SecureMyProfile,
+  MyOrders,
+  MyOrderDetails,
+} from './pages/MyDashboard';
 
 function App() {
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
@@ -56,14 +56,14 @@ function App() {
             path="/dashboard"
             element={
               // <RequiredAuth>
-              <Dashboard />
+              <MyDashboard />
               // </RequiredAuth>
             }
           >
-            <Route index element={<Profile />} />
-            <Route path="password/secure" element={<SecureProfile />} />
-            <Route path="myorders" element={<Orders />} />
-            <Route path="myorders/:id" element={<OrderDetails />} />
+            <Route index element={<MyProfile />} />
+            <Route path="password/secure" element={<SecureMyProfile />} />
+            <Route path="myorders" element={<MyOrders />} />
+            <Route path="myorders/:id" element={<MyOrderDetails />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
