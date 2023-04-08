@@ -17,9 +17,10 @@ import { sportsStore } from './utils/store';
 import WebFont from 'webfontloader';
 import {
   Dashboard,
-  Orders,
   Profile,
   SecureProfile,
+  Orders,
+  OrderDetails,
 } from './components/Dashboard';
 import { ForgetPassword, ResetPassword } from './components/Auth';
 
@@ -60,8 +61,9 @@ function App() {
             }
           >
             <Route index element={<Profile />} />
-            <Route path="myorders" element={<Orders />} />
             <Route path="password/secure" element={<SecureProfile />} />
+            <Route path="myorders" element={<Orders />} />
+            <Route path="myorders/:id" element={<OrderDetails />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
