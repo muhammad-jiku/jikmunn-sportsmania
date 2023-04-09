@@ -11,18 +11,19 @@ import {
   ContactPage,
   AboutPage,
   LoginPage,
-  NotFoundPage,
-} from './pages';
-import { sportsStore } from './utils/store';
-import WebFont from 'webfontloader';
-import { ForgetPassword, ResetPassword } from './components/Auth';
-import {
+  MyCarts,
+  ShippingPage,
+  ConfirmOrderPage,
   MyDashboard,
   MyProfile,
   SecureMyProfile,
   MyOrders,
   MyOrderDetails,
-} from './pages/MyDashboard';
+  NotFoundPage,
+} from './pages';
+import { sportsStore } from './utils/store';
+import WebFont from 'webfontloader';
+import { ForgetPassword, ResetPassword } from './components/Auth';
 
 function App() {
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
@@ -52,6 +53,9 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/password/forgot" element={<ForgetPassword />} />
           <Route path="/password/reset/:token" element={<ResetPassword />} />
+          <Route path="/carts" element={<MyCarts />} />
+          <Route path="/shipping" element={<ShippingPage />} />
+          <Route path="/order/confirm" element={<ConfirmOrderPage />} />
           <Route
             path="/dashboard"
             element={
