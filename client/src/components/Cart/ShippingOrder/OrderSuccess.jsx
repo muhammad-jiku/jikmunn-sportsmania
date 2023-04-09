@@ -1,10 +1,17 @@
 import React from 'react';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const OrderSuccess = () => {
   return (
-    <div>
-      <h1>Order Success</h1>
-    </div>
+    <>
+      <div>
+        <CheckCircleIcon />
+        <Typography>Your Order has been Placed successfully </Typography>
+        <Link to="/dashboard/myorders">View Orders</Link>
+      </div>
+    </>
   );
 };
 

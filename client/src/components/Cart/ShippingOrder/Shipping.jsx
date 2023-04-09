@@ -30,6 +30,7 @@ const Shipping = () => {
     if (phoneNo.length < 10 || phoneNo.length > 10) {
       return;
     }
+
     dispatch(
       saveShippingInfo({
         address,
@@ -40,6 +41,14 @@ const Shipping = () => {
         phoneNo,
       })
     );
+    console.log({
+      address,
+      city,
+      state,
+      country,
+      pinCode,
+      phoneNo,
+    });
     navigate('/order/confirm');
   };
 
@@ -51,11 +60,16 @@ const Shipping = () => {
         <div>
           <h2>Shipping Details</h2>
 
-          <form encType="multipart/form-data" onSubmit={shippingSubmit}>
+          <form onSubmit={(e) => shippingSubmit(e)}>
             <div>
-              <HomeIcon />
+              <label htmlFor="addressInput">
+                <HomeIcon />
+              </label>
+
               <input
                 type="text"
+                name="addressInput"
+                id="addressInput"
                 placeholder="Address"
                 required
                 value={address}
@@ -64,9 +78,13 @@ const Shipping = () => {
             </div>
 
             <div>
-              <LocationCityIcon />
+              <label htmlFor="cityInput">
+                <LocationCityIcon />
+              </label>
               <input
                 type="text"
+                name="cityInput"
+                id="cityInput"
                 placeholder="City"
                 required
                 value={city}
@@ -75,9 +93,13 @@ const Shipping = () => {
             </div>
 
             <div>
-              <FmdGoodIcon />
+              <label htmlFor="pinInput">
+                <FmdGoodIcon />
+              </label>
               <input
                 type="number"
+                name="pinInput"
+                id="pinInput"
                 placeholder="Pin Code"
                 required
                 value={pinCode}
@@ -86,9 +108,13 @@ const Shipping = () => {
             </div>
 
             <div>
-              <PhoneIcon />
+              <label htmlFor="phoneInput">
+                <PhoneIcon />
+              </label>
               <input
                 type="number"
+                name="phoneInput"
+                id="phoneInput"
                 placeholder="Phone Number"
                 required
                 value={phoneNo}
@@ -98,10 +124,13 @@ const Shipping = () => {
             </div>
 
             <div>
-              <PublicIcon />
-
+              <label htmlFor="countryInput">
+                <PublicIcon />
+              </label>
               <select
                 required
+                name="countryInput"
+                id="countryInput"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
               >
@@ -117,10 +146,13 @@ const Shipping = () => {
 
             {country && (
               <div>
-                <TransferWithinAStationIcon />
-
+                <label htmlFor="stateInput">
+                  <TransferWithinAStationIcon />
+                </label>
                 <select
                   required
+                  name="stateInput"
+                  id="stateInput"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                 >
@@ -135,11 +167,13 @@ const Shipping = () => {
               </div>
             )}
 
-            <input
+            <button
               type="submit"
-              value="Continue"
               disabled={state ? false : true}
-            />
+              // onClick={(e) => console.log(e.target)}
+            >
+              Continue
+            </button>
           </form>
         </div>
       </div>
