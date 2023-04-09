@@ -217,15 +217,19 @@ const Navbar = ({ isAuthenticated, user }) => {
           }}
         >
           <Tooltip title="Cart">
-            <IconButton disableRipple={true} style={{ color: 'white' }}>
+            <IconButton
+              disableRipple={true}
+              style={{ color: 'white' }}
+              href="/carts"
+            >
               <ShoppingCartIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Notifications">
+          {/* <Tooltip title="Notifications">
             <IconButton disableRipple={true} style={{ color: 'white' }}>
               <NotificationsIcon />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip title="Open settings">
             <IconButton
               onClick={handleOpenUserMenu}
