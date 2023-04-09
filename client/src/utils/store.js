@@ -13,7 +13,11 @@ import {
   userReducer,
 } from '../reducers/userReducer';
 import { cartReducer } from '../reducers/cartReducer';
-import { myOrdersReducer, newOrderReducer } from '../reducers/orderReducer';
+import {
+  myOrdersReducer,
+  newOrderReducer,
+  orderDetailsReducer,
+} from '../reducers/orderReducer';
 
 const reducer = combineReducers({
   user: userReducer,
@@ -28,7 +32,7 @@ const reducer = combineReducers({
   cart: cartReducer,
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
-  // orderDetails: orderDetailsReducer,
+  orderDetails: orderDetailsReducer,
   // allOrders: allOrdersReducer,
   // order: orderReducer,
   newReview: newReviewReducer,
