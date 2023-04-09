@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import CheckoutSteps from './CheckoutSteps';
-import { Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 const ConfirmOrder = () => {
   const navigate = useNavigate();
@@ -39,74 +39,81 @@ const ConfirmOrder = () => {
   return (
     <>
       <CheckoutSteps activeStep={1} />
-      <div>
-        <div>
-          <div>
+      <Box>
+        <Box>
+          <Box>
             <Typography>Shipping Info</Typography>
-            <div>
-              <div>
-                <p>Name:</p>
-                <span>{user?.name}</span>
-              </div>
-              <div>
-                <p>Phone:</p>
-                <span>{shippingInfo?.phoneNo}</span>
-              </div>
-              <div>
-                <p>Address:</p>
-                <span>{address}</span>
-              </div>
-            </div>
-          </div>
-          <div>
+            <Box>
+              <Box>
+                <Typography variant="p">Name:</Typography>
+                <Typography variant="span">{user?.name}</Typography>
+              </Box>
+              <Box>
+                <Typography variant="p">Phone:</Typography>
+                <Typography variant="span">{shippingInfo?.phoneNo}</Typography>
+              </Box>
+              <Box>
+                <Typography variant="p">Address:</Typography>
+                <Typography variant="span">{address}</Typography>
+              </Box>
+            </Box>
+          </Box>
+          <Box>
             <Typography>Your Cart Items:</Typography>
-            <div>
+            <Box>
               {cartItems &&
                 cartItems.map((item) => (
-                  <div key={item?.product}>
+                  <Box key={item?.product}>
                     <img src={item?.image} alt="Product" width={275} />
                     <Link to={`/product/${item?.product}`}>
                       {item?.name}
                     </Link>{' '}
-                    <span>
+                    <Typography variant="span">
                       {item?.quantity} X ${item?.price} ={' '}
-                      <b>${item?.price * item?.quantity}</b>
-                    </span>
-                  </div>
+                      <Typography variant="h5">
+                        ${item?.price * item?.quantity}
+                      </Typography>
+                    </Typography>
+                  </Box>
                 ))}
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
         {/*  */}
-        <div>
-          <div>
+        <Box>
+          <Box>
             <Typography>Order Summery</Typography>
-            <div>
-              <div>
-                <p>Subtotal:</p>
-                <span>${subtotal}</span>
-              </div>
-              <div>
-                <p>Shipping Charges:</p>
-                <span>${shippingCharges}</span>
-              </div>
-              <div>
-                <p>VAT:</p>
-                <span>${tax}</span>
-              </div>
-            </div>
+            <Box>
+              <Box>
+                <Typography variant="p">Subtotal:</Typography>
+                <Typography variant="span">${subtotal}</Typography>
+              </Box>
+              <Box>
+                <Typography variant="p">Shipping Charges:</Typography>
+                <Typography variant="span">${shippingCharges}</Typography>
+              </Box>
+              <Box>
+                <Typography variant="p">VAT:</Typography>
+                <Typography variant="span">${tax}</Typography>
+              </Box>
+            </Box>
 
-            <div>
-              <p>
-                <b>Total:</b>
-              </p>
-              <span>${totalPrice}</span>
-            </div>
-
-            <button onClick={proceedToPayment}>Proceed To Payment</button>
-          </div>
-        </div>
-      </div>
+            <Box>
+              <Typography variant="p">
+                <Typography
+                  sx={{
+                    fontWeight: 800,
+                  }}
+                >
+                  Total:
+                </Typography>
+              </Typography>
+              <Typography variant="span">${totalPrice}</Typography>
+            </Box>
+            <Button onClick={proceedToPayment}>Proceed To Payment</Button>
+          </Box>
+        </Box>
+      </Box>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { literal, object, string } from 'zod';
+import { literal, number, object, string } from 'zod';
 
 export const registerSchema = object({
   name: string().nonempty('Name is required').max(32, 'Name is too long'),
@@ -71,4 +71,20 @@ export const updatePasswordSchema = object({
 
 export const reviewSchema = object({
   comment: string().nonempty('Please provide feedback'),
+});
+
+export const shippingSchema = object({
+  // phone: number({
+  //   // required_error: 'Please provide your phone numberr',
+  //   // invalid_type_error: 'Invalid phone numberr',
+  // })
+  //   .int()
+  //   .positive()
+  //   .gte(11, { message: 'Invalid phone number' }),
+  phone: string().nonempty('Please provide your phone number'),
+  // country: string().nonempty('Please provide your country name'),
+  // state: string().nonempty('Please provide your state name'),
+  city: string().nonempty('Please provide your city name'),
+  pin: string().nonempty('Please provide your state pin code'),
+  address: string().nonempty('Please provide your address'),
 });
