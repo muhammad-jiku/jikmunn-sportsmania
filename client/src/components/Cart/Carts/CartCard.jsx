@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CartCard = () => {
+const CartCard = ({ item, deleteCartItems }) => {
   return (
     <div>
       <h1>Cart card</h1>
