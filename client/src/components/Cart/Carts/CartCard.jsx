@@ -1,9 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CartCard = ({ item, deleteCartItems }) => {
   return (
     <div>
-      <h1>Cart card</h1>
+      <img src={item.image} alt={item?.name} width={275} />
+      <div>
+        <Link to={`/product/${item.product}`}>{item.name}</Link>
+        <span>{`Price: $ ${item.price}`}</span>
+        <p onClick={() => deleteCartItems(item.product)}>Remove</p>
+      </div>
     </div>
   );
 };
