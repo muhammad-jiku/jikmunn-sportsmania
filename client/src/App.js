@@ -69,7 +69,14 @@ function App() {
             <Route path="myorders" element={<MyOrders />} />
             <Route path="myorders/:id" element={<MyOrderDetails />} />
           </Route>
-          <Route path="*" element={<NotFoundPage />} />
+          <Route
+            element={
+              window.location.pathname === '/process/payment' ? null : (
+                <NotFoundPage />
+              )
+            }
+          />
+          {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
         <Footer />
       </>
