@@ -15,20 +15,19 @@ const Shipping = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { shippingInfo } = useSelector((state) => state.cart);
+  const { shippingInfo } = useSelector((state) => state?.cart);
 
-  const [address, setAddress] = useState(shippingInfo.address);
-  const [city, setCity] = useState(shippingInfo.city);
-  const [state, setState] = useState(shippingInfo.state);
-  const [country, setCountry] = useState(shippingInfo.country);
-  const [pinCode, setPinCode] = useState(shippingInfo.pinCode);
-  const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
+  const [address, setAddress] = useState(shippingInfo?.address);
+  const [city, setCity] = useState(shippingInfo?.city);
+  const [state, setState] = useState(shippingInfo?.state);
+  const [country, setCountry] = useState(shippingInfo?.country);
+  const [pinCode, setPinCode] = useState(shippingInfo?.pinCode);
+  const [phoneNo, setPhoneNo] = useState(shippingInfo?.phoneNo);
 
   const shippingSubmit = (e) => {
     e.preventDefault();
 
     if (phoneNo.length < 10 || phoneNo.length > 10) {
-      alert.error('Phone Number should be 10 digits Long');
       return;
     }
     dispatch(
@@ -127,7 +126,7 @@ const Shipping = () => {
                 >
                   <option value="">State</option>
                   {State &&
-                    State.getStatesOfCountry(country).map((item) => (
+                    State?.getStatesOfCountry(country).map((item) => (
                       <option key={item.isoCode} value={item.isoCode}>
                         {item.name}
                       </option>

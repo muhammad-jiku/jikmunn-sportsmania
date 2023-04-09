@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import CheckoutSteps from './CheckoutSteps';
 import { Typography } from '@mui/material';
@@ -7,7 +7,6 @@ import { Typography } from '@mui/material';
 const ConfirmOrder = () => {
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
 
