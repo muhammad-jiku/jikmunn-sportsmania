@@ -54,6 +54,7 @@ const Payment = () => {
           'content-type': 'application/json',
         },
       };
+
       const { data } = await axios.post(
         '/api/v1/payment/process',
         paymentData,
