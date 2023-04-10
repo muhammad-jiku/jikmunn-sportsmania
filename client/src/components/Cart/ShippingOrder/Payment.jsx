@@ -33,18 +33,16 @@ const Payment = () => {
   const { error } = useSelector((state) => state.newOrder);
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
 
-  console.log(user);
-  console.log(shippingInfo);
   const paymentData = {
     amount: Math.round(orderInfo?.totalPrice),
   };
-
+  console.log(orderInfo);
   const order = {
     shippingInfo,
     orderItems: cartItems,
     itemsPrice: orderInfo?.subtotal,
     taxPrice: orderInfo?.tax,
-    shipcvcgPrice: orderInfo?.shipcvcgCharges,
+    shippingPrice: orderInfo?.shippingPrice,
     totalPrice: orderInfo?.totalPrice,
   };
 
@@ -61,6 +59,7 @@ const Payment = () => {
         },
       };
 
+      console.log(paymentData);
       const { data } = await axios.post(
         '/api/v1/payment/process',
         paymentData,
@@ -74,10 +73,11 @@ const Payment = () => {
       // const card = elements.getElement(CardElement);
       const card = elements.getElement(CardNumberElement);
 
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card,
-      });
+      const { error: paymentError, paymentMethod } =
+        await stripe.createPaymentMethod({
+          type: 'card',
+          card,
+        });
 
       if (card == null) {
         return;
@@ -104,15 +104,16 @@ const Payment = () => {
       if (result.error) {
         payBtn.current.disabled = false;
         console.log(result.error);
+        console.log(paymentError);
         console.log(paymentMethod);
-        console.log(error);
       } else {
         if (result.paymentIntent.status === 'succeeded') {
           order.paymentInfo = {
-            id: result.paymentIntent.id,
-            status: result.paymentIntent.status,
+            id: result?.paymentIntent?.id,
+            status: result?.paymentIntent?.status,
           };
 
+          console.log(order);
           dispatch(createOrder(order));
           reset();
           navigate('/success');
@@ -120,8 +121,8 @@ const Payment = () => {
           console.log("There's some issue while processing payment ");
         }
       }
-    } catch (error) {
-      console.log(error.message);
+    } catch (err) {
+      console.log(err.message);
       payBtn.current.disabled = false;
     }
   };

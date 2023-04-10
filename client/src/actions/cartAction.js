@@ -41,7 +41,6 @@ export const removeItemsFromCart = (id) => async (dispatch, getState) => {
 // SAVE SHIPPING INFO
 export const saveShippingInfo = (data) => async (dispatch) => {
   console.log(data);
-
   dispatch({
     type: SAVE_SHIPPING_INFO,
     payload: data,

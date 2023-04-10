@@ -1,10 +1,11 @@
 import React from 'react';
-import { Stepper, Step, StepLabel, Typography } from '@mui/material';
+import { Stepper, Step, StepLabel, Typography, useTheme } from '@mui/material';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
 const CheckoutSteps = ({ activeStep }) => {
+  const theme = useTheme();
   const steps = [
     {
       label: <Typography>Shipping Details</Typography>,
@@ -30,7 +31,10 @@ const CheckoutSteps = ({ activeStep }) => {
         >
           <StepLabel
             style={{
-              color: activeStep >= index ? 'tomato' : 'rgba(0, 0, 0, 0.649)',
+              color:
+                activeStep >= index
+                  ? `${theme.palette.primary.main}`
+                  : 'rgba(0, 0, 0, 0.649)',
             }}
             icon={item.icon}
           >
