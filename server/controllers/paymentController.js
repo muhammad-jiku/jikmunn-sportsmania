@@ -17,11 +17,11 @@ const processPayment = AsyncError(async (req, res, next) => {
     .json({ success: true, client_secret: myPayment.client_secret });
 });
 
-const sendStripeApiKey = (req, res, next) => {
-  res.send({
-    message: 'sending stripe key',
+const sendStripeApiKey = AsyncError(async (req, res, next) => {
+  res.status(200).json({
+    stripeApiKey: process.env.STRIPE_API_KEY,
   });
-};
+});
 
 module.exports = {
   processPayment,
