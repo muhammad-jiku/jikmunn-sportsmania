@@ -1,4 +1,4 @@
-import { literal, number, object, string } from 'zod';
+import { date, literal, number, object, string } from 'zod';
 
 export const registerSchema = object({
   name: string().nonempty('Name is required').max(32, 'Name is too long'),
@@ -87,4 +87,14 @@ export const shippingSchema = object({
   city: string().nonempty('Please provide your city name'),
   pin: string().nonempty('Please provide your state pin code'),
   address: string().nonempty('Please provide your address'),
+});
+
+export const paymentSchema = object({
+  card: string().nonempty('Please provide your card number'),
+  // date: date({
+  //   required_error: 'Please select a date and time',
+  //   invalid_type_error: "That's not a date!",
+  // }),
+  date: string().nonempty('Please select the date'),
+  cvc: string().nonempty('Please provide your cvc code'),
 });
