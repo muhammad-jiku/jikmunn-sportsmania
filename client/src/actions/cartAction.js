@@ -5,7 +5,7 @@ import {
   SAVE_SHIPPING_INFO,
 } from '../constants/cartConstant';
 
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+// axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 // Add to Cart
 export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {

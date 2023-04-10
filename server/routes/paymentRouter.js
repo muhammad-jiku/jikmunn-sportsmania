@@ -13,6 +13,6 @@ paymentRouter
   .route('/payment/process')
   .post(isAuthenticatedUser, processPayment);
 
-paymentRouter.route(isAuthenticatedUser, '/stripeapikey').get(sendStripeApiKey);
+paymentRouter.route('/stripeapikey').get(isAuthenticatedUser, sendStripeApiKey);
 
 module.exports = paymentRouter;

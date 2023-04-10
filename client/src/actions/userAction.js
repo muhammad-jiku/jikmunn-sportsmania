@@ -26,7 +26,7 @@ import {
   UPDATE_PROFILE_SUCCESS,
 } from '../constants/userConstant';
 
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+// axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 // Login
 export const loginUser = (userData) => async (dispatch) => {

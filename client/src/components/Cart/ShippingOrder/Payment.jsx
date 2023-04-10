@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import axios from 'axios';
 import CheckoutSteps from './CheckoutSteps';
 import { useNavigate } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   useStripe,
@@ -115,7 +115,7 @@ const Payment = () => {
   return (
     <>
       <CheckoutSteps activeStep={2} />
-      <div>
+      <Box>
         <form onSubmit={(e) => submitHandler(e)}>
           <Typography>Card Info</Typography>
           <div>
@@ -137,7 +137,7 @@ const Payment = () => {
             ref={payBtn}
           />
         </form>
-      </div>
+      </Box>
     </>
   );
 };

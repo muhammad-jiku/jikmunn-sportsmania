@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { loadUser } from './actions/userAction';
@@ -20,15 +20,38 @@ import {
   MyOrders,
   MyOrderDetails,
   NotFoundPage,
+  PaymentPage,
 } from './pages';
 import { sportsStore } from './utils/store';
 import WebFont from 'webfontloader';
 import { ForgetPassword, ResetPassword } from './components/Auth';
+import axios from 'axios';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 function App() {
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
 
+  const [stripeApiKey, setStripeApiKey] = useState('');
+
+  const getStripeApiKey = async () => {
+    // const config = {
+    //   headers: {
+    //     authorization: `Bearer ${localStorage?.getItem('token')}`,
+    //     'content-type': 'application/json',
+    //   },
+    // };
+
+    const { data } = await axios.get('/api/v1/stripeapikey');
+    // const { data } = await axios.get('/api/v1/stripeapikey', config);
+    console.log(data?.stripeApiKey);
+    setStripeApiKey(data?.stripeApiKey);
+  };
+
   useEffect(() => {
+    axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+    console.log(axios.defaults.baseURL);
+    console.log(stripeApiKey);
     WebFont.load({
       google: {
         families: ['Roboto', 'Droid Sans', 'Chilanka'],
@@ -36,6 +59,7 @@ function App() {
     });
 
     sportsStore.dispatch(loadUser());
+    getStripeApiKey();
   }, []);
 
   return (
@@ -56,6 +80,16 @@ function App() {
           <Route path="/carts" element={<MyCarts />} />
           <Route path="/shipping" element={<ShippingPage />} />
           <Route path="/order/confirm" element={<ConfirmOrderPage />} />
+          {stripeApiKey && (
+            <Route
+              path="/process/payment"
+              element={
+                <Elements stripe={loadStripe(stripeApiKey)}>
+                  <PaymentPage />
+                </Elements>
+              }
+            />
+          )}
           <Route
             path="/dashboard"
             element={
@@ -69,14 +103,8 @@ function App() {
             <Route path="myorders" element={<MyOrders />} />
             <Route path="myorders/:id" element={<MyOrderDetails />} />
           </Route>
-          <Route
-            element={
-              window.location.pathname === '/process/payment' ? null : (
-                <NotFoundPage />
-              )
-            }
-          />
-          {/* <Route path="*" element={<NotFoundPage />} /> */}
+
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
       </>

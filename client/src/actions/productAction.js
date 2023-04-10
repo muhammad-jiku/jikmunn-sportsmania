@@ -15,7 +15,7 @@ import {
   PRODUCT_DETAILS_SUCCESS,
 } from '../constants/productConstant';
 
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+// axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 // Get All Products (also with search, filter)
 export const getProducts =
