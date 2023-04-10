@@ -21,6 +21,7 @@ import {
   MyOrderDetails,
   NotFoundPage,
   PaymentPage,
+  SuccessPage,
 } from './pages';
 import { sportsStore } from './utils/store';
 import WebFont from 'webfontloader';
@@ -78,6 +79,7 @@ function App() {
           <Route path="/carts" element={<MyCarts />} />
           <Route path="/shipping" element={<ShippingPage />} />
           <Route path="/order/confirm" element={<ConfirmOrderPage />} />
+          <Route path="/success" element={<SuccessPage />} />
           {stripeApiKey && (
             <Route
               path="/process/payment"

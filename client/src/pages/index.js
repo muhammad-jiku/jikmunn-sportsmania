@@ -9,6 +9,7 @@ export { default as MyCarts } from './Carts/MyCarts';
 export { default as ShippingPage } from './Carts/ShippingPage';
 export { default as ConfirmOrderPage } from './Carts/ConfirmOrderPage';
 export { default as PaymentPage } from './Carts/PaymentPage';
+export { default as SuccessPage } from './Carts/SuccessPage';
 export { default as MyDashboard } from './MyDashboard/MyDashboard';
 export { default as MyProfile } from './MyDashboard/MyProfile';
 export { default as SecureMyProfile } from './MyDashboard/SecureMyProfile';
