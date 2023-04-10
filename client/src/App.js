@@ -35,16 +35,14 @@ function App() {
   const [stripeApiKey, setStripeApiKey] = useState('');
 
   const getStripeApiKey = async () => {
-    // const config = {
-    //   headers: {
-    //     authorization: `Bearer ${localStorage?.getItem('token')}`,
-    //     'content-type': 'application/json',
-    //   },
-    // };
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
 
-    const { data } = await axios.get('/api/v1/stripeapikey');
-    // const { data } = await axios.get('/api/v1/stripeapikey', config);
-    console.log(data?.stripeApiKey);
+    const { data } = await axios.get('/api/v1/stripeapikey', config);
     setStripeApiKey(data?.stripeApiKey);
   };
 
@@ -60,7 +58,7 @@ function App() {
 
     sportsStore.dispatch(loadUser());
     getStripeApiKey();
-  }, []);
+  }, [stripeApiKey]);
 
   return (
     <div className="App">

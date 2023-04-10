@@ -38,9 +38,6 @@ const Shipping = () => {
   });
 
   const onSubmitHandler = (values) => {
-    if (phoneNo?.length < 10 || phoneNo?.length > 10) {
-      return;
-    }
     const shippingDetails = {
       address: values.address,
       city: values.city,
@@ -61,8 +58,6 @@ const Shipping = () => {
       reset();
     }
   }, [isSubmitSuccessful, reset]);
-
-  console.log(errors);
 
   return (
     <>
