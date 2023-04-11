@@ -26,9 +26,7 @@ const Orders = () => {
       flex: 0.5,
       cellClassName: (params) => {
         console.log(params.id);
-        return (params.id, 'status') === 'Delivered'
-          ? 'greenColor'
-          : 'redColor';
+        return (params.id, 'status') === 'Delivered' ? 'green' : 'red';
       },
     },
     {
@@ -58,7 +56,7 @@ const Orders = () => {
         return (
           <>
             {console.log(params)}
-            <Link to={`/order/${params.id}`}>
+            <Link to={`/dashboard/myorders/${params.id}`}>
               <LaunchIcon />
             </Link>
           </>
