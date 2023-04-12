@@ -49,8 +49,8 @@ function App() {
 
   useEffect(() => {
     axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
-    console.log(axios.defaults.baseURL);
-    console.log(stripeApiKey);
+    // console.log(axios.defaults.baseURL);
+    // console.log(stripeApiKey);
     WebFont.load({
       google: {
         families: ['Roboto', 'Droid Sans', 'Chilanka'],

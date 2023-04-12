@@ -26,8 +26,6 @@ import {
   UPDATE_PROFILE_SUCCESS,
 } from '../constants/userConstant';
 
-// axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
-
 // Login
 export const loginUser = (userData) => async (dispatch) => {
   try {
@@ -86,7 +84,6 @@ export const registerUser = (userData) => async (dispatch) => {
 
 // Load User
 export const loadUser = () => async (dispatch) => {
-  console.log(axios.defaults.baseURL);
   try {
     dispatch({
       type: LOAD_USER_REQUEST,
@@ -247,16 +244,16 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
   }
 };
 
-// get All Users
+// get All Users - (admin)
 export const getAllUsers = () => async (dispatch) => {};
 
 // get  User Details
 export const getUserDetails = (id) => async (dispatch) => {};
 
-// Update User
+// Update User - (admin)
 export const updateUser = (id, userData) => async (dispatch) => {};
 
-// Delete User
+// Delete User - (admin)
 export const deleteUser = (id) => async (dispatch) => {};
 
 // Clearing Errors

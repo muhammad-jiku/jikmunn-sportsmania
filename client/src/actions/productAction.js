@@ -15,8 +15,6 @@ import {
   PRODUCT_DETAILS_SUCCESS,
 } from '../constants/productConstant';
 
-// axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
-
 // Get All Products (also with search, filter)
 export const getProducts =
   (
@@ -52,16 +50,16 @@ export const getProducts =
     }
   };
 
-// Get All Products For Admin
+// Get All Products For - (admin)
 export const getAdminProduct = () => async (dispatch) => {};
 
-// Create Product
+// Create Product - (admin)
 export const createProduct = (productData) => async (dispatch) => {};
 
-// Update Product
+// Update Product - (admin)
 export const updateProduct = (id, productData) => async (dispatch) => {};
 
-// Delete Product
+// Delete Product - (admin)
 export const deleteProduct = (id) => async (dispatch) => {};
 
 // Get Products Details
@@ -134,7 +132,7 @@ export const getAllReviews = (id) => async (dispatch) => {
   }
 };
 
-// Delete Review of a Product
+// Delete Review of a Product - (admin)
 export const deleteReviews = (reviewId, productId) => async (dispatch) => {};
 
 // Clearing Errors

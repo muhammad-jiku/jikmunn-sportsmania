@@ -12,11 +12,9 @@ import {
   ORDER_DETAILS_SUCCESS,
 } from '../constants/orderConstant';
 
-// axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
-
 // Create Order
 export const createOrder = (order) => async (dispatch) => {
-  console.log(order);
+  // console.log(order);
   try {
     dispatch({
       type: CREATE_ORDER_REQUEST,
@@ -71,13 +69,13 @@ export const myOrders = () => async (dispatch) => {
   }
 };
 
-// Get All Orders (admin)
+// Get All Orders - (admin)
 export const getAllOrders = () => async (dispatch) => {};
 
-// Update Order
+// Update Order - (admin)
 export const updateOrder = (id, order) => async (dispatch) => {};
 
-// Delete Order
+// Delete Order - (admin)
 export const deleteOrder = (id) => async (dispatch) => {};
 
 // Get Order Details

@@ -5,13 +5,9 @@ import {
   SAVE_SHIPPING_INFO,
 } from '../constants/cartConstant';
 
-// axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
-
 // Add to Cart
 export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
   const { data } = await axios.get(`/api/v1/product/${id}`);
-
-  // console.log(axios.defaults.baseURL);
 
   dispatch({
     type: ADD_TO_CART,
@@ -40,7 +36,7 @@ export const removeItemsFromCart = (id) => async (dispatch, getState) => {
 
 // SAVE SHIPPING INFO
 export const saveShippingInfo = (data) => async (dispatch) => {
-  console.log(data);
+  // console.log(data);
   dispatch({
     type: SAVE_SHIPPING_INFO,
     payload: data,
