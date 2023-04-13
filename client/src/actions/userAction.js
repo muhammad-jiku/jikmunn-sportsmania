@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  ALL_USERS_FAIL,
+  ALL_USERS_REQUEST,
+  ALL_USERS_SUCCESS,
   CLEAR_ERRORS,
   FORGOT_PASSWORD_FAIL,
   FORGOT_PASSWORD_REQUEST,
@@ -245,7 +248,24 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 };
 
 // get All Users - (admin)
-export const getAllUsers = () => async (dispatch) => {};
+export const getAllUsers = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: ALL_USERS_REQUEST,
+    });
+    const { data } = await axios.get(`/api/v1/admin/users`);
+    console.log(data);
+    dispatch({
+      type: ALL_USERS_SUCCESS,
+      payload: data.users,
+    });
+  } catch (error) {
+    dispatch({
+      type: ALL_USERS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // get  User Details
 export const getUserDetails = (id) => async (dispatch) => {};
