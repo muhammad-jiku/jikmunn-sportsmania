@@ -202,6 +202,8 @@ export const forgotPasswordReducer = (state = {}, action) => {
   }
 };
 
+//  - (admin)
 export const allUsersReducer = (state = { users: [] }, action) => {};
 
+//  - (admin)
 export const userDetailsReducer = (state = { user: {} }, action) => {};

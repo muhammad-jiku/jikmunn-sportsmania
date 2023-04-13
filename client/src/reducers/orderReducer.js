@@ -71,8 +71,10 @@ export const myOrdersReducer = (state = { orders: [] }, action) => {
   }
 };
 
+//  - (admin)
 export const allOrdersReducer = (state = { orders: [] }, action) => {};
 
+//  - (admin)
 export const orderReducer = (state = {}, action) => {};
 
 export const orderDetailsReducer = (state = { order: {} }, action) => {

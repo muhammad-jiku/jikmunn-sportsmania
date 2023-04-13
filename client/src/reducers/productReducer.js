@@ -57,8 +57,10 @@ export const productsReducer = (state = { products: [] }, action) => {
   }
 };
 
+//  - (admin)
 export const newProductReducer = (state = { product: {} }, action) => {};
 
+//  - (admin)
 export const productReducer = (state = {}, action) => {};
 
 export const productDetailsReducer = (state = { product: {} }, action) => {
@@ -151,4 +153,5 @@ export const productReviewsReducer = (state = { reviews: [] }, action) => {
   }
 };
 
+//  - (admin)
 export const reviewReducer = (state = {}, action) => {};
