@@ -50,8 +50,23 @@ const isAuthenticatedUser = AsyncError(async (req, res, next) => {
 });
 
 const authorizeRoles = (...roles) => {
-  // console.log('roles', roles);
+  // const authorizeRoles = async (...roles) => {
+
+  // const requestedEmail = req.decoded.email;
+  // const requestedAccount = await User.findOne({
+  //   email: requestedEmail,
+  // });
+  // if (requestedAccount?.role === 'admin') {
+  //   next();
+  // } else {
+  //   res.status(403).send({
+  //     message: 'Request to the this route is not accessible and deniable',
+  //   });
+  // }
+
+  console.log('roles', roles);
   return (req, res, next) => {
+    console.log(req.user);
     console.log('role...', req.user.role);
     if (!roles.includes(req.user.role)) {
       return next(
@@ -61,7 +76,7 @@ const authorizeRoles = (...roles) => {
         )
       );
     }
-
+    console.log('user');
     next();
   };
 };

@@ -14,6 +14,7 @@ import { clearErrors } from '../../../actions/userAction';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SettingsIcon from '@mui/icons-material/Settings';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -117,12 +118,12 @@ const Sidebar = () => {
               cursor: 'pointer',
               pt: 1.5,
             }}
-            onClick={() => navigate('/dashboard/myorders')}
+            onClick={() => navigate('/dashboard/admin')}
           >
-            <ShoppingCartIcon />
+            <DashboardIcon />
             <Typography variant="span" sx={{ ml: 1 }}>
               {' '}
-              My Orders
+              Dashboard
             </Typography>
           </ListItem>
           <ListItem
@@ -138,6 +139,21 @@ const Sidebar = () => {
             <Typography variant="span" sx={{ ml: 1 }}>
               {' '}
               Settings
+            </Typography>
+          </ListItem>
+          <ListItem
+            disablePadding
+            sx={{
+              color: 'primary.main',
+              cursor: 'pointer',
+              pt: 1.5,
+            }}
+            onClick={() => navigate('/dashboard/myorders')}
+          >
+            <ShoppingCartIcon />
+            <Typography variant="span" sx={{ ml: 1 }}>
+              {' '}
+              My Orders
             </Typography>
           </ListItem>
         </List>

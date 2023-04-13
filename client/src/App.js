@@ -17,6 +17,7 @@ import {
   MyDashboard,
   MyProfile,
   SecureMyProfile,
+  AdminPanelPage,
   MyOrders,
   MyOrderDetails,
   NotFoundPage,
@@ -35,6 +36,8 @@ function App() {
 
   const [stripeApiKey, setStripeApiKey] = useState('');
 
+  axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+  console.log(axios.defaults.baseURL);
   const getStripeApiKey = async () => {
     const config = {
       headers: {
@@ -48,7 +51,6 @@ function App() {
   };
 
   useEffect(() => {
-    axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
     // console.log(axios.defaults.baseURL);
     // console.log(stripeApiKey);
     WebFont.load({
@@ -59,7 +61,7 @@ function App() {
 
     sportsStore.dispatch(loadUser());
     getStripeApiKey();
-  }, [stripeApiKey]);
+  }, []);
 
   return (
     <div className="App">
@@ -80,7 +82,7 @@ function App() {
           <Route path="/shipping" element={<ShippingPage />} />
           <Route path="/order/confirm" element={<ConfirmOrderPage />} />
           <Route path="/success" element={<SuccessPage />} />
-          {stripeApiKey && (
+          {stripeApiKey ? (
             <Route
               path="/process/payment"
               element={
@@ -89,7 +91,7 @@ function App() {
                 </Elements>
               }
             />
-          )}
+          ) : null}
           <Route
             path="/dashboard"
             element={
@@ -100,6 +102,7 @@ function App() {
           >
             <Route index element={<MyProfile />} />
             <Route path="password/secure" element={<SecureMyProfile />} />
+            <Route path="admin" element={<AdminPanelPage />} />
             <Route path="myorders" element={<MyOrders />} />
             <Route path="myorders/:id" element={<MyOrderDetails />} />
           </Route>

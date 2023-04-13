@@ -13,5 +13,6 @@ export { default as SuccessPage } from './Carts/SuccessPage';
 export { default as MyDashboard } from './MyDashboard/MyDashboard';
 export { default as MyProfile } from './MyDashboard/MyProfile';
 export { default as SecureMyProfile } from './MyDashboard/SecureMyProfile';
+export { default as AdminPanelPage } from './MyDashboard/Admin/AdminPanelPage';
 export { default as MyOrders } from './MyDashboard/User/MyOrders';
 export { default as MyOrderDetails } from './MyDashboard/User/MyOrderDetails';
