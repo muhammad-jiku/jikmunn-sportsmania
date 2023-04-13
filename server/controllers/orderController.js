@@ -51,7 +51,7 @@ const getSingleOrder = AsyncError(async (req, res, next) => {
   });
 });
 
-// get logged in user  Orders
+// get logged in user Orders
 const myOrders = AsyncError(async (req, res, next) => {
   const { _id } = await req.user;
   const orders = await Order.find({ user: _id });
@@ -62,7 +62,7 @@ const myOrders = AsyncError(async (req, res, next) => {
   });
 });
 
-// get all Orders -- Admin
+// get all Orders - (admin)
 const getAllOrders = AsyncError(async (req, res, next) => {
   const orders = await Order.find({});
 
@@ -78,7 +78,17 @@ const getAllOrders = AsyncError(async (req, res, next) => {
   });
 });
 
-// update Order Status -- Admin
+//  update order's item stock
+const updateStock = async (id, quantity) => {
+  const product = await Product.findById({ _id: id });
+  product.stock -= quantity;
+
+  await product.save({
+    validateBeforeSave: false,
+  });
+};
+
+// update Order Status- (admin)
 const updateOrder = AsyncError(async (req, res, next) => {
   const { id } = await req.params;
   const { status } = await req.body;
@@ -113,16 +123,7 @@ const updateOrder = AsyncError(async (req, res, next) => {
   });
 });
 
-const updateStock = async (id, quantity) => {
-  const product = await Product.findById({ _id: id });
-  product.stock -= quantity;
-
-  await product.save({
-    validateBeforeSave: false,
-  });
-};
-
-// delete Order -- Admin
+// delete Order - (admin)
 const deleteOrder = AsyncError(async (req, res, next) => {
   const { id } = await req.params;
   const order = await Order.findById({ _id: id });
