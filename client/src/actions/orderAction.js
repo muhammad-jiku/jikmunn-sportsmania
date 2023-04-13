@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  ALL_ORDERS_FAIL,
+  ALL_ORDERS_REQUEST,
+  ALL_ORDERS_SUCCESS,
   CLEAR_ERRORS,
   CREATE_ORDER_FAIL,
   CREATE_ORDER_REQUEST,
@@ -70,7 +73,32 @@ export const myOrders = () => async (dispatch) => {
 };
 
 // Get All Orders - (admin)
-export const getAllOrders = () => async (dispatch) => {};
+export const getAllOrders = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: ALL_ORDERS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get('/api/v1/admin/orders', config);
+
+    dispatch({
+      type: ALL_ORDERS_SUCCESS,
+      payload: data.orders,
+    });
+  } catch (error) {
+    dispatch({
+      type: ALL_ORDERS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Update Order - (admin)
 export const updateOrder = (id, order) => async (dispatch) => {};
