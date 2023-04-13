@@ -12,7 +12,7 @@ const {
 } = require('../controllers/productController');
 const {
   isAuthenticatedUser,
-  authorizeRoles,
+  authorizeAdmin,
 } = require('../middlewares/auth/AuthMiddleware');
 
 const productRouter = express.Router({
@@ -23,16 +23,16 @@ productRouter.route('/products').get(getAllProducts);
 
 productRouter
   .route('/admin/products')
-  .get(isAuthenticatedUser, authorizeRoles('admin'), getAdminProducts);
+  .get(isAuthenticatedUser, authorizeAdmin, getAdminProducts);
 
 productRouter
   .route('/admin/product/new')
-  .post(isAuthenticatedUser, authorizeRoles('admin'), createProduct);
+  .post(isAuthenticatedUser, authorizeAdmin, createProduct);
 
 productRouter
   .route('/admin/product/:id')
-  .put(isAuthenticatedUser, authorizeRoles('admin'), updateProduct)
-  .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteProduct);
+  .put(isAuthenticatedUser, authorizeAdmin, updateProduct)
+  .delete(isAuthenticatedUser, authorizeAdmin, deleteProduct);
 
 productRouter.route('/product/:id').get(getProductDetails);
 

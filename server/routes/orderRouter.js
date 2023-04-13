@@ -10,7 +10,7 @@ const {
 
 const {
   isAuthenticatedUser,
-  authorizeRoles,
+  authorizeAdmin,
 } = require('../middlewares/auth/AuthMiddleware');
 
 const orderRouter = express.Router({
@@ -25,11 +25,11 @@ orderRouter.route('/orders/me').get(isAuthenticatedUser, myOrders);
 
 orderRouter
   .route('/admin/orders')
-  .get(isAuthenticatedUser, authorizeRoles('admin'), getAllOrders);
+  .get(isAuthenticatedUser, authorizeAdmin, getAllOrders);
 
 orderRouter
   .route('/admin/order/:id')
-  .put(isAuthenticatedUser, authorizeRoles('admin'), updateOrder)
-  .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteOrder);
+  .put(isAuthenticatedUser, authorizeAdmin, updateOrder)
+  .delete(isAuthenticatedUser, authorizeAdmin, deleteOrder);
 
 module.exports = orderRouter;

@@ -41,14 +41,15 @@ export const loginUser = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(`/api/v1/login`, userData, config);
-    // console.log(data);
-    const token = data?.token;
-    localStorage?.setItem('token', token);
 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: data.user,
     });
+    console.log(data);
+    const token = data?.token;
+    console.log('token', token);
+    localStorage?.setItem('token', token);
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
@@ -69,14 +70,15 @@ export const registerUser = (userData) => async (dispatch) => {
     };
 
     const { data } = await axios.post(`/api/v1/register`, userData, config);
-    // console.log(data);
-    const token = data?.token;
-    localStorage?.setItem('token', token);
 
     dispatch({
       type: REGISTER_USER_SUCCESS,
       payload: data.user,
     });
+    console.log(data);
+    const token = data?.token;
+    console.log('token', token);
+    localStorage?.setItem('token', token);
   } catch (error) {
     dispatch({
       type: REGISTER_USER_FAIL,
@@ -253,7 +255,15 @@ export const getAllUsers = () => async (dispatch) => {
     dispatch({
       type: ALL_USERS_REQUEST,
     });
-    const { data } = await axios.get(`/api/v1/admin/users`);
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/admin/users`, config);
     console.log(data);
     dispatch({
       type: ALL_USERS_SUCCESS,

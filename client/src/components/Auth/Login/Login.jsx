@@ -51,7 +51,7 @@ const Login = ({ setAuthProcess }) => {
       email: values.email,
       password: values.password,
     };
-    // console.log(userInfo);
+    console.log(userInfo);
     dispatch(loginUser(userInfo));
   };
 

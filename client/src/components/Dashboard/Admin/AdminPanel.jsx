@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllUsers } from '../../../actions/userAction';
 
 const AdminPanel = () => {
   const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.allUsers);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [dispatch]);
+
   return (
     <Box>
       <Box>
@@ -28,7 +35,7 @@ const AdminPanel = () => {
             </Link>
             <Link to="/admin/users">
               <Typography variant="p">Users</Typography>
-              {/* <Typography variant='p'>{users && users.length}</Typography> */}
+              <Typography variant="p">{users && users.length}</Typography>
             </Link>
           </Box>
         </Box>

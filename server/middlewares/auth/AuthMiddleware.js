@@ -16,17 +16,18 @@ const isAuthenticatedUser = AsyncError(async (req, res, next) => {
   // req.user = await User.findById(decodedData.id);
   // // console.log('user', req.user);
   // next();
-
-  // console.log(req.headers);
   // console.log(req.cookies);
+  // console.log('---------------------');
+  // console.log('---------------------');
+  // console.log(req.headers);
 
-  const authHeader = await req.headers.authorization;
+  const authHeader = await req?.headers?.authorization;
   // console.log('Auth header........', authHeader);
   if (!authHeader) {
     // return next(new ErrorHandler('Please Login to access this resource', 401));
     return next(new ErrorHandler('Please Login to access this resource', 400));
   }
-  const token = await authHeader.split(' ')[1];
+  const token = await authHeader?.split(' ')[1];
   // console.log('token.........', token);
   // console.log('secret.....', process.env.JWT_SECRET);
   if (!token) {
@@ -49,39 +50,42 @@ const isAuthenticatedUser = AsyncError(async (req, res, next) => {
   }
 });
 
-const authorizeRoles = (...roles) => {
-  // const authorizeRoles = async (...roles) => {
-
+// const authorizeAdmin = (...roles) => {
+const authorizeAdmin = async (req, res, next) => {
+  // console.log(req.user);
   // const requestedEmail = req.decoded.email;
   // const requestedAccount = await User.findOne({
   //   email: requestedEmail,
   // });
-  // if (requestedAccount?.role === 'admin') {
-  //   next();
-  // } else {
-  //   res.status(403).send({
-  //     message: 'Request to the this route is not accessible and deniable',
-  //   });
-  // }
-
-  console.log('roles', roles);
-  return (req, res, next) => {
-    console.log(req.user);
-    console.log('role...', req.user.role);
-    if (!roles.includes(req.user.role)) {
-      return next(
-        new ErrorHandler(
-          `Role: ${req.user.role} is not allowed to access this resouce `,
-          403
-        )
-      );
-    }
-    console.log('user');
+  if (req.user?.role === 'admin') {
     next();
-  };
+  } else {
+    return next(
+      new ErrorHandler(
+        `Role: ${req.user.role} is not allowed to access this resouce `,
+        403
+      )
+    );
+  }
+
+  // console.log('roles', roles);
+  // return (req, res, next) => {
+  //   console.log(req.user);
+  //   console.log('role...', req.user.role);
+  //   if (!roles.includes(req.user.role)) {
+  //     return next(
+  //       new ErrorHandler(
+  //         `Role: ${req.user.role} is not allowed to access this resouce `,
+  //         403
+  //       )
+  //     );
+  //   }
+  //   console.log('user');
+  // next();
+  // };
 };
 
 module.exports = {
   isAuthenticatedUser,
-  authorizeRoles,
+  authorizeAdmin,
 };

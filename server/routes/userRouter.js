@@ -16,7 +16,7 @@ const {
 
 const {
   isAuthenticatedUser,
-  authorizeRoles,
+  authorizeAdmin,
 } = require('../middlewares/auth/AuthMiddleware');
 
 const userRouter = express.Router({
@@ -41,12 +41,12 @@ userRouter.route('/me/update').put(isAuthenticatedUser, updateProfile);
 
 userRouter
   .route('/admin/users')
-  .get(isAuthenticatedUser, authorizeRoles('admin'), getAllUser);
+  .get(isAuthenticatedUser, authorizeAdmin, getAllUser);
 
 userRouter
   .route('/admin/user/:id')
-  .get(isAuthenticatedUser, authorizeRoles('admin'), getSingleUser)
-  .put(isAuthenticatedUser, authorizeRoles('admin'), updateUserRole)
-  .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteUser);
+  .get(isAuthenticatedUser, authorizeAdmin, getSingleUser)
+  .put(isAuthenticatedUser, authorizeAdmin, updateUserRole)
+  .delete(isAuthenticatedUser, authorizeAdmin, deleteUser);
 
 module.exports = userRouter;
