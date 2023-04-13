@@ -1,4 +1,7 @@
 import {
+  ALL_USERS_FAIL,
+  ALL_USERS_REQUEST,
+  ALL_USERS_SUCCESS,
   CLEAR_ERRORS,
   DELETE_USER_FAIL,
   DELETE_USER_REQUEST,
@@ -202,8 +205,39 @@ export const forgotPasswordReducer = (state = {}, action) => {
   }
 };
 
-//  - (admin)
-export const allUsersReducer = (state = { users: [] }, action) => {};
+//  Get All Users - (admin)
+export const allUsersReducer = (state = { users: [] }, action) => {
+  console.log(state);
+  switch (action.type) {
+    case ALL_USERS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ALL_USERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: action.payload,
+      };
+
+    case ALL_USERS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
 
 //  - (admin)
 export const userDetailsReducer = (state = { user: {} }, action) => {};
