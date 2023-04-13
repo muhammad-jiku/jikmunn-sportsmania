@@ -249,7 +249,7 @@ const updateProfile = AsyncError(async (req, res, next) => {
   });
 });
 
-// Get all users (admin)
+// Get all users  - (admin)
 const getAllUser = AsyncError(async (req, res, next) => {
   const users = await User.find({});
 
@@ -259,7 +259,7 @@ const getAllUser = AsyncError(async (req, res, next) => {
   });
 });
 
-// Get single user (admin)
+// Get single user  - (admin)
 const getSingleUser = AsyncError(async (req, res, next) => {
   const { id } = await req.params;
   const user = await User.findById({ _id: id });
@@ -274,7 +274,7 @@ const getSingleUser = AsyncError(async (req, res, next) => {
   });
 });
 
-// update User Role -- Admin
+// update User Role  - (admin)
 const updateUserRole = AsyncError(async (req, res, next) => {
   const { id } = await req.params;
   const { name, email, role } = await req.body;
@@ -302,7 +302,7 @@ const updateUserRole = AsyncError(async (req, res, next) => {
   });
 });
 
-// Delete User --Admin
+// Delete User  - (admin)
 const deleteUser = AsyncError(async (req, res, next) => {
   const { id } = await req.params;
   const user = await User.findById({ _id: id });
@@ -310,6 +310,9 @@ const deleteUser = AsyncError(async (req, res, next) => {
   if (!user) {
     return next(new ErrorHandler(`User does not exist with Id: ${id}`, 400));
   } else {
+    const imageId = user.avatar.public_id;
+    await cloudinary.v2.uploader.destroy(imageId);
+
     await User.deleteOne({ _id: id });
   }
 
