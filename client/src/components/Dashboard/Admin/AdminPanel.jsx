@@ -3,13 +3,16 @@ import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllUsers } from '../../../actions/userAction';
+import { getAdminProduct } from '../../../actions/productAction';
 
 const AdminPanel = () => {
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.allUsers);
+  const { products } = useSelector((state) => state.products);
 
   useEffect(() => {
     dispatch(getAllUsers());
+    dispatch(getAdminProduct());
   }, [dispatch]);
 
   return (
@@ -27,7 +30,7 @@ const AdminPanel = () => {
           <Box>
             <Link to="/admin/products">
               <Typography variant="p">Product</Typography>
-              {/* <Typography variant='p'>{products && products.length}</Typography> */}
+              <Typography variant="p">{products && products.length}</Typography>
             </Link>
             <Link to="/admin/orders">
               <Typography variant="p">Orders</Typography>

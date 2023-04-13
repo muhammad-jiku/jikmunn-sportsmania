@@ -57,10 +57,10 @@ export const productsReducer = (state = { products: [] }, action) => {
   }
 };
 
-//  - (admin)
+// - (admin)
 export const newProductReducer = (state = { product: {} }, action) => {};
 
-//  - (admin)
+// - (admin)
 export const productReducer = (state = {}, action) => {};
 
 export const productDetailsReducer = (state = { product: {} }, action) => {
