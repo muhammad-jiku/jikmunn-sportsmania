@@ -48,6 +48,8 @@ const Navbar = ({ isAuthenticated, user }) => {
   const handleLogoutUser = () => {
     dispatch(logoutUser());
     localStorage?.removeItem('token');
+    localStorage?.removeItem('cartItems');
+    localStorage?.removeItem('shippingInfo');
     navigate('/');
   };
 

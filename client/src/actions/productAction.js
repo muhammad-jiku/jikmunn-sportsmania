@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  ADMIN_PRODUCT_FAIL,
+  ADMIN_PRODUCT_REQUEST,
+  ADMIN_PRODUCT_SUCCESS,
   ALL_PRODUCT_FAIL,
   ALL_PRODUCT_REQUEST,
   ALL_PRODUCT_SUCCESS,
@@ -51,7 +54,31 @@ export const getProducts =
   };
 
 // Get All Products For - (admin)
-export const getAdminProduct = () => async (dispatch) => {};
+export const getAdminProduct = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADMIN_PRODUCT_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+    const { data } = await axios.get('/api/v1/admin/products', config);
+
+    dispatch({
+      type: ADMIN_PRODUCT_SUCCESS,
+      payload: data.products,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Create Product - (admin)
 export const createProduct = (productData) => async (dispatch) => {};
