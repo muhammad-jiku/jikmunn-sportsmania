@@ -119,7 +119,7 @@ function App() {
               element={<UpdateProductPage />}
             />
             <Route path="admin/orders" element={<AllOrdersPage />} />
-            <Route path="admin/order/process" element={<ProcessOrderPage />} />
+            <Route path="admin/order/:id" element={<ProcessOrderPage />} />
             <Route path="myorders" element={<MyOrders />} />
             <Route path="myorders/:id" element={<MyOrderDetails />} />
           </Route>

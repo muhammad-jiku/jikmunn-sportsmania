@@ -81,7 +81,6 @@ const AllOrders = () => {
       renderCell: (params) => {
         return (
           <>
-            {console.log(params.id)}
             <Link to={`/dashboard/admin/order/${params.id}`}>
               <EditIcon
                 sx={{

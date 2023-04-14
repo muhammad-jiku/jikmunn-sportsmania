@@ -16,6 +16,9 @@ import {
   ORDER_DETAILS_FAIL,
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
+  UPDATE_ORDER_FAIL,
+  UPDATE_ORDER_REQUEST,
+  UPDATE_ORDER_SUCCESS,
 } from '../constants/orderConstant';
 
 // Create Order
@@ -104,7 +107,38 @@ export const getAllOrders = () => async (dispatch) => {
 };
 
 // Update Order - (admin)
-export const updateOrder = (id, order) => async (dispatch) => {};
+export const updateOrder = (id, order) => async (dispatch) => {
+  console.log(id);
+  console.log(order);
+  try {
+    dispatch({
+      type: UPDATE_ORDER_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/admin/order/${id}`,
+      order,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_ORDER_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_ORDER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Delete Order - (admin)
 export const deleteOrder = (id) => async (dispatch) => {
