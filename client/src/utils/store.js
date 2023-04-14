@@ -32,15 +32,15 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   // newProduct: newProductReducer,
   // product: productReducer,
+  newReview: newReviewReducer,
+  productReviews: productReviewsReducer,
+  // review: reviewReducer,
   cart: cartReducer,
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
   orderDetails: orderDetailsReducer,
   allOrders: allOrdersReducer,
   order: orderReducer,
-  newReview: newReviewReducer,
-  productReviews: productReviewsReducer,
-  // review: reviewReducer,
 });
 
 let initialState = {
