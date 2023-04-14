@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers } from '../../../actions/userAction';
-import { getAdminProduct } from '../../../actions/productAction';
-import { getAllOrders } from '../../../actions/orderAction';
+import { getAllUsers } from '../../../../actions/userAction';
+import { getAdminProduct } from '../../../../actions/productAction';
+import { getAllOrders } from '../../../../actions/orderAction';
 import {
   Chart,
   ArcElement,
