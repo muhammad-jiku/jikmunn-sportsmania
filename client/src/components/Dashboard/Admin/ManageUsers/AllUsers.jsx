@@ -1,23 +1,50 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, getAllUsers } from '../../../../actions/userAction';
-import { Link } from 'react-router-dom';
+import {
+  clearErrors,
+  deleteUser,
+  getAllUsers,
+} from '../../../../actions/userAction';
+import { Link, useNavigate } from 'react-router-dom';
 import { Box, Button, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
+import { DELETE_USER_RESET } from '../../../../constants/userConstant';
 
 const AllUsers = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const { error, users } = useSelector((state) => state.allUsers);
+  const {
+    error: deleteError,
+    isDeleted,
+    message,
+  } = useSelector((state) => state.profile);
+
+  const deleteUserHandler = (id) => {
+    dispatch(deleteUser(id));
+  };
 
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
     }
 
+    if (deleteError) {
+      dispatch(clearErrors());
+    }
+
+    if (isDeleted) {
+      navigate('/dashboard/admin/users');
+      dispatch({
+        type: DELETE_USER_RESET,
+      });
+    }
+
     dispatch(getAllUsers());
-  }, [dispatch, error]);
+  }, [dispatch, error, deleteError, navigate, isDeleted]);
 
   const columns = [
     { field: 'id', headerName: 'User ID', minWidth: 180, flex: 0.8 },
@@ -68,7 +95,7 @@ const AllUsers = () => {
               />
             </Link>
 
-            <Button>
+            <Button onClick={() => deleteUserHandler(params.id)}>
               <DeleteIcon />
             </Button>
           </>
