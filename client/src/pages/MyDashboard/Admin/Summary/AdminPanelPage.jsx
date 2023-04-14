@@ -1,5 +1,5 @@
 import React from 'react';
-import { AdminPanel } from '../../../components/Dashboard';
+import { AdminPanel } from '../../../../components/Dashboard';
 
 const AdminPanelPage = () => {
   return (
