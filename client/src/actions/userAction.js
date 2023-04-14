@@ -27,6 +27,9 @@ import {
   UPDATE_PROFILE_FAIL,
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_SUCCESS,
+  UPDATE_USER_FAIL,
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_SUCCESS,
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
@@ -309,7 +312,38 @@ export const getUserDetails = (id) => async (dispatch) => {
 };
 
 // Update User - (admin)
-export const updateUser = (id, userData) => async (dispatch) => {};
+export const updateUser = (id, userData) => async (dispatch) => {
+  console.log(id);
+  console.log(userData);
+  try {
+    dispatch({
+      type: UPDATE_USER_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/admin/user/${id}`,
+      userData,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_USER_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_USER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Delete User - (admin)
 export const deleteUser = (id) => async (dispatch) => {};
