@@ -18,6 +18,13 @@ import {
   MyProfile,
   SecureMyProfile,
   AdminPanelPage,
+  AllUsersPage,
+  UpdateUserPage,
+  AllProductsPage,
+  NewProductPage,
+  UpdateProductPage,
+  AllOrdersPage,
+  ProcessOrderPage,
   MyOrders,
   MyOrderDetails,
   NotFoundPage,
@@ -103,6 +110,16 @@ function App() {
             <Route index element={<MyProfile />} />
             <Route path="password/secure" element={<SecureMyProfile />} />
             <Route path="admin" element={<AdminPanelPage />} />
+            <Route path="admin/users" element={<AllUsersPage />} />
+            <Route path="admin/user/update" element={<UpdateUserPage />} />
+            <Route path="admin/products" element={<AllProductsPage />} />
+            <Route path="admin/product/new" element={<NewProductPage />} />
+            <Route
+              path="admin/product/update"
+              element={<UpdateProductPage />}
+            />
+            <Route path="admin/orders" element={<AllOrdersPage />} />
+            <Route path="admin/order/process" element={<ProcessOrderPage />} />
             <Route path="myorders" element={<MyOrders />} />
             <Route path="myorders/:id" element={<MyOrderDetails />} />
           </Route>

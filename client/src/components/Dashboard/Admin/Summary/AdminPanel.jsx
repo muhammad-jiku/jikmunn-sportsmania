@@ -90,17 +90,17 @@ const AdminPanel = () => {
             </Typography>
           </Box>
           <Box>
-            <Link to="/admin/products">
+            <Link to="/dashboard/admin/products">
               <Typography variant="p">Product</Typography>
               <Typography variant="p">
                 {products && products?.length}
               </Typography>
             </Link>
-            <Link to="/admin/orders">
+            <Link to="/dashboard/admin/orders">
               <Typography variant="p">Orders</Typography>
               <Typography variant="p">{orders && orders?.length}</Typography>
             </Link>
-            <Link to="/admin/users">
+            <Link to="/dashboard/admin/users">
               <Typography variant="p">Users</Typography>
               <Typography variant="p">{users && users?.length}</Typography>
             </Link>
