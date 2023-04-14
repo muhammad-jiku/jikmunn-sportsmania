@@ -58,7 +58,7 @@ const AllUsers = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/dashboard/admin/user/${params.id}`}>
+            <Link to={`/dashboard/admin/user/update/${params.id}`}>
               <EditIcon
                 sx={{
                   mt: 1,

@@ -111,7 +111,7 @@ function App() {
             <Route path="password/secure" element={<SecureMyProfile />} />
             <Route path="admin" element={<AdminPanelPage />} />
             <Route path="admin/users" element={<AllUsersPage />} />
-            <Route path="admin/user/update" element={<UpdateUserPage />} />
+            <Route path="admin/user/update/:id" element={<UpdateUserPage />} />
             <Route path="admin/products" element={<AllProductsPage />} />
             <Route path="admin/product/new" element={<NewProductPage />} />
             <Route
