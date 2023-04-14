@@ -49,12 +49,13 @@ const ProcessOrder = () => {
   return (
     <>
       <Box>
+        {console.log(order)}
         <Box>
           {loading ? (
             <Loader />
           ) : (
             <Box
-              style={{
+              sx={{
                 display: order?.orderStatus === 'Delivered' ? 'block' : 'grid',
               }}
             >
@@ -148,7 +149,7 @@ const ProcessOrder = () => {
               </Box>
               {/*  */}
               <Box
-                style={{
+                sx={{
                   display:
                     order?.orderStatus === 'Delivered' ? 'none' : 'block',
                 }}
