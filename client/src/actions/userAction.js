@@ -4,6 +4,9 @@ import {
   ALL_USERS_REQUEST,
   ALL_USERS_SUCCESS,
   CLEAR_ERRORS,
+  DELETE_USER_FAIL,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
   FORGOT_PASSWORD_FAIL,
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
@@ -346,7 +349,32 @@ export const updateUser = (id, userData) => async (dispatch) => {
 };
 
 // Delete User - (admin)
-export const deleteUser = (id) => async (dispatch) => {};
+export const deleteUser = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: DELETE_USER_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.delete(`/api/v1/admin/user/${id}`, config);
+
+    dispatch({
+      type: DELETE_USER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_USER_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Clearing Errors
 export const clearErrors = () => async (dispatch) => {
