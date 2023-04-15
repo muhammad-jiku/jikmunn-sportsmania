@@ -115,7 +115,7 @@ function App() {
             <Route path="admin/products" element={<AllProductsPage />} />
             <Route path="admin/product/new" element={<NewProductPage />} />
             <Route
-              path="admin/product/update"
+              path="admin/product/update/:id"
               element={<UpdateProductPage />}
             />
             <Route path="admin/orders" element={<AllOrdersPage />} />

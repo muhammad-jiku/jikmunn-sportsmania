@@ -91,7 +91,7 @@ const AdminPanel = () => {
           </Box>
           <Box>
             <Link to="/dashboard/admin/products">
-              <Typography variant="p">Product</Typography>
+              <Typography variant="p">Products</Typography>
               <Typography variant="p">
                 {products && products?.length}
               </Typography>
