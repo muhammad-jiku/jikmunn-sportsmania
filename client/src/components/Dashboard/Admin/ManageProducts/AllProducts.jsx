@@ -58,7 +58,13 @@ const AllProducts = () => {
         return (
           <>
             <Link to={`/dashboard/admin/product/update/${params.id}`}>
-              <EditIcon />
+              <EditIcon
+                sx={{
+                  mt: 1,
+                  // color: 'primary.main',
+                  color: 'green',
+                }}
+              />
             </Link>
 
             <Button>

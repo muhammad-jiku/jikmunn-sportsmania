@@ -23,7 +23,7 @@ import {
 } from '../constants/orderConstant';
 
 export const newOrderReducer = (state = {}, action) => {
-  console.log(state);
+  // console.log(state);
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
       return {
