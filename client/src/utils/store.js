@@ -9,18 +9,19 @@ import {
   userReducer,
 } from '../reducers/userReducer';
 import {
+  productsReducer,
+  productDetailsReducer,
+  productReviewsReducer,
+  newReviewReducer,
+  productReducer,
+} from '../reducers/productReducer';
+import {
   allOrdersReducer,
   myOrdersReducer,
   newOrderReducer,
   orderDetailsReducer,
   orderReducer,
 } from '../reducers/orderReducer';
-import {
-  productsReducer,
-  productDetailsReducer,
-  productReviewsReducer,
-  newReviewReducer,
-} from '../reducers/productReducer';
 import { cartReducer } from '../reducers/cartReducer';
 
 const reducer = combineReducers({
@@ -32,7 +33,7 @@ const reducer = combineReducers({
   products: productsReducer,
   productDetails: productDetailsReducer,
   // newProduct: newProductReducer,
-  // product: productReducer,
+  product: productReducer,
   newReview: newReviewReducer,
   productReviews: productReviewsReducer,
   // review: reviewReducer,
