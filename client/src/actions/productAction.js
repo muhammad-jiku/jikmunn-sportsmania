@@ -10,6 +10,9 @@ import {
   ALL_REVIEW_REQUEST,
   ALL_REVIEW_SUCCESS,
   CLEAR_ERRORS,
+  DELETE_PRODUCT_FAIL,
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCCESS,
   NEW_REVIEW_FAIL,
   NEW_REVIEW_REQUEST,
   NEW_REVIEW_SUCCESS,
@@ -121,7 +124,32 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 };
 
 // Delete Product - (admin)
-export const deleteProduct = (id) => async (dispatch) => {};
+export const deleteProduct = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: DELETE_PRODUCT_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.delete(`/api/v1/admin/product/${id}`, config);
+
+    dispatch({
+      type: DELETE_PRODUCT_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Get Products Details
 export const getProductDetails = (id) => async (dispatch) => {
