@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import profile from '../../../assets/images/avatar_1.png';
 import { clearErrors } from '../../../actions/userAction';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -124,6 +125,21 @@ const Sidebar = () => {
             <Typography variant="span" sx={{ ml: 1 }}>
               {' '}
               Dashboard
+            </Typography>
+          </ListItem>
+          <ListItem
+            disablePadding
+            sx={{
+              color: 'primary.main',
+              cursor: 'pointer',
+              pt: 1.5,
+            }}
+            onClick={() => navigate('/dashboard/admin/product/new')}
+          >
+            <AddCircleIcon />
+            <Typography variant="span" sx={{ ml: 1 }}>
+              {' '}
+              Add Product
             </Typography>
           </ListItem>
           <ListItem
