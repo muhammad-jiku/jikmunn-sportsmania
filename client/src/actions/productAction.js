@@ -16,6 +16,9 @@ import {
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
+  UPDATE_PRODUCT_FAIL,
+  UPDATE_PRODUCT_REQUEST,
+  UPDATE_PRODUCT_SUCCESS,
 } from '../constants/productConstant';
 
 // Get All Products (also with search, filter)
@@ -84,7 +87,38 @@ export const getAdminProduct = () => async (dispatch) => {
 export const createProduct = (productData) => async (dispatch) => {};
 
 // Update Product - (admin)
-export const updateProduct = (id, productData) => async (dispatch) => {};
+export const updateProduct = (id, productData) => async (dispatch) => {
+  console.log(id);
+  console.log(productData);
+  try {
+    dispatch({
+      type: UPDATE_PRODUCT_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/admin/product/${id}`,
+      productData,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_PRODUCT_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Delete Product - (admin)
 export const deleteProduct = (id) => async (dispatch) => {};
