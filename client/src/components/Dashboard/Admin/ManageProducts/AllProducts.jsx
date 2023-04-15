@@ -2,25 +2,47 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   clearErrors,
+  deleteProduct,
   getAdminProduct,
 } from '../../../../actions/productAction';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Box, Button, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
+import { DELETE_PRODUCT_RESET } from '../../../../constants/productConstant';
 
 const AllProducts = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const { error, products } = useSelector((state) => state.products);
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.product
+  );
+
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id));
+  };
 
   useEffect(() => {
     if (error) {
       dispatch(clearErrors());
     }
 
+    if (deleteError) {
+      dispatch(clearErrors());
+    }
+
+    if (isDeleted) {
+      navigate('/dashboard/admin');
+      dispatch({
+        type: DELETE_PRODUCT_RESET,
+      });
+    }
+
     dispatch(getAdminProduct());
-  }, [dispatch, error]);
+  }, [dispatch, error, deleteError, isDeleted, navigate]);
 
   const columns = [
     { field: 'id', headerName: 'Product ID', minWidth: 200, flex: 0.5 },
@@ -57,6 +79,7 @@ const AllProducts = () => {
       renderCell: (params) => {
         return (
           <>
+            {/* {console.log(params.id)} */}
             <Link to={`/dashboard/admin/product/update/${params.id}`}>
               <EditIcon
                 sx={{
@@ -67,7 +90,7 @@ const AllProducts = () => {
               />
             </Link>
 
-            <Button>
+            <Button onClick={() => deleteProductHandler(params.id)}>
               <DeleteIcon />
             </Button>
           </>

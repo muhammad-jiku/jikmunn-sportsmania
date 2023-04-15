@@ -1,3 +1,4 @@
+const cloudinary = require('cloudinary');
 const AsyncError = require('../middlewares/bugError/AsyncError');
 const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
 const Product = require('../models/Product');
