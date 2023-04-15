@@ -13,6 +13,9 @@ import {
   DELETE_PRODUCT_FAIL,
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCCESS,
+  NEW_PRODUCT_FAIL,
+  NEW_PRODUCT_REQUEST,
+  NEW_PRODUCT_SUCCESS,
   NEW_REVIEW_FAIL,
   NEW_REVIEW_REQUEST,
   NEW_REVIEW_SUCCESS,
@@ -87,7 +90,37 @@ export const getAdminProduct = () => async (dispatch) => {
 };
 
 // Create Product - (admin)
-export const createProduct = (productData) => async (dispatch) => {};
+export const createProduct = (productData) => async (dispatch) => {
+  console.log(productData);
+  try {
+    dispatch({
+      type: NEW_PRODUCT_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.post(
+      `/api/v1/admin/product/new`,
+      productData,
+      config
+    );
+
+    dispatch({
+      type: NEW_PRODUCT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: NEW_PRODUCT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Update Product - (admin)
 export const updateProduct = (id, productData) => async (dispatch) => {
@@ -125,7 +158,6 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 
 // Delete Product - (admin)
 export const deleteProduct = (id) => async (dispatch) => {
-  console.log(id);
   try {
     dispatch({
       type: DELETE_PRODUCT_REQUEST,
