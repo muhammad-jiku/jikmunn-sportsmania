@@ -23,6 +23,7 @@ import {
   AllProductsPage,
   NewProductPage,
   UpdateProductPage,
+  AllProductReviewsPage,
   AllOrdersPage,
   ProcessOrderPage,
   MyOrders,
@@ -113,10 +114,14 @@ function App() {
             <Route path="admin/users" element={<AllUsersPage />} />
             <Route path="admin/user/update/:id" element={<UpdateUserPage />} />
             <Route path="admin/products" element={<AllProductsPage />} />
-            <Route path="admin/product/new" element={<NewProductPage />} />
+            <Route path="admin/product/new" element={<NewProductPage />} />{' '}
             <Route
               path="admin/product/update/:id"
               element={<UpdateProductPage />}
+            />
+            <Route
+              path="admin/product/reviews"
+              element={<AllProductReviewsPage />}
             />
             <Route path="admin/orders" element={<AllOrdersPage />} />
             <Route path="admin/order/:id" element={<ProcessOrderPage />} />

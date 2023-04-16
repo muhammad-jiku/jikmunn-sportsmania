@@ -19,6 +19,7 @@ export { default as UpdateUserPage } from './MyDashboard/Admin/ManageUsers/Updat
 export { default as AllProductsPage } from './MyDashboard/Admin/ManageProducts/AllProductsPage';
 export { default as NewProductPage } from './MyDashboard/Admin/ManageProducts/NewProductPage';
 export { default as UpdateProductPage } from './MyDashboard/Admin/ManageProducts/UpdateProductPage';
+export { default as AllProductReviewsPage } from './MyDashboard/Admin/ManageProducts/AllProductReviewsPage';
 export { default as AllOrdersPage } from './MyDashboard/Admin/ManageOrders/AllOrdersPage';
 export { default as ProcessOrderPage } from './MyDashboard/Admin/ManageOrders/ProcessOrderPage';
 export { default as MyOrders } from './MyDashboard/User/MyOrders';
