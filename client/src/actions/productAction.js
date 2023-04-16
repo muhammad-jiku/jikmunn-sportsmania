@@ -26,6 +26,9 @@ import {
   UPDATE_PRODUCT_REQUEST,
   UPDATE_PRODUCT_SUCCESS,
 } from '../constants/productConstant';
+import { DELETE_REVIEW_REQUEST } from '../constants/productConstant';
+import { DELETE_REVIEW_SUCCESS } from '../constants/productConstant';
+import { DELETE_REVIEW_FAIL } from '../constants/productConstant';
 
 // Get All Products (also with search, filter)
 export const getProducts =
@@ -255,7 +258,37 @@ export const getAllReviews = (id) => async (dispatch) => {
 };
 
 // Delete Review of a Product - (admin)
-export const deleteReviews = (reviewId, productId) => async (dispatch) => {};
+export const deleteReviews = (reviewId, productId) => async (dispatch) => {
+  console.log(reviewId);
+  console.log(productId);
+  try {
+    dispatch({
+      type: DELETE_REVIEW_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.delete(
+      `/api/v1/reviews?id=${reviewId}&productId=${productId}`,
+      config
+    );
+
+    dispatch({
+      type: DELETE_REVIEW_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_REVIEW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Clearing Errors
 export const clearErrors = () => async (dispatch) => {
