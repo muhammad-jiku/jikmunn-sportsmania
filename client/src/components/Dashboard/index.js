@@ -7,6 +7,7 @@ export { default as UpdateUser } from './Admin/ManageUsers/UpdateUser';
 export { default as AllProducts } from './Admin/ManageProducts/AllProducts';
 export { default as NewProduct } from './Admin/ManageProducts/NewProduct';
 export { default as UpdateProduct } from './Admin/ManageProducts/UpdateProduct';
+export { default as AllProductReviews } from './Admin/ManageProducts/AllProductReviews';
 export { default as AllOrders } from './Admin/ManageOrders/AllOrders';
 export { default as ProcessOrder } from './Admin/ManageOrders/ProcessOrder';
 export { default as Orders } from './User/Orders';

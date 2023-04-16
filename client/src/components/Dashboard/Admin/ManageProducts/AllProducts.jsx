@@ -6,7 +6,7 @@ import {
   getAdminProduct,
 } from '../../../../actions/productAction';
 import { Link, useNavigate } from 'react-router-dom';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, Link as TextLink } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
@@ -45,7 +45,27 @@ const AllProducts = () => {
   }, [dispatch, error, deleteError, isDeleted, navigate]);
 
   const columns = [
-    { field: 'id', headerName: 'Product ID', minWidth: 200, flex: 0.5 },
+    {
+      field: 'id',
+      headerName: 'Product ID',
+      minWidth: 200,
+      flex: 0.5,
+      renderCell: (params) => {
+        return (
+          <>
+            <TextLink
+              // to={`/dashboard/admin/product/reviews/${params.id}`}
+              href={`/dashboard/admin/product/reviews/${params.id}`}
+              underline="none"
+            >
+              <Typography variant="span" color="gray">
+                {params.id}
+              </Typography>
+            </TextLink>
+          </>
+        );
+      },
+    },
 
     {
       field: 'name',

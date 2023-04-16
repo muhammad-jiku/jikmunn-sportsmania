@@ -120,7 +120,7 @@ function App() {
               element={<UpdateProductPage />}
             />
             <Route
-              path="admin/product/reviews"
+              path="admin/product/reviews/:id"
               element={<AllProductReviewsPage />}
             />
             <Route path="admin/orders" element={<AllOrdersPage />} />
