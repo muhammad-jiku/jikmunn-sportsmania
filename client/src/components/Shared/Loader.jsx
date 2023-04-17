@@ -1,6 +1,6 @@
 import { Box, styled } from '@mui/material';
 import React from 'react';
-import Loading from '../../../assets/gifs/loadinn.gif';
+import Loading from '../../assets/gifs/loadinn.gif';
 
 const Loader = () => {
   const LoaderContainer = styled(Box)(({ matches, theme }) => ({

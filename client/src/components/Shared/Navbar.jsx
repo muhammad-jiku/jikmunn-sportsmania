@@ -12,15 +12,14 @@ import {
   Menu,
   Button,
 } from '@mui/material';
-import './Navbar.scss';
-import logo from '../../../assets/images/logo.png';
-import person1 from '../../../assets/images/avatar_1.png';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import '../../styles/Navbar.scss';
+import logo from '../../assets/images/logo.png';
+import person1 from '../../assets/images/avatar_1.png';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../../actions/userAction';
+import { logoutUser } from '../../actions/userAction';
 
 const Navbar = ({ isAuthenticated, user }) => {
   const navigate = useNavigate('');
@@ -227,11 +226,6 @@ const Navbar = ({ isAuthenticated, user }) => {
               <ShoppingCartIcon />
             </IconButton>
           </Tooltip>
-          {/* <Tooltip title="Notifications">
-            <IconButton disableRipple={true} style={{ color: 'white' }}>
-              <NotificationsIcon />
-            </IconButton>
-          </Tooltip> */}
           <Tooltip title="Open settings">
             <IconButton
               onClick={handleOpenUserMenu}
