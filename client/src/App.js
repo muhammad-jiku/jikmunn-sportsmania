@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { loadUser } from './actions/userAction';
 import './App.css';
-import { Navbar, Footer, Loader } from './components/Shared';
+import { Navbar, Footer } from './components/Shared';
 import {
   HomePage,
   ProductPage,
@@ -40,7 +40,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
 function App() {
-  const { loading, isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const [stripeApiKey, setStripeApiKey] = useState('');
 
@@ -73,8 +73,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* {loading ? // <Loader />
-      null : ( */}
       <>
         <Navbar isAuthenticated={isAuthenticated} user={user} />
         <Routes>
@@ -133,7 +131,6 @@ function App() {
         </Routes>
         <Footer />
       </>
-      {/* )} */}
     </div>
   );
 }

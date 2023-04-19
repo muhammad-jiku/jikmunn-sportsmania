@@ -6,7 +6,7 @@ import ProductsCard from '../../Products/Infos/ProductsCard';
 
 const Products = () => {
   const dispatch = useDispatch();
-  const { loading, error, products } = useSelector((state) => state.products);
+  const { error, products } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (error) {
@@ -41,7 +41,10 @@ const Products = () => {
             xs: 2,
             md: 3,
           }}
-          sx={{ margin: `20px 4px 10px 4px` }}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
           columns={{
             xs: 4,
             sm: 8,

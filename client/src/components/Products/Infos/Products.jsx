@@ -288,7 +288,8 @@ const Products = () => {
                 md: 3,
               }}
               sx={{
-                margin: `20px 4px 10px 4px`,
+                display: 'flex',
+                justifyContent: 'center',
               }}
               columns={{
                 xs: 4,
