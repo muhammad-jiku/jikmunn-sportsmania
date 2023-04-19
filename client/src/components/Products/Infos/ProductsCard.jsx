@@ -64,7 +64,9 @@ const ProductsCard = ({ product, idx }) => {
             textAlign="justify"
             sx={{ mt: 1, fontWeight: 400, fontSize: '12px' }}
           >
-            {product?.description}
+            {product?.description?.length === 35
+              ? product?.description
+              : product?.description?.slice(0, 35) + '...'}
           </Typography>
           <Typography variant="h7" sx={{ mt: 1, fontweight: 800 }}>
             ${product?.price}
