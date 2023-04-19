@@ -40,7 +40,7 @@ const ProductsCard = ({ product, idx }) => {
         <CardMedia
           component="img"
           height="350px"
-          width="220px"
+          // width="320px"
           image={`${product?.images[0]?.url}`}
           alt={`${product?.name}`}
           sx={{

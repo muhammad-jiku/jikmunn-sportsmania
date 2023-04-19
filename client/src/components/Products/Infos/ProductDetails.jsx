@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { useParams } from 'react-router-dom';
 import { Box, Button, Rating, TextField, Typography } from '@mui/material';
 import { clearErrors, getProductDetails } from '../../../actions/productAction';
@@ -95,15 +94,15 @@ const ProductDetails = () => {
                     p: 2,
                   }}
                 >
-                  {product.images &&
-                    product.images.map((item, idx) => (
+                  {product?.images &&
+                    product?.images.map((item, idx) => (
                       <img
                         key={idx}
                         src={item?.url}
                         alt={`${product?.name}`}
                         title={`${product?.name}`}
-                        width={225}
-                        height={305}
+                        // width={425}
+                        height={300}
                         loading="lazy"
                       />
                     ))}
@@ -117,26 +116,24 @@ const ProductDetails = () => {
                     p: 2,
                   }}
                 >
-                  <Typography variant="h6">{product?.name}</Typography>
-                  <Typography variant="p">{product?.description}</Typography>
-                  <Typography variant="span">{product?.category}</Typography>
-                  <Typography variant="span">${product?.price}</Typography>
-                  <Typography variant="span">
-                    Status:{' '}
-                    {product?.stock <= 10 ? (
-                      <span style={{ color: 'red' }}>Out of Stock</span>
-                    ) : (
-                      <span style={{ color: 'green' }}>In Stock</span>
-                    )}
+                  <Typography variant="h6" sx={{ fontWeight: 800 }}>
+                    {product?.name}
                   </Typography>
-                  <Typography variant="span" sx={{ ml: -0.5, display: 'flex' }}>
+                  <Typography
+                    variant="span"
+                    sx={{ ml: -0.5, display: 'flex', my: 1 }}
+                  >
                     <Rating
                       name="half-rating-read"
                       defaultValue={product?.ratings}
                       precision={0.5}
                       readOnly
-                    />{' '}
-                    <Typography variant="span" sx={{ ml: 1 }}>
+                      size="small"
+                    />
+                    <Typography
+                      variant="span"
+                      sx={{ ml: 1, fontSize: '15px', fontWeight: 500 }}
+                    >
                       (
                       {product?.numOfReviews > 1
                         ? product?.numOfReviews + ' reviews'
@@ -144,15 +141,28 @@ const ProductDetails = () => {
                       )
                     </Typography>
                   </Typography>
+                  <Typography variant="h7" sx={{ my: 0.5, fontWeight: 600 }}>
+                    ${product?.price}
+                  </Typography>
+                  <Typography variant="p" sx={{ my: 1, fontWeight: 400 }}>
+                    {product?.description}
+                  </Typography>
                   <Typography
-                    variant="span"
-                    sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}
+                    variant="p"
+                    sx={{
+                      my: 1,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      fontWeight: 700,
+                    }}
                   >
+                    Quantity:
                     <Button
                       variant="outlined"
                       sx={{
-                        fontSize: '20px',
-                        fontWeight: 700,
+                        ml: 1,
+                        fontSize: '15px',
                       }}
                       onClick={decreaseQuantity}
                     >
@@ -165,12 +175,12 @@ const ProductDetails = () => {
                         width: 70,
                       }}
                       value={quantity}
+                      size="small"
                     />
                     <Button
                       variant="outlined"
                       sx={{
-                        fontSize: '20px',
-                        fontWeight: 700,
+                        fontSize: '15px',
                       }}
                       onClick={increaseQuantity}
                     >
@@ -179,14 +189,24 @@ const ProductDetails = () => {
                     <Button
                       variant="contained"
                       sx={{
-                        ml: 3,
-                        // fontSize: '10px',
+                        p: 1,
                       }}
                       disabled={product?.stock <= 10}
                       onClick={handleAddProductToCart}
                     >
                       Add to cart
                     </Button>
+                  </Typography>
+                  <Typography variant="p" sx={{ my: 1, fontWeight: 600 }}>
+                    Category: {product?.category}
+                  </Typography>
+                  <Typography variant="p" sx={{ mb: 1, fontWeight: 600 }}>
+                    Availability:
+                    {product?.stock <= 10 ? (
+                      <span style={{ color: 'red' }}> Out of Stock</span>
+                    ) : (
+                      <span style={{ color: 'green' }}> In Stock</span>
+                    )}
                   </Typography>
                   <Button
                     variant="outlined"
@@ -205,7 +225,7 @@ const ProductDetails = () => {
                   />
                 </Box>
               </Box>
-              {product.reviews && product.reviews[0] ? (
+              {product?.reviews && product?.reviews[0] ? (
                 <Box>
                   <Reviews product={product} />
                 </Box>
@@ -216,6 +236,7 @@ const ProductDetails = () => {
                   textAlign="center"
                   sx={{
                     m: 4,
+                    fontWeight: 600,
                   }}
                 >
                   No Reviews Yet!

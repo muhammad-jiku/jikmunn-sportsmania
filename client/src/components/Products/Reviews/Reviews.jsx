@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import ReviewsCard from './ReviewsCard';
 
 const Reviews = ({ product }) => {
@@ -11,9 +11,6 @@ const Reviews = ({ product }) => {
         mt: 2,
       }}
     >
-      <Typography variant="h5" color="text.secondary">
-        Reviews:
-      </Typography>
       <Box
         sx={{
           p: 2,
