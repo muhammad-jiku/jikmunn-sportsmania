@@ -12,7 +12,7 @@ import {
   Menu,
   Button,
 } from '@mui/material';
-import '../../styles/Navbar.scss';
+import styles from '../../styles/Navbar.module.css';
 import logo from '../../assets/images/logo.png';
 import person1 from '../../assets/images/avatar_1.png';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -84,8 +84,8 @@ const Navbar = ({ isAuthenticated, user }) => {
   }));
 
   return (
-    <AppBar position="static" className="header" color="secondary">
-      <Toolbar className="toolbar">
+    <AppBar position="static" className={styles.header} color="secondary">
+      <Toolbar className={styles.toolbar}>
         {/*  Logo */}
         <Link to={`/`}>
           <Logo
