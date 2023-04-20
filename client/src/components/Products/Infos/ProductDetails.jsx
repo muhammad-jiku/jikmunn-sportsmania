@@ -7,17 +7,21 @@ import { ErrorNotFound, Loader } from '../../Shared';
 import AddReview from '../Reviews/AddReview';
 import Reviews from '../Reviews/Reviews';
 import { addItemsToCart } from '../../../actions/cartAction';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
 
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [selectedImage, setSelectedImage] = useState(
+    product?.images && `${product?.images[0]?.url}`
+  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -55,10 +59,13 @@ const ProductDetails = () => {
     }
 
     dispatch(getProductDetails(id));
+    // if (product) {
+    //   setSelectedImage(`${product?.images[0]?.url}`);
+    // }
   }, [
+    error,
     dispatch,
     id,
-    error,
     product,
     product?.ratings,
     product?.reviews,
@@ -76,6 +83,7 @@ const ProductDetails = () => {
             <>
               <Box
                 sx={{
+                  p: 2,
                   display: 'flex',
                   flexDirection: {
                     xs: 'column',
@@ -86,7 +94,6 @@ const ProductDetails = () => {
                     md: 'center',
                   },
                   alignItems: 'center',
-                  p: 2,
                 }}
               >
                 <Box
@@ -94,18 +101,36 @@ const ProductDetails = () => {
                     p: 2,
                   }}
                 >
-                  {product?.images &&
-                    product?.images.map((item, idx) => (
+                  {product?.images && (
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                       <img
-                        key={idx}
-                        src={item?.url}
+                        // src={item?.url}
+                        src={selectedImage}
                         alt={`${product?.name}`}
                         title={`${product?.name}`}
-                        // width={425}
                         height={300}
                         loading="lazy"
                       />
-                    ))}
+                      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                        {product?.images.map((item, idx) => (
+                          <img
+                            key={idx}
+                            src={item?.url}
+                            alt={`${product?.name}`}
+                            title={`${product?.name}`}
+                            height={100}
+                            loading="lazy"
+                            onClick={() => setSelectedImage(item?.url)}
+                            style={{
+                              margin: '2px',
+                              border: '1px solid brown',
+                              cursor: 'pointer',
+                            }}
+                          />
+                        ))}
+                      </Box>
+                    </Box>
+                  )}
                 </Box>
                 <Box
                   sx={{
@@ -114,6 +139,11 @@ const ProductDetails = () => {
                     justifyContent: 'center',
                     alignItems: 'flex-start',
                     p: 2,
+                    boxSizing: 'border-box',
+                    width: {
+                      xs: 'auto',
+                      md: '450px',
+                    },
                   }}
                 >
                   <Typography variant="h6" sx={{ fontWeight: 800 }}>
@@ -194,7 +224,26 @@ const ProductDetails = () => {
                       disabled={product?.stock <= 10}
                       onClick={handleAddProductToCart}
                     >
-                      Add to cart
+                      <Typography
+                        variant="span"
+                        sx={{
+                          display: {
+                            xs: 'none',
+                            md: 'block',
+                          },
+                        }}
+                      >
+                        {' '}
+                        Add to cart{' '}
+                      </Typography>{' '}
+                      <ShoppingCartIcon
+                        sx={{
+                          display: {
+                            xs: 'block',
+                            md: 'none',
+                          },
+                        }}
+                      />
                     </Button>
                   </Typography>
                   <Typography variant="p" sx={{ my: 1, fontWeight: 600 }}>
@@ -231,7 +280,7 @@ const ProductDetails = () => {
                 </Box>
               ) : (
                 <Typography
-                  variant="h5"
+                  variant="h3"
                   color="red"
                   textAlign="center"
                   sx={{
