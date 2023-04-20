@@ -1,5 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/scrollbar';
+import { Scrollbar } from 'swiper';
 import ReviewsCard from './ReviewsCard';
 
 const Reviews = ({ product }) => {
@@ -16,12 +20,26 @@ const Reviews = ({ product }) => {
           p: 2,
           display: 'flex',
           justifyContent: 'center',
-          overflowX: 'auto',
+          // overflowX: 'auto',
         }}
       >
-        {product?.reviews?.map((review, idx) => (
-          <ReviewsCard review={review} key={idx} />
-        ))}
+        {' '}
+        <Swiper
+          scrollbar={{
+            hide: false,
+          }}
+          modules={[Scrollbar]}
+          className="mySwiper"
+        >
+          {product?.reviews?.map((review, idx) => (
+            <SwiperSlide
+              key={idx}
+              style={{ display: 'flex', justifyContent: 'center' }}
+            >
+              <ReviewsCard review={review} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </Box>
     </Box>
   );

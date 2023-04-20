@@ -15,8 +15,14 @@ const ReviewsCard = ({ review }) => {
         border: '1px solid',
         borderColor: 'primary.main',
         borderRadius: '10px',
-        height: 275,
-        width: 300,
+        height: {
+          xs: 200,
+          md: 275,
+        },
+        width: {
+          xs: 200,
+          md: 300,
+        },
       }}
     >
       <FormatQuoteIcon size="large" color="primary" sx={{ fontSize: '35px' }} />
@@ -25,6 +31,10 @@ const ReviewsCard = ({ review }) => {
         color="primary"
         sx={{
           mb: 6,
+          fontSize: {
+            xs: '12px',
+            md: '16px',
+          },
         }}
       >
         {review?.comment}
@@ -42,6 +52,10 @@ const ReviewsCard = ({ review }) => {
         color="text.secondary"
         sx={{
           mb: 2,
+          fontSize: {
+            xs: '14px',
+            md: '18px',
+          },
         }}
       >
         {' '}

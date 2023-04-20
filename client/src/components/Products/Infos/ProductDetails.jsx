@@ -111,7 +111,9 @@ const ProductDetails = () => {
                         height={300}
                         loading="lazy"
                       />
-                      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                      <Box
+                        sx={{ p: 1, display: 'flex', justifyContent: 'center' }}
+                      >
                         {product?.images.map((item, idx) => (
                           <img
                             key={idx}
