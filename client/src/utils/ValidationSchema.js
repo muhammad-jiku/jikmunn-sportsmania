@@ -34,6 +34,7 @@ export const userInfoSchema = object({
   phone: string()
     .nonempty('Phone number is required')
     .min(11, 'Phone number is not sufficient'),
+  city: string().nonempty('Please provide your city name'),
   address: string()
     .nonempty('Address is required')
     .min(10, 'Address is too short'),

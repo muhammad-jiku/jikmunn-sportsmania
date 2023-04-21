@@ -55,7 +55,7 @@ const Orders = () => {
       renderCell: (params) => {
         return (
           <>
-            {console.log(params)}
+            {/* {console.log(params)} */}
             <Link to={`/dashboard/myorders/${params.id}`}>
               <LaunchIcon />
             </Link>
@@ -88,11 +88,27 @@ const Orders = () => {
       {loading ? (
         <Loader />
       ) : (
-        <>
-          {console.log(orders)}
+        <Box
+          sx={{
+            p: 2,
+            // height: 400,
+            boxSizing: 'border-box',
+            width: {
+              xs: 'auto',
+              md: '70%',
+            },
+          }}
+        >
+          {/* {console.log(orders)} */}
           {orders ? (
             <>
-              <Box sx={{ height: 400, width: '100%', p: 2 }}>
+              <Box
+                sx={{
+                  p: 2,
+                  height: '100%',
+                  boxSizing: 'border-box',
+                }}
+              >
                 <Typography>{user?.name}'s Orders</Typography>
                 <DataGrid
                   rows={rows}
@@ -118,7 +134,7 @@ const Orders = () => {
               </Typography>{' '}
             </Box>
           )}
-        </>
+        </Box>
       )}
     </>
   );

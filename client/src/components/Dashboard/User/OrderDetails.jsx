@@ -28,7 +28,7 @@ const OrderDetails = () => {
           {order && (
             <>
               {console.log(order)}
-              <Box sx={{ p: 2 }}>
+              <Box sx={{ p: 2, width: '70%', boxSizing: 'border-box' }}>
                 <Box>
                   <Typography component="h1">
                     Order #{order && order?._id}

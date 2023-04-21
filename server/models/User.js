@@ -43,7 +43,22 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: String,
       // maxLength: [30, 'Phone cannot exceed 30 characters'],
-      minLength: [11, 'Phone should have more than 11 characters'],
+      minLength: [11, 'Invalid phone number'],
+    },
+    country: {
+      type: String,
+      maxLength: [100, 'Country name is exceeding its limit'],
+      minLength: [2, 'Invalid country name'],
+    },
+    state: {
+      type: String,
+      maxLength: [100, 'State name is exceeding its limit'],
+      minLength: [1, 'Invalid state name'],
+    },
+    city: {
+      type: String,
+      maxLength: [100, 'City name is exceeding its limit'],
+      minLength: [2, 'Invalid city name'],
     },
     address: {
       type: String,

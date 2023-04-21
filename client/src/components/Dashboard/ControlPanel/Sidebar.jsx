@@ -41,10 +41,12 @@ const Sidebar = () => {
     <Card
       variant="outlined"
       sx={{
-        paddingY: 2,
-        border: '1px solid',
+        // paddingY: 2,
+        borderRight: '3px solid',
+        borderRadius: 0,
         borderColor: 'primary.main',
         width: 280,
+        m: 0,
       }}
     >
       <CardContent

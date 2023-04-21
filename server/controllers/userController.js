@@ -199,12 +199,15 @@ const updateProfile = AsyncError(async (req, res, next) => {
   //   email,
   // };
 
-  const { name, phone, address, avatar } = await req.body;
+  const { name, avatar, phone, country, state, city, address } = await req.body;
 
   const updatedUserData = {
     name,
     avatar,
     phone,
+    country,
+    state,
+    city,
     address,
   };
 
