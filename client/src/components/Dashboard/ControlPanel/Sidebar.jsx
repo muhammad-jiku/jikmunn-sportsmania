@@ -12,24 +12,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import profile from '../../../assets/images/avatar_1.png';
 import { clearErrors } from '../../../actions/userAction';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
+import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SettingsIcon from '@mui/icons-material/Settings';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { useNavigate } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, error } = useSelector((state) => state.user);
-  // console.log(user);
-
-  //  First Capital Letter of the Name
-  const name = user?.name;
-  const firstLetter = name?.charAt(0);
-  const firstLetterCap = firstLetter?.toUpperCase();
-  const remainingLetters = name?.slice(1);
-  const capitalizedName = firstLetterCap + remainingLetters;
 
   useEffect(() => {
     if (error) {
@@ -38,145 +32,273 @@ const Sidebar = () => {
   }, [dispatch, error]);
 
   return (
-    <Card
-      variant="outlined"
-      sx={{
-        // paddingY: 2,
-        borderRight: '3px solid',
-        borderRadius: 0,
-        borderColor: 'primary.main',
-        width: 280,
-        m: 0,
-      }}
-    >
-      <CardContent
+    <>
+      {/* Desktop */}
+      <Card
+        variant="outlined"
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: {
+            xs: 'none',
+            md: 'block',
+          },
+          borderRight: '3px solid',
+          borderRadius: 0,
+          borderColor: 'primary.main',
+          width: 280,
+          m: 0,
         }}
       >
-        <Box
+        <CardContent
           sx={{
             display: 'flex',
-            p: 2,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          <Avatar
-            alt="Change Avatar"
-            title="Change Avatar"
-            src={user ? `${user?.avatar?.url}` : `${profile}`}
+          <Box
             sx={{
-              width: 135,
-              height: 135,
-              border: '1px solid',
-              borderColor: 'secondary',
-              cursor: 'pointer',
+              p: 2,
+              display: 'flex',
             }}
-          />
-        </Box>
+          >
+            <Avatar
+              alt="Change Avatar"
+              title="Change Avatar"
+              src={user ? `${user?.avatar?.url}` : `${profile}`}
+              sx={{
+                width: 135,
+                height: 135,
+                border: '1px solid',
+                borderColor: 'secondary',
+                cursor: 'pointer',
+              }}
+            />
+          </Box>
 
-        <Typography
-          sx={
-            {
-              // mb: 1.5,
-            }
-          }
-          variant="h6"
-          color="text.secondary"
-        >
-          {capitalizedName}
-          {/* {user?.name} */}
-        </Typography>
-        <Typography
-          sx={{
-            mb: 1.5,
-          }}
-          variant="h7"
-          color="text.secondary"
-        >
-          Joined On: {String(user?.createdAt).substr(0, 10)}
-        </Typography>
+          <Typography
+            sx={{
+              textTransform: 'capitalize',
+            }}
+            variant="h6"
+            color="text.secondary"
+          >
+            {user?.name}
+          </Typography>
+
+          <Typography
+            sx={{
+              mb: 1.5,
+            }}
+            variant="h7"
+            color="text.secondary"
+          >
+            Joined On: {String(user?.createdAt).substr(0, 10)}
+          </Typography>
+
+          <List>
+            <ListItem
+              disablePadding
+              sx={{
+                color: 'primary.main',
+                cursor: 'pointer',
+                pt: 1.5,
+              }}
+              onClick={() => navigate('/dashboard')}
+            >
+              <PersonIcon />
+              <Typography variant="span" sx={{ ml: 1 }}>
+                {' '}
+                My Account
+              </Typography>
+            </ListItem>
+
+            <ListItem
+              disablePadding
+              sx={{
+                color: 'primary.main',
+                cursor: 'pointer',
+                pt: 1.5,
+              }}
+              onClick={() => navigate('/dashboard/admin')}
+            >
+              <DashboardIcon />
+              <Typography variant="span" sx={{ ml: 1 }}>
+                {' '}
+                Dashboard
+              </Typography>
+            </ListItem>
+
+            <ListItem
+              disablePadding
+              sx={{
+                color: 'primary.main',
+                cursor: 'pointer',
+                pt: 1.5,
+              }}
+              onClick={() => navigate('/dashboard/admin/product/new')}
+            >
+              <AddCircleIcon />
+              <Typography variant="span" sx={{ ml: 1 }}>
+                {' '}
+                Add Product
+              </Typography>
+            </ListItem>
+
+            <ListItem
+              disablePadding
+              sx={{
+                color: 'primary.main',
+                cursor: 'pointer',
+                pt: 1.5,
+              }}
+              onClick={() => navigate('/dashboard/password/secure')}
+            >
+              <SettingsIcon />
+              <Typography variant="span" sx={{ ml: 1 }}>
+                {' '}
+                Settings
+              </Typography>
+            </ListItem>
+
+            <ListItem
+              disablePadding
+              sx={{
+                color: 'primary.main',
+                cursor: 'pointer',
+                pt: 1.5,
+              }}
+              onClick={() => navigate('/dashboard/myorders')}
+            >
+              <ShoppingCartIcon />
+              <Typography variant="span" sx={{ ml: 1 }}>
+                {' '}
+                My Orders
+              </Typography>
+            </ListItem>
+          </List>
+        </CardContent>
+      </Card>
+
+      {/* Mobile */}
+      <Box
+        sx={{
+          display: {
+            xs: 'block',
+            md: 'none',
+          },
+        }}
+      >
         <List>
-          <ListItem
-            disablePadding
-            sx={{
-              color: 'primary.main',
-              cursor: 'pointer',
-              pt: 1.5,
-            }}
-            onClick={() => navigate('/dashboard')}
-          >
-            <InsertEmoticonIcon />
-            <Typography variant="span" sx={{ ml: 1 }}>
+          <Swiper watchSlidesProgress={true} slidesPerView={3}>
+            <SwiperSlide>
               {' '}
-              My Account
-            </Typography>
-          </ListItem>
-          <ListItem
-            disablePadding
-            sx={{
-              color: 'primary.main',
-              cursor: 'pointer',
-              pt: 1.5,
-            }}
-            onClick={() => navigate('/dashboard/admin')}
-          >
-            <DashboardIcon />
-            <Typography variant="span" sx={{ ml: 1 }}>
+              <ListItem
+                disablePadding
+                sx={{
+                  color: 'primary.main',
+                  cursor: 'pointer',
+                  px: 0.5,
+                  py: 1.5,
+                  borderRight: '2px solid brown',
+                }}
+                onClick={() => navigate('/dashboard')}
+              >
+                <PersonIcon />
+                <Typography variant="span" sx={{ ml: 1, fontSize: '12px' }}>
+                  {' '}
+                  My Account
+                </Typography>
+              </ListItem>
+            </SwiperSlide>
+
+            <SwiperSlide>
               {' '}
-              Dashboard
-            </Typography>
-          </ListItem>
-          <ListItem
-            disablePadding
-            sx={{
-              color: 'primary.main',
-              cursor: 'pointer',
-              pt: 1.5,
-            }}
-            onClick={() => navigate('/dashboard/admin/product/new')}
-          >
-            <AddCircleIcon />
-            <Typography variant="span" sx={{ ml: 1 }}>
+              <ListItem
+                disablePadding
+                sx={{
+                  color: 'primary.main',
+                  cursor: 'pointer',
+                  px: 0.5,
+                  py: 1.5,
+                  borderRight: '2px solid brown',
+                }}
+                onClick={() => navigate('/dashboard/admin')}
+              >
+                <DashboardIcon />
+                <Typography variant="span" sx={{ ml: 1, fontSize: '12px' }}>
+                  {' '}
+                  Dashboard
+                </Typography>
+              </ListItem>
+            </SwiperSlide>
+
+            <SwiperSlide>
               {' '}
-              Add Product
-            </Typography>
-          </ListItem>
-          <ListItem
-            disablePadding
-            sx={{
-              color: 'primary.main',
-              cursor: 'pointer',
-              pt: 1.5,
-            }}
-            onClick={() => navigate('/dashboard/password/secure')}
-          >
-            <SettingsIcon />
-            <Typography variant="span" sx={{ ml: 1 }}>
+              <ListItem
+                disablePadding
+                sx={{
+                  color: 'primary.main',
+                  cursor: 'pointer',
+                  px: 0.5,
+                  py: 1.5,
+                  borderRight: '2px solid brown',
+                }}
+                onClick={() => navigate('/dashboard/admin/product/new')}
+              >
+                <AddCircleIcon />
+                <Typography variant="span" sx={{ ml: 1, fontSize: '12px' }}>
+                  {' '}
+                  Add Product
+                </Typography>
+              </ListItem>
+            </SwiperSlide>
+
+            <SwiperSlide>
               {' '}
-              Settings
-            </Typography>
-          </ListItem>
-          <ListItem
-            disablePadding
-            sx={{
-              color: 'primary.main',
-              cursor: 'pointer',
-              pt: 1.5,
-            }}
-            onClick={() => navigate('/dashboard/myorders')}
-          >
-            <ShoppingCartIcon />
-            <Typography variant="span" sx={{ ml: 1 }}>
+              <ListItem
+                disablePadding
+                sx={{
+                  color: 'primary.main',
+                  cursor: 'pointer',
+                  px: 0.5,
+                  py: 1.5,
+                  borderRight: '2px solid brown',
+                }}
+                onClick={() => navigate('/dashboard/password/secure')}
+              >
+                <SettingsIcon />
+                <Typography variant="span" sx={{ ml: 1, fontSize: '12px' }}>
+                  {' '}
+                  Settings
+                </Typography>
+              </ListItem>
+            </SwiperSlide>
+
+            <SwiperSlide>
               {' '}
-              My Orders
-            </Typography>
-          </ListItem>
+              <ListItem
+                disablePadding
+                sx={{
+                  color: 'primary.main',
+                  cursor: 'pointer',
+                  px: 0.5,
+                  py: 1.5,
+                  // borderRight: '2px solid brown',
+                }}
+                onClick={() => navigate('/dashboard/myorders')}
+              >
+                <ShoppingCartIcon />
+                <Typography variant="span" sx={{ ml: 1, fontSize: '12px' }}>
+                  {' '}
+                  My Orders
+                </Typography>
+              </ListItem>
+            </SwiperSlide>
+          </Swiper>
         </List>
-      </CardContent>
-    </Card>
+      </Box>
+    </>
   );
 };
 

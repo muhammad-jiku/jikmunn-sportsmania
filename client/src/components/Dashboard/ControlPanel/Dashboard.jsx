@@ -7,10 +7,11 @@ const Dashboard = () => {
   return (
     <Box
       sx={{
-        // p: 2,
         display: 'flex',
-        // justifyContent: 'space-between',
-        // width: 480,
+        flexDirection: {
+          xs: 'column',
+          md: 'row',
+        },
       }}
     >
       <Sidebar />
