@@ -1,6 +1,6 @@
 export { default as Dashboard } from './ControlPanel/Dashboard';
 export { default as Profile } from './Profile/Profile';
-export { default as SecureProfile } from './Settings/SecureProfile';
+export { default as SecureProfile } from './Shield/SecureProfile';
 export { default as AdminPanel } from './Admin/Summary/AdminPanel';
 export { default as AllUsers } from './Admin/ManageUsers/AllUsers';
 export { default as UpdateUser } from './Admin/ManageUsers/UpdateUser';

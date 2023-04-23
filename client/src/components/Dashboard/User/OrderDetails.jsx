@@ -3,7 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { clearErrors, getOrderDetails } from '../../../actions/orderAction';
 import { ErrorNotFound, Loader } from '../../Shared';
-import { Box, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Divider,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import PhoneIcon from '@mui/icons-material/Phone';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -28,97 +39,226 @@ const OrderDetails = () => {
           {order && (
             <>
               {console.log(order)}
-              <Box sx={{ p: 2, width: '70%', boxSizing: 'border-box' }}>
-                <Box>
-                  <Typography component="h1">
-                    Order #{order && order?._id}
+              <Box
+                sx={{
+                  p: 2,
+                  width: {
+                    xs: 'auto',
+                    md: '70%',
+                  },
+                  boxSizing: 'border- box',
+                }}
+              >
+                {/* Order Id */}
+                <Box sx={{ py: 2, my: 2, boxSizing: 'border-box' }}>
+                  <Typography
+                    variant="span"
+                    sx={{
+                      p: 2,
+                      mr: 2,
+                      fontSize: '14px',
+                      borderRadius: '50px',
+                      // backgroundColor: 'lightgray',
+                      backgroundColor: '#f2f2f2',
+                    }}
+                  >
+                    Order{' '}
+                    <Typography variant="span" color="primary.main">
+                      #{order && order?._id?.slice(0, 5)}
+                    </Typography>
                   </Typography>
-                  <Typography>Shipping Info</Typography>
-                  <Box>
-                    <Box>
-                      <Typography variant="p">Name:</Typography>
-                      <Typography variant="span">
-                        {order?.user && order?.user.name}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography variant="p">Phone:</Typography>
-                      <Typography variant="span">
-                        {order?.shippingInfo && order?.shippingInfo.phoneNo}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography variant="p">Address:</Typography>
-                      <Typography variant="span">
-                        {order?.shippingInfo &&
-                          `${order?.shippingInfo.address}, ${order?.shippingInfo.city}, ${order?.shippingInfo.state}, ${order?.shippingInfo.pinCode}, ${order?.shippingInfo.country}`}
-                      </Typography>
-                    </Box>
+                  <Typography
+                    variant="span"
+                    sx={{
+                      color: 'gray',
+                      fontSize: '12px',
+                    }}
+                  >
+                    Order Placed: {String(order?.createdAt).substr(0, 10)}
+                  </Typography>
+                </Box>
+                <Divider />
+
+                {/*  Shipment Details */}
+                <Box sx={{ py: 2, my: 2, boxSizing: 'border-box' }}>
+                  {/* Title */}
+                  <Box sx={{ mb: 1 }}>
+                    <Typography
+                      variant="p"
+                      sx={{ fontSize: '24px', fontWeight: 800 }}
+                    >
+                      Shipment Info
+                    </Typography>
                   </Box>
-                  <Typography>Payment</Typography>
-                  <Box>
-                    <Box>
-                      <Typography
-                        variant="p"
-                        color={
+                  {/*  Name & Phone */}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: {
+                        xs: 'column',
+                        sm: 'row',
+                      },
+                    }}
+                  >
+                    <TextField
+                      fullWidth
+                      variant="standard"
+                      defaultValue={order?.user && order?.user?.name}
+                      InputProps={{
+                        readOnly: true,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PersonIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                      sx={{ m: 0.5 }}
+                    />
+                    <TextField
+                      fullWidth
+                      variant="standard"
+                      defaultValue={
+                        order?.shippingInfo && order?.shippingInfo?.phoneNo
+                      }
+                      InputProps={{
+                        readOnly: true,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PhoneIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                      sx={{ m: 0.5 }}
+                    />
+                  </Box>
+                  {/*  Address */}
+                  <Box sx={{ my: 1 }}>
+                    <TextField
+                      fullWidth
+                      variant="standard"
+                      defaultValue={
+                        order?.shippingInfo &&
+                        `${order?.shippingInfo?.address}, ${order?.shippingInfo?.city}, ${order?.shippingInfo?.state}, ${order?.shippingInfo?.pinCode}, ${order?.shippingInfo?.country}`
+                      }
+                      InputProps={{
+                        readOnly: true,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <LocationOnIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                      sx={{ m: 0.5 }}
+                    />
+                  </Box>
+                  {/*  Total Amount */}
+                  <Box sx={{ my: 1 }}>
+                    <TextField
+                      fullWidth
+                      variant="standard"
+                      defaultValue={order?.totalPrice && order?.totalPrice}
+                      InputProps={{
+                        readOnly: true,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <AttachMoneyIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                      sx={{ m: 0.5 }}
+                    />
+                  </Box>
+                  {/*  Payment & Order Status */}
+                  <Box sx={{ mt: 1, pt: 2 }}>
+                    <Button
+                      sx={{
+                        px: 2,
+                        py: 1,
+                        mr: 2,
+                        fontWeight: 800,
+                        borderRadius: '25px',
+                        backgroundColor: '#f2f2f2',
+                        color:
                           order?.paymentInfo &&
                           order?.paymentInfo?.status === 'succeeded'
                             ? 'green'
-                            : 'red'
-                        }
-                      >
-                        {order?.paymentInfo &&
-                        order?.paymentInfo?.status === 'succeeded'
-                          ? 'PAID'
-                          : 'NOT PAID'}
-                      </Typography>
-                    </Box>
-
-                    <Box>
-                      <Typography variant="p">Amount:</Typography>
-                      <Typography variant="span">
-                        {order?.totalPrice && order?.totalPrice}
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  <Typography>Order Status</Typography>
-                  <Box>
-                    <Box>
-                      <Typography
-                        variant="p"
-                        color={
+                            : 'red',
+                      }}
+                    >
+                      {order?.paymentInfo &&
+                      order?.paymentInfo?.status === 'succeeded'
+                        ? 'PAID'
+                        : 'NOT PAID'}
+                    </Button>
+                    <Button
+                      sx={{
+                        px: 2,
+                        py: 1,
+                        mr: 2,
+                        fontWeight: 800,
+                        borderRadius: '25px',
+                        backgroundColor: '#f2f2f2',
+                        color:
                           order?.orderStatus &&
                           order?.orderStatus === 'Delivered'
                             ? 'green'
-                            : 'red'
-                        }
-                      >
-                        {order?.orderStatus && order?.orderStatus}
-                      </Typography>
-                    </Box>
+                            : 'red',
+                      }}
+                    >
+                      {order?.orderStatus && order?.orderStatus}
+                    </Button>
                   </Box>
                 </Box>
+                <Divider />
 
-                <Box>
-                  <Typography>Order Items:</Typography>
-                  <Box>
-                    {order?.orderItems &&
-                      order?.orderItems.map((item) => (
-                        <Box key={item?.product}>
-                          <img src={item?.image} alt="Product" width={225} />
-                          <Link to={`/product/${item?.product}`}>
+                {/*  Order Items */}
+                <Box sx={{ p: 2, my: 2, boxSizing: 'border-box' }}>
+                  {order?.orderItems &&
+                    order?.orderItems.map((item) => (
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        <Box
+                          key={item?.product}
+                          sx={{
+                            my: 0.5,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <img
+                            src={item?.image}
+                            alt="Product"
+                            height={55}
+                            style={{ marginRight: '5px' }}
+                          />
+                          <Link
+                            to={`/product/${item?.product}`}
+                            style={{
+                              color: 'black',
+                              textDecoration: 'none',
+                              textTransform: 'capitalize',
+                            }}
+                          >
                             {item?.name}
                           </Link>
+                        </Box>
+                        <Box>
                           <Typography variant="span">
                             {item?.quantity} X ${item?.price} =
-                            <Typography variant="h7">
+                            <Typography variant="span">
+                              {' '}
                               ${item?.price * item?.quantity}
                             </Typography>
                           </Typography>
                         </Box>
-                      ))}
-                  </Box>
+                      </Box>
+                    ))}
                 </Box>
               </Box>
             </>

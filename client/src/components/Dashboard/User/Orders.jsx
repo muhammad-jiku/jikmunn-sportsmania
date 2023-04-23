@@ -10,7 +10,6 @@ import LaunchIcon from '@mui/icons-material/Launch';
 const Orders = () => {
   const dispatch = useDispatch();
   const { loading, error, orders } = useSelector((state) => state.myOrders);
-  const { user } = useSelector((state) => state.user);
 
   const columns = [
     {
@@ -30,8 +29,8 @@ const Orders = () => {
       },
     },
     {
-      field: 'itemsQty',
-      headerName: 'Items Qty',
+      field: 'itemsQuantity',
+      headerName: 'Items Quantity',
       type: 'number',
       minWidth: 150,
       flex: 0.3,
@@ -69,7 +68,7 @@ const Orders = () => {
   orders &&
     orders.forEach((item, index) => {
       rows.push({
-        itemsQty: item?.orderItems?.length,
+        itemsQuantity: item?.orderItems?.length,
         id: item?._id,
         status: item?.orderStatus,
         amount: item?.totalPrice,
@@ -91,7 +90,8 @@ const Orders = () => {
         <Box
           sx={{
             p: 2,
-            // height: 400,
+            height: 500,
+            minHeight: '100vh',
             boxSizing: 'border-box',
             width: {
               xs: 'auto',
@@ -99,7 +99,6 @@ const Orders = () => {
             },
           }}
         >
-          {/* {console.log(orders)} */}
           {orders ? (
             <>
               <Box
@@ -107,9 +106,15 @@ const Orders = () => {
                   p: 2,
                   height: '100%',
                   boxSizing: 'border-box',
+                  // display: 'flex',
+                  // flexDirection: 'column',
+                  // justifyContent: 'center',
+                  // alignItems: 'center',
                 }}
               >
-                <Typography>{user?.name}'s Orders</Typography>
+                <Typography>
+                  Your {orders?.length === 1 ? 'Order' : 'Orders'}
+                </Typography>
                 <DataGrid
                   rows={rows}
                   columns={columns}
