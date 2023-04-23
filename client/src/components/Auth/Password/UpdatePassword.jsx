@@ -20,7 +20,10 @@ import { updatePasswordSchema } from '../../../utils/ValidationSchema';
 
 const UpdatePassword = () => {
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
+  const { error, isUpdated, loading } = useSelector((state) => state.profile);
+
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -34,8 +37,6 @@ const UpdatePassword = () => {
     e.preventDefault();
   };
 
-  const { error, isUpdated, loading } = useSelector((state) => state.profile);
-
   const {
     register,
     formState: { errors, isSubmitSuccessful },
@@ -47,9 +48,9 @@ const UpdatePassword = () => {
 
   const onSubmitHandler = (values) => {
     const passwordsInfo = {
-      oldPassword: values.oldPassword,
-      newPassword: values.newPassword,
-      passwordConfirm: values.passwordConfirm,
+      oldPassword: values?.oldPassword,
+      newPassword: values?.newPassword,
+      passwordConfirm: values?.passwordConfirm,
     };
     dispatch(updatePassword(passwordsInfo));
   };
@@ -85,11 +86,16 @@ const UpdatePassword = () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            // alignItems: 'center',
+            alignItems: 'center',
           }}
         >
-          <Typography variant="h6" color="primary" textAlign="center">
-            Update Password
+          <Typography
+            variant="p"
+            color="primary"
+            textAlign="center"
+            sx={{ fontWeight: 800 }}
+          >
+            Secure profile by updating your password
           </Typography>
 
           <Box

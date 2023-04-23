@@ -14,7 +14,7 @@ import { clearErrors } from '../../../actions/userAction';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import SettingsIcon from '@mui/icons-material/Settings';
+import SecurityIcon from '@mui/icons-material/Security';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -109,7 +109,7 @@ const Sidebar = () => {
               <PersonIcon />
               <Typography variant="span" sx={{ ml: 1 }}>
                 {' '}
-                My Account
+                My Profile
               </Typography>
             </ListItem>
 
@@ -154,10 +154,10 @@ const Sidebar = () => {
               }}
               onClick={() => navigate('/dashboard/password/secure')}
             >
-              <SettingsIcon />
+              <SecurityIcon />
               <Typography variant="span" sx={{ ml: 1 }}>
                 {' '}
-                Settings
+                Profile Shield
               </Typography>
             </ListItem>
 
@@ -205,9 +205,12 @@ const Sidebar = () => {
                 onClick={() => navigate('/dashboard')}
               >
                 <PersonIcon />
-                <Typography variant="span" sx={{ ml: 1, fontSize: '12px' }}>
+                <Typography
+                  variant="span"
+                  sx={{ ml: 1, fontSize: '12px', fontWeight: 900 }}
+                >
                   {' '}
-                  My Account
+                  My Profile
                 </Typography>
               </ListItem>
             </SwiperSlide>
@@ -226,7 +229,10 @@ const Sidebar = () => {
                 onClick={() => navigate('/dashboard/admin')}
               >
                 <DashboardIcon />
-                <Typography variant="span" sx={{ ml: 1, fontSize: '12px' }}>
+                <Typography
+                  variant="span"
+                  sx={{ ml: 1, fontSize: '12px', fontWeight: 900 }}
+                >
                   {' '}
                   Dashboard
                 </Typography>
@@ -247,7 +253,10 @@ const Sidebar = () => {
                 onClick={() => navigate('/dashboard/admin/product/new')}
               >
                 <AddCircleIcon />
-                <Typography variant="span" sx={{ ml: 1, fontSize: '12px' }}>
+                <Typography
+                  variant="span"
+                  sx={{ ml: 1, fontSize: '12px', fontWeight: 900 }}
+                >
                   {' '}
                   Add Product
                 </Typography>
@@ -264,13 +273,18 @@ const Sidebar = () => {
                   px: 0.5,
                   py: 1.5,
                   borderRight: '2px solid brown',
+                  // width: '150px',
+                  // mr: 2,
                 }}
                 onClick={() => navigate('/dashboard/password/secure')}
               >
-                <SettingsIcon />
-                <Typography variant="span" sx={{ ml: 1, fontSize: '12px' }}>
+                <SecurityIcon />
+                <Typography
+                  variant="span"
+                  sx={{ ml: 1, fontSize: '12px', fontWeight: 900 }}
+                >
                   {' '}
-                  Settings
+                  Profile Shield
                 </Typography>
               </ListItem>
             </SwiperSlide>
@@ -289,7 +303,10 @@ const Sidebar = () => {
                 onClick={() => navigate('/dashboard/myorders')}
               >
                 <ShoppingCartIcon />
-                <Typography variant="span" sx={{ ml: 1, fontSize: '12px' }}>
+                <Typography
+                  variant="span"
+                  sx={{ ml: 1, fontSize: '12px', fontWeight: 900 }}
+                >
                   {' '}
                   My Orders
                 </Typography>
