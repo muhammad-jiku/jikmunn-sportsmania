@@ -105,8 +105,54 @@ const Registration = ({ setAuthProcess }) => {
   }, [dispatch, error, isAuthenticated, navigate, from]);
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: {
+          xs: 'column',
+          md: 'row',
+        },
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <Box
+        sx={{
+          py: 2,
+          mx: 2,
+          mb: {
+            xs: 0,
+            md: 8,
+          },
+          boxSizing: 'border-box',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+        }}
+      >
+        <Typography
+          variant="span"
+          color="primary.main"
+          sx={{ fontSize: '32px', fontWeight: 900 }}
+        >
+          Hello there!
+        </Typography>
+        <Typography
+          variant="span"
+          textAlign="justify"
+          sx={{ fontSize: '18px', fontWeight: 700 }}
+        >
+          Welcome to{' '}
+          <Typography variant="span" color="primary.main">
+            Sports Mania
+          </Typography>{' '}
+          Online Shop. Here you can find your lovable and desirable sports
+          product. Please Create an account to enjoy your time here!
+        </Typography>
+      </Box>
+      <Box
+        sx={{ py: 2 }}
         component="form"
         noValidate
         autoComplete="off"
@@ -190,6 +236,7 @@ const Registration = ({ setAuthProcess }) => {
             />
           </IconButton> */}
         </Box>
+
         <TextField
           sx={{ mb: 2 }}
           label="Name"
@@ -276,7 +323,11 @@ const Registration = ({ setAuthProcess }) => {
             }
             {...register('terms')}
             label={
-              <Typography color={errors['terms'] ? 'error' : 'inherit'}>
+              <Typography
+                color={errors['terms'] ? 'error' : 'inherit'}
+                variant="span"
+                sx={{ fontSize: '14px', fontWeight: 700 }}
+              >
                 Accept Terms and Conditions
               </Typography>
             }
@@ -296,14 +347,16 @@ const Registration = ({ setAuthProcess }) => {
         </Button>
         <Typography
           sx={{
-            m: 1.5,
+            mt: 1.5,
+            fontSize: '14px',
+            fontWeight: 700,
             display: 'flex',
             justifyContent: 'center',
           }}
           variant="span"
           color="text.secondary"
         >
-          Already have an accout?
+          Already have an account?
           <Typography
             variant="span"
             color="primary"

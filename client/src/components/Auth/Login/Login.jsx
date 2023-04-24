@@ -216,6 +216,7 @@ const Login = ({ setAuthProcess }) => {
         <Typography
           sx={{
             mt: 1.5,
+            fontSize: '14px',
             fontWeight: 700,
             display: 'flex',
             justifyContent: 'center',
