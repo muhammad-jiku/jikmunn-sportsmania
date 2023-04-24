@@ -90,8 +90,6 @@ const Orders = () => {
         <Box
           sx={{
             p: 2,
-            height: 500,
-            minHeight: '100vh',
             boxSizing: 'border-box',
             width: {
               xs: 'auto',
@@ -108,7 +106,6 @@ const Orders = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                // alignItems: 'center',
               }}
             >
               <Typography

@@ -11,12 +11,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
 import { DELETE_PRODUCT_RESET } from '../../../../constants/productConstant';
+import { Loader } from '../../../Shared';
 
 const AllProducts = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { error, products } = useSelector((state) => state.products);
+  const { loading, error, products } = useSelector((state) => state.products);
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.product
   );
@@ -133,21 +134,51 @@ const AllProducts = () => {
 
   return (
     <>
-      <Box>
-        <Box>
-          <Typography variant="h6" id="productListHeading">
-            ALL PRODUCTS
-          </Typography>
+      {' '}
+      {loading ? (
+        <Loader />
+      ) : (
+        <Box
+          sx={{
+            p: 2,
+            boxSizing: 'border-box',
+            width: {
+              xs: 'auto',
+              md: '70%',
+            },
+          }}
+        >
+          {products && (
+            <Box
+              sx={{
+                p: 2,
+                height: '100%',
+                boxSizing: 'border-box',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <Typography
+                variant="p"
+                color="primary.main"
+                textAlign="center"
+                sx={{ fontSize: '22px', fontWeight: 900 }}
+              >
+                List of All Products
+              </Typography>
 
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            autoHeight
-          />
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={10}
+                disableSelectionOnClick
+                autoHeight
+              />
+            </Box>
+          )}
         </Box>
-      </Box>
+      )}
     </>
   );
 };
