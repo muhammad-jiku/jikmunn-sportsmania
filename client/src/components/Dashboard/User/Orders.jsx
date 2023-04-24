@@ -100,42 +100,40 @@ const Orders = () => {
           }}
         >
           {orders ? (
-            <>
-              <Box
-                sx={{
-                  p: 2,
-                  height: '100%',
-                  boxSizing: 'border-box',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  // alignItems: 'center',
-                }}
+            <Box
+              sx={{
+                p: 2,
+                height: '100%',
+                boxSizing: 'border-box',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                // alignItems: 'center',
+              }}
+            >
+              <Typography
+                variant="p"
+                color="primary.main"
+                textAlign="center"
+                sx={{ fontSize: '22px', fontWeight: 900 }}
               >
-                <Typography
-                  variant="p"
-                  color="primary.main"
-                  textAlign="center"
-                  sx={{ fontSize: '22px', fontWeight: 900 }}
-                >
-                  Your {orders?.length === 1 ? 'Order' : 'Orders'}
-                </Typography>
-                <DataGrid
-                  rows={rows}
-                  columns={columns}
-                  initialState={{
-                    pagination: {
-                      paginationModel: {
-                        pageSize: 5,
-                      },
+                Your {orders?.length === 1 ? 'Order' : 'Orders'}
+              </Typography>
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: {
+                      pageSize: 5,
                     },
-                  }}
-                  pageSizeOptions={[5]}
-                  checkboxSelection
-                  disableRowSelectionOnClick
-                />
-              </Box>
-            </>
+                  },
+                }}
+                pageSizeOptions={[5]}
+                checkboxSelection
+                disableRowSelectionOnClick
+              />
+            </Box>
           ) : (
             <Box sx={{ p: 2 }}>
               <Typography textAlign="center" color="red">
