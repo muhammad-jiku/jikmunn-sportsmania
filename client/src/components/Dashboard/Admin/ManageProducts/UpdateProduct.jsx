@@ -7,10 +7,17 @@ import {
   updateProduct,
 } from '../../../../actions/productAction';
 import { UPDATE_PRODUCT_RESET } from '../../../../constants/productConstant';
-import { Box, Button, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  InputAdornment,
+  MenuItem,
+  TextField,
+  Typography,
+} from '@mui/material';
 import SpellcheckIcon from '@mui/icons-material/Spellcheck';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import DescriptionIcon from '@mui/icons-material/Description';
+import HeightIcon from '@mui/icons-material/Height';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import StorageIcon from '@mui/icons-material/Storage';
 import { Loader } from '../../../Shared';
@@ -28,13 +35,16 @@ const UpdateProduct = () => {
     isUpdated,
   } = useSelector((state) => state.product);
 
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
-  const [stock, setStock] = useState(0);
-  const [images, setImages] = useState([]);
+  const [name, setName] = useState(product ? product?.name : '');
+  const [price, setPrice] = useState(product ? product?.price : 0);
+  const [description, setDescription] = useState(
+    product ? product?.description : ''
+  );
+  const [category, setCategory] = useState(product ? product?.category : '');
+  const [size, setSize] = useState(product ? product?.size : '');
+  const [stock, setStock] = useState(product ? product?.stock : 0);
   const [oldImages, setOldImages] = useState([]);
+  const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
@@ -47,16 +57,19 @@ const UpdateProduct = () => {
     'Swimming',
   ];
 
+  const sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+
   useEffect(() => {
-    if (product && product._id !== id) {
+    if (product && product?._id !== id) {
       dispatch(getProductDetails(id));
     } else {
-      setName(product.name);
-      setDescription(product.description);
-      setPrice(product.price);
-      setCategory(product.category);
-      setStock(product.stock);
-      setOldImages(product.images);
+      setName(product?.name);
+      setPrice(product?.price);
+      setDescription(product?.description);
+      setCategory(product?.category);
+      setSize(product?.size);
+      setStock(product?.stock);
+      setOldImages(product?.images);
     }
     if (error) {
       dispatch(clearErrors());
@@ -83,6 +96,7 @@ const UpdateProduct = () => {
     myForm.set('price', price);
     myForm.set('description', description);
     myForm.set('category', category);
+    myForm.set('size', size);
     myForm.set('stock', stock);
 
     images.forEach((image) => {
@@ -114,119 +128,276 @@ const UpdateProduct = () => {
 
   return (
     <>
-      <Box>
-        {loading ? (
-          <Loader />
-        ) : (
-          <>
-            {product && (
-              <Box>
-                {/* {console.log(product)} */}
-                <form
-                  // encType="multipart/form-data"
-                  onSubmit={updateProductSubmitHandler}
+      {loading ? (
+        <Loader />
+      ) : (
+        <Box
+          sx={{
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: {
+              xs: 'auto',
+              md: '70%',
+            },
+          }}
+        >
+          {product && (
+            <>
+              <Typography
+                variant="p"
+                color="primary"
+                textAlign="center"
+                sx={{
+                  mt: 2,
+                  fontSize: '24px',
+                  fontWeight: 800,
+                }}
+              >
+                Update {product?.name}
+              </Typography>
+
+              <Box
+                sx={{
+                  p: 2,
+                  ml: {
+                    xs: 0,
+                    md: 6,
+                  },
+                }}
+                component="form"
+                noValidate
+                autoComplete="off"
+                // encType="multipart/form-data"
+                onSubmit={updateProductSubmitHandler}
+              >
+                {/* Name */}
+                <TextField
+                  sx={{ mt: 0.5 }}
+                  label="Name"
+                  fullWidth
+                  required
+                  type="text"
+                  placeholder="Name"
+                  defaultValue={name}
+                  onChange={(e) => setName(e.target.value)}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SpellcheckIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+
+                {/*  Price */}
+                <TextField
+                  sx={{ mt: 2, pt: 1 }}
+                  label="Price"
+                  fullWidth
+                  required
+                  type="number"
+                  placeholder="Price"
+                  defaultValue={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AttachMoneyIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+
+                {/*  Desc */}
+                <TextField
+                  sx={{ mt: 2, pt: 1 }}
+                  multiline
+                  rows={3}
+                  fullWidth
+                  required
+                  label={'Description'}
+                  placeholder="Description"
+                  defaultValue={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+
+                {/*  Category */}
+                <TextField
+                  sx={{ mt: 2, pt: 1 }}
+                  select
+                  fullWidth
+                  label="Category"
+                  placeholder="Category"
+                  required
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AccountTreeIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 >
-                  <Typography variant="h6">Update Product</Typography>
-
-                  <Box>
-                    <SpellcheckIcon />
-                    <input
-                      type="text"
-                      placeholder="Product Name"
-                      required
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </Box>
-                  <Box>
-                    <AttachMoneyIcon />
-                    <input
-                      type="number"
-                      placeholder="Price"
-                      required
-                      onChange={(e) => setPrice(e.target.value)}
-                      value={price}
-                    />
-                  </Box>
-
-                  <Box>
-                    <DescriptionIcon />
-
-                    <textarea
-                      placeholder="Product Description"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      cols="30"
-                      rows="1"
-                    ></textarea>
-                  </Box>
-
-                  <Box>
-                    <AccountTreeIcon />
-                    <select
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
+                  {categories.map((cate) => (
+                    <MenuItem
+                      key={cate}
+                      value={cate}
+                      label={'Category'}
+                      placeholder={'Category'}
                     >
-                      <option value="">Choose Category</option>
-                      {categories.map((cate) => (
-                        <option key={cate} value={cate}>
-                          {cate}
-                        </option>
-                      ))}
-                    </select>
-                  </Box>
+                      {cate || 'Choose Category'}
+                    </MenuItem>
+                  ))}
 
-                  <Box>
-                    <StorageIcon />
-                    <input
-                      type="number"
-                      placeholder="Stock"
-                      required
-                      onChange={(e) => setStock(e.target.value)}
-                      value={stock}
-                    />
-                  </Box>
+                  {/* <option value="">Choose Category</option>
+          {categories.map((cate) => (
+            <option key={cate} value={cate}>
+              {cate}
+            </option>
+          ))} */}
+                </TextField>
 
-                  <Box id="createProductFormFile">
-                    <input
-                      type="file"
-                      name="avatar"
-                      accept="image/*"
-                      onChange={updateProductImagesChange}
-                      multiple
-                    />
-                  </Box>
+                {/*  Size */}
+                <TextField
+                  sx={{ mt: 2, pt: 1 }}
+                  select
+                  fullWidth
+                  label="Size"
+                  placeholder="Size"
+                  required
+                  value={size}
+                  onChange={(e) => setSize(e.target.value)}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <HeightIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                >
+                  {sizes.map((sz) => (
+                    <MenuItem
+                      key={sz}
+                      value={sz}
+                      label="Size"
+                      placeholder="Size"
+                    >
+                      {sz || 'Choose Size'}
+                    </MenuItem>
+                  ))}
 
-                  <Box id="createProductFormImage">
+                  {/* <option value="">Choose Category</option>
+          {categories.map((cate) => (
+            <option key={cate} value={cate}>
+              {cate}
+            </option>
+          ))} */}
+                </TextField>
+
+                {/*  Stock */}
+                <TextField
+                  sx={{ mt: 2, pt: 1 }}
+                  label="Stock"
+                  fullWidth
+                  required
+                  type="number"
+                  placeholder="Stock"
+                  defaultValue={stock}
+                  onChange={(e) => setStock(e.target.value)}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <StorageIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+
+                {/*  Product Images */}
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      p: 2,
+                      mt: 2,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
                     {oldImages &&
-                      oldImages.map((image, index) => (
+                      oldImages?.map((image, index) => (
                         <img
                           key={index}
-                          src={image.url}
+                          src={image?.url}
                           alt="Old Product Preview"
+                          height={50}
                         />
                       ))}
-                  </Box>
 
-                  <Box id="createProductFormImage">
-                    {imagesPreview.map((image, index) => (
-                      <img key={index} src={image} alt="Product Preview" />
+                    {imagesPreview?.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        alt="Product Preview"
+                        height={50}
+                      />
                     ))}
                   </Box>
 
                   <Button
-                    id="createProductBtn"
-                    type="submit"
-                    disabled={loading ? true : false}
+                    variant="outlined"
+                    component="label"
+                    fullWidth
+                    sx={{
+                      p: 1.8,
+                      mt: 2,
+                      cursor: 'pointer',
+                    }}
                   >
-                    Update
+                    Choose Product Images
+                    <input
+                      type="file"
+                      id="avatar"
+                      name="avatar"
+                      accept="image/*"
+                      onChange={updateProductImagesChange}
+                      hidden
+                      multiple
+                    />
                   </Button>
-                </form>
+                  {/* <input
+                    type="file"
+                    name="avatar"
+                    accept="image/*"
+                    onChange={updateProductImagesChange}
+                    multiple
+                  /> */}
+                </Box>
+
+                <Button
+                  sx={{ p: 1, mt: 2 }}
+                  fullWidth
+                  variant="contained"
+                  type="submit"
+                  disabled={loading ? true : false}
+                >
+                  Update
+                </Button>
               </Box>
-            )}
-          </>
-        )}
-      </Box>
+            </>
+          )}
+        </Box>
+      )}
     </>
   );
 };
