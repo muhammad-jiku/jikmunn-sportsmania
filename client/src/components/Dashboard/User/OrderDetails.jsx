@@ -17,6 +17,10 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const OrderDetails = () => {
+  const futureDate = new Date(
+    Date.now() + 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 10
+  );
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const { order, error, loading } = useSelector((state) => state.orderDetails);
@@ -207,6 +211,21 @@ const OrderDetails = () => {
                     >
                       {order?.orderStatus && order?.orderStatus}
                     </Button>
+                    {order?.orderStatus === 'Shipped' && (
+                      <Box sx={{ pt: 2 }}>
+                        <Typography
+                          variant="span"
+                          sx={{
+                            my: 2,
+                            color: 'gray',
+                            fontSize: '12px',
+                          }}
+                        >
+                          Will be delivered on:{' '}
+                          {String(futureDate).substr(0, 10)}
+                        </Typography>
+                      </Box>
+                    )}
                   </Box>
                 </Box>
                 <Divider />
