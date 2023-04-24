@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   clearErrors,
@@ -19,6 +19,8 @@ const AllOrders = () => {
 
   const { loading, error, orders } = useSelector((state) => state.allOrders);
   const { error: deleteError, isDeleted } = useSelector((state) => state.order);
+
+  const [pageSize, setPageSize] = useState(5);
 
   const deleteOrderHandler = (id) => {
     dispatch(deleteOrder(id));
@@ -132,7 +134,8 @@ const AllOrders = () => {
             <Box
               sx={{
                 p: 2,
-                height: '100%',
+                // height: '100%',
+                height: 500,
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: 'column',
@@ -150,9 +153,11 @@ const AllOrders = () => {
               <DataGrid
                 rows={rows}
                 columns={columns}
-                pageSize={10}
+                // pageSize={10}
                 disableSelectionOnClick
-                autoHeight
+                // autoHeight
+                pageSize={pageSize}
+                onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
               />
             </Box>
           ) : (

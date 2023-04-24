@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   clearErrors,
@@ -23,6 +23,8 @@ const AllUsers = () => {
     isDeleted,
     message,
   } = useSelector((state) => state.profile);
+
+  const [pageSize, setPageSize] = useState(5);
 
   const deleteUserHandler = (id) => {
     dispatch(deleteUser(id));
@@ -135,7 +137,8 @@ const AllUsers = () => {
             <Box
               sx={{
                 p: 2,
-                height: '100%',
+                // height: '100%',
+                height: 500,
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: 'column',
@@ -150,13 +153,14 @@ const AllUsers = () => {
               >
                 List of All Users
               </Typography>
-
               <DataGrid
                 rows={rows}
                 columns={columns}
-                pageSize={10}
+                // pageSize={10}
                 disableSelectionOnClick
-                autoHeight
+                // autoHeight
+                pageSize={pageSize}
+                onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
               />
             </Box>
           )}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, myOrders } from '../../../actions/orderAction';
 import { Loader } from '../../Shared';
@@ -10,6 +10,8 @@ import LaunchIcon from '@mui/icons-material/Launch';
 const Orders = () => {
   const dispatch = useDispatch();
   const { loading, error, orders } = useSelector((state) => state.myOrders);
+
+  const [pageSize, setPageSize] = useState(5);
 
   const columns = [
     {
@@ -101,7 +103,8 @@ const Orders = () => {
             <Box
               sx={{
                 p: 2,
-                height: '100%',
+                // height: '100%',
+                height: 500,
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: 'column',
@@ -129,6 +132,11 @@ const Orders = () => {
                 pageSizeOptions={[5]}
                 checkboxSelection
                 disableRowSelectionOnClick
+                // pageSize={10}
+                disableSelectionOnClick
+                // autoHeight
+                pageSize={pageSize}
+                onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
               />
             </Box>
           ) : (

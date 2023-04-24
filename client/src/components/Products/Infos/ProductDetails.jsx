@@ -105,7 +105,7 @@ const ProductDetails = () => {
                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                       <img
                         // src={item?.url}
-                        src={selectedImage}
+                        src={selectedImage || product?.images[0]?.url}
                         alt={`${product?.name}`}
                         title={`${product?.name}`}
                         height={300}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   clearErrors,
@@ -27,6 +27,8 @@ const AllProductReviews = () => {
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.review
   );
+
+  const [pageSize, setPageSize] = useState(5);
 
   const deleteReviewHandler = (reviewId) => {
     dispatch(deleteReviews(reviewId, id));
@@ -136,7 +138,8 @@ const AllProductReviews = () => {
             <Box
               sx={{
                 p: 2,
-                height: '100%',
+                // height: '100%',
+                height: 500,
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: 'column',
@@ -154,13 +157,19 @@ const AllProductReviews = () => {
               <DataGrid
                 rows={rows}
                 columns={columns}
-                pageSize={10}
+                // pageSize={10}
                 disableSelectionOnClick
-                autoHeight
+                // autoHeight
+                pageSize={pageSize}
+                onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
               />
             </Box>
           ) : (
-            <Typography variant="h7">No Reviews Found</Typography>
+            <Box sx={{ p: 2 }}>
+              <Typography variant="h6" textAlign={'center'} color={'red'}>
+                No Reviews!
+              </Typography>
+            </Box>
           )}
         </Box>
       )}

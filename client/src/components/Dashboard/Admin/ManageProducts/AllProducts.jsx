@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   clearErrors,
@@ -21,6 +21,8 @@ const AllProducts = () => {
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.product
   );
+
+  const [pageSize, setPageSize] = useState(5);
 
   const deleteProductHandler = (id) => {
     dispatch(deleteProduct(id));
@@ -134,7 +136,6 @@ const AllProducts = () => {
 
   return (
     <>
-      {' '}
       {loading ? (
         <Loader />
       ) : (
@@ -152,7 +153,8 @@ const AllProducts = () => {
             <Box
               sx={{
                 p: 2,
-                height: '100%',
+                // height: '100%',
+                height: 500,
                 boxSizing: 'border-box',
                 display: 'flex',
                 flexDirection: 'column',
@@ -171,9 +173,12 @@ const AllProducts = () => {
               <DataGrid
                 rows={rows}
                 columns={columns}
-                pageSize={10}
+                // pageSize={10}
                 disableSelectionOnClick
-                autoHeight
+                // autoHeight
+                // rowsPerPageOptions={[5, 10, 20]}
+                pageSize={pageSize}
+                onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
               />
             </Box>
           )}
