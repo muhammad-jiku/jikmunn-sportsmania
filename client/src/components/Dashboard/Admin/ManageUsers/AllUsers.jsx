@@ -11,12 +11,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
 import { DELETE_USER_RESET } from '../../../../constants/userConstant';
+import { Loader } from '../../../Shared';
 
 const AllUsers = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { error, users } = useSelector((state) => state.allUsers);
+  const { loading, error, users } = useSelector((state) => state.allUsers);
   const {
     error: deleteError,
     isDeleted,
@@ -117,19 +118,54 @@ const AllUsers = () => {
     });
   return (
     <>
-      <Box>
-        <Box>
-          <Typography variant="h7">ALL USERS</Typography>
+      {' '}
+      {loading ? (
+        <Loader />
+      ) : (
+        <Box
+          sx={{
+            p: 2,
+            height: 500,
+            minHeight: '100vh',
+            boxSizing: 'border-box',
+            width: {
+              xs: 'auto',
+              md: '70%',
+            },
+          }}
+        >
+          {users && (
+            <Box
+              sx={{
+                p: 2,
+                height: '100%',
+                boxSizing: 'border-box',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                // alignItems: 'center',
+              }}
+            >
+              <Typography
+                variant="p"
+                color="primary.main"
+                textAlign="center"
+                sx={{ fontSize: '22px', fontWeight: 900 }}
+              >
+                List of All Users
+              </Typography>
 
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            disableSelectionOnClick
-            autoHeight
-          />
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={10}
+                disableSelectionOnClick
+                autoHeight
+              />
+            </Box>
+          )}
         </Box>
-      </Box>
+      )}
     </>
   );
 };
