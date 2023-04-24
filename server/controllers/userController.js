@@ -280,11 +280,11 @@ const getSingleUser = AsyncError(async (req, res, next) => {
 // update User Role  - (admin)
 const updateUserRole = AsyncError(async (req, res, next) => {
   const { id } = await req.params;
-  const { name, email, role } = await req.body;
+  const { name, email, userRole } = await req.body;
   const newUserData = {
     name,
     email,
-    role,
+    role: userRole,
   };
   const opts = {
     runValidators: true,
