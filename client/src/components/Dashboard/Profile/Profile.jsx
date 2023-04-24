@@ -124,6 +124,12 @@ const Profile = () => {
           sx={{
             display: 'flex',
             flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: {
+              xs: 'auto',
+              md: '70%',
+            },
           }}
         >
           <Typography
@@ -131,7 +137,7 @@ const Profile = () => {
             color="primary.main"
             sx={{ mx: 2, my: 1, fontSize: '26px', fontWeight: 800 }}
           >
-            Your Information
+            Profile Info
           </Typography>
 
           {/*  Desktop */}
@@ -155,10 +161,9 @@ const Profile = () => {
                   justifyContent: 'space-between',
                 }}
               >
-                <Box>
+                <Box sx={{ ml: 4 }}>
                   {/* Name */}
                   <TextField
-                    sx={{ mt: 2 }}
                     label={user ? '' : 'Name'}
                     fullWidth
                     required
@@ -303,10 +308,9 @@ const Profile = () => {
                   </TextField>
                 </Box>
 
-                <Box sx={{ mx: 2 }}>
+                <Box sx={{ ml: 4 }}>
                   {/* City */}
                   <TextField
-                    sx={{ mt: 2 }}
                     label={user?.city ? '' : 'City'}
                     fullWidth
                     required

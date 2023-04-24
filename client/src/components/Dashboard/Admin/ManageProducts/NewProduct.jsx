@@ -3,10 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, createProduct } from '../../../../actions/productAction';
 import { useNavigate } from 'react-router-dom';
 import { NEW_PRODUCT_RESET } from '../../../../constants/productConstant';
-import { Box, Button } from '@mui/material';
+import {
+  Box,
+  Button,
+  InputAdornment,
+  MenuItem,
+  TextField,
+  Typography,
+} from '@mui/material';
 import SpellcheckIcon from '@mui/icons-material/Spellcheck';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import DescriptionIcon from '@mui/icons-material/Description';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import StorageIcon from '@mui/icons-material/Storage';
 
@@ -85,96 +91,199 @@ const NewProduct = () => {
   };
 
   return (
-    <>
-      <Box>
-        <Box>
-          <form
-            // encType="multipart/form-data"
-            onSubmit={createProductSubmitHandler}
-          >
-            <h1>Create Product</h1>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: {
+          xs: 'auto',
+          md: '70%',
+        },
+      }}
+    >
+      <Typography
+        variant="p"
+        color="primary"
+        textAlign="center"
+        sx={{
+          mt: 2,
+          fontSize: '24px',
+          fontWeight: 800,
+        }}
+      >
+        Add New Product
+      </Typography>
 
-            <Box>
-              <SpellcheckIcon />
-              <input
-                type="text"
-                placeholder="Product Name"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Box>
-            <Box>
-              <AttachMoneyIcon />
-              <input
-                type="number"
-                placeholder="Price"
-                required
-                onChange={(e) => setPrice(e.target.value)}
-              />
-            </Box>
+      {/* Form */}
+      <Box
+        component="form"
+        noValidate
+        autoComplete="off"
+        // encType="multipart/form-data"
+        onSubmit={createProductSubmitHandler}
+        sx={{
+          p: 2,
+          ml: {
+            xs: 0,
+            md: 6,
+          },
+        }}
+      >
+        {/*   Name */}
+        <TextField
+          sx={{ mt: 0.5 }}
+          label="Name"
+          fullWidth
+          required
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SpellcheckIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
 
-            <Box>
-              <DescriptionIcon />
+        {/*  Price */}
+        <TextField
+          sx={{ mt: 2, pt: 1 }}
+          label="Price"
+          fullWidth
+          required
+          type="number"
+          placeholder="Price"
+          onChange={(e) => setPrice(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AttachMoneyIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
 
-              <textarea
-                placeholder="Product Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                cols="30"
-                rows="1"
-              ></textarea>
-            </Box>
+        {/*  Desc */}
+        <TextField
+          sx={{ mt: 2, pt: 1 }}
+          multiline
+          rows={3}
+          fullWidth
+          required
+          label={'Description'}
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
 
-            <Box>
-              <AccountTreeIcon />
-              <select onChange={(e) => setCategory(e.target.value)}>
-                <option value="">Choose Category</option>
-                {categories.map((cate) => (
-                  <option key={cate} value={cate}>
-                    {cate}
-                  </option>
-                ))}
-              </select>
-            </Box>
-
-            <Box>
-              <StorageIcon />
-              <input
-                type="number"
-                placeholder="Stock"
-                required
-                onChange={(e) => setStock(e.target.value)}
-              />
-            </Box>
-
-            <Box id="createProductFormFile">
-              <input
-                type="file"
-                name="avatar"
-                accept="image/*"
-                onChange={createProductImagesChange}
-                multiple
-              />
-            </Box>
-
-            <Box id="createProductFormImage">
-              {imagesPreview.map((image, index) => (
-                <img key={index} src={image} alt="Product Preview" />
-              ))}
-            </Box>
-
-            <Button
-              id="createProductBtn"
-              type="submit"
-              disabled={loading ? true : false}
+        {/*  Category */}
+        <TextField
+          sx={{ mt: 2, pt: 1 }}
+          select
+          fullWidth
+          label="Category"
+          placeholder="Category"
+          required
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountTreeIcon />
+              </InputAdornment>
+            ),
+          }}
+        >
+          {categories.map((cate) => (
+            <MenuItem
+              key={cate}
+              value={cate}
+              label={'Category'}
+              placeholder={'Category'}
             >
-              Add
-            </Button>
-          </form>
-        </Box>
+              {cate || 'Choose Category'}
+            </MenuItem>
+          ))}
+
+          {/* <option value="">Choose Category</option>
+          {categories.map((cate) => (
+            <option key={cate} value={cate}>
+              {cate}
+            </option>
+          ))} */}
+        </TextField>
+
+        {/*  Stock */}
+        <TextField
+          sx={{ mt: 2, pt: 1 }}
+          label="Stock"
+          fullWidth
+          required
+          type="number"
+          placeholder="Stock"
+          onChange={(e) => setStock(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <StorageIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+
+        {/*  Images */}
+        <Button
+          variant="outlined"
+          component="label"
+          fullWidth
+          sx={{
+            p: 1.8,
+            mt: 2,
+            cursor: 'pointer',
+          }}
+        >
+          Choose Product Images
+          <input
+            type="file"
+            id="avatar"
+            name="avatar"
+            accept="image/*"
+            onChange={createProductImagesChange}
+            multiple
+            hidden
+          />
+        </Button>
+
+        {/* <TextField
+          sx={{ mt: 2, pt: 1 }}
+          fullWidth
+          type="file"
+          name="avatar"
+          accept="image/*"
+          onChange={createProductImagesChange}
+          multiple
+        /> */}
+
+        {imagesPreview.map((image, index) => (
+          <img key={index} src={image} alt="Product Preview" height={55} />
+        ))}
+
+        <Button
+          sx={{ p: 1, mt: 2 }}
+          fullWidth
+          variant="contained"
+          type="submit"
+          disabled={loading ? true : false}
+        >
+          Add Product
+        </Button>
       </Box>
-    </>
+    </Box>
   );
 };
 
