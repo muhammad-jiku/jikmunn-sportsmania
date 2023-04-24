@@ -75,8 +75,54 @@ const Login = ({ setAuthProcess }) => {
   }, [dispatch, error, isAuthenticated, navigate, from]);
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: {
+          xs: 'column',
+          md: 'row-reverse',
+        },
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <Box
+        sx={{
+          py: 2,
+          mx: 2,
+          mb: {
+            xs: 0,
+            md: 8,
+          },
+          boxSizing: 'border-box',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+        }}
+      >
+        <Typography
+          variant="span"
+          color="primary.main"
+          sx={{ fontSize: '32px', fontWeight: 900 }}
+        >
+          Hello there!
+        </Typography>
+        <Typography
+          variant="span"
+          textAlign="justify"
+          sx={{ fontSize: '18px', fontWeight: 700 }}
+        >
+          Welcome to{' '}
+          <Typography variant="span" color="primary.main">
+            Sports Mania
+          </Typography>{' '}
+          Online Shop. Here you can find your lovable and desirable sports
+          product. Please Login to enjoy your time here!
+        </Typography>
+      </Box>
+      <Box
+        sx={{ py: 2 }}
         component="form"
         noValidate
         autoComplete="off"
@@ -169,7 +215,8 @@ const Login = ({ setAuthProcess }) => {
         </Button>{' '}
         <Typography
           sx={{
-            m: 1.5,
+            mt: 1.5,
+            fontWeight: 700,
             display: 'flex',
             justifyContent: 'center',
           }}
