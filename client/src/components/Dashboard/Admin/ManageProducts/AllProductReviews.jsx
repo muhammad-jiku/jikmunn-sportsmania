@@ -1,61 +1,60 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   clearErrors,
   deleteReviews,
   getAllReviews,
+  getProductDetails,
 } from '../../../../actions/productAction';
 import { DELETE_REVIEW_RESET } from '../../../../constants/productConstant';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Button, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import StarIcon from '@mui/icons-material/Star';
 import { DataGrid } from '@mui/x-data-grid';
+import { Loader } from '../../../Shared';
 
 const AllProductReviews = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  const { error, product } = useSelector((state) => state.productDetails);
+  const {
+    error: reviewError,
+    reviews,
+    loading,
+  } = useSelector((state) => state.productReviews);
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.review
   );
-  const { error, reviews, loading } = useSelector(
-    (state) => state.productReviews
-  );
-
-  const [productId, setProductId] = useState(`${id}`);
 
   const deleteReviewHandler = (reviewId) => {
-    dispatch(deleteReviews(reviewId, productId));
-  };
-
-  const productReviewsSubmitHandler = (e) => {
-    e.preventDefault();
-    dispatch(getAllReviews(productId));
+    dispatch(deleteReviews(reviewId, id));
   };
 
   useEffect(() => {
-    console.log(productId);
-    console.log(productId.length);
-    if (productId.length) {
-      dispatch(getAllReviews(productId));
+    if (id?.length) {
+      dispatch(getProductDetails(id));
+      dispatch(getAllReviews(id));
     }
+
     if (error) {
       dispatch(clearErrors());
     }
-
+    if (reviewError) {
+      dispatch(clearErrors());
+    }
     if (deleteError) {
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      navigate(`/dashboard/admin/product/reviews/${productId}`);
+      navigate(`/dashboard/admin/product/reviews/${id}`);
       dispatch({
         type: DELETE_REVIEW_RESET,
       });
     }
-  }, [dispatch, productId, error, deleteError, navigate, isDeleted]);
+  }, [dispatch, id, error, reviewError, deleteError, navigate, isDeleted]);
 
   const columns = [
     { field: 'id', headerName: 'Review ID', minWidth: 200, flex: 0.5 },
@@ -119,46 +118,52 @@ const AllProductReviews = () => {
 
   return (
     <>
-      <Box>
-        <Box>
-          <form onSubmit={productReviewsSubmitHandler}>
-            <Typography variant="h7">ALL REVIEWS</Typography>
-
-            <Box>
-              <StarIcon />
-              <input
-                type="text"
-                placeholder="Product Id"
-                required
-                value={productId}
-                onChange={(e) => setProductId(e.target.value)}
+      {' '}
+      {loading ? (
+        <Loader />
+      ) : (
+        <Box
+          sx={{
+            p: 2,
+            boxSizing: 'border-box',
+            width: {
+              xs: 'auto',
+              md: '70%',
+            },
+          }}
+        >
+          {reviews && reviews.length > 0 ? (
+            <Box
+              sx={{
+                p: 2,
+                height: '100%',
+                boxSizing: 'border-box',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <Typography
+                variant="p"
+                color="primary.main"
+                textAlign="center"
+                sx={{ fontSize: '22px', fontWeight: 900 }}
+              >
+                List of {product && product?.name}'s Reviews
+              </Typography>
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                pageSize={10}
+                disableSelectionOnClick
+                autoHeight
               />
             </Box>
-
-            <Button
-              id="createProductBtn"
-              type="submit"
-              disabled={
-                loading ? true : false || productId === '' ? true : false
-              }
-            >
-              Search
-            </Button>
-          </form>
-
-          {reviews && reviews.length > 0 ? (
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              pageSize={10}
-              disableSelectionOnClick
-              autoHeight
-            />
           ) : (
             <Typography variant="h7">No Reviews Found</Typography>
           )}
         </Box>
-      </Box>
+      )}
     </>
   );
 };
