@@ -27,7 +27,15 @@ import { Loader } from '../../Shared';
 const Products = () => {
   const dispatch = useDispatch();
 
-  const categories = ['Cricket', 'Football'];
+  const categories = [
+    'Football',
+    'Cricket',
+    'Golf',
+    'Racing',
+    'Tennis',
+    'Badminton',
+    'Swimming',
+  ];
 
   const [currentPage, setCurrentPage] = useState(1);
   const [priceRange, setPriceRange] = useState([0, 500]);

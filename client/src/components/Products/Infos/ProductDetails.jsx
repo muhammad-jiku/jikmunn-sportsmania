@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Box, Button, Rating, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  InputAdornment,
+  MenuItem,
+  Rating,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { clearErrors, getProductDetails } from '../../../actions/productAction';
 import { ErrorNotFound, Loader } from '../../Shared';
 import AddReview from '../Reviews/AddReview';
 import Reviews from '../Reviews/Reviews';
 import { addItemsToCart } from '../../../actions/cartAction';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import HeightIcon from '@mui/icons-material/Height';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -17,7 +26,10 @@ const ProductDetails = () => {
     (state) => state.productDetails
   );
 
+  const sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+
   const [open, setOpen] = useState(false);
+  const [size, setSize] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(
     product?.images && `${product?.images[0]?.url}`
@@ -49,8 +61,8 @@ const ProductDetails = () => {
   };
 
   const handleAddProductToCart = () => {
-    // console.log(id, quantity);
-    dispatch(addItemsToCart(id, quantity));
+    // console.log(id, size, quantity);
+    dispatch(addItemsToCart(id, size, quantity));
   };
 
   useEffect(() => {
@@ -81,6 +93,7 @@ const ProductDetails = () => {
           {!product && <ErrorNotFound />}
           {product && (
             <>
+              {/* {console.log(product)} */}
               <Box
                 sx={{
                   p: 2,
@@ -148,9 +161,11 @@ const ProductDetails = () => {
                     },
                   }}
                 >
+                  {/*  Name */}
                   <Typography variant="h6" sx={{ fontWeight: 800 }}>
                     {product?.name}
                   </Typography>
+                  {/*  Rating */}
                   <Typography
                     variant="span"
                     sx={{ ml: -0.5, display: 'flex', my: 1 }}
@@ -173,12 +188,64 @@ const ProductDetails = () => {
                       )
                     </Typography>
                   </Typography>
+                  {/*  Price */}
                   <Typography variant="h7" sx={{ my: 0.5, fontWeight: 600 }}>
                     ${product?.price}
                   </Typography>
+                  {/*  Desc */}
                   <Typography variant="p" sx={{ my: 1, fontWeight: 400 }}>
                     {product?.description}
                   </Typography>
+                  {/*  Size */}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Typography variant="p" sx={{ my: 1, fontWeight: 600 }}>
+                      Size:
+                    </Typography>{' '}
+                    <TextField
+                      sx={{ ml: 4.8, width: 150 }}
+                      select
+                      // fullWidth
+                      // label="Size"
+                      // placeholder="Size"
+                      // required
+                      size="small"
+                      value={size || product?.size}
+                      onChange={(e) => setSize(e.target.value)}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <HeightIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                    >
+                      {sizes.map((sz) => (
+                        <MenuItem
+                          key={sz}
+                          value={sz}
+                          label="Size"
+                          placeholder="Size"
+                        >
+                          {sz || 'Choose Size'}
+                        </MenuItem>
+                      ))}
+
+                      {/* <option value="">Choose Category</option>
+          {categories.map((cate) => (
+            <option key={cate} value={cate}>
+              {cate}
+            </option>
+          ))} */}
+                    </TextField>
+                  </Box>
+
+                  {/*  Quantity */}
                   <Typography
                     variant="p"
                     sx={{
@@ -248,9 +315,11 @@ const ProductDetails = () => {
                       />
                     </Button>
                   </Typography>
+                  {/*  Category */}
                   <Typography variant="p" sx={{ my: 1, fontWeight: 600 }}>
                     Category: {product?.category}
                   </Typography>
+                  {/*  Stock */}
                   <Typography variant="p" sx={{ mb: 1, fontWeight: 600 }}>
                     Availability:
                     {product?.stock <= 10 ? (
@@ -259,6 +328,7 @@ const ProductDetails = () => {
                       <span style={{ color: 'green' }}> In Stock</span>
                     )}
                   </Typography>
+                  {/*  Review */}
                   <Button
                     variant="outlined"
                     onClick={handleClickOpen}
