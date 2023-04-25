@@ -83,10 +83,20 @@ const ResetPassword = () => {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
+            minHeight: '100vh',
           }}
         >
-          <Typography variant="h6" color="primary">
-            Reset Password
+          <Typography
+            variant="span"
+            color="primary"
+            textAlign={'center'}
+            sx={{
+              my: 1.5,
+              fontSize: '18px',
+              fontWeight: 700,
+            }}
+          >
+            Reset your password here!
           </Typography>
 
           <Box
@@ -95,10 +105,10 @@ const ResetPassword = () => {
             autoComplete="off"
             onSubmit={handleSubmit(onSubmitHandler)}
             sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
+              width: {
+                xs: '100%',
+                md: '60%',
+              },
             }}
           >
             <TextField
