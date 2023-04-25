@@ -61,22 +61,34 @@ const ForgetPassword = () => {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
+            minHeight: '100vh',
           }}
         >
-          <Typography variant="h6" color="primary">
-            Forgot Password
+          <Typography
+            variant="span"
+            color="primary"
+            textAlign={'center'}
+            sx={{ fontSize: { xs: '14px', md: '18px' }, fontWeight: 700 }}
+          >
+            Ooops! It seems you forget the password!
           </Typography>
-
+          <Typography
+            variant="span"
+            textAlign={'center'}
+            sx={{ fontSize: { xs: '12px', md: '14px' }, fontWeight: 700 }}
+          >
+            Please write down your email to receive reset password mail!
+          </Typography>
           <Box
             component="form"
             noValidate
             autoComplete="off"
             onSubmit={handleSubmit(onSubmitHandler)}
             sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
+              width: {
+                xs: '100%',
+                md: '60%',
+              },
             }}
           >
             <TextField
@@ -90,7 +102,7 @@ const ForgetPassword = () => {
               error={!!errors['email']}
               helperText={errors['email'] ? errors['email'].message : ''}
               {...register('email')}
-            />{' '}
+            />
             <Button
               variant="contained"
               fullWidth
