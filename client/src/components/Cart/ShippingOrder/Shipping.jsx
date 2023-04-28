@@ -9,8 +9,15 @@ import LocationCityIcon from '@mui/icons-material/LocationCity';
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import PhoneIcon from '@mui/icons-material/Phone';
 import PublicIcon from '@mui/icons-material/Public';
-import TransferWithinAStationIcon from '@mui/icons-material/TransferWithinAStation';
-import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
+import MapIcon from '@mui/icons-material/Map';
+import {
+  Box,
+  Button,
+  InputAdornment,
+  MenuItem,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { shippingSchema } from '../../../utils/ValidationSchema';
@@ -60,175 +67,240 @@ const Shipping = () => {
   }, [isSubmitSuccessful, reset]);
 
   return (
-    <>
+    <Box sx={{ minHeight: '100vh' }}>
       <CheckoutSteps activeStep={0} />
+      <Box
+        sx={{
+          p: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Typography
+          varinat="span"
+          color="primary.main"
+          textAlign="center"
+          sx={{
+            fontSize: {
+              xs: '22px',
+              md: '26px',
+            },
+          }}
+        >
+          Shipping Details Information
+        </Typography>
+        <Box
+          component="form"
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit(onSubmitHandler)}
+          sx={{
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: {
+              xs: '100%',
+              md: '60%',
+            },
+          }}
+        >
+          {/* Address */}
+          <TextField
+            sx={{ mt: 2 }}
+            label="Address"
+            fullWidth
+            required
+            type="text"
+            placeholder="Address"
+            name="address"
+            defaultValue={address}
+            onChange={(e) => setAddress(e.target.value)}
+            error={!!errors['address']}
+            helperText={errors['address'] ? errors['address'].message : ''}
+            {...register('address')}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <FmdGoodIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
 
-      <Box>
-        <Box>
-          <Typography varinat="h2">Shipping Details</Typography>
+          {/* City */}
+          <TextField
+            sx={{ mt: 2 }}
+            label="City"
+            fullWidth
+            required
+            type="text"
+            placeholder="City"
+            name="city"
+            defaultValue={city}
+            onChange={(e) => setCity(e.target.value)}
+            error={!!errors['city']}
+            helperText={errors['city'] ? errors['city'].message : ''}
+            {...register('city')}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <HomeIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
 
-          <Box
-            component="form"
-            noValidate
-            autoComplete="off"
-            onSubmit={handleSubmit(onSubmitHandler)}
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              p: 2,
+          {/*  Pin Code */}
+          <TextField
+            sx={{ mt: 2 }}
+            label="Pin Code"
+            fullWidth
+            required
+            type="text"
+            placeholder="Pin Code"
+            name="pin"
+            defaultValue={pinCode}
+            onChange={(e) => setPinCode(e.target.value)}
+            error={!!errors['pin']}
+            helperText={errors['pin'] ? errors['pin'].message : ''}
+            {...register('pin')}
+            // {...register('pin', {
+            //   setValueAs: (v) => (v === '' ? undefined : parseInt(v, 4)),
+            // })}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LocationCityIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          {/*  Phone */}
+          <TextField
+            sx={{ mt: 2 }}
+            label="Phone"
+            fullWidth
+            required
+            type="text"
+            placeholder="Phone"
+            name="phone"
+            defaultValue={phoneNo}
+            onChange={(e) => setPhoneNo(e.target.value)}
+            error={!!errors['phone']}
+            helperText={errors['phone'] ? errors['phone'].message : ''}
+            {...register('phone')}
+            // {...register('phone', {
+            //   setValueAs: (v) => (v === '' ? undefined : parseInt(v, 11)),
+            // })}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PhoneIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          {/* Country */}
+          <TextField
+            fullWidth
+            id="outlined-select-country"
+            select
+            label="Select"
+            defaultValue={country}
+            onChange={(e) => setCountry(e.target.value.toString())}
+            sx={{ mt: 2 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PublicIcon />
+                </InputAdornment>
+              ),
             }}
           >
-            {/* Address */}
-            <TextField
-              sx={{ mt: 2 }}
-              label="Address"
-              fullWidth
-              required
-              type="text"
-              placeholder="Address"
-              name="address"
-              defaultValue={address}
-              onChange={(e) => setAddress(e.target.value)}
-              error={!!errors['address']}
-              helperText={errors['address'] ? errors['address'].message : ''}
-              {...register('address')}
-            />
+            {Country &&
+              Country.getAllCountries().map((item) => (
+                <MenuItem
+                  key={item.isoCode}
+                  value={item.isoCode}
+                  label="Country"
+                  placeholder="Country"
+                >
+                  {item.name}
+                </MenuItem>
+              ))}
+          </TextField>
 
-            {/* City */}
+          {/* State */}
+          {country && (
             <TextField
-              sx={{ mt: 2 }}
-              label="City"
               fullWidth
-              required
-              type="text"
-              placeholder="City"
-              name="city"
-              defaultValue={city}
-              onChange={(e) => setCity(e.target.value)}
-              error={!!errors['city']}
-              helperText={errors['city'] ? errors['city'].message : ''}
-              {...register('city')}
-            />
-
-            {/*  Pin Code */}
-            <TextField
-              sx={{ mt: 2 }}
-              label="Pin Code"
-              fullWidth
-              required
-              type="text"
-              placeholder="Pin Code"
-              name="pin"
-              defaultValue={pinCode}
-              onChange={(e) => setPinCode(e.target.value)}
-              error={!!errors['pin']}
-              helperText={errors['pin'] ? errors['pin'].message : ''}
-              {...register('pin')}
-              // {...register('pin', {
-              //   setValueAs: (v) => (v === '' ? undefined : parseInt(v, 4)),
-              // })}
-            />
-
-            {/*  Phone */}
-            <TextField
-              sx={{ mt: 2 }}
-              label="Phone"
-              fullWidth
-              required
-              type="text"
-              placeholder="Phone"
-              name="phone"
-              defaultValue={phoneNo}
-              onChange={(e) => setPhoneNo(e.target.value)}
-              error={!!errors['phone']}
-              helperText={errors['phone'] ? errors['phone'].message : ''}
-              {...register('phone')}
-              // {...register('phone', {
-              //   setValueAs: (v) => (v === '' ? undefined : parseInt(v, 11)),
-              // })}
-            />
-
-            {/* Country */}
-            <TextField
-              id="outlined-select-country"
+              id="outlined-select-state"
               select
               label="Select"
-              defaultValue={country}
-              onChange={(e) => setCountry(e.target.value.toString())}
+              defaultValue={state}
+              onChange={(e) => setState(e.target.value.toString())}
               sx={{ mt: 2 }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <MapIcon />
+                  </InputAdornment>
+                ),
+              }}
             >
-              {Country &&
-                Country.getAllCountries().map((item) => (
+              {State &&
+                State?.getStatesOfCountry(country).map((item) => (
                   <MenuItem
                     key={item.isoCode}
                     value={item.isoCode}
-                    label="Country"
-                    placeholder="Country"
+                    label="State"
+                    placeholder="State"
                   >
                     {item.name}
                   </MenuItem>
                 ))}
             </TextField>
 
-            {/* State */}
-            {country && (
-              <TextField
-                id="outlined-select-state"
-                select
-                label="Select"
-                defaultValue={state}
-                onChange={(e) => setState(e.target.value.toString())}
-                sx={{ mt: 2 }}
-              >
-                {State &&
-                  State?.getStatesOfCountry(country).map((item) => (
-                    <MenuItem
-                      key={item.isoCode}
-                      value={item.isoCode}
-                      label="State"
-                      placeholder="State"
-                    >
-                      {item.name}
-                    </MenuItem>
-                  ))}
-              </TextField>
+            // <Select
+            //   name="state"
+            //   defaultValue={state}
+            //   label="State"
+            //   fullWidth
+            //   onChange={(e) => setState(e.target.value)}
+            //   sx={{ mt: 2 }}
+            // >
+            //   <MenuItem value={''}>State</MenuItem>
+            //   {State &&
+            //     State?.getStatesOfCountry(country).map((item) => (
+            //       <MenuItem key={item.isoCode} value={item.isoCode}>
+            //         {item.name}
+            //       </MenuItem>
+            //     ))}
+            // </Select>
+          )}
 
-              // <Select
-              //   name="state"
-              //   defaultValue={state}
-              //   label="State"
-              //   fullWidth
-              //   onChange={(e) => setState(e.target.value)}
-              //   sx={{ mt: 2 }}
-              // >
-              //   <MenuItem value={''}>State</MenuItem>
-              //   {State &&
-              //     State?.getStatesOfCountry(country).map((item) => (
-              //       <MenuItem key={item.isoCode} value={item.isoCode}>
-              //         {item.name}
-              //       </MenuItem>
-              //     ))}
-              // </Select>
-            )}
-
-            <Button
-              variant="contained"
-              // fullWidth
-              type="submit"
-              sx={{
-                p: 1.8,
-                mt: 2,
-                fontSize: '14px',
-              }}
-              disabled={state ? false : true}
-            >
-              Continue
-            </Button>
-          </Box>
+          <Button
+            variant="contained"
+            fullWidth
+            type="submit"
+            sx={{
+              p: 1.8,
+              mt: 2,
+              fontSize: '14px',
+            }}
+            disabled={state ? false : true}
+          >
+            Continue
+          </Button>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 
