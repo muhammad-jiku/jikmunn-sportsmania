@@ -7,18 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   useStripe,
   useElements,
-  CardElement,
+  // CardElement,
   CardNumberElement,
   CardExpiryElement,
   CardCvcElement,
 } from '@stripe/react-stripe-js';
 import { clearErrors, createOrder } from '../../../actions/orderAction';
-import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
-import EventIcon from '@mui/icons-material/Event';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { paymentSchema } from '../../../utils/ValidationSchema';
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -134,45 +129,77 @@ const Payment = () => {
   }, [dispatch, error]);
 
   return (
-    <>
+    <Box sx={{ p: 2 }}>
       <CheckoutSteps activeStep={2} />
-      <Box>
-        <Typography>Card Info</Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
+        }}
+      >
         <Box
           component="form"
           noValidate
           autoComplete="off"
           onSubmit={handleSubmit(onSubmitHandler)}
           sx={{
+            p: 2,
+            my: 2,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            p: 2,
+            width: {
+              xs: '100%',
+              md: '60%',
+            },
+            borderRadius: {
+              xs: '30px',
+              md: 0,
+            },
+            boxShadow: {
+              xs: '5px 5px 10px black',
+              md: 0,
+            },
           }}
         >
+          {' '}
+          <Typography
+            varinat="span"
+            color="primary.main"
+            textAlign="center"
+            sx={{
+              mt: 4,
+              fontSize: {
+                xs: '22px',
+                md: '26px',
+              },
+            }}
+          >
+            Card Information
+          </Typography>
           {/* Card */}
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ p: 2, mt: 2, borderBottom: '1px solid #682404' }}>
             {/* <CardElement /> */}
             <CardNumberElement />
           </Box>
-
           {/* Date */}
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ p: 2, mt: 2, borderBottom: '1px solid #682404' }}>
             <CardExpiryElement />
           </Box>
-
           {/*  CVC Code */}
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ p: 2, mt: 2, borderBottom: '1px solid #682404' }}>
             <CardCvcElement />
           </Box>
-
           <Button
             variant="contained"
-            // fullWidth
+            fullWidth
             type="submit"
             sx={{
               p: 1.8,
-              mt: 2,
+              mt: 4,
               fontSize: '14px',
             }}
             ref={payBtn}
@@ -181,7 +208,7 @@ const Payment = () => {
           </Button>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 

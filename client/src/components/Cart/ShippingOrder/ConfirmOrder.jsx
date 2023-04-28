@@ -49,6 +49,7 @@ const ConfirmOrder = () => {
   return (
     <Box sx={{ minHeight: '100vh' }}>
       <CheckoutSteps activeStep={1} />
+
       {/* Cards */}
       <Box
         sx={{
