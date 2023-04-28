@@ -17,8 +17,7 @@ const ForgetPassword = () => {
 
   const {
     register,
-    formState: { errors, isSubmitSuccessful },
-    reset,
+    formState: { errors },
     handleSubmit,
   } = useForm({
     resolver: zodResolver(forgetPasswordSchema),
@@ -40,12 +39,12 @@ const ForgetPassword = () => {
 
   useEffect(() => {
     if (error) {
-      console.log(error);
+      // console.log(error);
       dispatch(clearErrors());
     }
 
     if (message) {
-      console.log(message);
+      // console.log(message);
     }
   }, [dispatch, error, message]);
 

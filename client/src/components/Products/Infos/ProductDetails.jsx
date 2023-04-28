@@ -85,7 +85,7 @@ const ProductDetails = () => {
   ]);
 
   return (
-    <>
+    <Box sx={{ minHeight: '100vh' }}>
       {loading ? (
         <Loader />
       ) : (
@@ -367,7 +367,7 @@ const ProductDetails = () => {
           )}
         </>
       )}
-    </>
+    </Box>
   );
 };
 

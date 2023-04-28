@@ -31,7 +31,7 @@ const Payment = () => {
   const paymentData = {
     amount: Math.round(orderInfo?.totalPrice),
   };
-  console.log(orderInfo);
+  // console.log(orderInfo);
   const order = {
     shippingInfo,
     orderItems: cartItems,
@@ -46,7 +46,7 @@ const Payment = () => {
   const onSubmitHandler = async (values) => {
     payBtn.current.disabled = true;
     try {
-      console.log(values);
+      // console.log(values);
       const config = {
         headers: {
           authorization: `Bearer ${localStorage?.getItem('token')}`,
@@ -54,7 +54,7 @@ const Payment = () => {
         },
       };
 
-      console.log(paymentData);
+      // console.log(paymentData);
       const { data } = await axios.post(
         '/api/v1/payment/process',
         paymentData,
@@ -95,12 +95,12 @@ const Payment = () => {
           },
         },
       });
-      console.log(paymentMethod);
+      // console.log(paymentMethod);
       if (result.error) {
         payBtn.current.disabled = false;
-        console.log(result.error);
-        console.log(paymentError);
-        console.log(paymentMethod);
+        // console.log(result.error);
+        // console.log(paymentError);
+        // console.log(paymentMethod);
       } else {
         if (result.paymentIntent.status === 'succeeded') {
           order.paymentInfo = {
@@ -108,16 +108,16 @@ const Payment = () => {
             status: result?.paymentIntent?.status,
           };
 
-          console.log(order);
+          // console.log(order);
           dispatch(createOrder(order));
           reset();
           navigate('/success');
         } else {
-          console.log("There's some issue while processing payment ");
+          // console.log("There's some issue while processing payment ");
         }
       }
     } catch (err) {
-      console.log(err.message);
+      // console.log(err.message);
       payBtn.current.disabled = false;
     }
   };

@@ -94,7 +94,7 @@ export const getAdminProduct = () => async (dispatch) => {
 
 // Create Product - (admin)
 export const createProduct = (productData) => async (dispatch) => {
-  console.log(productData);
+  // console.log(productData);
   try {
     dispatch({
       type: NEW_PRODUCT_REQUEST,
@@ -127,8 +127,8 @@ export const createProduct = (productData) => async (dispatch) => {
 
 // Update Product - (admin)
 export const updateProduct = (id, productData) => async (dispatch) => {
-  console.log(id);
-  console.log(productData);
+  // console.log(id);
+  // console.log(productData);
   try {
     dispatch({
       type: UPDATE_PRODUCT_REQUEST,
@@ -259,8 +259,8 @@ export const getAllReviews = (id) => async (dispatch) => {
 
 // Delete Review of a Product - (admin)
 export const deleteReviews = (reviewId, productId) => async (dispatch) => {
-  console.log(reviewId);
-  console.log(productId);
+  // console.log(reviewId);
+  // console.log(productId);
   try {
     dispatch({
       type: DELETE_REVIEW_REQUEST,

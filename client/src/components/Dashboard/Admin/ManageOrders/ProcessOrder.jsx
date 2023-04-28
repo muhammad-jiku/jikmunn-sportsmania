@@ -49,7 +49,7 @@ const ProcessOrder = () => {
   return (
     <>
       <Box>
-        {console.log(order)}
+        {/* {console.log(order)} */}
         <Box>
           {loading ? (
             <Loader />

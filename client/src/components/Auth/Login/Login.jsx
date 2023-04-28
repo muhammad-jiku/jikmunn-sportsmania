@@ -17,13 +17,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loginSchema } from '../../../utils/ValidationSchema';
 
 const Login = ({ setAuthProcess }) => {
-  // console.log(setAuthProcess);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const { error, loading, isAuthenticated } = useSelector(
-    (state) => state.user
-  );
+  const {
+    error,
+    // loading,
+    isAuthenticated,
+  } = useSelector((state) => state.user);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -51,7 +52,7 @@ const Login = ({ setAuthProcess }) => {
       email: values.email,
       password: values.password,
     };
-    console.log(userInfo);
+    // console.log(userInfo);
     dispatch(loginUser(userInfo));
   };
 

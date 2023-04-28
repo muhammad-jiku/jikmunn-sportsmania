@@ -108,8 +108,8 @@ export const getAllOrders = () => async (dispatch) => {
 
 // Update Order - (admin)
 export const updateOrder = (id, order) => async (dispatch) => {
-  console.log(id);
-  console.log(order);
+  // console.log(id);
+  // console.log(order);
   try {
     dispatch({
       type: UPDATE_ORDER_REQUEST,

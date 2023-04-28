@@ -12,6 +12,7 @@ const Dashboard = () => {
           xs: 'column',
           md: 'row',
         },
+        minHeight: '100vh',
       }}
     >
       <Sidebar />

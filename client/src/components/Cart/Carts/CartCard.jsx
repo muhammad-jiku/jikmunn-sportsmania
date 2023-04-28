@@ -47,7 +47,7 @@ const CartCard = ({ item }) => {
           boxShadow: '5px 5px 10px black',
         }}
       >
-        {console.log(item)}
+        {/* {console.log(item)} */}
         <Box
           sx={{
             p: 2,

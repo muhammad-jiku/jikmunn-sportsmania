@@ -120,7 +120,6 @@ const Products = () => {
       <Container
         id="products"
         display="flex"
-        // justifyContent="center"
         justifycontent="center"
         sx={{
           p: 4,
@@ -306,7 +305,7 @@ const Products = () => {
               }}
             >
               {products?.map((product, idx) => (
-                <ProductsCard product={product} idx={idx} />
+                <ProductsCard product={product} key={product?._id} />
               ))}
             </Grid>
             {products?.length === 0 && (

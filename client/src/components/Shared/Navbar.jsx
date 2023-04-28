@@ -61,14 +61,14 @@ const Navbar = ({ isAuthenticated, user }) => {
       title: 'Products',
       path: '/products',
     },
-    {
-      title: 'Contact',
-      path: '/contact',
-    },
-    {
-      title: 'About',
-      path: '/about',
-    },
+    // {
+    //   title: 'Contact',
+    //   path: '/contact',
+    // },
+    // {
+    //   title: 'About',
+    //   path: '/about',
+    // },
   ];
 
   const Logo = styled('img')(({ theme }) => ({
@@ -257,9 +257,9 @@ const Navbar = ({ isAuthenticated, user }) => {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            <>
+            <Box>
               {isAuthenticated && user ? (
-                <>
+                <Box>
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">
                       <Link
@@ -279,7 +279,7 @@ const Navbar = ({ isAuthenticated, user }) => {
                       Logout
                     </Button>
                   </MenuItem>
-                </>
+                </Box>
               ) : (
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
@@ -295,7 +295,7 @@ const Navbar = ({ isAuthenticated, user }) => {
                   </Typography>
                 </MenuItem>
               )}
-            </>
+            </Box>
           </Menu>
         </Box>
       </Toolbar>

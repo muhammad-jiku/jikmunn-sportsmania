@@ -53,7 +53,7 @@ const Shipping = () => {
       pinCode: values.pin,
       phoneNo: values.phone,
     };
-    console.log(shippingDetails);
+    // console.log(shippingDetails);
 
     dispatch(saveShippingInfo(shippingDetails));
     reset();

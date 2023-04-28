@@ -10,13 +10,13 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const ProductsCard = ({ product, idx }) => {
+const ProductsCard = ({ product }) => {
   const navigate = useNavigate();
 
   return (
     <Grid
+      key={product?._id}
       item
-      key={idx}
       xs={6}
       sm={3}
       md={3}

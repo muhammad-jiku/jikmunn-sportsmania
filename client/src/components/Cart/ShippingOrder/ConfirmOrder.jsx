@@ -41,7 +41,7 @@ const ConfirmOrder = () => {
       tax,
       totalPrice,
     };
-    console.log(data);
+    // console.log(data);
     sessionStorage.setItem('orderInfo', JSON.stringify(data));
     navigate('/process/payment');
   };

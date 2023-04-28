@@ -26,7 +26,6 @@ const Orders = () => {
       minWidth: 150,
       flex: 0.5,
       cellClassName: (params) => {
-        console.log(params.id);
         return (params.id, 'status') === 'Delivered' ? 'green' : 'red';
       },
     },
@@ -56,7 +55,6 @@ const Orders = () => {
       renderCell: (params) => {
         return (
           <>
-            {/* {console.log(params)} */}
             <Link to={`/dashboard/myorders/${params.id}`}>
               <LaunchIcon />
             </Link>

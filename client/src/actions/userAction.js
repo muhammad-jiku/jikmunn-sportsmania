@@ -55,9 +55,9 @@ export const loginUser = (userData) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: data.user,
     });
-    console.log(data);
+    // console.log(data);
     const token = data?.token;
-    console.log('token', token);
+    // console.log('token', token);
     localStorage?.setItem('token', token);
   } catch (error) {
     dispatch({
@@ -84,9 +84,9 @@ export const registerUser = (userData) => async (dispatch) => {
       type: REGISTER_USER_SUCCESS,
       payload: data.user,
     });
-    console.log(data);
+    // console.log(data);
     const token = data?.token;
-    console.log('token', token);
+    // console.log('token', token);
     localStorage?.setItem('token', token);
   } catch (error) {
     dispatch({
@@ -273,7 +273,7 @@ export const getAllUsers = () => async (dispatch) => {
     };
 
     const { data } = await axios.get(`/api/v1/admin/users`, config);
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: ALL_USERS_SUCCESS,
       payload: data.users,
@@ -316,8 +316,8 @@ export const getUserDetails = (id) => async (dispatch) => {
 
 // Update User - (admin)
 export const updateUser = (id, userData) => async (dispatch) => {
-  console.log(id);
-  console.log(userData);
+  // console.log(id);
+  // console.log(userData);
   try {
     dispatch({
       type: UPDATE_USER_REQUEST,

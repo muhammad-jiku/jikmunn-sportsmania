@@ -8,8 +8,8 @@ import {
   HomePage,
   ProductPage,
   ProductDetailsPage,
-  ContactPage,
-  AboutPage,
+  // ContactPage,
+  // AboutPage,
   LoginPage,
   MyCarts,
   ShippingPage,
@@ -38,6 +38,7 @@ import { ForgetPassword, ResetPassword } from './components/Auth';
 import axios from 'axios';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { Box } from '@mui/material';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -72,66 +73,64 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <>
-        <Navbar isAuthenticated={isAuthenticated} user={user} />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<ProductPage />} />
-          <Route path="/product/:id" element={<ProductDetailsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/password/forgot" element={<ForgetPassword />} />
-          <Route path="/password/reset/:token" element={<ResetPassword />} />
-          <Route path="/carts" element={<MyCarts />} />
-          <Route path="/shipping" element={<ShippingPage />} />
-          <Route path="/order/confirm" element={<ConfirmOrderPage />} />
-          <Route path="/success" element={<SuccessPage />} />
-          {stripeApiKey ? (
-            <Route
-              path="/process/payment"
-              element={
-                <Elements stripe={loadStripe(stripeApiKey)}>
-                  <PaymentPage />
-                </Elements>
-              }
-            />
-          ) : null}
+    <Box className="App">
+      <Navbar isAuthenticated={isAuthenticated} user={user} />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<ProductPage />} />
+        <Route path="/product/:id" element={<ProductDetailsPage />} />
+        {/* <Route path="/contact" element={<ContactPage />} /> */}
+        {/* <Route path="/about" element={<AboutPage />} /> */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/password/forgot" element={<ForgetPassword />} />
+        <Route path="/password/reset/:token" element={<ResetPassword />} />
+        <Route path="/carts" element={<MyCarts />} />
+        <Route path="/shipping" element={<ShippingPage />} />
+        <Route path="/order/confirm" element={<ConfirmOrderPage />} />
+        <Route path="/success" element={<SuccessPage />} />
+        {stripeApiKey ? (
           <Route
-            path="/dashboard"
+            path="/process/payment"
             element={
-              // <RequiredAuth>
-              <MyDashboard />
-              // </RequiredAuth>
+              <Elements stripe={loadStripe(stripeApiKey)}>
+                <PaymentPage />
+              </Elements>
             }
-          >
-            <Route index element={<MyProfile />} />
-            <Route path="password/secure" element={<SecureMyProfile />} />
-            <Route path="admin" element={<AdminPanelPage />} />
-            <Route path="admin/users" element={<AllUsersPage />} />
-            <Route path="admin/user/update/:id" element={<UpdateUserPage />} />
-            <Route path="admin/products" element={<AllProductsPage />} />
-            <Route path="admin/product/new" element={<NewProductPage />} />{' '}
-            <Route
-              path="admin/product/update/:id"
-              element={<UpdateProductPage />}
-            />
-            <Route
-              path="admin/product/reviews/:id"
-              element={<AllProductReviewsPage />}
-            />
-            <Route path="admin/orders" element={<AllOrdersPage />} />
-            <Route path="admin/order/:id" element={<ProcessOrderPage />} />
-            <Route path="myorders" element={<MyOrders />} />
-            <Route path="myorders/:id" element={<MyOrderDetails />} />
-          </Route>
+          />
+        ) : null}
+        <Route
+          path="/dashboard"
+          element={
+            // <RequiredAuth>
+            <MyDashboard />
+            // </RequiredAuth>
+          }
+        >
+          <Route index element={<MyProfile />} />
+          <Route path="password/secure" element={<SecureMyProfile />} />
+          <Route path="admin" element={<AdminPanelPage />} />
+          <Route path="admin/users" element={<AllUsersPage />} />
+          <Route path="admin/user/update/:id" element={<UpdateUserPage />} />
+          <Route path="admin/products" element={<AllProductsPage />} />
+          <Route path="admin/product/new" element={<NewProductPage />} />{' '}
+          <Route
+            path="admin/product/update/:id"
+            element={<UpdateProductPage />}
+          />
+          <Route
+            path="admin/product/reviews/:id"
+            element={<AllProductReviewsPage />}
+          />
+          <Route path="admin/orders" element={<AllOrdersPage />} />
+          <Route path="admin/order/:id" element={<ProcessOrderPage />} />
+          <Route path="myorders" element={<MyOrders />} />
+          <Route path="myorders/:id" element={<MyOrderDetails />} />
+        </Route>
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        <Footer />
-      </>
-    </div>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+      <Footer />
+    </Box>
   );
 }
 

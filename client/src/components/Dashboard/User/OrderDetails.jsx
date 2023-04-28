@@ -42,7 +42,7 @@ const OrderDetails = () => {
           {!order && <ErrorNotFound />}
           {order && (
             <>
-              {console.log(order)}
+              {/* {console.log(order)} */}
               <Box
                 sx={{
                   p: 2,

@@ -20,7 +20,6 @@ const Products = () => {
       <Container
         id="products"
         display="flex"
-        // justifyContent="center"
         justifycontent="center"
         sx={{
           p: 4,
@@ -51,8 +50,8 @@ const Products = () => {
             md: 12,
           }}
         >
-          {products?.map((product, idx) => (
-            <ProductsCard product={product} idx={idx} />
+          {products?.map((product) => (
+            <ProductsCard product={product} key={product?._id} />
           ))}
         </Grid>
       </Container>
