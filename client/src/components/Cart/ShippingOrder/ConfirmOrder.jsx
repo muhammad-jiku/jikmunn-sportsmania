@@ -1,8 +1,19 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CheckoutSteps from './CheckoutSteps';
-import { Box, Button, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import PhoneIcon from '@mui/icons-material/Phone';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import CartCard from '../Carts/CartCard';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 const ConfirmOrder = () => {
   const navigate = useNavigate();
@@ -36,84 +47,181 @@ const ConfirmOrder = () => {
   };
 
   return (
-    <>
+    <Box sx={{ minHeight: '100vh' }}>
       <CheckoutSteps activeStep={1} />
-      <Box>
-        <Box>
-          <Box>
-            <Typography>Shipping Info</Typography>
-            <Box>
-              <Box>
-                <Typography variant="p">Name:</Typography>
-                <Typography variant="span">{user?.name}</Typography>
-              </Box>
-              <Box>
-                <Typography variant="p">Phone:</Typography>
-                <Typography variant="span">{shippingInfo?.phoneNo}</Typography>
-              </Box>
-              <Box>
-                <Typography variant="p">Address:</Typography>
-                <Typography variant="span">{address}</Typography>
-              </Box>
-            </Box>
-          </Box>
-          <Box>
-            <Typography>Your Cart Items:</Typography>
-            <Box>
-              {cartItems &&
-                cartItems.map((item) => (
-                  <Box key={item?.product}>
-                    <img src={item?.image} alt="Product" width={275} />
-                    <Link to={`/product/${item?.product}`}>
-                      {item?.name}
-                    </Link>{' '}
-                    <Typography variant="span">
-                      {item?.quantity} X ${item?.price} ={' '}
-                      <Typography variant="h5">
-                        ${item?.price * item?.quantity}
-                      </Typography>
-                    </Typography>
-                  </Box>
-                ))}
-            </Box>
-          </Box>
+      {/* Cards */}
+      <Box
+        sx={{
+          p: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {/*  Personal Info Card */}
+        <Box
+          sx={{
+            p: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: {
+              xs: '100%',
+              md: '60%',
+            },
+            borderRadius: '30px',
+            boxShadow: '5px 5px 10px black',
+          }}
+        >
+          <Typography
+            varinat="span"
+            color="primary.main"
+            textAlign="center"
+            sx={{
+              fontSize: {
+                xs: '18px',
+                sm: '22px',
+                md: '26px',
+              },
+            }}
+          >
+            Shipping Details Information
+          </Typography>
+          {/* Name */}
+          <TextField
+            sx={{ pt: 2 }}
+            fullWidth
+            variant="standard"
+            defaultValue={user?.name}
+            InputProps={{
+              readOnly: true,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PersonIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+          {/* Phone */}
+          <TextField
+            sx={{ pt: 2 }}
+            fullWidth
+            variant="standard"
+            defaultValue={shippingInfo?.phoneNo}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <PhoneIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+          {/* Address */}
+          <TextField
+            sx={{ pt: 2 }}
+            fullWidth
+            variant="standard"
+            defaultValue={address}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LocationOnIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
         </Box>
-        {/*  */}
-        <Box>
-          <Box>
-            <Typography>Order Summery</Typography>
-            <Box>
-              <Box>
-                <Typography variant="p">Subtotal:</Typography>
-                <Typography variant="span">${subtotal}</Typography>
+        {/*  Carts Item Card */}
+        <Box sx={{ p: 2 }}>
+          {cartItems &&
+            cartItems.map((item) => (
+              <Box key={item?.product}>
+                <CartCard item={item} />
               </Box>
-              <Box>
-                <Typography variant="p">Shipping Charges:</Typography>
-                <Typography variant="span">${shippingPrice}</Typography>
-              </Box>
-              <Box>
-                <Typography variant="p">VAT:</Typography>
-                <Typography variant="span">${tax}</Typography>
-              </Box>
-            </Box>
-
-            <Box>
-              <Typography variant="p">
-                <Typography
-                  sx={{
-                    fontWeight: 800,
-                  }}
-                >
-                  Total:
-                </Typography>
-              </Typography>
-              <Typography variant="span">${totalPrice}</Typography>
-            </Box>
-            <Button onClick={proceedToPayment}>Proceed To Payment</Button>
-          </Box>
+            ))}
         </Box>
       </Box>
-    </>
+      {/* Orders Cost */}
+      <Box
+        sx={{
+          p: 2,
+          display: 'flex',
+          flexDirection: {
+            xs: 'column',
+            md: 'row',
+          },
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          {/*  Subtotal */}
+          <Box
+            sx={{
+              p: 2,
+              fontSize: { xs: '12px', sm: '14px', md: '16px' },
+              fontWeight: 800,
+            }}
+          >
+            <Typography variant="span">Subtotal: </Typography>
+            <Typography variant="span">${subtotal}</Typography>
+          </Box>
+          {/* Shipping Charges*/}
+          <Box
+            sx={{
+              p: 2,
+              fontSize: { xs: '12px', sm: '14px', md: '16px' },
+              fontWeight: 800,
+            }}
+          >
+            <Typography variant="span">Shipping Charges: </Typography>
+            <Typography variant="span">${shippingPrice}</Typography>
+          </Box>
+          {/* VAT */}
+          <Box
+            sx={{
+              p: 2,
+              fontSize: { xs: '12px', sm: '14px', md: '16px' },
+              fontWeight: 800,
+            }}
+          >
+            <Typography variant="span">VAT: </Typography>
+            <Typography variant="span">${tax}</Typography>
+          </Box>
+          {/* Total */}
+          <Box
+            sx={{
+              p: 2,
+              fontSize: { xs: '12px', sm: '14px', md: '16px' },
+              fontWeight: 800,
+            }}
+          >
+            <Typography variant="span">Total: </Typography>
+            <Typography variant="span">${totalPrice}</Typography>
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            p: 2,
+          }}
+        >
+          <Button onClick={proceedToPayment}>
+            <Typography
+              sx={{
+                fontSize: { xs: '12px', sm: '14px', md: '16px' },
+                fontWeight: 900,
+              }}
+            >
+              Proceed To Payment
+            </Typography>{' '}
+            <ArrowRightAltIcon sx={{ ml: 1 }} />
+          </Button>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
