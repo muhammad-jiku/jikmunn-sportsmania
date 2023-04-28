@@ -37,13 +37,14 @@ const CartCard = ({ item }) => {
         sx={{
           my: 2,
           // boxSizing: 'border-box',
-          display: 'flex',
+          display: {
+            xs: 'none',
+            md: 'flex',
+          },
           justifyContent: 'space-between',
           alignItems: 'center',
-          // backgroundColor: 'lightgray',
           borderRadius: '30px',
           boxShadow: '5px 5px 10px black',
-          transition: '0.5s',
         }}
       >
         {console.log(item)}
@@ -74,7 +75,6 @@ const CartCard = ({ item }) => {
             </Link>
             <Typography
               variant="span"
-              // to={`/product/${item?.product}`}
               sx={{ pb: 2, color: 'gray', textDecoration: 'none' }}
             >
               Size: {item?.size}
@@ -151,13 +151,7 @@ const CartCard = ({ item }) => {
               sx={{ fontSize: { xs: '12px', sm: '14px', md: '16px' } }}
             >
               {' '}
-              X ${item?.price}{' '}
-              {/* </Typography>
-          <Typography
-            variant="span"
-            sx={{ fontSize: { xs: '12px', sm: '14px', md: '16px' } }}
-          > */}
-              = ${item?.price * item?.quantity}
+              X ${item?.price} = ${item?.price * item?.quantity}
             </Typography>{' '}
             <Button
               sx={{
@@ -173,6 +167,124 @@ const CartCard = ({ item }) => {
             </Button>
           </Box>
         </Box>
+      </Box>
+
+      {/* Mobile View */}
+      <Box
+        sx={{
+          my: 2,
+          boxSizing: 'border-box',
+          display: {
+            xs: 'flex',
+            md: 'none',
+          },
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: '30px',
+          boxShadow: '5px 5px 10px black',
+        }}
+      >
+        <Box
+          sx={{
+            p: 2,
+            display: {
+              xs: 'flex',
+              md: 'none',
+            },
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <img src={item?.image} alt={item?.name} height={125} />
+          <Link
+            to={`/product/${item?.product}`}
+            style={{
+              color: 'black',
+              marginTop: '10px',
+              textDecoration: 'none',
+            }}
+          >
+            {item?.name}
+          </Link>
+          <Typography
+            variant="span"
+            sx={{ color: 'gray', textDecoration: 'none' }}
+          >
+            Size: {item?.size}
+          </Typography>
+          <Typography
+            variant="span"
+            sx={{ color: 'gray', textDecoration: 'none' }}
+          >
+            ${item?.price}
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
+            my: 2,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Button
+            variant="outlined"
+            sx={{
+              ml: 1,
+              fontSize: '15px',
+            }}
+            onClick={() =>
+              decreaseQuantity(item?.product, item?.size, item?.quantity)
+            }
+          >
+            —
+          </Button>
+          <TextField
+            readOnly
+            type="number"
+            sx={{
+              // height: '22px',
+              width: 50,
+              fontSize: '15px',
+            }}
+            value={item?.quantity}
+            size="small"
+          />
+          <Button
+            variant="outlined"
+            sx={{
+              fontSize: '15px',
+            }}
+            onClick={() =>
+              increaseQuantity(
+                item?.product,
+                item?.size,
+                item?.quantity,
+                item?.stock
+              )
+            }
+          >
+            +
+          </Button>
+        </Box>
+        <Button
+          fullWidth
+          sx={{
+            mt: 2,
+            px: 2,
+            py: 1,
+            fontSize: '16px',
+            borderBottomLeftRadius: '30px',
+            borderBottomRightRadius: '30px',
+          }}
+          variant="contained"
+          onClick={() => deleteCartItems(item?.product)}
+        >
+          Remove
+        </Button>
       </Box>
     </>
   );

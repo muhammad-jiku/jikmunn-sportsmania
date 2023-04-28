@@ -32,7 +32,7 @@ const Carts = () => {
               borderBottom: '2px solid #682404',
               width: {
                 xs: 'auto',
-                sm: '60%',
+                md: '80%',
               },
             }}
           >
