@@ -253,7 +253,7 @@ const OrderDetails = () => {
                           <img
                             src={item?.image}
                             alt="Product"
-                            height={55}
+                            height={75}
                             style={{ marginRight: '5px' }}
                           />
                           <Link

@@ -270,7 +270,7 @@ const NewProduct = () => {
         /> */}
 
         {imagesPreview.map((image, index) => (
-          <img key={index} src={image} alt="Product Preview" height={55} />
+          <img key={index} src={image} alt="Product Preview" height={75} />
         ))}
 
         <Button
