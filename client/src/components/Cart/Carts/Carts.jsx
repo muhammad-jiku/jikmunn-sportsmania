@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Box, Button, Typography } from '@mui/material';
 import CartCard from './CartCard';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 const Carts = () => {
   const navigate = useNavigate();
@@ -56,13 +57,21 @@ const Carts = () => {
               </Box>
             ))}
 
-          <Box>
+          <Box
+            sx={{
+              my: 1,
+              display: 'flex',
+              flexDirection: {
+                xs: 'column',
+                md: 'row',
+              },
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
             <Box
               sx={{
-                my: 1,
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                p: 2,
                 fontSize: '22px',
                 fontWeight: 800,
               }}
@@ -75,15 +84,10 @@ const Carts = () => {
                 )}`}
               </Typography>
             </Box>
-            <Box
-              sx={{
-                my: 1,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Button onClick={checkoutHandler}>Check Out</Button>
+            <Box>
+              <Button onClick={checkoutHandler}>
+                Check Out <ArrowRightAltIcon sx={{ ml: 1 }} />
+              </Button>
             </Box>
           </Box>
         </Box>
