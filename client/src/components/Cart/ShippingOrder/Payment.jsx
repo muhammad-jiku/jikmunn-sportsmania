@@ -4,6 +4,7 @@ import CheckoutSteps from './CheckoutSteps';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
 import {
   useStripe,
   useElements,
@@ -16,6 +17,7 @@ import { clearErrors, createOrder } from '../../../actions/orderAction';
 import { useForm } from 'react-hook-form';
 
 const Payment = () => {
+  const alert = useAlert();
   const navigate = useNavigate();
   const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
 
@@ -98,6 +100,8 @@ const Payment = () => {
       // console.log(paymentMethod);
       if (result.error) {
         payBtn.current.disabled = false;
+        alert.error(result.error.message);
+        alert.error(paymentError);
         // console.log(result.error);
         // console.log(paymentError);
         // console.log(paymentMethod);
@@ -111,22 +115,26 @@ const Payment = () => {
           // console.log(order);
           dispatch(createOrder(order));
           reset();
+          alert.success('Payment Successfull!');
           navigate('/success');
         } else {
-          // console.log("There's some issue while processing payment ");
+          // console.log("There's some issue while processing payment!");
+          alert.error("There's some issue while processing payment!");
         }
       }
     } catch (err) {
       // console.log(err.message);
       payBtn.current.disabled = false;
+      alert.error(err.response.data.message);
     }
   };
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, error]);
+  }, [dispatch, error, alert]);
 
   return (
     <Box sx={{ p: 2 }}>

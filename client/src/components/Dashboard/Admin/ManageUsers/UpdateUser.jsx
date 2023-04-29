@@ -6,6 +6,7 @@ import {
 } from '../../../../actions/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import { UPDATE_USER_RESET } from '../../../../constants/userConstant';
 import { Loader } from '../../../Shared';
 import PersonIcon from '@mui/icons-material/Person';
@@ -21,6 +22,7 @@ import {
 } from '@mui/material';
 
 const UpdateUser = () => {
+  const alert = useAlert();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -60,20 +62,23 @@ const UpdateUser = () => {
       setUserRole(user?.role);
     }
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (updateError) {
+      alert.error(updateError);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
+      alert.success('User Role Updated Successfully');
       navigate('/dashboard/admin/users');
       dispatch({
         type: UPDATE_USER_RESET,
       });
     }
-  }, [dispatch, user, error, updateError, isUpdated, navigate, id]);
+  }, [dispatch, alert, user, error, updateError, isUpdated, navigate, id]);
 
   return (
     <>

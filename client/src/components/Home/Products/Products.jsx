@@ -1,19 +1,22 @@
 import React, { useEffect } from 'react';
 import { Container, Grid, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
 import { getProducts, clearErrors } from '../../../actions/productAction';
 import ProductsCard from '../../Products/Infos/ProductsCard';
 
 const Products = () => {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const { error, products } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
     dispatch(getProducts());
-  }, [dispatch, error]);
+  }, [dispatch, error, alert]);
 
   return (
     <>

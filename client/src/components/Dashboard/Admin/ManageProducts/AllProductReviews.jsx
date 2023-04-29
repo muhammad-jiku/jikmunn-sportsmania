@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
 import {
   clearErrors,
   deleteReviews,
@@ -14,6 +15,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Loader } from '../../../Shared';
 
 const AllProductReviews = () => {
+  const alert = useAlert();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -41,22 +43,35 @@ const AllProductReviews = () => {
     }
 
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
     if (reviewError) {
+      alert.error(reviewError);
       dispatch(clearErrors());
     }
     if (deleteError) {
+      alert.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
+      alert.success('Review Deleted Successfully');
       navigate(`/dashboard/admin/product/reviews/${id}`);
       dispatch({
         type: DELETE_REVIEW_RESET,
       });
     }
-  }, [dispatch, id, error, reviewError, deleteError, navigate, isDeleted]);
+  }, [
+    dispatch,
+    alert,
+    id,
+    error,
+    reviewError,
+    deleteError,
+    navigate,
+    isDeleted,
+  ]);
 
   const columns = [
     { field: 'id', headerName: 'Review ID', minWidth: 200, flex: 0.5 },

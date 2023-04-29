@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { useAlert } from 'react-alert';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,9 +18,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { loginSchema } from '../../../utils/ValidationSchema';
 
 const Login = ({ setAuthProcess }) => {
-  const dispatch = useDispatch();
+  const alert = useAlert();
   const location = useLocation();
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
   const {
     error,
     // loading,
@@ -66,14 +69,16 @@ const Login = ({ setAuthProcess }) => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
+
     if (isAuthenticated) {
       navigate(from, {
         replace: true,
       });
     }
-  }, [dispatch, error, isAuthenticated, navigate, from]);
+  }, [dispatch, error, alert, isAuthenticated, navigate, from]);
 
   return (
     <Box

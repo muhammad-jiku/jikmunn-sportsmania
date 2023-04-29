@@ -12,8 +12,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
 import { DELETE_USER_RESET } from '../../../../constants/userConstant';
 import { Loader } from '../../../Shared';
+import { useAlert } from 'react-alert';
 
 const AllUsers = () => {
+  const alert = useAlert();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -32,14 +34,17 @@ const AllUsers = () => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (deleteError) {
+      alert.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
+      alert.success(message);
       navigate('/dashboard/admin/users');
       dispatch({
         type: DELETE_USER_RESET,
@@ -47,7 +52,7 @@ const AllUsers = () => {
     }
 
     dispatch(getAllUsers());
-  }, [dispatch, error, deleteError, navigate, isDeleted]);
+  }, [dispatch, alert, error, deleteError, navigate, isDeleted, message]);
 
   const columns = [
     { field: 'id', headerName: 'User ID', minWidth: 180, flex: 0.8 },

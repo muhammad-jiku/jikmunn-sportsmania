@@ -13,6 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import profile from '../../../assets/images/avatar_1.png';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
 import { Country, State } from 'country-state-city';
 import {
   clearErrors,
@@ -26,7 +27,9 @@ import { userInfoSchema } from '../../../utils/ValidationSchema';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 const Profile = () => {
+  const alert = useAlert();
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
@@ -91,6 +94,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
@@ -107,13 +111,14 @@ const Profile = () => {
     }
 
     if (isUpdated) {
+      alert.success('Profile Updated Successfully');
       dispatch(loadUser());
       navigate('/dashboard');
       dispatch({
         type: UPDATE_PROFILE_RESET,
       });
     }
-  }, [dispatch, error, isUpdated, navigate, user]);
+  }, [dispatch, error, alert, isUpdated, navigate, user]);
 
   return (
     <>

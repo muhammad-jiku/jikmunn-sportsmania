@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, forgotPassword } from '../../../actions/userAction';
 import { Loader } from '../../Shared';
 import { useForm } from 'react-hook-form';
+import { useAlert } from 'react-alert';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { forgetPasswordSchema } from '../../../utils/ValidationSchema';
 
 const ForgetPassword = () => {
+  const alert = useAlert();
+
   const dispatch = useDispatch();
 
   const { error, message, loading } = useSelector(
@@ -31,22 +34,18 @@ const ForgetPassword = () => {
     dispatch(forgotPassword(emailInfo));
   };
 
-  // useEffect(() => {
-  //   if (isSubmitSuccessful) {
-  //     reset();
-  //   }
-  // }, [isSubmitSuccessful, reset]);
-
   useEffect(() => {
     if (error) {
       // console.log(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (message) {
       // console.log(message);
+      alert.success(message);
     }
-  }, [dispatch, error, message]);
+  }, [dispatch, error, alert, message]);
 
   return (
     <>

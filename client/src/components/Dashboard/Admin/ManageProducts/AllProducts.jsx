@@ -6,6 +6,7 @@ import {
   getAdminProduct,
 } from '../../../../actions/productAction';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import { Box, Button, Typography, Link as TextLink } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -14,6 +15,7 @@ import { DELETE_PRODUCT_RESET } from '../../../../constants/productConstant';
 import { Loader } from '../../../Shared';
 
 const AllProducts = () => {
+  const alert = useAlert();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -30,14 +32,17 @@ const AllProducts = () => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (deleteError) {
+      alert.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
+      alert.success('Product Deleted Successfully');
       navigate('/dashboard/admin');
       dispatch({
         type: DELETE_PRODUCT_RESET,
@@ -45,7 +50,7 @@ const AllProducts = () => {
     }
 
     dispatch(getAdminProduct());
-  }, [dispatch, error, deleteError, isDeleted, navigate]);
+  }, [dispatch, error, alert, deleteError, isDeleted, navigate]);
 
   const columns = [
     {

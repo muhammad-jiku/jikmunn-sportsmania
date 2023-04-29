@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import { UPDATE_ORDER_RESET } from '../../../../constants/orderConstant';
 import {
   clearErrors,
@@ -12,6 +13,7 @@ import { Box, Button, Typography } from '@mui/material';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 
 const ProcessOrder = () => {
+  const alert = useAlert();
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -32,19 +34,22 @@ const ProcessOrder = () => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
     if (updateError) {
+      alert.error(updateError);
       dispatch(clearErrors());
     }
     if (isUpdated) {
+      alert.success('Order Updated Successfully');
       dispatch({
         type: UPDATE_ORDER_RESET,
       });
     }
 
     dispatch(getOrderDetails(id));
-  }, [dispatch, error, updateError, isUpdated, id]);
+  }, [dispatch, alert, error, updateError, isUpdated, id]);
 
   return (
     <>

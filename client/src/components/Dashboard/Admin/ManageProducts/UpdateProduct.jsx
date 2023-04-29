@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import {
   clearErrors,
   getProductDetails,
@@ -23,6 +24,7 @@ import StorageIcon from '@mui/icons-material/Storage';
 import { Loader } from '../../../Shared';
 
 const UpdateProduct = () => {
+  const alert = useAlert();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -72,20 +74,23 @@ const UpdateProduct = () => {
       setOldImages(product?.images);
     }
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (updateError) {
+      alert.error(updateError);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
+      alert.success('Product Updated Successfully');
       navigate('/dashboard/admin/products');
       dispatch({
         type: UPDATE_PRODUCT_RESET,
       });
     }
-  }, [dispatch, id, error, updateError, navigate, isUpdated, product]);
+  }, [dispatch, alert, id, error, updateError, navigate, isUpdated, product]);
 
   const updateProductSubmitHandler = (e) => {
     e.preventDefault();

@@ -19,10 +19,12 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useAlert } from 'react-alert';
 import { logoutUser } from '../../actions/userAction';
 
 const Navbar = ({ isAuthenticated, user }) => {
-  const navigate = useNavigate('');
+  const alert = useAlert();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -46,6 +48,7 @@ const Navbar = ({ isAuthenticated, user }) => {
 
   const handleLogoutUser = () => {
     dispatch(logoutUser());
+    alert.success('Logout Successfully');
     localStorage?.removeItem('token');
     localStorage?.removeItem('cartItems');
     localStorage?.removeItem('shippingInfo');

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import {
   Box,
   Button,
@@ -19,6 +20,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HeightIcon from '@mui/icons-material/Height';
 
 const ProductDetails = () => {
+  const alert = useAlert();
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -63,10 +65,12 @@ const ProductDetails = () => {
   const handleAddProductToCart = () => {
     // console.log(id, size, quantity);
     dispatch(addItemsToCart(id, size, quantity));
+    alert.success('Item Added To Cart');
   };
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
@@ -75,8 +79,9 @@ const ProductDetails = () => {
     //   setSelectedImage(`${product?.images[0]?.url}`);
     // }
   }, [
-    error,
     dispatch,
+    error,
+    alert,
     id,
     product,
     product?.ratings,

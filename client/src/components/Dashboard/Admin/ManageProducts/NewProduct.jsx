@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, createProduct } from '../../../../actions/productAction';
 import { useNavigate } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import { NEW_PRODUCT_RESET } from '../../../../constants/productConstant';
 import {
   Box,
@@ -17,6 +18,7 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import StorageIcon from '@mui/icons-material/Storage';
 
 const NewProduct = () => {
+  const alert = useAlert();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -42,16 +44,18 @@ const NewProduct = () => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (success) {
+      alert.success('New Product Added Successfully!');
       navigate('/dashboard/admin/products');
       dispatch({
         type: NEW_PRODUCT_RESET,
       });
     }
-  }, [dispatch, error, navigate, success]);
+  }, [dispatch, alert, error, navigate, success]);
 
   const createProductSubmitHandler = (e) => {
     e.preventDefault();

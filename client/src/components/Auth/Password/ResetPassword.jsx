@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { clearErrors, resetPassword } from '../../../actions/userAction';
 import { useForm } from 'react-hook-form';
+import { useAlert } from 'react-alert';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate, useParams } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
@@ -18,9 +19,15 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { resetPasswordSchema } from '../../../utils/ValidationSchema';
 
 const ResetPassword = () => {
+  const alert = useAlert();
   const { token } = useParams();
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
+  const { error, success, loading } = useSelector(
+    (state) => state.forgotPassword
+  );
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -31,10 +38,6 @@ const ResetPassword = () => {
   const handleMouseDownPassword = (e) => {
     e.preventDefault();
   };
-
-  const { error, success, loading } = useSelector(
-    (state) => state.forgotPassword
-  );
 
   const {
     register,
@@ -62,13 +65,15 @@ const ResetPassword = () => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (success) {
+      alert.success('Password Updated Successfully');
       navigate('/login');
     }
-  }, [dispatch, error, navigate, success]);
+  }, [dispatch, error, alert, navigate, success]);
 
   return (
     <>

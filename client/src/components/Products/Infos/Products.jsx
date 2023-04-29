@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
 import ProductsCard from './ProductsCard';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -25,6 +26,8 @@ import { clearErrors, getProducts } from '../../../actions/productAction';
 import { Loader } from '../../Shared';
 
 const Products = () => {
+  const alert = useAlert();
+
   const dispatch = useDispatch();
 
   const categories = [
@@ -110,10 +113,20 @@ const Products = () => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
     dispatch(getProducts(keyword, currentPage, priceRange, category, ratings));
-  }, [dispatch, keyword, currentPage, priceRange, category, ratings, error]);
+  }, [
+    dispatch,
+    keyword,
+    currentPage,
+    priceRange,
+    category,
+    ratings,
+    error,
+    alert,
+  ]);
 
   return (
     <>

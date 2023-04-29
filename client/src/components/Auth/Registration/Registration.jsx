@@ -21,16 +21,21 @@ import profile from '../../../assets/images/avatar_1.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, registerUser } from '../../../actions/userAction';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { registerSchema } from '../../../utils/ValidationSchema';
 
 const Registration = ({ setAuthProcess }) => {
-  const dispatch = useDispatch();
+  const alert = useAlert();
   const location = useLocation();
   const navigate = useNavigate();
-  const { error, loading, isAuthenticated } = useSelector(
-    (state) => state.user
-  );
+
+  const dispatch = useDispatch();
+  const {
+    error,
+    // loading,
+    isAuthenticated,
+  } = useSelector((state) => state.user);
 
   const [isChecked, setIsChecked] = useState(false);
   const [avatar, setAvatar] = useState(`${profile}`);
@@ -95,14 +100,16 @@ const Registration = ({ setAuthProcess }) => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
+
     if (isAuthenticated) {
       navigate(from, {
         replace: true,
       });
     }
-  }, [dispatch, error, isAuthenticated, navigate, from]);
+  }, [dispatch, error, alert, isAuthenticated, navigate, from]);
 
   return (
     <Box

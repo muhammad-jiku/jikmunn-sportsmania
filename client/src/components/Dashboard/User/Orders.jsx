@@ -6,8 +6,10 @@ import { Box, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import LaunchIcon from '@mui/icons-material/Launch';
+import { useAlert } from 'react-alert';
 
 const Orders = () => {
+  const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, error, orders } = useSelector((state) => state.myOrders);
 
@@ -77,10 +79,11 @@ const Orders = () => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
     dispatch(myOrders());
-  }, [dispatch, error]);
+  }, [dispatch, alert, error]);
 
   return (
     <>

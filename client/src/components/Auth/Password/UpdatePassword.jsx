@@ -11,6 +11,7 @@ import { Loader } from '../../Shared';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { useAlert } from 'react-alert';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { clearErrors, updatePassword } from '../../../actions/userAction';
 import Visibility from '@mui/icons-material/Visibility';
@@ -19,6 +20,7 @@ import { UPDATE_PASSWORD_RESET } from '../../../constants/userConstant';
 import { updatePasswordSchema } from '../../../utils/ValidationSchema';
 
 const UpdatePassword = () => {
+  const alert = useAlert();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -63,17 +65,19 @@ const UpdatePassword = () => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
+      alert.success('Password Updated Successfully!');
       navigate('/dashboard');
 
       dispatch({
         type: UPDATE_PASSWORD_RESET,
       });
     }
-  }, [dispatch, error, isUpdated, navigate]);
+  }, [dispatch, error, alert, isUpdated, navigate]);
 
   return (
     <>

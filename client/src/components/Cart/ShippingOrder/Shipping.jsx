@@ -19,10 +19,12 @@ import {
   Typography,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { useAlert } from 'react-alert';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { shippingSchema } from '../../../utils/ValidationSchema';
 
 const Shipping = () => {
+  const alert = useAlert();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -54,7 +56,7 @@ const Shipping = () => {
       phoneNo: values.phone,
     };
     // console.log(shippingDetails);
-
+    alert.success('Shipping Details Info Fulfilled!');
     dispatch(saveShippingInfo(shippingDetails));
     reset();
     navigate('/order/confirm');

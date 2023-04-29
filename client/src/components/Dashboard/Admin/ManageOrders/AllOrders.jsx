@@ -6,6 +6,7 @@ import {
   getAllOrders,
 } from '../../../../actions/orderAction';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Button, Typography } from '@mui/material';
@@ -14,6 +15,7 @@ import { DELETE_ORDER_RESET } from '../../../../constants/orderConstant';
 import { Loader } from '../../../Shared';
 
 const AllOrders = () => {
+  const alert = useAlert();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -28,14 +30,17 @@ const AllOrders = () => {
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     if (deleteError) {
+      alert.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
+      alert.success('Order Deleted Successfully');
       navigate('/dashboard/admin/orders');
       dispatch({
         type: DELETE_ORDER_RESET,
@@ -43,7 +48,7 @@ const AllOrders = () => {
     }
 
     dispatch(getAllOrders());
-  }, [dispatch, error, deleteError, navigate, isDeleted]);
+  }, [dispatch, alert, error, deleteError, navigate, isDeleted]);
 
   const columns = [
     { field: 'id', headerName: 'Order ID', minWidth: 300, flex: 1 },

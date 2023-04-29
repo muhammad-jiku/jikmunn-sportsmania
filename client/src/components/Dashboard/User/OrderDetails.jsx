@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 import { clearErrors, getOrderDetails } from '../../../actions/orderAction';
 import { ErrorNotFound, Loader } from '../../Shared';
 import {
   Box,
   Button,
   Divider,
-  InputAdornment,
   TextField,
+  InputAdornment,
   Typography,
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
@@ -21,17 +22,19 @@ const OrderDetails = () => {
     Date.now() + 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 10
   );
 
+  const alert = useAlert();
   const { id } = useParams();
   const dispatch = useDispatch();
   const { order, error, loading } = useSelector((state) => state.orderDetails);
 
   useEffect(() => {
     if (error) {
+      alert.error(error);
       dispatch(clearErrors());
     }
 
     dispatch(getOrderDetails(id));
-  }, [dispatch, error, id]);
+  }, [dispatch, error, alert, id]);
 
   return (
     <>
