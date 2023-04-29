@@ -18,6 +18,7 @@ import Reviews from '../Reviews/Reviews';
 import { addItemsToCart } from '../../../actions/cartAction';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HeightIcon from '@mui/icons-material/Height';
+import MetaData from '../../../utils/MetaData';
 
 const ProductDetails = () => {
   const alert = useAlert();
@@ -98,6 +99,7 @@ const ProductDetails = () => {
           {!product && <ErrorNotFound />}
           {product && (
             <>
+              <MetaData title={`${product?.name}`} />
               {/* {console.log(product)} */}
               <Box
                 sx={{
