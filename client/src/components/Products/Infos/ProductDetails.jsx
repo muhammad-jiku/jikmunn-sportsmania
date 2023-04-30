@@ -20,7 +20,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HeightIcon from '@mui/icons-material/Height';
 import MetaData from '../../../utils/MetaData';
 
-const ProductDetails = () => {
+const ProductDetails = ({ user }) => {
+  console.log(user);
   const alert = useAlert();
   const { id } = useParams();
 
@@ -173,6 +174,7 @@ const ProductDetails = () => {
                   <Typography variant="h6" sx={{ fontWeight: 800 }}>
                     {product?.name}
                   </Typography>
+
                   {/*  Rating */}
                   <Typography
                     variant="span"
@@ -196,14 +198,17 @@ const ProductDetails = () => {
                       )
                     </Typography>
                   </Typography>
+
                   {/*  Price */}
                   <Typography variant="h7" sx={{ my: 0.5, fontWeight: 600 }}>
                     ${product?.price}
                   </Typography>
+
                   {/*  Desc */}
                   <Typography variant="p" sx={{ my: 1, fontWeight: 400 }}>
                     {product?.description}
                   </Typography>
+
                   {/*  Size */}
                   <Box
                     sx={{
@@ -291,7 +296,11 @@ const ProductDetails = () => {
                       sx={{
                         p: 1,
                       }}
-                      disabled={product?.stock <= 10}
+                      disabled={
+                        user?.role === 'admin' || product?.stock <= 10
+                          ? true
+                          : false
+                      }
                       onClick={handleAddProductToCart}
                     >
                       <Typography
@@ -316,10 +325,12 @@ const ProductDetails = () => {
                       />
                     </Button>
                   </Typography>
+
                   {/*  Category */}
                   <Typography variant="p" sx={{ my: 1, fontWeight: 600 }}>
                     Category: {product?.category}
                   </Typography>
+
                   {/*  Stock */}
                   <Typography variant="p" sx={{ mb: 1, fontWeight: 600 }}>
                     Availability:
@@ -329,9 +340,11 @@ const ProductDetails = () => {
                       <span style={{ color: 'green' }}> In Stock</span>
                     )}
                   </Typography>
+
                   {/*  Review */}
                   <Button
                     variant="outlined"
+                    disabled={user?.role === 'admin' ? true : false}
                     onClick={handleClickOpen}
                     sx={{
                       mt: 2,
@@ -340,6 +353,7 @@ const ProductDetails = () => {
                   >
                     Add Review
                   </Button>
+
                   <AddReview
                     open={open}
                     setOpen={setOpen}

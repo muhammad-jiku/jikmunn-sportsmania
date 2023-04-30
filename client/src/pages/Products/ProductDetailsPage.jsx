@@ -1,10 +1,10 @@
 import React from 'react';
 import { ProductDetails } from '../../components/Products';
 
-const ProductDetailsPage = () => {
+const ProductDetailsPage = ({ user }) => {
   return (
     <>
-      <ProductDetails />
+      <ProductDetails user={user} />
     </>
   );
 };

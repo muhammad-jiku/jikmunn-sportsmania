@@ -83,7 +83,7 @@ function App() {
           path="/product/:id"
           element={
             <RequiredAuth isAuthenticated={isAuthenticated}>
-              <ProductDetailsPage />
+              <ProductDetailsPage user={user} />
             </RequiredAuth>
           }
         />
