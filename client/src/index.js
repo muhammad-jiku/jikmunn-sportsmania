@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import { sportsStore } from './utils/store';
 import { positions, transitions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+import { HelmetProvider } from 'react-helmet-async';
 
 const options = {
   timeout: 5000,
@@ -24,9 +25,11 @@ root.render(
       <CssBaseline />
       <BrowserRouter>
         <Provider store={sportsStore}>
-          <AlertProvider template={AlertTemplate} {...options}>
-            <App />
-          </AlertProvider>
+          <HelmetProvider>
+            <AlertProvider template={AlertTemplate} {...options}>
+              <App />
+            </AlertProvider>
+          </HelmetProvider>
         </Provider>
       </BrowserRouter>
     </ThemeProvider>

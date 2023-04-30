@@ -238,6 +238,7 @@ const OrderDetails = () => {
                   {order?.orderItems &&
                     order?.orderItems.map((item) => (
                       <Box
+                        key={item?.product}
                         sx={{
                           display: 'flex',
                           alignItems: 'center',
@@ -245,7 +246,6 @@ const OrderDetails = () => {
                         }}
                       >
                         <Box
-                          key={item?.product}
                           sx={{
                             my: 0.5,
                             display: 'flex',
