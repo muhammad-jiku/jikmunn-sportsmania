@@ -112,38 +112,58 @@ const Sidebar = () => {
                 My Profile
               </Typography>
             </ListItem>
+            {user?.role === 'admin' && (
+              <>
+                <ListItem
+                  disablePadding
+                  sx={{
+                    color: 'primary.main',
+                    cursor: 'pointer',
+                    pt: 1.5,
+                  }}
+                  onClick={() => navigate('/dashboard/admin')}
+                >
+                  <DashboardIcon />
+                  <Typography variant="span" sx={{ ml: 1 }}>
+                    {' '}
+                    Dashboard
+                  </Typography>
+                </ListItem>
 
-            <ListItem
-              disablePadding
-              sx={{
-                color: 'primary.main',
-                cursor: 'pointer',
-                pt: 1.5,
-              }}
-              onClick={() => navigate('/dashboard/admin')}
-            >
-              <DashboardIcon />
-              <Typography variant="span" sx={{ ml: 1 }}>
-                {' '}
-                Dashboard
-              </Typography>
-            </ListItem>
-
-            <ListItem
-              disablePadding
-              sx={{
-                color: 'primary.main',
-                cursor: 'pointer',
-                pt: 1.5,
-              }}
-              onClick={() => navigate('/dashboard/admin/product/new')}
-            >
-              <AddCircleIcon />
-              <Typography variant="span" sx={{ ml: 1 }}>
-                {' '}
-                Add Product
-              </Typography>
-            </ListItem>
+                <ListItem
+                  disablePadding
+                  sx={{
+                    color: 'primary.main',
+                    cursor: 'pointer',
+                    pt: 1.5,
+                  }}
+                  onClick={() => navigate('/dashboard/admin/product/new')}
+                >
+                  <AddCircleIcon />
+                  <Typography variant="span" sx={{ ml: 1 }}>
+                    {' '}
+                    Add Product
+                  </Typography>
+                </ListItem>
+              </>
+            )}
+            {user?.role === 'user' && (
+              <ListItem
+                disablePadding
+                sx={{
+                  color: 'primary.main',
+                  cursor: 'pointer',
+                  pt: 1.5,
+                }}
+                onClick={() => navigate('/dashboard/myorders')}
+              >
+                <ShoppingCartIcon />
+                <Typography variant="span" sx={{ ml: 1 }}>
+                  {' '}
+                  My Orders
+                </Typography>
+              </ListItem>
+            )}
 
             <ListItem
               disablePadding
@@ -158,22 +178,6 @@ const Sidebar = () => {
               <Typography variant="span" sx={{ ml: 1 }}>
                 {' '}
                 Profile Shield
-              </Typography>
-            </ListItem>
-
-            <ListItem
-              disablePadding
-              sx={{
-                color: 'primary.main',
-                cursor: 'pointer',
-                pt: 1.5,
-              }}
-              onClick={() => navigate('/dashboard/myorders')}
-            >
-              <ShoppingCartIcon />
-              <Typography variant="span" sx={{ ml: 1 }}>
-                {' '}
-                My Orders
               </Typography>
             </ListItem>
           </List>
@@ -215,53 +219,83 @@ const Sidebar = () => {
               </ListItem>
             </SwiperSlide>
 
-            <SwiperSlide>
-              {' '}
-              <ListItem
-                disablePadding
-                sx={{
-                  color: 'primary.main',
-                  cursor: 'pointer',
-                  px: 0.5,
-                  py: 1.5,
-                  borderRight: '2px solid brown',
-                }}
-                onClick={() => navigate('/dashboard/admin')}
-              >
-                <DashboardIcon />
-                <Typography
-                  variant="span"
-                  sx={{ ml: 1, fontSize: '12px', fontWeight: 900 }}
-                >
+            {user?.role === 'admin' && (
+              <>
+                <SwiperSlide>
                   {' '}
-                  Dashboard
-                </Typography>
-              </ListItem>
-            </SwiperSlide>
+                  <ListItem
+                    disablePadding
+                    sx={{
+                      color: 'primary.main',
+                      cursor: 'pointer',
+                      px: 0.5,
+                      py: 1.5,
+                      borderRight: '2px solid brown',
+                    }}
+                    onClick={() => navigate('/dashboard/admin')}
+                  >
+                    <DashboardIcon />
+                    <Typography
+                      variant="span"
+                      sx={{ ml: 1, fontSize: '12px', fontWeight: 900 }}
+                    >
+                      {' '}
+                      Dashboard
+                    </Typography>
+                  </ListItem>
+                </SwiperSlide>
 
-            <SwiperSlide>
-              {' '}
-              <ListItem
-                disablePadding
-                sx={{
-                  color: 'primary.main',
-                  cursor: 'pointer',
-                  px: 0.5,
-                  py: 1.5,
-                  borderRight: '2px solid brown',
-                }}
-                onClick={() => navigate('/dashboard/admin/product/new')}
-              >
-                <AddCircleIcon />
-                <Typography
-                  variant="span"
-                  sx={{ ml: 1, fontSize: '12px', fontWeight: 900 }}
-                >
+                <SwiperSlide>
                   {' '}
-                  Add Product
-                </Typography>
-              </ListItem>
-            </SwiperSlide>
+                  <ListItem
+                    disablePadding
+                    sx={{
+                      color: 'primary.main',
+                      cursor: 'pointer',
+                      px: 0.5,
+                      py: 1.5,
+                      borderRight: '2px solid brown',
+                    }}
+                    onClick={() => navigate('/dashboard/admin/product/new')}
+                  >
+                    <AddCircleIcon />
+                    <Typography
+                      variant="span"
+                      sx={{ ml: 1, fontSize: '12px', fontWeight: 900 }}
+                    >
+                      {' '}
+                      Add Product
+                    </Typography>
+                  </ListItem>
+                </SwiperSlide>
+              </>
+            )}
+
+            {user?.role === 'user' && (
+              <SwiperSlide>
+                {' '}
+                <ListItem
+                  disablePadding
+                  sx={{
+                    color: 'primary.main',
+                    cursor: 'pointer',
+                    px: 0.5,
+                    py: 1.5,
+                    borderRight: '2px solid brown',
+                  }}
+                  onClick={() => navigate('/dashboard/myorders')}
+                >
+                  <ShoppingCartIcon />
+                  <Typography
+                    variant="span"
+                    sx={{ ml: 1, fontSize: '12px', fontWeight: 900 }}
+                  >
+                    {' '}
+                    My Orders
+                  </Typography>
+                </ListItem>
+              </SwiperSlide>
+            )}
 
             <SwiperSlide>
               {' '}
@@ -285,30 +319,6 @@ const Sidebar = () => {
                 >
                   {' '}
                   Profile Shield
-                </Typography>
-              </ListItem>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              {' '}
-              <ListItem
-                disablePadding
-                sx={{
-                  color: 'primary.main',
-                  cursor: 'pointer',
-                  px: 0.5,
-                  py: 1.5,
-                  // borderRight: '2px solid brown',
-                }}
-                onClick={() => navigate('/dashboard/myorders')}
-              >
-                <ShoppingCartIcon />
-                <Typography
-                  variant="span"
-                  sx={{ ml: 1, fontSize: '12px', fontWeight: 900 }}
-                >
-                  {' '}
-                  My Orders
                 </Typography>
               </ListItem>
             </SwiperSlide>

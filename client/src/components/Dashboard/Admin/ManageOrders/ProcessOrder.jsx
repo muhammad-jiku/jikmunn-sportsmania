@@ -139,7 +139,7 @@ const ProcessOrder = () => {
                     {order?.orderItems &&
                       order?.orderItems.map((item) => (
                         <Box key={item.product}>
-                          <img src={item.image} alt="Product" />
+                          <img src={item.image} alt="Product" height={55} />
                           <Link to={`/product/${item.product}`}>
                             {item.name}
                           </Link>{' '}

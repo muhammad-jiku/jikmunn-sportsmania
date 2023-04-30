@@ -7,7 +7,7 @@ import {
 } from '../../../../actions/productAction';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAlert } from 'react-alert';
-import { Box, Button, Typography, Link as TextLink } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DataGrid } from '@mui/x-data-grid';
@@ -61,15 +61,14 @@ const AllProducts = () => {
       renderCell: (params) => {
         return (
           <>
-            <TextLink
-              // to={`/dashboard/admin/product/reviews/${params.id}`}
-              href={`/dashboard/admin/product/reviews/${params.id}`}
-              underline="none"
+            <Link
+              to={`/dashboard/admin/product/reviews/${params.id}`}
+              style={{ textDecoration: 'none' }}
             >
               <Typography variant="span" color="gray">
                 {params.id}
               </Typography>
-            </TextLink>
+            </Link>
           </>
         );
       },

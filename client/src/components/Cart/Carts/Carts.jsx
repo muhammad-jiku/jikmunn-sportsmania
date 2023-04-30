@@ -15,8 +15,8 @@ const Carts = () => {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh' }}>
-      {cartItems ? (
+    <Box>
+      {cartItems?.length !== 0 ? (
         <Box
           sx={{
             p: 2,
@@ -25,6 +25,7 @@ const Carts = () => {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
+            minHeight: '100vh',
           }}
         >
           <Box
@@ -96,9 +97,14 @@ const Carts = () => {
           sx={{
             m: 2,
             p: 2,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh',
+            fontWeight: 800,
           }}
         >
-          <Typography variant="h7" textAlign="center" color="red">
+          <Typography variant="span" color="red" fontSize={'22px'}>
             No items added to your cart!
           </Typography>
         </Box>
