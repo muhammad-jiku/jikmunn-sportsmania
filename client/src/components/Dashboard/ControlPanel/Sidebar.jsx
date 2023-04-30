@@ -204,7 +204,7 @@ const Sidebar = () => {
                   cursor: 'pointer',
                   px: 0.5,
                   py: 1.5,
-                  borderRight: '2px solid brown',
+                  borderRight: '2px solid #682404',
                 }}
                 onClick={() => navigate('/dashboard')}
               >
@@ -230,7 +230,7 @@ const Sidebar = () => {
                       cursor: 'pointer',
                       px: 0.5,
                       py: 1.5,
-                      borderRight: '2px solid brown',
+                      borderRight: '2px solid #682404',
                     }}
                     onClick={() => navigate('/dashboard/admin')}
                   >
@@ -254,7 +254,7 @@ const Sidebar = () => {
                       cursor: 'pointer',
                       px: 0.5,
                       py: 1.5,
-                      borderRight: '2px solid brown',
+                      borderRight: '2px solid #682404',
                     }}
                     onClick={() => navigate('/dashboard/admin/product/new')}
                   >
@@ -281,7 +281,7 @@ const Sidebar = () => {
                     cursor: 'pointer',
                     px: 0.5,
                     py: 1.5,
-                    borderRight: '2px solid brown',
+                    borderRight: '2px solid #682404',
                   }}
                   onClick={() => navigate('/dashboard/myorders')}
                 >
@@ -306,7 +306,7 @@ const Sidebar = () => {
                   cursor: 'pointer',
                   px: 0.5,
                   py: 1.5,
-                  borderRight: '2px solid brown',
+                  borderRight: '2px solid #682404',
                   // width: '150px',
                   // mr: 2,
                 }}

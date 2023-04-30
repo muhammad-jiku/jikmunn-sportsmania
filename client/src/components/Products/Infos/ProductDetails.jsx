@@ -145,7 +145,7 @@ const ProductDetails = () => {
                             onClick={() => setSelectedImage(item?.url)}
                             style={{
                               margin: '2px',
-                              border: '1px solid brown',
+                              border: '1px solid #682404',
                               cursor: 'pointer',
                             }}
                           />
