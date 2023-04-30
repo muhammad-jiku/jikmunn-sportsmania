@@ -43,7 +43,8 @@ const AdminPanel = () => {
         outOfStock += 1;
       }
     });
-  console.log(outOfStock);
+  // console.log(outOfStock);
+
   useEffect(() => {
     dispatch(getAllUsers());
     dispatch(getAllOrders());

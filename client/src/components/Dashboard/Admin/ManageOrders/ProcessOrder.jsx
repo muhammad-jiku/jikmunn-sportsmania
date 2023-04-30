@@ -8,9 +8,21 @@ import {
   updateOrder,
   getOrderDetails,
 } from '../../../../actions/orderAction';
-import { Loader } from '../../../Shared';
-import { Box, Button, Typography } from '@mui/material';
+import { ErrorNotFound, Loader } from '../../../Shared';
+import {
+  Box,
+  Button,
+  Divider,
+  InputAdornment,
+  MenuItem,
+  TextField,
+  Typography,
+} from '@mui/material';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import PersonIcon from '@mui/icons-material/Person';
+import PhoneIcon from '@mui/icons-material/Phone';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const ProcessOrder = () => {
   const alert = useAlert();
@@ -20,7 +32,9 @@ const ProcessOrder = () => {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { error: updateError, isUpdated } = useSelector((state) => state.order);
 
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(order ? order?.orderStatus : '');
+
+  const orderDeliveryStatus = ['Processing', 'Shipped', 'Delivered'];
 
   const updateOrderSubmitHandler = (e) => {
     e.preventDefault();
@@ -55,141 +69,336 @@ const ProcessOrder = () => {
 
   return (
     <>
+      {console.log(order)}
+
       <Box>
-        {/* {console.log(order)} */}
         <Box>
           {loading ? (
             <Loader />
           ) : (
-            <Box
-              sx={{
-                display: order?.orderStatus === 'Delivered' ? 'block' : 'grid',
-              }}
-            >
-              <Box>
-                <Box>
-                  <Typography>Shipping Info</Typography>
-                  <Box>
-                    <Box>
-                      <Typography variant="p">Name:</Typography>
-                      <Typography variant="span">
-                        {order?.user && order?.user.name}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography variant="p">Phone:</Typography>
-                      <Typography variant="span">
-                        {order?.shippingInfo && order?.shippingInfo.phoneNo}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography variant="p">Address:</Typography>
-                      <Typography variant="span">
-                        {order?.shippingInfo &&
-                          `${order?.shippingInfo.address}, ${order?.shippingInfo.city}, ${order?.shippingInfo.state}, ${order?.shippingInfo.pinCode}, ${order?.shippingInfo.country}`}
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  <Typography>Payment</Typography>
-                  <Box>
-                    <Box>
-                      <Typography
-                        variant="p"
-                        color={
-                          order?.paymentInfo &&
-                          order?.paymentInfo.status === 'succeeded'
-                            ? 'green'
-                            : 'red'
-                        }
-                      >
-                        {order?.paymentInfo &&
-                        order?.paymentInfo.status === 'succeeded'
-                          ? 'PAID'
-                          : 'NOT PAID'}
-                      </Typography>
-                    </Box>
-
-                    <Box>
-                      <Typography variant="p">Amount:</Typography>
-                      <Typography variant="span">
-                        {order?.totalPrice && order?.totalPrice}
-                      </Typography>
-                    </Box>
-                  </Box>
-
-                  <Typography>Order Status</Typography>
-                  <Box>
-                    <Box>
-                      <Typography
-                        variant="p"
-                        color={
-                          order?.orderStatus &&
-                          order?.orderStatus === 'Delivered'
-                            ? 'green'
-                            : 'red'
-                        }
-                      >
-                        {order?.orderStatus && order?.orderStatus}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box>
-                  <Typography>Your Cart Items:</Typography>
-                  <Box>
-                    {order?.orderItems &&
-                      order?.orderItems.map((item) => (
-                        <Box key={item.product}>
-                          <img src={item.image} alt="Product" height={55} />
-                          <Link to={`/product/${item.product}`}>
-                            {item.name}
-                          </Link>{' '}
-                          <Typography variant="span">
-                            {item.quantity} X ${item.price} ={' '}
-                            <b>${item.price * item.quantity}</b>
-                          </Typography>
-                        </Box>
-                      ))}
-                  </Box>
-                </Box>
-              </Box>
-              {/*  */}
-              <Box
-                sx={{
-                  display:
-                    order?.orderStatus === 'Delivered' ? 'none' : 'block',
-                }}
-              >
-                <form onSubmit={updateOrderSubmitHandler}>
-                  <Typography variant="h7">Process Order</Typography>
-
-                  <Box>
-                    <AccountTreeIcon />
-                    <select onChange={(e) => setStatus(e.target.value)}>
-                      <option value="">Choose Category</option>
-                      {order?.orderStatus === 'Processing' && (
-                        <option value="Shipped">Shipped</option>
-                      )}
-
-                      {order?.orderStatus === 'Shipped' && (
-                        <option value="Delivered">Delivered</option>
-                      )}
-                    </select>
-                  </Box>
-
-                  <Button
-                    id="createProductBtn"
-                    type="submit"
-                    disabled={
-                      loading ? true : false || status === '' ? true : false
-                    }
+            <>
+              {!order && <ErrorNotFound />}
+              {order && (
+                <>
+                  {/* {console.log(order)} */}
+                  <Box
+                    sx={{
+                      p: 2,
+                      width: {
+                        xs: 'auto',
+                        md: '70%',
+                      },
+                      boxSizing: 'border- box',
+                    }}
                   >
-                    Process
-                  </Button>
-                </form>
-              </Box>
-            </Box>
+                    {/* Order Id */}
+                    <Box sx={{ py: 2, my: 2, boxSizing: 'border-box' }}>
+                      <Typography
+                        variant="span"
+                        sx={{
+                          p: 2,
+                          mr: 2,
+                          fontSize: '14px',
+                          borderRadius: '50px',
+                          // backgroundColor: 'lightgray',
+                          backgroundColor: '#f2f2f2',
+                        }}
+                      >
+                        Order{' '}
+                        <Typography variant="span" color="primary.main">
+                          #{order && order?._id?.slice(0, 5)}
+                        </Typography>
+                      </Typography>
+                      <Typography
+                        variant="span"
+                        sx={{
+                          color: 'gray',
+                          fontSize: '12px',
+                        }}
+                      >
+                        Order Placed: {String(order?.createdAt).substr(0, 10)}
+                      </Typography>
+                    </Box>
+                    <Divider />
+                    {/*  Shipment Details */}
+                    <Box sx={{ py: 2, my: 2, boxSizing: 'border-box' }}>
+                      {/* Title */}
+                      <Box sx={{ mb: 1 }}>
+                        <Typography
+                          variant="p"
+                          sx={{ fontSize: '24px', fontWeight: 800 }}
+                        >
+                          Shipment Info
+                        </Typography>
+                      </Box>
+                      {/*  Name & Phone */}
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: {
+                            xs: 'column',
+                            sm: 'row',
+                          },
+                        }}
+                      >
+                        <TextField
+                          fullWidth
+                          variant="standard"
+                          defaultValue={order?.user && order?.user?.name}
+                          InputProps={{
+                            readOnly: true,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <PersonIcon />
+                              </InputAdornment>
+                            ),
+                          }}
+                          sx={{ m: 0.5 }}
+                        />
+                        <TextField
+                          fullWidth
+                          variant="standard"
+                          defaultValue={
+                            order?.shippingInfo && order?.shippingInfo?.phoneNo
+                          }
+                          InputProps={{
+                            readOnly: true,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <PhoneIcon />
+                              </InputAdornment>
+                            ),
+                          }}
+                          sx={{ m: 0.5 }}
+                        />
+                      </Box>
+                      {/*  Address */}
+                      <Box sx={{ my: 1 }}>
+                        <TextField
+                          fullWidth
+                          variant="standard"
+                          defaultValue={
+                            order?.shippingInfo &&
+                            `${order?.shippingInfo?.address}, ${order?.shippingInfo?.city}, ${order?.shippingInfo?.state}, ${order?.shippingInfo?.pinCode}, ${order?.shippingInfo?.country}`
+                          }
+                          InputProps={{
+                            readOnly: true,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <LocationOnIcon />
+                              </InputAdornment>
+                            ),
+                          }}
+                          sx={{ m: 0.5 }}
+                        />
+                      </Box>
+                      {/*  Total Amount */}
+                      <Box sx={{ my: 1 }}>
+                        <TextField
+                          fullWidth
+                          variant="standard"
+                          defaultValue={order?.totalPrice && order?.totalPrice}
+                          InputProps={{
+                            readOnly: true,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <AttachMoneyIcon />
+                              </InputAdornment>
+                            ),
+                          }}
+                          sx={{ m: 0.5 }}
+                        />
+                      </Box>
+                      {/*  Payment & Order Status */}
+                      <Box sx={{ mt: 1, pt: 2 }}>
+                        <Button
+                          sx={{
+                            px: 2,
+                            py: 1,
+                            mr: 2,
+                            fontWeight: 800,
+                            borderRadius: '25px',
+                            backgroundColor: '#f2f2f2',
+                            color:
+                              order?.paymentInfo &&
+                              order?.paymentInfo?.status === 'succeeded'
+                                ? 'green'
+                                : 'red',
+                          }}
+                        >
+                          {order?.paymentInfo &&
+                          order?.paymentInfo?.status === 'succeeded'
+                            ? 'PAID'
+                            : 'NOT PAID'}
+                        </Button>
+                        <Button
+                          sx={{
+                            px: 2,
+                            py: 1,
+                            mr: 2,
+                            fontWeight: 800,
+                            borderRadius: '25px',
+                            backgroundColor: '#f2f2f2',
+                            color:
+                              order?.orderStatus &&
+                              order?.orderStatus === 'Delivered'
+                                ? 'green'
+                                : 'red',
+                          }}
+                        >
+                          {order?.orderStatus && order?.orderStatus}
+                        </Button>
+                      </Box>
+                    </Box>
+                    <Divider />
+
+                    {/*  Order Items */}
+                    <Box sx={{ p: 2, my: 2, boxSizing: 'border-box' }}>
+                      {order?.orderItems &&
+                        order?.orderItems.map((item) => (
+                          <Box
+                            key={item?.product}
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                my: 0.5,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}
+                            >
+                              <img
+                                src={item?.image}
+                                alt="Product"
+                                height={75}
+                                style={{ marginRight: '5px' }}
+                              />
+                              <Link
+                                to={`/product/${item?.product}`}
+                                style={{
+                                  color: 'black',
+                                  textDecoration: 'none',
+                                  textTransform: 'capitalize',
+                                }}
+                              >
+                                {item?.name}
+                              </Link>
+                            </Box>
+                            <Box>
+                              <Typography variant="span">
+                                {item?.quantity} X ${item?.price} =
+                                <Typography variant="span">
+                                  {' '}
+                                  ${item?.price * item?.quantity}
+                                </Typography>
+                              </Typography>
+                            </Box>
+                          </Box>
+                        ))}
+                    </Box>
+                    <Divider />
+
+                    {/* Order Processing */}
+                    <Box sx={{ py: 2, my: 2, boxSizing: 'border-box' }}>
+                      <Box sx={{ mb: 1 }}>
+                        <Typography
+                          variant="p"
+                          sx={{ fontSize: '18px', fontWeight: 800 }}
+                        >
+                          Order Status Process
+                        </Typography>
+                      </Box>
+                      <Box
+                        sx={{
+                          p: 2,
+                          ml: {
+                            xs: 0,
+                            md: 6,
+                          },
+                        }}
+                        component="form"
+                        noValidate
+                        autoComplete="off"
+                        onSubmit={updateOrderSubmitHandler}
+                      >
+                        {/* Order Status */}
+                        <TextField
+                          sx={{ mt: 2, pt: 1 }}
+                          select
+                          fullWidth
+                          label="Order Status"
+                          placeholder="Order Status"
+                          required
+                          value={status}
+                          onChange={(e) => setStatus(e.target.value)}
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <AccountTreeIcon />
+                              </InputAdornment>
+                            ),
+                          }}
+                        >
+                          {order?.orderStatus === 'Processing' &&
+                            orderDeliveryStatus.splice(
+                              orderDeliveryStatus.indexOf('Delivered'),
+                              1
+                            ) &&
+                            orderDeliveryStatus.map((os) => (
+                              <MenuItem
+                                key={os}
+                                value={os}
+                                label={'Order Stauts'}
+                                placeholder={'Order Status'}
+                              >
+                                {console.log(os)}
+                                {os}
+                              </MenuItem>
+                            ))}
+
+                          {(order?.orderStatus === 'Shipped' ||
+                            order?.orderStatus === 'Delivered') &&
+                            orderDeliveryStatus.splice(
+                              orderDeliveryStatus.indexOf('Processing'),
+                              1
+                            ) &&
+                            orderDeliveryStatus.map((os) => (
+                              <MenuItem
+                                key={os}
+                                value={os}
+                                label={'Order Stauts'}
+                                placeholder={'Order Status'}
+                              >
+                                {console.log(os)}
+                                {os}
+                              </MenuItem>
+                            ))}
+                        </TextField>
+
+                        <Button
+                          id="createProductBtn"
+                          type="submit"
+                          disabled={
+                            loading
+                              ? true
+                              : false || status === ''
+                              ? true
+                              : false
+                          }
+                        >
+                          Process
+                        </Button>
+                      </Box>
+                    </Box>
+                  </Box>
+                </>
+              )}
+            </>
           )}
         </Box>
       </Box>
