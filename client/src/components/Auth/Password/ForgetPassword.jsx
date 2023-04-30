@@ -37,7 +37,7 @@ const ForgetPassword = () => {
   useEffect(() => {
     if (error) {
       // console.log(error);
-      alert.error(error);
+      alert.error('Invalid Email!');
       dispatch(clearErrors());
     }
 

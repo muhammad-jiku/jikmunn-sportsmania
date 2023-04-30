@@ -113,7 +113,8 @@ const Products = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // console.log(error);
+      alert.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
     dispatch(getProducts(keyword, currentPage, priceRange, category, ratings));

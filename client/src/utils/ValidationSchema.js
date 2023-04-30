@@ -1,4 +1,4 @@
-import { date, literal, number, object, string } from 'zod';
+import { literal, object, string } from 'zod';
 
 export const registerSchema = object({
   name: string().nonempty('Name is required').max(32, 'Name is too long'),

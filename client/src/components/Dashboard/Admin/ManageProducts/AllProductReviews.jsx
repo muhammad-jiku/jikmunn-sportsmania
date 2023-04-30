@@ -43,15 +43,18 @@ const AllProductReviews = () => {
     }
 
     if (error) {
-      alert.error(error);
+      // console.log(error);
+      alert.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
     if (reviewError) {
-      alert.error(reviewError);
+      // console.log(reviewError);
+      alert.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
     if (deleteError) {
-      alert.error(deleteError);
+      // console.log(deleteError);
+      alert.error('Failed to delete the product review!');
       dispatch(clearErrors());
     }
 

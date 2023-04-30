@@ -34,15 +34,17 @@ const ProcessOrder = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // console.log(error);
+      alert.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
     if (updateError) {
-      alert.error(updateError);
+      // console.log(updateError);
+      alert.error('Failed to update order status!');
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      alert.success('Order Updated Successfully');
+      alert.success('Order Status Updated Successfully');
       dispatch({
         type: UPDATE_ORDER_RESET,
       });

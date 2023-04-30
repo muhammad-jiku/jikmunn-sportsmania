@@ -65,7 +65,8 @@ const ResetPassword = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // console.log(error);
+      alert.error('Invalid Password!');
       dispatch(clearErrors());
     }
 

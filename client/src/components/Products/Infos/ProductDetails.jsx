@@ -71,7 +71,8 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // console.log(error);
+      alert.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
 

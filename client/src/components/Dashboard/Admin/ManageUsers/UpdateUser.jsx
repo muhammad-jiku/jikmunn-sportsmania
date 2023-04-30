@@ -62,12 +62,14 @@ const UpdateUser = () => {
       setUserRole(user?.role);
     }
     if (error) {
-      alert.error(error);
+      // console.log(error);
+      alert.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
 
     if (updateError) {
-      alert.error(updateError);
+      // console.log(updateError);
+      alert.error('Failed to update user role!');
       dispatch(clearErrors());
     }
 

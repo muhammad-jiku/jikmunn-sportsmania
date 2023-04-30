@@ -16,7 +16,7 @@ const databaseConnect = async () => {
     })
     .catch((err) => {
       // console.log(err);
-      console.log('Something went wrong!');
+      console.log('Something Went Wrong!');
     });
 };
 

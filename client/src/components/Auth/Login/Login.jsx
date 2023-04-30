@@ -69,7 +69,8 @@ const Login = ({ setAuthProcess }) => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // console.log(error);
+      alert.error('Invalid Email or Password!');
       dispatch(clearErrors());
     }
 

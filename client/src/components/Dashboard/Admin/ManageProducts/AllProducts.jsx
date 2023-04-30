@@ -32,12 +32,14 @@ const AllProducts = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // console.log(error);
+      alert.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      alert.error(deleteError);
+      //  console.log(deleteError);
+      alert.error('Failed to delete the product!');
       dispatch(clearErrors());
     }
 

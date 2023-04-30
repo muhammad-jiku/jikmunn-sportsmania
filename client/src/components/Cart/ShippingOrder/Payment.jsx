@@ -100,11 +100,13 @@ const Payment = () => {
       // console.log(paymentMethod);
       if (result.error) {
         payBtn.current.disabled = false;
-        alert.error(result.error.message);
-        alert.error(paymentError);
-        // console.log(result.error);
-        // console.log(paymentError);
-        // console.log(paymentMethod);
+        console.log(result.error);
+        console.log(paymentError);
+        console.log(paymentMethod);
+
+        alert.error('Something Went Wrong!');
+        // alert.error(result.error);
+        // alert.error(paymentError);
       } else {
         if (result.paymentIntent.status === 'succeeded') {
           order.paymentInfo = {
@@ -123,15 +125,19 @@ const Payment = () => {
         }
       }
     } catch (err) {
-      // console.log(err.message);
+      console.log(err.message);
       payBtn.current.disabled = false;
-      alert.error(err.response.data.message);
+
+      // console.log(err.response.data.message);
+      // alert.error(err.response.data.message);
+      alert.error('Something Went Wrong!');
     }
   };
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      // console.log(error);
+      alert.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
   }, [dispatch, error, alert]);
