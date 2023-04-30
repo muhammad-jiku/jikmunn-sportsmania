@@ -223,7 +223,7 @@ const ProductDetails = () => {
                       // placeholder="Size"
                       // required
                       size="small"
-                      value={size || product?.size}
+                      defaultValue={product?.size || size}
                       onChange={(e) => setSize(e.target.value)}
                       InputProps={{
                         startAdornment: (
@@ -243,13 +243,6 @@ const ProductDetails = () => {
                           {sz || 'Choose Size'}
                         </MenuItem>
                       ))}
-
-                      {/* <option value="">Choose Category</option>
-          {categories.map((cate) => (
-            <option key={cate} value={cate}>
-              {cate}
-            </option>
-          ))} */}
                     </TextField>
                   </Box>
 

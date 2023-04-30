@@ -30,12 +30,20 @@ const Shipping = () => {
   const dispatch = useDispatch();
   const { shippingInfo } = useSelector((state) => state?.cart);
 
-  const [phoneNo, setPhoneNo] = useState(shippingInfo?.phoneNo);
-  const [country, setCountry] = useState(shippingInfo?.country);
-  const [state, setState] = useState(shippingInfo?.state);
-  const [city, setCity] = useState(shippingInfo?.city);
-  const [pinCode, setPinCode] = useState(shippingInfo?.pinCode);
-  const [address, setAddress] = useState(shippingInfo?.address);
+  const [phoneNo, setPhoneNo] = useState(
+    shippingInfo ? shippingInfo?.phoneNo : ''
+  );
+  const [country, setCountry] = useState(
+    shippingInfo ? shippingInfo?.country : ''
+  );
+  const [state, setState] = useState(shippingInfo ? shippingInfo?.state : '');
+  const [city, setCity] = useState(shippingInfo ? shippingInfo?.city : '');
+  const [pinCode, setPinCode] = useState(
+    shippingInfo ? shippingInfo?.pinCode : ''
+  );
+  const [address, setAddress] = useState(
+    shippingInfo ? shippingInfo?.address : ''
+  );
 
   const {
     register,
@@ -119,7 +127,7 @@ const Shipping = () => {
             type="text"
             placeholder="Address"
             name="address"
-            defaultValue={address}
+            defaultValue={address || shippingInfo?.address}
             onChange={(e) => setAddress(e.target.value)}
             error={!!errors['address']}
             helperText={errors['address'] ? errors['address'].message : ''}
@@ -142,7 +150,7 @@ const Shipping = () => {
             type="text"
             placeholder="City"
             name="city"
-            defaultValue={city}
+            defaultValue={city || shippingInfo?.city}
             onChange={(e) => setCity(e.target.value)}
             error={!!errors['city']}
             helperText={errors['city'] ? errors['city'].message : ''}
@@ -165,7 +173,7 @@ const Shipping = () => {
             type="text"
             placeholder="Pin Code"
             name="pin"
-            defaultValue={pinCode}
+            defaultValue={pinCode || shippingInfo?.pinCode}
             onChange={(e) => setPinCode(e.target.value)}
             error={!!errors['pin']}
             helperText={errors['pin'] ? errors['pin'].message : ''}
@@ -191,7 +199,7 @@ const Shipping = () => {
             type="text"
             placeholder="Phone"
             name="phone"
-            defaultValue={phoneNo}
+            defaultValue={phoneNo || shippingInfo?.phoneNo}
             onChange={(e) => setPhoneNo(e.target.value)}
             error={!!errors['phone']}
             helperText={errors['phone'] ? errors['phone'].message : ''}
@@ -214,7 +222,7 @@ const Shipping = () => {
             id="outlined-select-country"
             select
             label="Select"
-            defaultValue={country}
+            defaultValue={country || shippingInfo?.country}
             onChange={(e) => setCountry(e.target.value.toString())}
             sx={{ mt: 2 }}
             InputProps={{
@@ -245,7 +253,7 @@ const Shipping = () => {
               id="outlined-select-state"
               select
               label="Select"
-              defaultValue={state}
+              defaultValue={state || shippingInfo?.state}
               onChange={(e) => setState(e.target.value.toString())}
               sx={{ mt: 2 }}
               InputProps={{
@@ -268,23 +276,6 @@ const Shipping = () => {
                   </MenuItem>
                 ))}
             </TextField>
-
-            // <Select
-            //   name="state"
-            //   defaultValue={state}
-            //   label="State"
-            //   fullWidth
-            //   onChange={(e) => setState(e.target.value)}
-            //   sx={{ mt: 2 }}
-            // >
-            //   <MenuItem value={''}>State</MenuItem>
-            //   {State &&
-            //     State?.getStatesOfCountry(country).map((item) => (
-            //       <MenuItem key={item.isoCode} value={item.isoCode}>
-            //         {item.name}
-            //       </MenuItem>
-            //     ))}
-            // </Select>
           )}
 
           <Button

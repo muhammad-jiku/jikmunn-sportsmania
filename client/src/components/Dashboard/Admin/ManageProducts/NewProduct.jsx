@@ -16,6 +16,7 @@ import SpellcheckIcon from '@mui/icons-material/Spellcheck';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import StorageIcon from '@mui/icons-material/Storage';
+import HeightIcon from '@mui/icons-material/Height';
 
 const NewProduct = () => {
   const alert = useAlert();
@@ -28,6 +29,7 @@ const NewProduct = () => {
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
+  const [size, setSize] = useState('');
   const [stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
@@ -41,6 +43,8 @@ const NewProduct = () => {
     'Badminton',
     'Swimming',
   ];
+
+  const sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
   useEffect(() => {
     if (error) {
@@ -144,7 +148,7 @@ const NewProduct = () => {
           required
           type="text"
           placeholder="Name"
-          value={name}
+          defaultValue={name}
           onChange={(e) => setName(e.target.value)}
           InputProps={{
             startAdornment: (
@@ -163,6 +167,7 @@ const NewProduct = () => {
           required
           type="number"
           placeholder="Price"
+          defaultValue={price}
           onChange={(e) => setPrice(e.target.value)}
           InputProps={{
             startAdornment: (
@@ -182,7 +187,7 @@ const NewProduct = () => {
           required
           label={'Description'}
           placeholder="Description"
-          value={description}
+          defaultValue={description}
           onChange={(e) => setDescription(e.target.value)}
         />
 
@@ -194,7 +199,7 @@ const NewProduct = () => {
           label="Category"
           placeholder="Category"
           required
-          value={category}
+          defaultValue={category}
           onChange={(e) => setCategory(e.target.value)}
           InputProps={{
             startAdornment: (
@@ -211,16 +216,34 @@ const NewProduct = () => {
               label={'Category'}
               placeholder={'Category'}
             >
-              {cate || 'Choose Category'}
+              {cate}
             </MenuItem>
           ))}
+        </TextField>
 
-          {/* <option value="">Choose Category</option>
-          {categories.map((cate) => (
-            <option key={cate} value={cate}>
-              {cate}
-            </option>
-          ))} */}
+        {/*  Size */}
+        <TextField
+          sx={{ mt: 2, pt: 1 }}
+          select
+          fullWidth
+          label="Size"
+          placeholder="Size"
+          required
+          defaultValue={size}
+          onChange={(e) => setSize(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <HeightIcon />
+              </InputAdornment>
+            ),
+          }}
+        >
+          {sizes.map((sz) => (
+            <MenuItem key={sz} value={sz} label="Size" placeholder="Size">
+              {sz}
+            </MenuItem>
+          ))}
         </TextField>
 
         {/*  Stock */}
@@ -231,6 +254,7 @@ const NewProduct = () => {
           required
           type="number"
           placeholder="Stock"
+          defaultValue={stock}
           onChange={(e) => setStock(e.target.value)}
           InputProps={{
             startAdornment: (
@@ -264,22 +288,15 @@ const NewProduct = () => {
           />
         </Button>
 
-        {/* <TextField
-          sx={{ mt: 2, pt: 1 }}
-          fullWidth
-          type="file"
-          name="avatar"
-          accept="image/*"
-          onChange={createProductImagesChange}
-          multiple
-        /> */}
-
         {imagesPreview.map((image, index) => (
           <img key={index} src={image} alt="Product Preview" height={75} />
         ))}
 
         <Button
-          sx={{ p: 1, mt: 2 }}
+          sx={{
+            p: 1,
+            mt: 2,
+          }}
           fullWidth
           variant="contained"
           type="submit"

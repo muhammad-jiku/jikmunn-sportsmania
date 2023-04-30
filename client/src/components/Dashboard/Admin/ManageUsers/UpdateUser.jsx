@@ -127,7 +127,7 @@ const UpdateUser = () => {
               required
               type="text"
               placeholder="Name"
-              defaultValue={name}
+              defaultValue={user?.name || name}
               onChange={(e) => setName(e.target.value)}
               InputProps={{
                 readOnly: true,
@@ -147,7 +147,7 @@ const UpdateUser = () => {
               required
               type="email"
               placeholder="Email"
-              defaultValue={email}
+              defaultValue={user?.email || email}
               onChange={(e) => setEmail(e.target.value)}
               InputProps={{
                 readOnly: true,
@@ -167,7 +167,7 @@ const UpdateUser = () => {
               label="User Role"
               placeholder="User Role"
               required
-              value={userRole}
+              defaultValue={user?.role || userRole}
               onChange={(e) => setUserRole(e.target.value)}
               InputProps={{
                 startAdornment: (

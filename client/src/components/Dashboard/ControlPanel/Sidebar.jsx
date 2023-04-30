@@ -112,6 +112,7 @@ const Sidebar = () => {
                 My Profile
               </Typography>
             </ListItem>
+
             {user?.role === 'admin' && (
               <>
                 <ListItem
@@ -147,6 +148,7 @@ const Sidebar = () => {
                 </ListItem>
               </>
             )}
+
             {user?.role === 'user' && (
               <ListItem
                 disablePadding

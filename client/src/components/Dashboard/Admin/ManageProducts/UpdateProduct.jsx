@@ -188,7 +188,7 @@ const UpdateProduct = () => {
                   required
                   type="text"
                   placeholder="Name"
-                  defaultValue={name}
+                  defaultValue={product?.name || name}
                   onChange={(e) => setName(e.target.value)}
                   InputProps={{
                     startAdornment: (
@@ -207,7 +207,7 @@ const UpdateProduct = () => {
                   required
                   type="number"
                   placeholder="Price"
-                  defaultValue={price}
+                  defaultValue={product?.price || price}
                   onChange={(e) => setPrice(e.target.value)}
                   InputProps={{
                     startAdornment: (
@@ -227,7 +227,7 @@ const UpdateProduct = () => {
                   required
                   label={'Description'}
                   placeholder="Description"
-                  defaultValue={description}
+                  defaultValue={product?.description || description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
 
@@ -239,7 +239,7 @@ const UpdateProduct = () => {
                   label="Category"
                   placeholder="Category"
                   required
-                  value={category}
+                  defaultValue={product?.category || category}
                   onChange={(e) => setCategory(e.target.value)}
                   InputProps={{
                     startAdornment: (
@@ -256,16 +256,9 @@ const UpdateProduct = () => {
                       label={'Category'}
                       placeholder={'Category'}
                     >
-                      {cate || 'Choose Category'}
+                      {cate}
                     </MenuItem>
                   ))}
-
-                  {/* <option value="">Choose Category</option>
-          {categories.map((cate) => (
-            <option key={cate} value={cate}>
-              {cate}
-            </option>
-          ))} */}
                 </TextField>
 
                 {/*  Size */}
@@ -276,7 +269,7 @@ const UpdateProduct = () => {
                   label="Size"
                   placeholder="Size"
                   required
-                  value={size}
+                  defaultValue={product?.size || size}
                   onChange={(e) => setSize(e.target.value)}
                   InputProps={{
                     startAdornment: (
@@ -293,16 +286,9 @@ const UpdateProduct = () => {
                       label="Size"
                       placeholder="Size"
                     >
-                      {sz || 'Choose Size'}
+                      {sz}
                     </MenuItem>
                   ))}
-
-                  {/* <option value="">Choose Category</option>
-          {categories.map((cate) => (
-            <option key={cate} value={cate}>
-              {cate}
-            </option>
-          ))} */}
                 </TextField>
 
                 {/*  Stock */}
@@ -313,7 +299,7 @@ const UpdateProduct = () => {
                   required
                   type="number"
                   placeholder="Stock"
-                  defaultValue={stock}
+                  defaultValue={product?.stock || stock}
                   onChange={(e) => setStock(e.target.value)}
                   InputProps={{
                     startAdornment: (
@@ -353,7 +339,7 @@ const UpdateProduct = () => {
 
                     {imagesPreview?.map((image, index) => (
                       <img
-                        key={index}
+                        key={(index + 1 + 0.6456) * Math.random()}
                         src={image}
                         alt="Product Preview"
                         height={50}
@@ -382,13 +368,6 @@ const UpdateProduct = () => {
                       multiple
                     />
                   </Button>
-                  {/* <input
-                    type="file"
-                    name="avatar"
-                    accept="image/*"
-                    onChange={updateProductImagesChange}
-                    multiple
-                  /> */}
                 </Box>
 
                 <Button

@@ -176,7 +176,7 @@ const Profile = () => {
                     type="text"
                     placeholder={user ? '' : 'Name'}
                     name="name"
-                    defaultValue={name}
+                    defaultValue={user?.name || name}
                     // value={name}
                     onChange={(e) => setName(e?.target?.value)}
                     error={!!errors['name']}
@@ -193,7 +193,7 @@ const Profile = () => {
                     type="email"
                     placeholder={user ? '' : 'Email'}
                     name="email"
-                    defaultValue={email}
+                    defaultValue={user?.email || email}
                     // value={email}
                     onChange={(e) => setEmail(e?.target?.value)}
                     InputProps={{
@@ -258,7 +258,7 @@ const Profile = () => {
                     pattern="[0-9]"
                     placeholder={user?.phone?.length ? '' : 'Phone'}
                     name="phone"
-                    defaultValue={phone}
+                    defaultValue={user?.phone || phone}
                     // value={phone}
                     onChange={(e) => setPhone(e?.target?.value)}
                     error={!!errors['phone']}
@@ -272,8 +272,8 @@ const Profile = () => {
                     id="outlined-select-country"
                     select
                     label={'Country'}
-                    // defaultValue={country}
-                    value={country}
+                    defaultValue={user?.country || country}
+                    // value={country}
                     onChange={(e) => setCountry(e?.target?.value)}
                     sx={{ mt: 2 }}
                   >
@@ -296,8 +296,8 @@ const Profile = () => {
                     id="outlined-select-state"
                     select
                     label={'State'}
-                    // defaultValue={state}
-                    value={state}
+                    defaultValue={user?.state || state}
+                    // value={state}
                     onChange={(e) => setState(e?.target?.value)}
                     sx={{ mt: 2 }}
                   >
@@ -323,7 +323,7 @@ const Profile = () => {
                     type="text"
                     placeholder={user ? '' : 'City'}
                     name="city"
-                    defaultValue={city}
+                    defaultValue={user?.city || city}
                     // value={city}
                     onChange={(e) => setCity(e?.target?.value)}
                     error={!!errors['city']}
@@ -342,7 +342,7 @@ const Profile = () => {
                     type="text"
                     placeholder={user?.address?.length ? '' : 'Address'}
                     name="address"
-                    defaultValue={address}
+                    defaultValue={user?.address || address}
                     // value={address}
                     onChange={(e) => setAddress(e?.target?.value)}
                     error={!!errors['address']}
@@ -443,7 +443,7 @@ const Profile = () => {
                     type="text"
                     placeholder={user ? '' : 'Name'}
                     name="name"
-                    defaultValue={name}
+                    defaultValue={user?.name || name}
                     // value={name}
                     onChange={(e) => setName(e?.target?.value)}
                     error={!!errors['name']}
@@ -460,7 +460,7 @@ const Profile = () => {
                     type="email"
                     placeholder={user ? '' : 'Email'}
                     name="email"
-                    defaultValue={email}
+                    defaultValue={user?.email || email}
                     // value={email}
                     onChange={(e) => setEmail(e?.target?.value)}
                     InputProps={{
@@ -481,7 +481,7 @@ const Profile = () => {
                     pattern="[0-9]"
                     placeholder={user?.phone?.length ? '' : 'Phone'}
                     name="phone"
-                    defaultValue={phone}
+                    defaultValue={user?.phone || phone}
                     // value={phone}
                     onChange={(e) => setPhone(e?.target?.value)}
                     error={!!errors['phone']}
@@ -495,15 +495,15 @@ const Profile = () => {
                     id="outlined-select-country"
                     select
                     label={'Country'}
-                    // defaultValue={country}
-                    value={country}
+                    defaultValue={user?.country || country}
+                    // value={country}
                     onChange={(e) => setCountry(e?.target?.value)}
                     sx={{ mt: 2 }}
                   >
                     {Country &&
-                      Country.getAllCountries().map((item) => (
+                      Country.getAllCountries().map((item, idx) => (
                         <MenuItem
-                          key={item?.isoCode}
+                          key={idx}
                           value={item?.isoCode}
                           label={'Country'}
                           placeholder={'Country'}
@@ -519,14 +519,14 @@ const Profile = () => {
                     id="outlined-select-state"
                     select
                     label={'State'}
-                    // defaultValue={state}
-                    value={state}
+                    defaultValue={user?.state || state}
+                    // value={state}
                     onChange={(e) => setState(e?.target?.value)}
                     sx={{ mt: 2 }}
                   >
-                    {State?.getStatesOfCountry(country).map((item) => (
+                    {State?.getStatesOfCountry(country).map((item, idx) => (
                       <MenuItem
-                        key={item?.isoCode}
+                        key={idx + Math.random() + 0.56}
                         value={item?.isoCode}
                         label={'State'}
                         placeholder={'State'}
@@ -545,7 +545,7 @@ const Profile = () => {
                     type="text"
                     placeholder={user ? '' : 'City'}
                     name="city"
-                    defaultValue={city}
+                    defaultValue={user?.city || city}
                     // value={city}
                     onChange={(e) => setCity(e?.target?.value)}
                     error={!!errors['city']}
@@ -564,7 +564,7 @@ const Profile = () => {
                     type="text"
                     placeholder={user?.address?.length ? '' : 'Address'}
                     name="address"
-                    defaultValue={address}
+                    defaultValue={user?.address || address}
                     // value={address}
                     onChange={(e) => setAddress(e?.target?.value)}
                     error={!!errors['address']}
