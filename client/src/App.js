@@ -39,7 +39,7 @@ import axios from 'axios';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { Box } from '@mui/material';
-import { RequiredAuth } from './components/Protected';
+import { RequiredAdmin, RequiredAuth } from './components/Protected';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -160,21 +160,78 @@ function App() {
               </RequiredAuth>
             }
           />
-          <Route path="admin" element={<AdminPanelPage />} />
-          <Route path="admin/users" element={<AllUsersPage />} />
-          <Route path="admin/user/update/:id" element={<UpdateUserPage />} />
-          <Route path="admin/products" element={<AllProductsPage />} />
-          <Route path="admin/product/new" element={<NewProductPage />} />
+          <Route
+            path="admin"
+            element={
+              <RequiredAdmin user={user}>
+                <AdminPanelPage />
+              </RequiredAdmin>
+            }
+          />
+          <Route
+            path="admin/users"
+            element={
+              <RequiredAdmin user={user}>
+                <AllUsersPage />
+              </RequiredAdmin>
+            }
+          />
+          <Route
+            path="admin/user/update/:id"
+            element={
+              <RequiredAdmin user={user}>
+                <UpdateUserPage />
+              </RequiredAdmin>
+            }
+          />
+          <Route
+            path="admin/products"
+            element={
+              <RequiredAdmin user={user}>
+                <AllProductsPage />
+              </RequiredAdmin>
+            }
+          />
+          <Route
+            path="admin/product/new"
+            element={
+              <RequiredAdmin user={user}>
+                <NewProductPage />
+              </RequiredAdmin>
+            }
+          />
           <Route
             path="admin/product/update/:id"
-            element={<UpdateProductPage />}
+            element={
+              <RequiredAdmin user={user}>
+                <UpdateProductPage />
+              </RequiredAdmin>
+            }
           />
           <Route
             path="admin/product/reviews/:id"
-            element={<AllProductReviewsPage />}
+            element={
+              <RequiredAdmin user={user}>
+                <AllProductReviewsPage />
+              </RequiredAdmin>
+            }
           />
-          <Route path="admin/orders" element={<AllOrdersPage />} />
-          <Route path="admin/order/:id" element={<ProcessOrderPage />} />
+          <Route
+            path="admin/orders"
+            element={
+              <RequiredAdmin user={user}>
+                <AllOrdersPage />
+              </RequiredAdmin>
+            }
+          />
+          <Route
+            path="admin/order/:id"
+            element={
+              <RequiredAdmin user={user}>
+                <ProcessOrderPage />
+              </RequiredAdmin>
+            }
+          />
           <Route
             path="myorders"
             element={
