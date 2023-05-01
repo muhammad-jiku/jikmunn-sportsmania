@@ -33,7 +33,6 @@ import {
   SuccessPage,
 } from './pages';
 import { sportsStore } from './utils/store';
-import WebFont from 'webfontloader';
 import { ForgetPassword, ResetPassword } from './components/Auth';
 import axios from 'axios';
 import { Elements } from '@stripe/react-stripe-js';
@@ -46,11 +45,8 @@ function App() {
 
   const [stripeApiKey, setStripeApiKey] = useState('');
 
-  console.log('1', process.env);
-
   axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
-  console.log('2', process.env);
   console.log('server side uri = ', axios.defaults.baseURL);
   const getStripeApiKey = async () => {
     const config = {
@@ -65,14 +61,6 @@ function App() {
   };
 
   useEffect(() => {
-    // console.log(axios.defaults.baseURL);
-    // console.log(stripeApiKey);
-    WebFont.load({
-      google: {
-        families: ['Roboto', 'Droid Sans', 'Chilanka'],
-      },
-    });
-
     sportsStore.dispatch(loadUser());
     getStripeApiKey();
   }, []);

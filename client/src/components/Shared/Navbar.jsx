@@ -3,7 +3,6 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  styled,
   Box,
   Tooltip,
   IconButton,
@@ -13,7 +12,6 @@ import {
   Button,
 } from '@mui/material';
 import styles from '../../styles/Navbar.module.css';
-import logo from '../../assets/images/logo.png';
 import person1 from '../../assets/images/avatar_1.png';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -74,113 +72,131 @@ const Navbar = ({ isAuthenticated, user }) => {
     // },
   ];
 
-  const Logo = styled('img')(({ theme }) => ({
-    width: '15rem',
-    minWidth: '10rem',
-    // [theme.breakpoints.down('md')]: {
-    //   width: '350px',
-    // },
-    // [theme.breakpoints.down('sm')]: {
-    //   width: '11rem',
-    //   align: 'center',
-    // },
-  }));
-
   return (
     <AppBar position="static" className={styles.header} color="secondary">
       <Toolbar className={styles.toolbar}>
-        {/*  Logo */}
-        <Link to={`/`}>
-          <Logo
-            src={logo}
-            sx={{
-              display: {
-                xs: 'none',
-                md: 'flex',
-              },
-            }}
-          />
-        </Link>
-        {/* Menus */}
         <Box
           sx={{
-            flexGrow: 1,
-            display: {
-              xs: 'flex',
-              md: 'none',
-            },
+            display: 'flex',
+            justifyContent: 'space-around',
+            alignItems: 'center',
           }}
         >
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleOpenNavMenu}
-            color="inherit"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorElNav}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            open={Boolean(anchorElNav)}
-            onClose={handleCloseNavMenu}
+          {/*  Logo Title */}
+          <Box
             sx={{
-              display: { xs: 'block', md: 'none' },
+              p: 2,
+              boxSizing: 'border-box',
             }}
           >
-            {pages.map(({ title, path }) => (
-              <MenuItem key={title} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">
-                  <Link
-                    to={path}
-                    style={{
-                      textDecoration: 'none',
-                      color: '#000',
-                    }}
-                  >
-                    {title}
-                  </Link>
-                </Typography>
-              </MenuItem>
-            ))}
-          </Menu>
+            <Typography
+              variant="h5"
+              className={styles.headerText}
+              sx={{
+                // mr: 2,
+                display: {
+                  // xs: 'flex',
+                  // md: 'none',
+                  xs: 'none',
+                  md: 'block',
+                },
+                // flexGrow: 1,
+                // fontWeight: 300,
+                fontSize: {
+                  md: '32px',
+                },
+                // letterSpacing: '0.125rem',
+                color: 'inherit',
+                textDecoration: 'none',
+                cursor: 'pointer',
+              }}
+              onClick={() => navigate('/')}
+            >
+              Sports Mania
+            </Typography>
+          </Box>
+          {/* Menus */}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: {
+                xs: 'flex',
+                md: 'none',
+              },
+            }}
+          >
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map(({ title, path }) => (
+                <MenuItem key={title} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link
+                      to={path}
+                      style={{
+                        textDecoration: 'none',
+                        color: '#000',
+                      }}
+                    >
+                      {title}
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
         </Box>
+
         {/*  Pages */}
         <Typography
           variant="h5"
-          noWrap
-          component="a"
-          href="/"
+          // noWrap
+          // component="a"
+          className={styles.headerText}
           sx={{
             // mr: 2,
             display: {
               xs: 'flex',
               md: 'none',
             },
+            justifyContent: 'center',
             flexGrow: 1,
-            fontFamily: 'monospace',
-            fontWeight: 300,
+            // fontWeight: 300,
             fontSize: {
-              xs: 18,
-              sm: 22,
-              md: 'auto',
+              xs: '20px',
+              sm: '24px',
             },
             // letterSpacing: '0.125rem',
             color: 'inherit',
             textDecoration: 'none',
             cursor: 'pointer',
           }}
+          onClick={() => navigate('/')}
         >
           Sports Mania
         </Typography>
