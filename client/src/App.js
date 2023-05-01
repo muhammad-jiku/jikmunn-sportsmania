@@ -47,7 +47,7 @@ function App() {
   const [stripeApiKey, setStripeApiKey] = useState('');
 
   axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
-  console.log(axios.defaults.baseURL);
+  console.log('server side uri = ', axios.defaults.baseURL);
   const getStripeApiKey = async () => {
     const config = {
       headers: {
