@@ -47,6 +47,7 @@ function App() {
   const [stripeApiKey, setStripeApiKey] = useState('');
 
   console.log('1', process.env);
+
   // axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
   axios.defaults.baseURL = process.env.REACT_APP_SERVER_URI;
   console.log('2', process.env);
