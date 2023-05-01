@@ -47,7 +47,8 @@ function App() {
   const [stripeApiKey, setStripeApiKey] = useState('');
 
   console.log('1', process.env);
-  axios.defaults.baseURL = 'https://jikmunn-sportsmania-awcf.vercel.app/';
+  // axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+  axios.defaults.baseURL = process.env.REACT_APP_SERVER_URI;
   console.log('2', process.env);
   console.log('server side uri = ', axios.defaults.baseURL);
   const getStripeApiKey = async () => {
