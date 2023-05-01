@@ -113,7 +113,7 @@ const NewProduct = () => {
       }}
     >
       <Typography
-        variant="p"
+        variant="span"
         color="primary"
         textAlign="center"
         sx={{

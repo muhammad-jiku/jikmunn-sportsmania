@@ -53,7 +53,7 @@ const ErrorNotFound = () => {
   return (
     <NotFoundContainer>
       <NotFoundImage src={`${NotFound}`} />
-      <NotFoundTitle variant="h6">
+      <NotFoundTitle variant="span">
         Ooops! The page you're looking is not found!
       </NotFoundTitle>
       <GotoHomeButton color="primary" onClick={() => navigate('/')}>

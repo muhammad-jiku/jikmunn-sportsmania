@@ -21,12 +21,11 @@ import HeightIcon from '@mui/icons-material/Height';
 import MetaData from '../../../utils/MetaData';
 
 const ProductDetails = ({ user }) => {
-  console.log(user);
   const alert = useAlert();
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const { product, loading, error } = useSelector(
+  const { loading, error, product } = useSelector(
     (state) => state.productDetails
   );
 
@@ -78,9 +77,6 @@ const ProductDetails = ({ user }) => {
     }
 
     dispatch(getProductDetails(id));
-    // if (product) {
-    //   setSelectedImage(`${product?.images[0]?.url}`);
-    // }
   }, [
     dispatch,
     error,
@@ -171,7 +167,7 @@ const ProductDetails = ({ user }) => {
                   }}
                 >
                   {/*  Name */}
-                  <Typography variant="h6" sx={{ fontWeight: 800 }}>
+                  <Typography variant="span" sx={{ fontWeight: 800 }}>
                     {product?.name}
                   </Typography>
 
@@ -200,12 +196,12 @@ const ProductDetails = ({ user }) => {
                   </Typography>
 
                   {/*  Price */}
-                  <Typography variant="h7" sx={{ my: 0.5, fontWeight: 600 }}>
+                  <Typography variant="span" sx={{ my: 0.5, fontWeight: 600 }}>
                     ${product?.price}
                   </Typography>
 
                   {/*  Desc */}
-                  <Typography variant="p" sx={{ my: 1, fontWeight: 400 }}>
+                  <Typography variant="span" sx={{ my: 1, fontWeight: 400 }}>
                     {product?.description}
                   </Typography>
 
@@ -217,7 +213,7 @@ const ProductDetails = ({ user }) => {
                       alignItems: 'center',
                     }}
                   >
-                    <Typography variant="p" sx={{ my: 1, fontWeight: 600 }}>
+                    <Typography variant="span" sx={{ my: 1, fontWeight: 600 }}>
                       Size:
                     </Typography>{' '}
                     <TextField
@@ -253,7 +249,7 @@ const ProductDetails = ({ user }) => {
 
                   {/*  Quantity */}
                   <Typography
-                    variant="p"
+                    variant="span"
                     sx={{
                       my: 1,
                       display: 'flex',
@@ -327,12 +323,12 @@ const ProductDetails = ({ user }) => {
                   </Typography>
 
                   {/*  Category */}
-                  <Typography variant="p" sx={{ my: 1, fontWeight: 600 }}>
+                  <Typography variant="span" sx={{ my: 1, fontWeight: 600 }}>
                     Category: {product?.category}
                   </Typography>
 
                   {/*  Stock */}
-                  <Typography variant="p" sx={{ mb: 1, fontWeight: 600 }}>
+                  <Typography variant="span" sx={{ mb: 1, fontWeight: 600 }}>
                     Availability:
                     {product?.stock <= 10 ? (
                       <span style={{ color: 'red' }}> Out of Stock</span>
@@ -367,7 +363,7 @@ const ProductDetails = ({ user }) => {
                 </Box>
               ) : (
                 <Typography
-                  variant="h3"
+                  variant="span"
                   color="red"
                   textAlign="center"
                   sx={{

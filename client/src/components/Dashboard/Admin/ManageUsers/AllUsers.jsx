@@ -153,10 +153,10 @@ const AllUsers = () => {
               }}
             >
               <Typography
-                variant="p"
+                variant="span"
                 color="primary.main"
-                textAlign="center"
-                sx={{ fontSize: '22px', fontWeight: 900 }}
+                textAlign={'center'}
+                sx={{ mx: 2, my: 1, fontSize: '26px', fontWeight: 800 }}
               >
                 List of All Users
               </Typography>

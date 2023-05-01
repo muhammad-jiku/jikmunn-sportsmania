@@ -95,7 +95,7 @@ const UpdatePassword = () => {
           }}
         >
           <Typography
-            variant="p"
+            variant="span"
             color="primary"
             textAlign="center"
             sx={{ fontWeight: 800 }}

@@ -31,8 +31,12 @@ const Profile = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
-  const { error, isUpdated, loading } = useSelector((state) => state.profile);
+  const { loading, user } = useSelector((state) => state.user);
+  const {
+    error,
+    isUpdated,
+    loading: updateLoading,
+  } = useSelector((state) => state.profile);
   // console.log('user', user);
 
   const [name, setName] = useState(user ? user?.name : ``);
@@ -123,7 +127,7 @@ const Profile = () => {
 
   return (
     <>
-      {loading ? (
+      {loading || updateLoading ? (
         <Loader />
       ) : (
         <Box
@@ -139,7 +143,7 @@ const Profile = () => {
           }}
         >
           <Typography
-            variant="p"
+            variant="span"
             color="primary.main"
             sx={{ mx: 2, my: 1, fontSize: '26px', fontWeight: 800 }}
           >

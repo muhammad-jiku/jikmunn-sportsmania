@@ -206,7 +206,7 @@ const Products = () => {
             >
               {/* price */}
               <Box sx={{ p: 2 }}>
-                <Typography variant="h6">Price</Typography>
+                <Typography variant="span">Price</Typography>
                 <Slider
                   aria-labelledby="range-slider"
                   getAriaLabel={() => 'Price range'}
@@ -223,7 +223,7 @@ const Products = () => {
               </Box>
               {/* category */}
               <Box sx={{ paddingX: 2 }}>
-                <Typography variant="h6">Category</Typography>
+                <Typography variant="span">Category</Typography>
                 <List>
                   {categories.map((cat, idx) => (
                     <ListItem key={idx}>
@@ -245,7 +245,7 @@ const Products = () => {
               </Box>
               {/* Ratings */}
               <Box sx={{ paddingX: 2 }}>
-                <Typography variant="h6">Ratings</Typography>
+                <Typography variant="span">Ratings</Typography>
                 <Slider
                   aria-labelledby="continuous-slider"
                   getAriaLabel={() => 'Ratings range'}
@@ -294,14 +294,18 @@ const Products = () => {
           <Loader />
         ) : (
           <>
-            <Typography
-              variant="h4"
-              sx={{
-                mb: 2,
-              }}
-            >
-              Our Products
-            </Typography>
+            <Box sx={{ mb: 2 }}>
+              <Typography
+                variant="span"
+                sx={{
+                  fontSize: '24px',
+                  fontWeight: 700,
+                }}
+                color="primary.main"
+              >
+                Our Products
+              </Typography>
+            </Box>
             <Grid
               container
               spacing={{
@@ -324,7 +328,7 @@ const Products = () => {
             </Grid>
             {products?.length === 0 && (
               <Typography
-                variant="h6"
+                variant="span"
                 color={'red'}
                 display="flex"
                 justifyContent="center"

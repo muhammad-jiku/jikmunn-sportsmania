@@ -80,7 +80,7 @@ const Sidebar = () => {
             sx={{
               textTransform: 'capitalize',
             }}
-            variant="h6"
+            variant="span"
             color="text.secondary"
           >
             {user?.name}
@@ -90,7 +90,7 @@ const Sidebar = () => {
             sx={{
               mb: 1.5,
             }}
-            variant="h7"
+            variant="span"
             color="text.secondary"
           >
             Joined On: {String(user?.createdAt).substr(0, 10)}

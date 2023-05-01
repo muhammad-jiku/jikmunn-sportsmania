@@ -90,7 +90,7 @@ const Navbar = ({ isAuthenticated, user }) => {
             }}
           >
             <Typography
-              variant="h5"
+              variant="span"
               className={styles.headerText}
               sx={{
                 // mr: 2,
@@ -161,6 +161,7 @@ const Navbar = ({ isAuthenticated, user }) => {
                       style={{
                         textDecoration: 'none',
                         color: '#000',
+                        fontWeight: 700,
                       }}
                     >
                       {title}
@@ -174,7 +175,7 @@ const Navbar = ({ isAuthenticated, user }) => {
 
         {/*  Pages */}
         <Typography
-          variant="h5"
+          variant="span"
           // noWrap
           // component="a"
           className={styles.headerText}
@@ -219,7 +220,8 @@ const Navbar = ({ isAuthenticated, user }) => {
                 color: 'white',
                 display: 'block',
                 textTransform: 'none',
-                fontWeight: 400,
+
+                fontWeight: 700,
               }}
             >
               {title}
@@ -289,6 +291,7 @@ const Navbar = ({ isAuthenticated, user }) => {
                         style={{
                           textDecoration: 'none',
                           color: '#000',
+                          fontWeight: 700,
                         }}
                       >
                         Profile
@@ -310,6 +313,7 @@ const Navbar = ({ isAuthenticated, user }) => {
                       style={{
                         textDecoration: 'none',
                         color: '#000',
+                        fontWeight: 700,
                       }}
                     >
                       Login

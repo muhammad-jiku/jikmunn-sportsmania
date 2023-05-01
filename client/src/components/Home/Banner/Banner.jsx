@@ -87,13 +87,13 @@ const Banner = () => {
   return (
     <BannerContainer>
       <BannerContent>
-        <BannerTitle variant="h2">
+        <BannerTitle variant="span">
           Welcome to{' '}
           <Typography variant="span" color="primary">
             Sports Mania!
           </Typography>
         </BannerTitle>
-        <BannerSubtitle variant="h6">Huge Sports Collection</BannerSubtitle>
+        <BannerSubtitle variant="span">Huge Sports Collection</BannerSubtitle>
         <BannerDescription variant="subtitle">
           You will find here amazing collections of sports around the globe.
           This is the best online sports shop where you can find your favorite

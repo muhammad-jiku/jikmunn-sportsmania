@@ -56,7 +56,7 @@ const ProductsCard = ({ product }) => {
             justifyContent: 'center',
           }}
         >
-          <Typography variant="p" sx={{ fontWeight: 800 }}>
+          <Typography variant="span" sx={{ fontWeight: 800 }}>
             {product?.name}
           </Typography>
           <Typography
@@ -68,7 +68,7 @@ const ProductsCard = ({ product }) => {
               ? product?.description
               : product?.description?.slice(0, 35) + '...'}
           </Typography>
-          <Typography variant="p" sx={{ mt: 1, fontweight: 800 }}>
+          <Typography variant="span" sx={{ mt: 1, fontweight: 800 }}>
             ${product?.price}
           </Typography>
 

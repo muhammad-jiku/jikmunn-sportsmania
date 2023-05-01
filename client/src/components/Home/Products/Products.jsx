@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { getProducts, clearErrors } from '../../../actions/productAction';
@@ -30,14 +30,18 @@ const Products = () => {
         }}
       >
         {/* {console.log(products)} */}
-        <Typography
-          variant="h4"
-          sx={{
-            mb: 2,
-          }}
-        >
-          Our Products
-        </Typography>
+        <Box sx={{ mb: 2 }}>
+          <Typography
+            variant="span"
+            sx={{
+              fontSize: '24px',
+              fontWeight: 700,
+            }}
+            color="primary.main"
+          >
+            Our Products
+          </Typography>
+        </Box>
         <Grid
           container
           spacing={{

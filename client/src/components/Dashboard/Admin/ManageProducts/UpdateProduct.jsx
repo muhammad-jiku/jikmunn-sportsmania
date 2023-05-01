@@ -7,7 +7,11 @@ import {
   getProductDetails,
   updateProduct,
 } from '../../../../actions/productAction';
-import { UPDATE_PRODUCT_RESET } from '../../../../constants/productConstant';
+import {
+  PRODUCT_DETAILS_REQUEST,
+  PRODUCT_DETAILS_SUCCESS,
+  UPDATE_PRODUCT_RESET,
+} from '../../../../constants/productConstant';
 import {
   Box,
   Button,
@@ -29,11 +33,13 @@ const UpdateProduct = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { error, product } = useSelector((state) => state.productDetails);
+  const { loading, error, product } = useSelector(
+    (state) => state.productDetails
+  );
 
   const {
-    loading,
-    error: updateError,
+    loading: modificationLoading,
+    error: modificationError,
     isUpdated,
   } = useSelector((state) => state.product);
 
@@ -62,8 +68,14 @@ const UpdateProduct = () => {
   const sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
   useEffect(() => {
+    dispatch({
+      type: PRODUCT_DETAILS_REQUEST,
+    });
     if (product && product?._id !== id) {
       dispatch(getProductDetails(id));
+      dispatch({
+        type: PRODUCT_DETAILS_SUCCESS,
+      });
     } else {
       setName(product?.name);
       setPrice(product?.price);
@@ -79,9 +91,9 @@ const UpdateProduct = () => {
       dispatch(clearErrors());
     }
 
-    if (updateError) {
-      // console.log(updateError);
-      alert.error('Failed to update product details!');
+    if (modificationError) {
+      // console.log(modificationError);
+      alert.error('Failed to complete action!');
       dispatch(clearErrors());
     }
 
@@ -92,7 +104,16 @@ const UpdateProduct = () => {
         type: UPDATE_PRODUCT_RESET,
       });
     }
-  }, [dispatch, alert, id, error, updateError, navigate, isUpdated, product]);
+  }, [
+    dispatch,
+    alert,
+    id,
+    error,
+    modificationError,
+    navigate,
+    isUpdated,
+    product,
+  ]);
 
   const updateProductSubmitHandler = (e) => {
     e.preventDefault();
@@ -135,7 +156,7 @@ const UpdateProduct = () => {
 
   return (
     <>
-      {loading ? (
+      {loading || modificationLoading ? (
         <Loader />
       ) : (
         <Box
@@ -154,7 +175,7 @@ const UpdateProduct = () => {
           {product && (
             <>
               <Typography
-                variant="p"
+                variant="span"
                 color="primary"
                 textAlign="center"
                 sx={{
@@ -165,7 +186,6 @@ const UpdateProduct = () => {
               >
                 Update {product?.name}
               </Typography>
-
               <Box
                 sx={{
                   p: 2,
@@ -177,7 +197,6 @@ const UpdateProduct = () => {
                 component="form"
                 noValidate
                 autoComplete="off"
-                // encType="multipart/form-data"
                 onSubmit={updateProductSubmitHandler}
               >
                 {/* Name */}

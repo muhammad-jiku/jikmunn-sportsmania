@@ -27,7 +27,7 @@ const ReviewsCard = ({ review }) => {
     >
       <FormatQuoteIcon size="large" color="primary" sx={{ fontSize: '35px' }} />
       <Typography
-        variant="h7"
+        variant="span"
         color="primary"
         sx={{
           mb: 6,

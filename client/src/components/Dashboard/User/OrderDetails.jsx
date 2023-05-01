@@ -92,7 +92,7 @@ const OrderDetails = () => {
                   {/* Title */}
                   <Box sx={{ mb: 1 }}>
                     <Typography
-                      variant="p"
+                      variant="span"
                       sx={{ fontSize: '24px', fontWeight: 800 }}
                     >
                       Shipment Info

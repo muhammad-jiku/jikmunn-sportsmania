@@ -95,7 +95,7 @@ const AdminPanel = () => {
       }}
     >
       <Typography
-        variant="p"
+        variant="span"
         sx={{
           mt: 2,
           fontSize: {
@@ -108,7 +108,7 @@ const AdminPanel = () => {
         {user?.name ? user?.name + "'s" : ''} Dashboard
       </Typography>{' '}
       <Typography
-        variant="p"
+        variant="span"
         sx={{
           p: 2,
           my: 2,
@@ -173,7 +173,7 @@ const AdminPanel = () => {
             }}
           >
             <Typography
-              variant="p"
+              variant="span"
               sx={{
                 fontSize: {
                   xs: '14px',
@@ -186,7 +186,7 @@ const AdminPanel = () => {
               {users && users?.length === 1 ? 'User' : 'Users'}
             </Typography>
             <Typography
-              variant="p"
+              variant="span"
               sx={{
                 fontSize: {
                   xs: '12px',
@@ -226,7 +226,7 @@ const AdminPanel = () => {
             }}
           >
             <Typography
-              variant="p"
+              variant="span"
               sx={{
                 fontSize: {
                   xs: '14px',
@@ -239,7 +239,7 @@ const AdminPanel = () => {
               {products && products?.length === 1 ? 'Product' : 'Products'}
             </Typography>
             <Typography
-              variant="p"
+              variant="span"
               sx={{
                 fontSize: {
                   xs: '12px',
@@ -279,7 +279,7 @@ const AdminPanel = () => {
             }}
           >
             <Typography
-              variant="p"
+              variant="span"
               sx={{
                 fontSize: {
                   xs: '14px',
@@ -292,7 +292,7 @@ const AdminPanel = () => {
               {orders && orders?.length === 1 ? 'Order' : 'Orders'}
             </Typography>
             <Typography
-              variant="p"
+              variant="span"
               sx={{
                 fontSize: {
                   xs: '12px',

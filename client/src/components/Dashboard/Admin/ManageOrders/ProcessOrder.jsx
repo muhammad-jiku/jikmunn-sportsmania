@@ -69,8 +69,6 @@ const ProcessOrder = () => {
 
   return (
     <>
-      {console.log(order)}
-
       {loading ? (
         <Loader />
       ) : (
@@ -124,7 +122,7 @@ const ProcessOrder = () => {
                   {/* Title */}
                   <Box sx={{ mb: 1 }}>
                     <Typography
-                      variant="p"
+                      variant="span"
                       sx={{ fontSize: '24px', fontWeight: 800 }}
                     >
                       Shipment Info
@@ -312,7 +310,7 @@ const ProcessOrder = () => {
                 <Box sx={{ py: 2, my: 2, boxSizing: 'border-box' }}>
                   <Box sx={{ mb: 1 }}>
                     <Typography
-                      variant="p"
+                      variant="span"
                       sx={{ fontSize: '18px', fontWeight: 700 }}
                     >
                       Order Status Process
@@ -361,7 +359,6 @@ const ProcessOrder = () => {
                             label={'Order Stauts'}
                             placeholder={'Order Status'}
                           >
-                            {console.log(os)}
                             {os}
                           </MenuItem>
                         ))}
@@ -379,7 +376,6 @@ const ProcessOrder = () => {
                             label={'Order Stauts'}
                             placeholder={'Order Status'}
                           >
-                            {console.log(os)}
                             {os}
                           </MenuItem>
                         ))}

@@ -150,10 +150,10 @@ const AllOrders = () => {
               }}
             >
               <Typography
-                variant="p"
+                variant="span"
                 color="primary.main"
-                textAlign="center"
-                sx={{ fontSize: '22px', fontWeight: 900 }}
+                textAlign={'center'}
+                sx={{ mx: 2, my: 1, fontSize: '26px', fontWeight: 800 }}
               >
                 List of All Orders
               </Typography>
@@ -169,7 +169,7 @@ const AllOrders = () => {
             </Box>
           ) : (
             <Box sx={{ p: 2 }}>
-              <Typography variant="h6" textAlign="center" color="red">
+              <Typography variant="span" textAlign="center" color="red">
                 Nothing is order yet!
               </Typography>
             </Box>

@@ -97,7 +97,7 @@ const UpdateUser = () => {
           }}
         >
           <Typography
-            variant="p"
+            variant="span"
             color="primary"
             textAlign="center"
             sx={{ fontSize: '24px', fontWeight: 800 }}
