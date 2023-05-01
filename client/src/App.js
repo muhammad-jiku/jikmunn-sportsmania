@@ -48,8 +48,8 @@ function App() {
 
   console.log('1', process.env);
 
-  // axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
-  axios.defaults.baseURL = process.env.REACT_APP_SERVER_URI;
+  axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+
   console.log('2', process.env);
   console.log('server side uri = ', axios.defaults.baseURL);
   const getStripeApiKey = async () => {
