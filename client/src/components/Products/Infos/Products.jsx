@@ -228,16 +228,19 @@ const Products = () => {
                   {categories.map((cat, idx) => (
                     <ListItem key={idx}>
                       <ListItemText>
-                        <Checkbox
-                          onChange={categoryHandler}
-                          checked={
-                            cat === category && isChecked === true
-                              ? true
-                              : false
-                          }
-                          value={cat}
-                        />
-                        {cat}
+                        <Typography sx={{ fontSize: '14px' }}>
+                          {' '}
+                          <Checkbox
+                            onChange={categoryHandler}
+                            checked={
+                              cat === category && isChecked === true
+                                ? true
+                                : false
+                            }
+                            value={cat}
+                          />{' '}
+                          {cat}
+                        </Typography>
                       </ListItemText>
                     </ListItem>
                   ))}
@@ -348,7 +351,11 @@ const Products = () => {
                   justifyContent: 'center',
                 }}
                 size="small"
-                count={productsCount / resultPerPage}
+                count={
+                  resultPerPage < count
+                    ? Math.ceil(count / resultPerPage)
+                    : Math.ceil(productsCount / resultPerPage)
+                }
                 page={currentPage}
                 onChange={setCurrentPageNo}
                 // variant="outlined"

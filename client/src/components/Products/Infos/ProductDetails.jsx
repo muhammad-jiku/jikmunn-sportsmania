@@ -362,17 +362,20 @@ const ProductDetails = ({ user }) => {
                   <Reviews product={product} />
                 </Box>
               ) : (
-                <Typography
-                  variant="span"
-                  color="red"
-                  textAlign="center"
-                  sx={{
-                    m: 4,
-                    fontWeight: 600,
-                  }}
-                >
-                  No Reviews Yet!
-                </Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Typography
+                    variant="span"
+                    color="red"
+                    textAlign="center"
+                    sx={{
+                      m: 4,
+                      fontSize: '22px',
+                      fontWeight: 600,
+                    }}
+                  >
+                    No Reviews Yet!
+                  </Typography>
+                </Box>
               )}
             </>
           )}

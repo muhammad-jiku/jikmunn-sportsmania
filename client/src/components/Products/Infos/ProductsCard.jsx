@@ -39,7 +39,7 @@ const ProductsCard = ({ product }) => {
       >
         <CardMedia
           component="img"
-          height="350px"
+          height="320px"
           // width="320px"
           image={`${product?.images[0]?.url}`}
           alt={`${product?.name}`}
@@ -56,7 +56,11 @@ const ProductsCard = ({ product }) => {
             justifyContent: 'center',
           }}
         >
-          <Typography variant="span" sx={{ fontWeight: 800 }}>
+          <Typography
+            variant="span"
+            textAlign={'center'}
+            sx={{ fontSize: '16px', fontWeight: 800 }}
+          >
             {product?.name}
           </Typography>
           <Typography
@@ -64,9 +68,9 @@ const ProductsCard = ({ product }) => {
             textAlign="justify"
             sx={{ mt: 1, fontWeight: 400, fontSize: '12px' }}
           >
-            {product?.description?.length === 35
+            {product?.description?.length === 32
               ? product?.description
-              : product?.description?.slice(0, 35) + '...'}
+              : product?.description?.slice(0, 32) + '...'}
           </Typography>
           <Typography variant="span" sx={{ mt: 1, fontweight: 800 }}>
             ${product?.price}

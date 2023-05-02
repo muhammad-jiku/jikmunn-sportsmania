@@ -289,7 +289,16 @@ const NewProduct = () => {
         </Button>
 
         {imagesPreview.map((image, index) => (
-          <img key={index} src={image} alt="Product Preview" height={75} />
+          <img
+            key={index}
+            src={image}
+            alt="Product Preview"
+            height={75}
+            style={{
+              marginTop: '5px',
+              cursor: 'pointer',
+            }}
+          />
         ))}
 
         <Button
