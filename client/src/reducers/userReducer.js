@@ -1,3 +1,4 @@
+//  internal imports
 import {
   ALL_USERS_FAIL,
   ALL_USERS_REQUEST,
@@ -41,8 +42,8 @@ import {
   USER_DETAILS_SUCCESS,
 } from '../constants/userConstant';
 
+//  user reducer
 export const userReducer = (state = { user: {} }, action) => {
-  // console.log(state);
   switch (action.type) {
     case LOGIN_REQUEST:
     case REGISTER_USER_REQUEST:
@@ -103,8 +104,8 @@ export const userReducer = (state = { user: {} }, action) => {
   }
 };
 
+//  profile reducer
 export const profileReducer = (state = {}, action) => {
-  // console.log(state);
   switch (action.type) {
     case UPDATE_PROFILE_REQUEST:
     case UPDATE_PASSWORD_REQUEST:
@@ -166,6 +167,7 @@ export const profileReducer = (state = {}, action) => {
   }
 };
 
+//  fotget password reducer
 export const forgotPasswordReducer = (state = {}, action) => {
   switch (action.type) {
     case FORGOT_PASSWORD_REQUEST:
@@ -208,9 +210,8 @@ export const forgotPasswordReducer = (state = {}, action) => {
   }
 };
 
-//  Get All Users - (admin)
+//  all users reducer - (admin)
 export const allUsersReducer = (state = { users: [] }, action) => {
-  // console.log(state);
   switch (action.type) {
     case ALL_USERS_REQUEST:
       return {
@@ -242,7 +243,7 @@ export const allUsersReducer = (state = { users: [] }, action) => {
   }
 };
 
-//  - (admin)
+//  user details reducer - (admin)
 export const userDetailsReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case USER_DETAILS_REQUEST:

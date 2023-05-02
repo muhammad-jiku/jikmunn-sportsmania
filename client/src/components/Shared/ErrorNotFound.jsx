@@ -1,7 +1,9 @@
-import { Box, Button, styled, Typography } from '@mui/material';
 import React from 'react';
-import NotFound from '../../assets/gifs/NotFound.gif';
+//  external imports
 import { useNavigate } from 'react-router-dom';
+import { Box, Button, styled, Typography } from '@mui/material';
+//  internal import
+import NotFound from '../../assets/gifs/NotFound.gif';
 
 const ErrorNotFound = () => {
   const navigate = useNavigate();

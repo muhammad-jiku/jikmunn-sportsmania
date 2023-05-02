@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+//  external imports
 import { useAlert } from 'react-alert';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import HeightIcon from '@mui/icons-material/Height';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
   Box,
   Button,
@@ -11,14 +14,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { clearErrors, getProductDetails } from '../../../actions/productAction';
-import { ErrorNotFound, Loader } from '../../Shared';
-import AddReview from '../Reviews/AddReview';
+//  internal imports
 import Reviews from '../Reviews/Reviews';
-import { addItemsToCart } from '../../../actions/cartAction';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import HeightIcon from '@mui/icons-material/Height';
 import MetaData from '../../../utils/MetaData';
+import AddReview from '../Reviews/AddReview';
+import { ErrorNotFound, Loader } from '../../Shared';
+import { addItemsToCart } from '../../../actions/cartAction';
+import { clearErrors, getProductDetails } from '../../../actions/productAction';
 
 const ProductDetails = ({ user }) => {
   const alert = useAlert();
@@ -52,7 +54,6 @@ const ProductDetails = ({ user }) => {
 
     const qty = quantity + 1;
     setQuantity(qty);
-    // console.log(qty);
   };
 
   const decreaseQuantity = () => {
@@ -60,11 +61,9 @@ const ProductDetails = ({ user }) => {
 
     const qty = quantity - 1;
     setQuantity(qty);
-    // console.log(qty);
   };
 
   const handleAddProductToCart = () => {
-    // console.log(id, size, quantity);
     dispatch(addItemsToCart(id, size, quantity));
     alert.success('Item Added To Cart');
   };
@@ -98,7 +97,6 @@ const ProductDetails = ({ user }) => {
           {product && (
             <>
               <MetaData title={`${product?.name}`} />
-              {/* {console.log(product)} */}
               <Box
                 sx={{
                   p: 2,

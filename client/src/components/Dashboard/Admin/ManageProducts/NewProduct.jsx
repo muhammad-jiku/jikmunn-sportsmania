@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, createProduct } from '../../../../actions/productAction';
-import { useNavigate } from 'react-router-dom';
+//  external imports
 import { useAlert } from 'react-alert';
-import { NEW_PRODUCT_RESET } from '../../../../constants/productConstant';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import HeightIcon from '@mui/icons-material/Height';
+import StorageIcon from '@mui/icons-material/Storage';
+import SpellcheckIcon from '@mui/icons-material/Spellcheck';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import {
   Box,
   Button,
@@ -12,11 +16,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import SpellcheckIcon from '@mui/icons-material/Spellcheck';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import StorageIcon from '@mui/icons-material/Storage';
-import HeightIcon from '@mui/icons-material/Height';
+//  internal imports
+import { clearErrors, createProduct } from '../../../../actions/productAction';
+import { NEW_PRODUCT_RESET } from '../../../../constants/productConstant';
 
 const NewProduct = () => {
   const alert = useAlert();

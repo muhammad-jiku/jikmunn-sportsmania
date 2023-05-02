@@ -1,4 +1,5 @@
 import React from 'react';
+//  internal imports
 import MetaData from '../../../../utils/MetaData';
 import { AdminPanel } from '../../../../components/Dashboard';
 

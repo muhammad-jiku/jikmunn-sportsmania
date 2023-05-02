@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { Box, Container, Grid, Typography } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+//  external imports
 import { useAlert } from 'react-alert';
-import { getProducts, clearErrors } from '../../../actions/productAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box, Container, Grid, Typography } from '@mui/material';
+//  internal imports
 import ProductsCard from '../../Products/Infos/ProductsCard';
+import { getProducts, clearErrors } from '../../../actions/productAction';
 
 const Products = () => {
   const alert = useAlert();
@@ -29,7 +31,6 @@ const Products = () => {
           p: 4,
         }}
       >
-        {/* {console.log(products)} */}
         <Box sx={{ mb: 2 }}>
           <Typography
             variant="span"

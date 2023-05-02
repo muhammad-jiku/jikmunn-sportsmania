@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ErrorNotFound, Loader } from '../../Shared';
-import {
-  Box,
-  Button,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Typography,
-} from '@mui/material';
-import { clearErrors, resetPassword } from '../../../actions/userAction';
-import { useForm } from 'react-hook-form';
+//  external imports
 import { useAlert } from 'react-alert';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate, useParams } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  IconButton,
+  InputAdornment,
+} from '@mui/material';
+//  internal imports
+import { ErrorNotFound, Loader } from '../../Shared';
 import { resetPasswordSchema } from '../../../utils/ValidationSchema';
+import { clearErrors, resetPassword } from '../../../actions/userAction';
 
 const ResetPassword = () => {
   const alert = useAlert();

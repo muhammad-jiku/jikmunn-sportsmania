@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+//  external imports
 import { useAlert } from 'react-alert';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import PersonIcon from '@mui/icons-material/Person';
+import PhoneIcon from '@mui/icons-material/Phone';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import {
+  Box,
+  Button,
+  Divider,
+  MenuItem,
+  TextField,
+  Typography,
+  InputAdornment,
+} from '@mui/material';
+//  internal imports
+import { ErrorNotFound, Loader } from '../../../Shared';
 import { UPDATE_ORDER_RESET } from '../../../../constants/orderConstant';
 import {
   clearErrors,
   updateOrder,
   getOrderDetails,
 } from '../../../../actions/orderAction';
-import { ErrorNotFound, Loader } from '../../../Shared';
-import {
-  Box,
-  Button,
-  Divider,
-  InputAdornment,
-  MenuItem,
-  TextField,
-  Typography,
-} from '@mui/material';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import PersonIcon from '@mui/icons-material/Person';
-import PhoneIcon from '@mui/icons-material/Phone';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const ProcessOrder = () => {
   const alert = useAlert();
@@ -76,7 +78,6 @@ const ProcessOrder = () => {
           {!order && <ErrorNotFound />}
           {order && (
             <>
-              {/* {console.log(order)} */}
               <Box
                 sx={{
                   p: 2,

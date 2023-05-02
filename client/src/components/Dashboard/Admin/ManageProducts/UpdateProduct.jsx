@@ -1,7 +1,23 @@
 import React, { useEffect, useState } from 'react';
+//  external imports
+import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAlert } from 'react-alert';
+import HeightIcon from '@mui/icons-material/Height';
+import StorageIcon from '@mui/icons-material/Storage';
+import SpellcheckIcon from '@mui/icons-material/Spellcheck';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import {
+  Box,
+  Button,
+  InputAdornment,
+  MenuItem,
+  TextField,
+  Typography,
+} from '@mui/material';
+//  internal imports
+import { Loader } from '../../../Shared';
 import {
   clearErrors,
   getProductDetails,
@@ -12,20 +28,6 @@ import {
   PRODUCT_DETAILS_SUCCESS,
   UPDATE_PRODUCT_RESET,
 } from '../../../../constants/productConstant';
-import {
-  Box,
-  Button,
-  InputAdornment,
-  MenuItem,
-  TextField,
-  Typography,
-} from '@mui/material';
-import SpellcheckIcon from '@mui/icons-material/Spellcheck';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import HeightIcon from '@mui/icons-material/Height';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import StorageIcon from '@mui/icons-material/Storage';
-import { Loader } from '../../../Shared';
 
 const UpdateProduct = () => {
   const alert = useAlert();

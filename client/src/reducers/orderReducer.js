@@ -1,3 +1,4 @@
+//  internal imports
 import {
   ALL_ORDERS_FAIL,
   ALL_ORDERS_REQUEST,
@@ -22,8 +23,8 @@ import {
   UPDATE_ORDER_SUCCESS,
 } from '../constants/orderConstant';
 
+//  new order reducer
 export const newOrderReducer = (state = {}, action) => {
-  // console.log(state);
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
       return {
@@ -53,6 +54,7 @@ export const newOrderReducer = (state = {}, action) => {
   }
 };
 
+//  my orders reducer
 export const myOrdersReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case MY_ORDERS_REQUEST:
@@ -82,7 +84,7 @@ export const myOrdersReducer = (state = { orders: [] }, action) => {
   }
 };
 
-//  - (admin)
+//  all orders reducer - (admin)
 export const allOrdersReducer = (state = { orders: [] }, action) => {
   switch (action.type) {
     case ALL_ORDERS_REQUEST:
@@ -112,7 +114,7 @@ export const allOrdersReducer = (state = { orders: [] }, action) => {
   }
 };
 
-//  - (admin)
+//  order reducer - (admin)
 export const orderReducer = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_ORDER_REQUEST:
@@ -165,6 +167,7 @@ export const orderReducer = (state = {}, action) => {
   }
 };
 
+//  order details reducer
 export const orderDetailsReducer = (state = { order: {} }, action) => {
   switch (action.type) {
     case ORDER_DETAILS_REQUEST:

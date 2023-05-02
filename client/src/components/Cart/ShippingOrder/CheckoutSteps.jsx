@@ -1,4 +1,8 @@
 import React from 'react';
+//  external imports
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import {
   Box,
   Stepper,
@@ -7,9 +11,6 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
 const CheckoutSteps = ({ activeStep }) => {
   const theme = useTheme();

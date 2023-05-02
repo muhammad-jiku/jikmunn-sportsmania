@@ -1,6 +1,7 @@
 import React from 'react';
-import { Auth } from '../../components/Auth';
+//  internal imports
 import MetaData from '../../utils/MetaData';
+import { Auth } from '../../components/Auth';
 
 const LoginPage = () => {
   return (

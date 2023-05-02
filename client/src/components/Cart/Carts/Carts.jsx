@@ -1,9 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+//  external imports
 import { useSelector } from 'react-redux';
-import { Box, Button, Typography } from '@mui/material';
-import CartCard from './CartCard';
+import { useNavigate } from 'react-router-dom';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import { Box, Button, Typography } from '@mui/material';
+//  internal import
+import CartCard from './CartCard';
 
 const Carts = () => {
   const navigate = useNavigate();

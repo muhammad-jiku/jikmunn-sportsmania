@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from 'react';
+//  external imports
+import { useForm } from 'react-hook-form';
+import { useAlert } from 'react-alert';
+import { useNavigate } from 'react-router-dom';
+import { Country, State } from 'country-state-city';
+import { useDispatch, useSelector } from 'react-redux';
+import { zodResolver } from '@hookform/resolvers/zod';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import {
   Avatar,
   Badge,
@@ -9,22 +17,16 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+//  internal imports
+import { Loader } from '../../Shared';
 import profile from '../../../assets/images/avatar_1.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { useAlert } from 'react-alert';
-import { Country, State } from 'country-state-city';
+import { userInfoSchema } from '../../../utils/ValidationSchema';
+import { UPDATE_PROFILE_RESET } from '../../../constants/userConstant';
 import {
   clearErrors,
   loadUser,
   updateProfile,
 } from '../../../actions/userAction';
-import { Loader } from '../../Shared';
-import { UPDATE_PROFILE_RESET } from '../../../constants/userConstant';
-import { useNavigate } from 'react-router-dom';
-import { userInfoSchema } from '../../../utils/ValidationSchema';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 const Profile = () => {
   const alert = useAlert();
@@ -37,7 +39,6 @@ const Profile = () => {
     isUpdated,
     loading: updateLoading,
   } = useSelector((state) => state.profile);
-  // console.log('user', user);
 
   const [name, setName] = useState(user ? user?.name : ``);
   const [email, setEmail] = useState(user ? user?.email : ``);
@@ -72,8 +73,6 @@ const Profile = () => {
           setAvatarPreview(reader.result);
           setAvatar(reader.result);
         }
-        // do something with the result
-        // console.log(reader.result);
       };
     } else {
       console.error('The selected file is not a valid Blob object.');
@@ -81,7 +80,6 @@ const Profile = () => {
   };
 
   const onSubmitHandler = (values) => {
-    // console.log(values);
     const userInfo = {
       name: values?.name,
       email: values?.email,

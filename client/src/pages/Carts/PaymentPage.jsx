@@ -1,6 +1,7 @@
 import React from 'react';
-import { Payment } from '../../components/Cart';
+//  internal imports
 import MetaData from '../../utils/MetaData';
+import { Payment } from '../../components/Cart';
 
 const PaymentPage = () => {
   return (

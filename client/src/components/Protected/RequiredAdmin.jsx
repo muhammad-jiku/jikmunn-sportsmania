@@ -1,4 +1,5 @@
 import React from 'react';
+//  external import
 import { Navigate } from 'react-router-dom';
 
 const RequiredAdmin = ({ user, children }) => {

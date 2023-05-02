@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+//  external imports
 import { useAlert } from 'react-alert';
-import { clearErrors, getOrderDetails } from '../../../actions/orderAction';
-import { ErrorNotFound, Loader } from '../../Shared';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import PhoneIcon from '@mui/icons-material/Phone';
+import PersonIcon from '@mui/icons-material/Person';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import {
   Box,
   Button,
@@ -12,10 +15,9 @@ import {
   InputAdornment,
   Typography,
 } from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
-import PhoneIcon from '@mui/icons-material/Phone';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+//  internal imports
+import { ErrorNotFound, Loader } from '../../Shared';
+import { clearErrors, getOrderDetails } from '../../../actions/orderAction';
 
 const OrderDetails = () => {
   const futureDate = new Date(

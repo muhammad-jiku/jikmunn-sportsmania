@@ -1,4 +1,5 @@
 import React from 'react';
+//  internal import
 import { UpdatePassword } from '../../Auth';
 
 const SecureProfile = () => {

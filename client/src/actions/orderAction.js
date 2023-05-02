@@ -1,4 +1,6 @@
+//  external import
 import axios from 'axios';
+//  internal imports
 import {
   ALL_ORDERS_FAIL,
   ALL_ORDERS_REQUEST,
@@ -21,11 +23,10 @@ import {
   UPDATE_ORDER_SUCCESS,
 } from '../constants/orderConstant';
 
-// Create Order
+// Creating Order
 export const createOrder = (order) => async (dispatch) => {
-  // console.log(order);
   try {
-    dispatch({
+    await dispatch({
       type: CREATE_ORDER_REQUEST,
     });
 
@@ -38,12 +39,12 @@ export const createOrder = (order) => async (dispatch) => {
 
     const { data } = await axios.post('/api/v1/order/new', order, config);
 
-    dispatch({
+    await dispatch({
       type: CREATE_ORDER_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: CREATE_ORDER_FAIL,
       payload: error.response.data.message,
     });
@@ -53,7 +54,7 @@ export const createOrder = (order) => async (dispatch) => {
 // My Orders
 export const myOrders = () => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: MY_ORDERS_REQUEST,
     });
 
@@ -66,12 +67,12 @@ export const myOrders = () => async (dispatch) => {
 
     const { data } = await axios.get('/api/v1/orders/me', config);
 
-    dispatch({
+    await dispatch({
       type: MY_ORDERS_SUCCESS,
       payload: data.orders,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: MY_ORDERS_FAIL,
       payload: error.response.data.message,
     });
@@ -81,7 +82,7 @@ export const myOrders = () => async (dispatch) => {
 // Get All Orders - (admin)
 export const getAllOrders = () => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: ALL_ORDERS_REQUEST,
     });
 
@@ -94,12 +95,12 @@ export const getAllOrders = () => async (dispatch) => {
 
     const { data } = await axios.get('/api/v1/admin/orders', config);
 
-    dispatch({
+    await dispatch({
       type: ALL_ORDERS_SUCCESS,
       payload: data.orders,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: ALL_ORDERS_FAIL,
       payload: error.response.data.message,
     });
@@ -108,10 +109,8 @@ export const getAllOrders = () => async (dispatch) => {
 
 // Update Order - (admin)
 export const updateOrder = (id, order) => async (dispatch) => {
-  // console.log(id);
-  // console.log(order);
   try {
-    dispatch({
+    await dispatch({
       type: UPDATE_ORDER_REQUEST,
     });
 
@@ -128,12 +127,12 @@ export const updateOrder = (id, order) => async (dispatch) => {
       config
     );
 
-    dispatch({
+    await dispatch({
       type: UPDATE_ORDER_SUCCESS,
       payload: data.success,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: UPDATE_ORDER_FAIL,
       payload: error.response.data.message,
     });
@@ -143,7 +142,7 @@ export const updateOrder = (id, order) => async (dispatch) => {
 // Delete Order - (admin)
 export const deleteOrder = (id) => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: DELETE_ORDER_REQUEST,
     });
 
@@ -155,12 +154,12 @@ export const deleteOrder = (id) => async (dispatch) => {
     };
     const { data } = await axios.delete(`/api/v1/admin/order/${id}`, config);
 
-    dispatch({
+    await dispatch({
       type: DELETE_ORDER_SUCCESS,
       payload: data.success,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: DELETE_ORDER_FAIL,
       payload: error.response.data.message,
     });
@@ -170,7 +169,7 @@ export const deleteOrder = (id) => async (dispatch) => {
 // Get Order Details
 export const getOrderDetails = (id) => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: ORDER_DETAILS_REQUEST,
     });
 
@@ -183,12 +182,12 @@ export const getOrderDetails = (id) => async (dispatch) => {
 
     const { data } = await axios.get(`/api/v1/order/${id}`, config);
 
-    dispatch({
+    await dispatch({
       type: ORDER_DETAILS_SUCCESS,
       payload: data.order,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: ORDER_DETAILS_FAIL,
       payload: error.response.data.message,
     });
@@ -197,7 +196,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
 
 // Clearing Errors
 export const clearErrors = () => async (dispatch) => {
-  dispatch({
+  await dispatch({
     type: CLEAR_ERRORS,
   });
 };

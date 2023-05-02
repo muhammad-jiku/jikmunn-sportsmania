@@ -1,6 +1,7 @@
 import React from 'react';
-import { ConfirmOrder } from '../../components/Cart';
+//  internal imports
 import MetaData from '../../utils/MetaData';
+import { ConfirmOrder } from '../../components/Cart';
 
 const ConfirmOrderPage = () => {
   return (

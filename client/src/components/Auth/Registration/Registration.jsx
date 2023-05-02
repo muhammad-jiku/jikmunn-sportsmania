@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from 'react';
+//  external imports
+import { useAlert } from 'react-alert';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {
   Avatar,
   Badge,
   Box,
   Button,
   Checkbox,
-  FormControlLabel,
-  FormGroup,
-  FormHelperText,
-  IconButton,
-  InputAdornment,
   TextField,
   Typography,
+  IconButton,
+  InputAdornment,
+  FormGroup,
+  FormControlLabel,
+  FormHelperText,
 } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+//  internal imports
 import profile from '../../../assets/images/avatar_1.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, registerUser } from '../../../actions/userAction';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useAlert } from 'react-alert';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { registerSchema } from '../../../utils/ValidationSchema';
+import { clearErrors, registerUser } from '../../../actions/userAction';
 
 const Registration = ({ setAuthProcess }) => {
   const alert = useAlert();
@@ -78,7 +80,6 @@ const Registration = ({ setAuthProcess }) => {
   };
 
   const onSubmitHandler = (values) => {
-    // console.log(values);
     const userInfo = {
       name: values.name,
       email: values.email,

@@ -1,6 +1,7 @@
 import React from 'react';
-import { OrderSuccess } from '../../components/Cart';
+//  internal imports
 import MetaData from '../../utils/MetaData';
+import { OrderSuccess } from '../../components/Cart';
 
 const SuccessPage = () => {
   return (

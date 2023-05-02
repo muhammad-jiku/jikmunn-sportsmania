@@ -1,5 +1,7 @@
+//  external imports
 import { literal, object, string } from 'zod';
 
+// exporting register schema
 export const registerSchema = object({
   name: string().nonempty('Name is required').max(32, 'Name is too long'),
   email: string().nonempty('Email is required').email('Invalid email'),
@@ -16,6 +18,7 @@ export const registerSchema = object({
   message: 'Passwords do not match',
 });
 
+// exporting login schema
 export const loginSchema = object({
   email: string().nonempty('Email is required').email('Invalid email'),
   password: string()
@@ -28,6 +31,7 @@ export const loginSchema = object({
   message: 'Passwords do not match',
 });
 
+// exporting user info schema
 export const userInfoSchema = object({
   name: string().nonempty('Name is required').max(32, 'Name is too long'),
   email: string().nonempty('Email is required').email('Invalid email'),
@@ -40,10 +44,12 @@ export const userInfoSchema = object({
     .min(10, 'Address is too short'),
 });
 
+// exporting forget password schema
 export const forgetPasswordSchema = object({
   email: string().nonempty('Email is required').email('Invalid email'),
 });
 
+// exporting reset password schema
 export const resetPasswordSchema = object({
   password: string()
     .nonempty('Password is required')
@@ -55,6 +61,7 @@ export const resetPasswordSchema = object({
   message: 'Passwords do not match',
 });
 
+// exporting update password schema
 export const updatePasswordSchema = object({
   oldPassword: string()
     .nonempty('Old password is not provided')
@@ -70,10 +77,12 @@ export const updatePasswordSchema = object({
   message: 'Passwords do not match',
 });
 
+// exporting review schema
 export const reviewSchema = object({
   comment: string().nonempty('Please provide feedback'),
 });
 
+// exporting shipment schema
 export const shippingSchema = object({
   // phone: number({
   //   // required_error: 'Please provide your phone numberr',
@@ -90,6 +99,7 @@ export const shippingSchema = object({
   address: string().nonempty('Please provide your address'),
 });
 
+// exporting payment schema
 export const paymentSchema = object({
   card: string().nonempty('Please provide your card number'),
   // date: date({

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import CheckoutSteps from './CheckoutSteps';
-import { useDispatch, useSelector } from 'react-redux';
-import { Country, State } from 'country-state-city';
-import { saveShippingInfo } from '../../../actions/cartAction';
+//  external imports
+import { useAlert } from 'react-alert';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { Country, State } from 'country-state-city';
+import { useDispatch, useSelector } from 'react-redux';
+import { zodResolver } from '@hookform/resolvers/zod';
+import MapIcon from '@mui/icons-material/Map';
 import HomeIcon from '@mui/icons-material/Home';
-import LocationCityIcon from '@mui/icons-material/LocationCity';
-import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import PhoneIcon from '@mui/icons-material/Phone';
 import PublicIcon from '@mui/icons-material/Public';
-import MapIcon from '@mui/icons-material/Map';
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 import {
   Box,
   Button,
@@ -18,9 +20,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { useAlert } from 'react-alert';
-import { zodResolver } from '@hookform/resolvers/zod';
+//  internal imports
+import CheckoutSteps from './CheckoutSteps';
+import { saveShippingInfo } from '../../../actions/cartAction';
 import { shippingSchema } from '../../../utils/ValidationSchema';
 
 const Shipping = () => {

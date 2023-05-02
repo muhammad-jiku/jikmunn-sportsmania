@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+//  external imports
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
+const validator = require('validator');
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {

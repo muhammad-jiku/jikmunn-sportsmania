@@ -1,4 +1,5 @@
 import React from 'react';
+//  external import
 import { Helmet } from 'react-helmet-async';
 
 const MetaData = ({ title }) => {

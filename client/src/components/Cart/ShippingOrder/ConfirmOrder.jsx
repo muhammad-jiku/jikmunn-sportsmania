@@ -1,7 +1,11 @@
 import React from 'react';
+//  external imports
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import CheckoutSteps from './CheckoutSteps';
+import PhoneIcon from '@mui/icons-material/Phone';
+import PersonIcon from '@mui/icons-material/Person';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import {
   Box,
   Button,
@@ -9,11 +13,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
-import PhoneIcon from '@mui/icons-material/Phone';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+//  internal imports
 import CartCard from '../Carts/CartCard';
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import CheckoutSteps from './CheckoutSteps';
 
 const ConfirmOrder = () => {
   const navigate = useNavigate();

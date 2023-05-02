@@ -1,12 +1,13 @@
-const app = require('./app');
+//  external import
 const cloudinary = require('cloudinary');
+//  internal imports
+const app = require('./app');
 const databaseConnect = require('./utils/dbConnect');
 
 //  port
 const port = process.env.PORT || 5000;
 
-//  deveopment purpose error handling =>
-
+//  development purpose error handling =>
 // // Handling Uncaught Exception
 // process.on('uncaughtException', (err) => {
 //   // console.log(`Error: ${err.message}`);

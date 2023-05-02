@@ -1,6 +1,7 @@
 import React from 'react';
-import { Shipping } from '../../components/Cart';
+//  internal imports
 import MetaData from '../../utils/MetaData';
+import { Shipping } from '../../components/Cart';
 
 const ShippingPage = () => {
   return (

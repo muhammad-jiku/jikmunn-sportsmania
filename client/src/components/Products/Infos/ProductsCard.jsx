@@ -1,4 +1,6 @@
 import React from 'react';
+//  external imports
+import { useNavigate } from 'react-router-dom';
 import {
   Button,
   Card,
@@ -8,7 +10,6 @@ import {
   Rating,
   Typography,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 
 const ProductsCard = ({ product }) => {
   const navigate = useNavigate();

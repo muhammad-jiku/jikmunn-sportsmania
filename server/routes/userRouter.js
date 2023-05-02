@@ -1,4 +1,6 @@
+//  external import
 const express = require('express');
+//  internal imports
 const {
   registerUser,
   loginUser,
@@ -13,7 +15,6 @@ const {
   updateUserRole,
   deleteUser,
 } = require('../controllers/userController');
-
 const {
   isAuthenticatedUser,
   authorizeAdmin,
@@ -49,4 +50,5 @@ userRouter
   .put(isAuthenticatedUser, authorizeAdmin, updateUserRole)
   .delete(isAuthenticatedUser, authorizeAdmin, deleteUser);
 
+//  exporing module
 module.exports = userRouter;

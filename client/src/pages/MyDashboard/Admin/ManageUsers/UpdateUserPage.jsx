@@ -1,6 +1,7 @@
 import React from 'react';
-import { UpdateUser } from '../../../../components/Dashboard';
+//  internal imports
 import MetaData from '../../../../utils/MetaData';
+import { UpdateUser } from '../../../../components/Dashboard';
 
 const UpdateUserPage = () => {
   return (

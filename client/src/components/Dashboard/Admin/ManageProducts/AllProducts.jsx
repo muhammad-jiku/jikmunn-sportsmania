@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
+//  external imports
+import { useAlert } from 'react-alert';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { DataGrid } from '@mui/x-data-grid';
+import { Box, Button, Typography } from '@mui/material';
+//  internal imports
+import { Loader } from '../../../Shared';
+import { DELETE_PRODUCT_RESET } from '../../../../constants/productConstant';
 import {
   clearErrors,
   deleteProduct,
   getAdminProduct,
 } from '../../../../actions/productAction';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAlert } from 'react-alert';
-import { Box, Button, Typography } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { DataGrid } from '@mui/x-data-grid';
-import { DELETE_PRODUCT_RESET } from '../../../../constants/productConstant';
-import { Loader } from '../../../Shared';
 
 const AllProducts = () => {
   const alert = useAlert();
@@ -108,7 +110,6 @@ const AllProducts = () => {
       renderCell: (params) => {
         return (
           <>
-            {/* {console.log(params.id)} */}
             <Link to={`/dashboard/admin/product/update/${params.id}`}>
               <EditIcon
                 sx={{

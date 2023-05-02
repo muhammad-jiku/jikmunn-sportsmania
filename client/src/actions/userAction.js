@@ -1,4 +1,6 @@
+//  external import
 import axios from 'axios';
+//  internal imports
 import {
   ALL_USERS_FAIL,
   ALL_USERS_REQUEST,
@@ -41,7 +43,7 @@ import {
 // Login
 export const loginUser = (userData) => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: LOGIN_REQUEST,
     });
 
@@ -51,16 +53,15 @@ export const loginUser = (userData) => async (dispatch) => {
 
     const { data } = await axios.post(`/api/v1/login`, userData, config);
 
-    dispatch({
+    await dispatch({
       type: LOGIN_SUCCESS,
       payload: data.user,
     });
-    // console.log(data);
-    const token = data?.token;
-    // console.log('token', token);
+
+    const token = await data?.token;
     localStorage?.setItem('token', token);
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: LOGIN_FAIL,
       payload: error.response.data.message,
     });
@@ -70,7 +71,7 @@ export const loginUser = (userData) => async (dispatch) => {
 // Register
 export const registerUser = (userData) => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: REGISTER_USER_REQUEST,
     });
 
@@ -80,16 +81,15 @@ export const registerUser = (userData) => async (dispatch) => {
 
     const { data } = await axios.post(`/api/v1/register`, userData, config);
 
-    dispatch({
+    await dispatch({
       type: REGISTER_USER_SUCCESS,
       payload: data.user,
     });
-    // console.log(data);
-    const token = data?.token;
-    // console.log('token', token);
+
+    const token = await data?.token;
     localStorage?.setItem('token', token);
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: REGISTER_USER_FAIL,
       payload: error.response.data.message,
     });
@@ -99,7 +99,7 @@ export const registerUser = (userData) => async (dispatch) => {
 // Load User
 export const loadUser = () => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: LOAD_USER_REQUEST,
     });
 
@@ -112,12 +112,12 @@ export const loadUser = () => async (dispatch) => {
 
     const { data } = await axios.get(`/api/v1/me`, config);
 
-    dispatch({
+    await dispatch({
       type: LOAD_USER_SUCCESS,
       payload: data.user,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: LOAD_USER_FAIL,
       payload: error.response.data.message,
     });
@@ -129,11 +129,11 @@ export const logoutUser = () => async (dispatch) => {
   try {
     await axios.get(`/api/v1/logout`);
 
-    dispatch({
+    await dispatch({
       type: LOGOUT_SUCCESS,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: LOGOUT_FAIL,
       payload: error.response.data.message,
     });
@@ -143,7 +143,7 @@ export const logoutUser = () => async (dispatch) => {
 // Update Profile
 export const updateProfile = (userData) => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: UPDATE_PROFILE_REQUEST,
     });
 
@@ -156,12 +156,12 @@ export const updateProfile = (userData) => async (dispatch) => {
 
     const { data } = await axios.put(`/api/v1/me/update`, userData, config);
 
-    dispatch({
+    await dispatch({
       type: UPDATE_PROFILE_SUCCESS,
       payload: data.success,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: UPDATE_PROFILE_FAIL,
       payload: error.response.data.message,
     });
@@ -171,7 +171,7 @@ export const updateProfile = (userData) => async (dispatch) => {
 // Update Password
 export const updatePassword = (passwords) => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: UPDATE_PASSWORD_REQUEST,
     });
 
@@ -188,12 +188,12 @@ export const updatePassword = (passwords) => async (dispatch) => {
       config
     );
 
-    dispatch({
+    await dispatch({
       type: UPDATE_PASSWORD_SUCCESS,
       payload: data.success,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: UPDATE_PASSWORD_FAIL,
       payload: error.response.data.message,
     });
@@ -203,7 +203,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
 // Forgot Password
 export const forgotPassword = (email) => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: FORGOT_PASSWORD_REQUEST,
     });
 
@@ -215,12 +215,12 @@ export const forgotPassword = (email) => async (dispatch) => {
 
     const { data } = await axios.post(`/api/v1/password/forgot`, email, config);
 
-    dispatch({
+    await dispatch({
       type: FORGOT_PASSWORD_SUCCESS,
       payload: data.message,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: FORGOT_PASSWORD_FAIL,
       payload: error.response.data.message,
     });
@@ -230,7 +230,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 // Reset Password
 export const resetPassword = (token, passwords) => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: RESET_PASSWORD_REQUEST,
     });
 
@@ -246,12 +246,12 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
       config
     );
 
-    dispatch({
+    await dispatch({
       type: RESET_PASSWORD_SUCCESS,
       payload: data.success,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: RESET_PASSWORD_FAIL,
       payload: error.response.data.message,
     });
@@ -261,7 +261,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 // get All Users - (admin)
 export const getAllUsers = () => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: ALL_USERS_REQUEST,
     });
 
@@ -273,13 +273,13 @@ export const getAllUsers = () => async (dispatch) => {
     };
 
     const { data } = await axios.get(`/api/v1/admin/users`, config);
-    // console.log(data);
-    dispatch({
+
+    await dispatch({
       type: ALL_USERS_SUCCESS,
       payload: data.users,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: ALL_USERS_FAIL,
       payload: error.response.data.message,
     });
@@ -289,7 +289,7 @@ export const getAllUsers = () => async (dispatch) => {
 // get  User Details
 export const getUserDetails = (id) => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: USER_DETAILS_REQUEST,
     });
 
@@ -302,12 +302,12 @@ export const getUserDetails = (id) => async (dispatch) => {
 
     const { data } = await axios.get(`/api/v1/admin/user/${id}`, config);
 
-    dispatch({
+    await dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data.user,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: USER_DETAILS_FAIL,
       payload: error.response.data.message,
     });
@@ -316,10 +316,8 @@ export const getUserDetails = (id) => async (dispatch) => {
 
 // Update User - (admin)
 export const updateUser = (id, userData) => async (dispatch) => {
-  // console.log(id);
-  // console.log(userData);
   try {
-    dispatch({
+    await dispatch({
       type: UPDATE_USER_REQUEST,
     });
 
@@ -336,12 +334,12 @@ export const updateUser = (id, userData) => async (dispatch) => {
       config
     );
 
-    dispatch({
+    await dispatch({
       type: UPDATE_USER_SUCCESS,
       payload: data.success,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: UPDATE_USER_FAIL,
       payload: error.response.data.message,
     });
@@ -351,7 +349,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
 // Delete User - (admin)
 export const deleteUser = (id) => async (dispatch) => {
   try {
-    dispatch({
+    await dispatch({
       type: DELETE_USER_REQUEST,
     });
 
@@ -364,12 +362,12 @@ export const deleteUser = (id) => async (dispatch) => {
 
     const { data } = await axios.delete(`/api/v1/admin/user/${id}`, config);
 
-    dispatch({
+    await dispatch({
       type: DELETE_USER_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    dispatch({
+    await dispatch({
       type: DELETE_USER_FAIL,
       payload: error.response.data.message,
     });
@@ -378,7 +376,7 @@ export const deleteUser = (id) => async (dispatch) => {
 
 // Clearing Errors
 export const clearErrors = () => async (dispatch) => {
-  dispatch({
+  await dispatch({
     type: CLEAR_ERRORS,
   });
 };

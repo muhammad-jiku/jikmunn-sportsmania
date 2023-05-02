@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+//  external imports
 import { useAlert } from 'react-alert';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { DataGrid } from '@mui/x-data-grid';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Box, Button, Typography } from '@mui/material';
+//  internal imports
+import { Loader } from '../../../Shared';
+import { DELETE_REVIEW_RESET } from '../../../../constants/productConstant';
 import {
   clearErrors,
   deleteReviews,
   getAllReviews,
   getProductDetails,
 } from '../../../../actions/productAction';
-import { DELETE_REVIEW_RESET } from '../../../../constants/productConstant';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Box, Button, Typography } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { DataGrid } from '@mui/x-data-grid';
-import { Loader } from '../../../Shared';
 
 const AllProductReviews = () => {
   const alert = useAlert();

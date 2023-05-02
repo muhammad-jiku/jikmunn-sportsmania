@@ -1,4 +1,5 @@
 import React from 'react';
+//  internal import
 import { ProductDetails } from '../../components/Products';
 
 const ProductDetailsPage = ({ user }) => {

@@ -1,5 +1,7 @@
-import { Box, styled } from '@mui/material';
 import React from 'react';
+//  external import
+import { Box, styled } from '@mui/material';
+//  internal import
 import Loading from '../../assets/gifs/loadinn.gif';
 
 const Loader = () => {

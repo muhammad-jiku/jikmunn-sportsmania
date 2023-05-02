@@ -1,9 +1,10 @@
-const AsyncError = require('../middlewares/bugError/AsyncError');
-const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
+//  internal imports
 const Order = require('../models/Order');
 const Product = require('../models/Product');
+const AsyncError = require('../middlewares/bugError/AsyncError');
+const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
 
-// Create new Order
+// Create New Order
 const newOrder = AsyncError(async (req, res, next) => {
   const {
     shippingInfo,
@@ -33,7 +34,7 @@ const newOrder = AsyncError(async (req, res, next) => {
   });
 });
 
-// get Single Order
+// Get Single Order
 const getSingleOrder = AsyncError(async (req, res, next) => {
   const { id } = await req.params;
   const order = await Order.findById({ _id: id }).populate(
@@ -51,7 +52,7 @@ const getSingleOrder = AsyncError(async (req, res, next) => {
   });
 });
 
-// get logged in user Orders
+// Get logged in user Orders
 const myOrders = AsyncError(async (req, res, next) => {
   const { _id } = await req.user;
   const orders = await Order.find({ user: _id });
@@ -62,7 +63,7 @@ const myOrders = AsyncError(async (req, res, next) => {
   });
 });
 
-// get all Orders - (admin)
+// Get all Orders - (admin)
 const getAllOrders = AsyncError(async (req, res, next) => {
   const orders = await Order.find({});
 
@@ -78,7 +79,7 @@ const getAllOrders = AsyncError(async (req, res, next) => {
   });
 });
 
-//  update order's item stock
+//  Update order's item stock
 const updateStock = async (id, quantity) => {
   const product = await Product.findById({ _id: id });
   product.stock -= quantity;
@@ -88,7 +89,7 @@ const updateStock = async (id, quantity) => {
   });
 };
 
-// update Order Status- (admin)
+// Update Order Status- (admin)
 const updateOrder = AsyncError(async (req, res, next) => {
   const { id } = await req.params;
   const { status } = await req.body;
@@ -123,7 +124,7 @@ const updateOrder = AsyncError(async (req, res, next) => {
   });
 });
 
-// delete Order - (admin)
+// Delete Order - (admin)
 const deleteOrder = AsyncError(async (req, res, next) => {
   const { id } = await req.params;
   const order = await Order.findById({ _id: id });
@@ -140,6 +141,7 @@ const deleteOrder = AsyncError(async (req, res, next) => {
   });
 });
 
+// exporting modules
 module.exports = {
   newOrder,
   getSingleOrder,

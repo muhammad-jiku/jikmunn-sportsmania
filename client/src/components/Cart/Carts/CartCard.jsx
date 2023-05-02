@@ -1,7 +1,9 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+//  external imports
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Box, Button, TextField, Typography } from '@mui/material';
+//  internal imports
 import {
   addItemsToCart,
   removeItemsFromCart,
@@ -47,7 +49,6 @@ const CartCard = ({ item }) => {
           boxShadow: '5px 5px 10px black',
         }}
       >
-        {/* {console.log(item)} */}
         <Box
           sx={{
             p: 2,

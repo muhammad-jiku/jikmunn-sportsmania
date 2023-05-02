@@ -1,6 +1,7 @@
 import React from 'react';
-import { NewProduct } from '../../../../components/Dashboard';
+//  internal imports
 import MetaData from '../../../../utils/MetaData';
+import { NewProduct } from '../../../../components/Dashboard';
 
 const NewProductPage = () => {
   return (

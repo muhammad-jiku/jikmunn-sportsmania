@@ -1,13 +1,14 @@
 import React from 'react';
-import { Box } from '@mui/material';
-import { Swiper, SwiperSlide } from 'swiper/react';
+//  external imports
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 import { Scrollbar } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Box } from '@mui/material';
+//  internal import
 import ReviewsCard from './ReviewsCard';
 
 const Reviews = ({ product }) => {
-  // console.log(product);
   return (
     <Box
       sx={{

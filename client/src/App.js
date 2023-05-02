@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from 'react';
+//  external imports
+import axios from 'axios';
+import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import { Route, Routes } from 'react-router-dom';
-import { loadUser } from './actions/userAction';
+//  internal imports
 import './App.css';
+import { sportsStore } from './utils/store';
+import { loadUser } from './actions/userAction';
 import { Navbar, Footer } from './components/Shared';
+import { ForgetPassword, ResetPassword } from './components/Auth';
+import { RequiredAdmin, RequiredAuth } from './components/Protected';
+import { handleDisableRightClick } from './utils/handleDisableRightClick';
 import {
   HomePage,
-  ProductPage,
-  ProductDetailsPage,
   // ContactPage,
   // AboutPage,
   LoginPage,
+  ProductPage,
+  ProductDetailsPage,
   MyCarts,
   ShippingPage,
   ConfirmOrderPage,
+  PaymentPage,
+  SuccessPage,
   MyDashboard,
   MyProfile,
   SecureMyProfile,
@@ -29,17 +41,7 @@ import {
   MyOrders,
   MyOrderDetails,
   NotFoundPage,
-  PaymentPage,
-  SuccessPage,
 } from './pages';
-import { sportsStore } from './utils/store';
-import { ForgetPassword, ResetPassword } from './components/Auth';
-import axios from 'axios';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import { Box } from '@mui/material';
-import { RequiredAdmin, RequiredAuth } from './components/Protected';
-import { handleDisableRightClick } from './utils/handleDisableRightClick';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);

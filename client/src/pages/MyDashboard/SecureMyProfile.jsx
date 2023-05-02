@@ -1,6 +1,7 @@
 import React from 'react';
-import { SecureProfile } from '../../components/Dashboard';
+//  internal imports
 import MetaData from '../../utils/MetaData';
+import { SecureProfile } from '../../components/Dashboard';
 
 const SecureMyProfile = () => {
   return (

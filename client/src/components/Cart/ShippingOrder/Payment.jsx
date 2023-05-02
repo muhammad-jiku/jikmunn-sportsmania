@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
+//  external imports
 import axios from 'axios';
-import CheckoutSteps from './CheckoutSteps';
-import { useNavigate } from 'react-router-dom';
-import { Box, Button, Typography } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box, Button, Typography } from '@mui/material';
 import {
   useStripe,
   useElements,
@@ -13,8 +14,9 @@ import {
   CardExpiryElement,
   CardCvcElement,
 } from '@stripe/react-stripe-js';
+//  internal imports
+import CheckoutSteps from './CheckoutSteps';
 import { clearErrors, createOrder } from '../../../actions/orderAction';
-import { useForm } from 'react-hook-form';
 
 const Payment = () => {
   const alert = useAlert();
@@ -48,7 +50,6 @@ const Payment = () => {
   const onSubmitHandler = async (values) => {
     payBtn.current.disabled = true;
     try {
-      // console.log(values);
       const config = {
         headers: {
           authorization: `Bearer ${localStorage?.getItem('token')}`,
@@ -56,7 +57,6 @@ const Payment = () => {
         },
       };
 
-      // console.log(paymentData);
       const { data } = await axios.post(
         '/api/v1/payment/process',
         paymentData,
@@ -97,7 +97,7 @@ const Payment = () => {
           },
         },
       });
-      // console.log(paymentMethod);
+      console.log(paymentMethod);
       if (result.error) {
         payBtn.current.disabled = false;
         console.log(result.error);
@@ -114,7 +114,6 @@ const Payment = () => {
             status: result?.paymentIntent?.status,
           };
 
-          // console.log(order);
           dispatch(createOrder(order));
           reset();
           alert.success('Payment Successfull!');

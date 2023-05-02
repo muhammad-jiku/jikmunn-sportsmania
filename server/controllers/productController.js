@@ -1,8 +1,10 @@
+//  external import
 const cloudinary = require('cloudinary');
-const AsyncError = require('../middlewares/bugError/AsyncError');
-const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
+//  internal imports
 const Product = require('../models/Product');
 const ApiFeatures = require('../utils/ApiFeatures');
+const AsyncError = require('../middlewares/bugError/AsyncError');
+const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
 
 // Create Product - (admin)
 const createProduct = AsyncError(async (req, res, next) => {
@@ -38,7 +40,7 @@ const createProduct = AsyncError(async (req, res, next) => {
   });
 });
 
-// Get All Product
+// Get All Products
 const getAllProducts = AsyncError(async (req, res, next) => {
   const resultPerPage = 8;
   const productsCount = await Product.countDocuments();
@@ -64,7 +66,7 @@ const getAllProducts = AsyncError(async (req, res, next) => {
   });
 });
 
-// Get All Product - (admin)
+// Get All Products - (admin)
 const getAdminProducts = AsyncError(async (req, res, next) => {
   const products = await Product.find({});
 
@@ -290,6 +292,7 @@ const deleteReview = AsyncError(async (req, res, next) => {
   });
 });
 
+// exporting modules
 module.exports = {
   createProduct,
   getAllProducts,

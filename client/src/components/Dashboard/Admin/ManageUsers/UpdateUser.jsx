@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react';
+//  external imports
+import { useAlert } from 'react-alert';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import PersonIcon from '@mui/icons-material/Person';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import {
+  Box,
+  Button,
+  MenuItem,
+  TextField,
+  Typography,
+  InputAdornment,
+} from '@mui/material';
+//  internal imports
+import { Loader } from '../../../Shared';
+import { UPDATE_USER_RESET } from '../../../../constants/userConstant';
 import {
   clearErrors,
   getUserDetails,
   updateUser,
 } from '../../../../actions/userAction';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useAlert } from 'react-alert';
-import { UPDATE_USER_RESET } from '../../../../constants/userConstant';
-import { Loader } from '../../../Shared';
-import PersonIcon from '@mui/icons-material/Person';
-import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import {
-  Box,
-  Button,
-  InputAdornment,
-  MenuItem,
-  TextField,
-  Typography,
-} from '@mui/material';
 
 const UpdateUser = () => {
   const alert = useAlert();

@@ -1,3 +1,10 @@
+//  external imports
+import React, { useEffect, useState } from 'react';
+import { useAlert } from 'react-alert';
+import { useDispatch, useSelector } from 'react-redux';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 import {
   Box,
   Button,
@@ -15,15 +22,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useAlert } from 'react-alert';
-import ProductsCard from './ProductsCard';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import FilterListOffIcon from '@mui/icons-material/FilterListOff';
-import { clearErrors, getProducts } from '../../../actions/productAction';
+//  internal imports
 import { Loader } from '../../Shared';
+import ProductsCard from './ProductsCard';
+import { clearErrors, getProducts } from '../../../actions/productAction';
 
 const Products = () => {
   const alert = useAlert();
@@ -80,17 +82,11 @@ const Products = () => {
 
   const categoryHandler = (e) => {
     e.preventDefault();
-    // console.log(e.target.value);
-    // console.log(newCheckStatus);
-    // setIsChecked(!isChecked);
     setIsChecked(e.target.checked);
-    // console.log(isChecked);
     if (isChecked === true) {
       setCategory(e.target.value);
-      // console.log('2', isChecked);
     } else {
       setCategory('');
-      // console.log('3', isChecked);
     }
   };
 

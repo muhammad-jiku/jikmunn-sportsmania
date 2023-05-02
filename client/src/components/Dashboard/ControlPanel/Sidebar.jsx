@@ -1,4 +1,14 @@
 import React, { useEffect } from 'react';
+//  external imports
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import PersonIcon from '@mui/icons-material/Person';
+import SecurityIcon from '@mui/icons-material/Security';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
   Avatar,
   Box,
@@ -8,17 +18,9 @@ import {
   ListItem,
   Typography,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import profile from '../../../assets/images/avatar_1.png';
+//  internal imports
 import { clearErrors } from '../../../actions/userAction';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import PersonIcon from '@mui/icons-material/Person';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import SecurityIcon from '@mui/icons-material/Security';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import { useNavigate } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+import profile from '../../../assets/images/avatar_1.png';
 
 const Sidebar = () => {
   const navigate = useNavigate();

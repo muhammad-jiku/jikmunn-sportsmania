@@ -1,4 +1,5 @@
 import React from 'react';
+//  external imports
 import { Box, Rating, Typography } from '@mui/material';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 

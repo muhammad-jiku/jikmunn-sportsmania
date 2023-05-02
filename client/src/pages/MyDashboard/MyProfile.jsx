@@ -1,6 +1,7 @@
 import React from 'react';
-import { Profile } from '../../components/Dashboard';
+//  internal imports
 import MetaData from '../../utils/MetaData';
+import { Profile } from '../../components/Dashboard';
 
 const MyProfile = () => {
   return (

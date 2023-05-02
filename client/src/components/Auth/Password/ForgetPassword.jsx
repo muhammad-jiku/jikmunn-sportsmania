@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, forgotPassword } from '../../../actions/userAction';
-import { Loader } from '../../Shared';
-import { useForm } from 'react-hook-form';
+//  external imports
 import { useAlert } from 'react-alert';
+import { useForm } from 'react-hook-form';
+import SendIcon from '@mui/icons-material/Send';
+import { useDispatch, useSelector } from 'react-redux';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, TextField, Typography } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
+//  internal imports
+import { Loader } from '../../Shared';
 import { forgetPasswordSchema } from '../../../utils/ValidationSchema';
+import { clearErrors, forgotPassword } from '../../../actions/userAction';
 
 const ForgetPassword = () => {
   const alert = useAlert();

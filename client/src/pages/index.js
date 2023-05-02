@@ -1,3 +1,4 @@
+//  internal exports
 export { default as HomePage } from './Home/Homepage';
 export { default as ProductPage } from './Products/ProductPage';
 export { default as ProductDetailsPage } from './Products/ProductDetailsPage';

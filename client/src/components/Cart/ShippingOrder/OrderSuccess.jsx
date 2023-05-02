@@ -1,7 +1,8 @@
 import React from 'react';
+//  external imports
+import { Link } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
 
 const OrderSuccess = () => {
   return (

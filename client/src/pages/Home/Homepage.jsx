@@ -1,6 +1,7 @@
 import React from 'react';
-import { Banner, Products } from '../../components/Home';
+//  internal imports
 import MetaData from '../../utils/MetaData';
+import { Banner, Products } from '../../components/Home';
 
 const Homepage = () => {
   return (

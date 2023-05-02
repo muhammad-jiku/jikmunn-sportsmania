@@ -1,5 +1,7 @@
+//  internal import
 const ErrorHandler = require('./ErrorHandler');
 
+// exporting module
 module.exports = (err, req, res, next) => {
   // console.log(err);
   err.statusCode = err.statusCode || 500;

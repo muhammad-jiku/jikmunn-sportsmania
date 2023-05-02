@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
+//  external imports
 import {
   Box,
   Button,
-  IconButton,
-  InputAdornment,
   TextField,
   Typography,
+  IconButton,
+  InputAdornment,
 } from '@mui/material';
-import { useForm } from 'react-hook-form';
 import { useAlert } from 'react-alert';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useDispatch, useSelector } from 'react-redux';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, loginUser } from '../../../actions/userAction';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+//  internal imports
 import { loginSchema } from '../../../utils/ValidationSchema';
+import { clearErrors, loginUser } from '../../../actions/userAction';
 
 const Login = ({ setAuthProcess }) => {
   const alert = useAlert();
@@ -50,7 +52,6 @@ const Login = ({ setAuthProcess }) => {
   });
 
   const onSubmitHandler = (values) => {
-    // console.log(values);
     const userInfo = {
       email: values.email,
       password: values.password,

@@ -1,4 +1,6 @@
+//  external import
 const express = require('express');
+//  internal imports
 const {
   processPayment,
   sendStripeApiKey,
@@ -15,4 +17,5 @@ paymentRouter
 
 paymentRouter.route('/stripeapikey').get(isAuthenticatedUser, sendStripeApiKey);
 
+//  exporting module
 module.exports = paymentRouter;

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+//  external imports
 import { Box, Container, Tab } from '@mui/material';
 import { TabList, TabPanel, TabContext } from '@mui/lab';
+//  internal imports
 import Login from './Login/Login';
 import Registration from './Registration/Registration';
 

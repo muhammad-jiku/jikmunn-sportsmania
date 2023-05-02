@@ -1,6 +1,7 @@
 import React from 'react';
-import { ErrorNotFound } from '../../components/Shared';
+//  internal imports
 import MetaData from '../../utils/MetaData';
+import { ErrorNotFound } from '../../components/Shared';
 
 const NotFoundPage = () => {
   return (

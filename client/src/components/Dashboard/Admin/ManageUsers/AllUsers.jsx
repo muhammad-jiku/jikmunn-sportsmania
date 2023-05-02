@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
+//  external imports
+import { useAlert } from 'react-alert';
+import { DataGrid } from '@mui/x-data-grid';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Box, Button, Typography } from '@mui/material';
+//  internal imports
+import { Loader } from '../../../Shared';
+import { DELETE_USER_RESET } from '../../../../constants/userConstant';
 import {
   clearErrors,
   deleteUser,
   getAllUsers,
 } from '../../../../actions/userAction';
-import { Link, useNavigate } from 'react-router-dom';
-import { Box, Button, Typography } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { DataGrid } from '@mui/x-data-grid';
-import { DELETE_USER_RESET } from '../../../../constants/userConstant';
-import { Loader } from '../../../Shared';
-import { useAlert } from 'react-alert';
 
 const AllUsers = () => {
   const alert = useAlert();

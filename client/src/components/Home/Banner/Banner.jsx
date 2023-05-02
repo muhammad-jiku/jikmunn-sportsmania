@@ -1,7 +1,9 @@
-import { Box, Button, styled, Typography } from '@mui/material';
 import React from 'react';
-import SportsManiaBanner from '../../../assets/images/sportsBanner.jpeg';
+//  external imports
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Box, Button, styled, Typography } from '@mui/material';
+//  internal import
+import SportsManiaBanner from '../../../assets/images/sportsBanner.jpeg';
 
 const Banner = () => {
   const BannerContainer = styled(Box)(({ matches, theme }) => ({

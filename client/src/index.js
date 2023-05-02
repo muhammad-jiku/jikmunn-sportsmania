@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+//  external imports
+import { Provider } from 'react-redux';
 import { theme } from './styles/theme';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { sportsStore } from './utils/store';
-import { positions, transitions, Provider as AlertProvider } from 'react-alert';
-import AlertTemplate from 'react-alert-template-basic';
 import { HelmetProvider } from 'react-helmet-async';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import AlertTemplate from 'react-alert-template-basic';
+import { positions, transitions, Provider as AlertProvider } from 'react-alert';
+//  internal imports
+import './index.css';
+import App from './App';
+import { sportsStore } from './utils/store';
 
 const options = {
   timeout: 5000,

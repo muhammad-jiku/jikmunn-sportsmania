@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
+//  external imports
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUsers } from '../../../../actions/userAction';
-import { getAdminProduct } from '../../../../actions/productAction';
-import { getAllOrders } from '../../../../actions/orderAction';
+import { Box, Typography } from '@mui/material';
 import {
   Chart,
   ArcElement,
@@ -17,6 +15,12 @@ import {
   Legend,
 } from 'chart.js';
 import { Line, Doughnut } from 'react-chartjs-2';
+//  internal imports
+import { getAllUsers } from '../../../../actions/userAction';
+import { getAllOrders } from '../../../../actions/orderAction';
+import { getAdminProduct } from '../../../../actions/productAction';
+
+//   registering chart
 Chart.register(
   ArcElement,
   CategoryScale,
@@ -43,7 +47,6 @@ const AdminPanel = () => {
         outOfStock += 1;
       }
     });
-  // console.log(outOfStock);
 
   useEffect(() => {
     dispatch(getAllUsers());

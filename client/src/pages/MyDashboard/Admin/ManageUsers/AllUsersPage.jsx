@@ -1,6 +1,7 @@
 import React from 'react';
-import { AllUsers } from '../../../../components/Dashboard';
+//  internal imports
 import MetaData from '../../../../utils/MetaData';
+import { AllUsers } from '../../../../components/Dashboard';
 
 const AllUsersPage = () => {
   return (

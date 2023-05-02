@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
+//  external imports
+import { useAlert } from 'react-alert';
+import { useDispatch } from 'react-redux';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
-  Typography,
   Box,
   Tooltip,
-  IconButton,
-  MenuItem,
   Avatar,
   Menu,
   Button,
+  MenuItem,
+  Typography,
+  IconButton,
 } from '@mui/material';
+//  internal imports
 import styles from '../../styles/Navbar.module.css';
+import { logoutUser } from '../../actions/userAction';
 import person1 from '../../assets/images/avatar_1.png';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useAlert } from 'react-alert';
-import { logoutUser } from '../../actions/userAction';
 
 const Navbar = ({ isAuthenticated, user }) => {
   const alert = useAlert();

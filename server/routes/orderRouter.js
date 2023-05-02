@@ -1,4 +1,6 @@
+//  external import
 const express = require('express');
+//  internal imports
 const {
   newOrder,
   getSingleOrder,
@@ -7,7 +9,6 @@ const {
   updateOrder,
   deleteOrder,
 } = require('../controllers/orderController');
-
 const {
   isAuthenticatedUser,
   authorizeAdmin,
@@ -32,4 +33,5 @@ orderRouter
   .put(isAuthenticatedUser, authorizeAdmin, updateOrder)
   .delete(isAuthenticatedUser, authorizeAdmin, deleteOrder);
 
+//  exporting module
 module.exports = orderRouter;

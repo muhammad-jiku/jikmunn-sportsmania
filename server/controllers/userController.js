@@ -1,10 +1,12 @@
-const AsyncError = require('../middlewares/bugError/AsyncError');
-const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
+//  external imports
+const crypto = require('crypto');
+const cloudinary = require('cloudinary');
+//  internal imports
 const User = require('../models/User');
 const sendEmail = require('../utils/sendEmail');
 const sendToken = require('../utils/sendToken');
-const crypto = require('crypto');
-const cloudinary = require('cloudinary');
+const AsyncError = require('../middlewares/bugError/AsyncError');
+const ErrorHandler = require('../middlewares/bugError/ErrorHandler');
 
 // Register a User
 const registerUser = AsyncError(async (req, res, next) => {
@@ -65,7 +67,7 @@ const logout = AsyncError(async (req, res, next) => {
   });
 });
 
-// Forgot Password
+// Forget Password
 const forgotPassword = AsyncError(async (req, res, next) => {
   // res.header('Access-Control-Allow-Origin', '*');
   const { email } = await req.body;
@@ -75,7 +77,7 @@ const forgotPassword = AsyncError(async (req, res, next) => {
     return next(new ErrorHandler('User not found', 404));
   }
 
-  // Get ResetPassword Token
+  // Get Reset Password Token
   const resetToken = await user.getResetPasswordToken();
 
   await user.save({
@@ -118,7 +120,7 @@ const resetPassword = AsyncError(async (req, res, next) => {
   const { token } = await req.params;
   const { password, passwordConfirm } = await req.body;
 
-  // creating token hash
+  // Creating Token Hash
   const resetPasswordToken = crypto
     .createHash('sha256')
     .update(token)
@@ -153,10 +155,9 @@ const resetPassword = AsyncError(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-// Get User Detail
+// Get User Details
 const getUserDetails = AsyncError(async (req, res, next) => {
   const { id } = await req.user;
-  // console.log(req.user);
   const user = await User.findById({
     _id: id,
   });
@@ -167,7 +168,7 @@ const getUserDetails = AsyncError(async (req, res, next) => {
   });
 });
 
-// update User password
+// Update User password
 const updatePassword = AsyncError(async (req, res, next) => {
   const { id } = await req.user;
   const { oldPassword, newPassword, passwordConfirm } = await req.body;
@@ -189,16 +190,9 @@ const updatePassword = AsyncError(async (req, res, next) => {
   sendToken(user, 200, res);
 });
 
-// update User Profile
+// Update User Profile
 const updateProfile = AsyncError(async (req, res, next) => {
   const { id } = await req.user;
-  // const { name, email, avatar } = await req.body;
-  // // const { public_id, url } = await avatar;
-  // const newUserData = {
-  //   name,
-  //   email,
-  // };
-
   const { name, avatar, phone, country, state, city, address } = await req.body;
 
   const updatedUserData = {
@@ -252,7 +246,7 @@ const updateProfile = AsyncError(async (req, res, next) => {
   });
 });
 
-// Get all users  - (admin)
+// Get All Users  - (admin)
 const getAllUser = AsyncError(async (req, res, next) => {
   const users = await User.find({});
 
@@ -262,7 +256,7 @@ const getAllUser = AsyncError(async (req, res, next) => {
   });
 });
 
-// Get single user  - (admin)
+// Get Single User  - (admin)
 const getSingleUser = AsyncError(async (req, res, next) => {
   const { id } = await req.params;
   const user = await User.findById({ _id: id });
@@ -277,7 +271,7 @@ const getSingleUser = AsyncError(async (req, res, next) => {
   });
 });
 
-// update User Role  - (admin)
+// Update User Role  - (admin)
 const updateUserRole = AsyncError(async (req, res, next) => {
   const { id } = await req.params;
   const { name, email, userRole } = await req.body;
@@ -325,7 +319,7 @@ const deleteUser = AsyncError(async (req, res, next) => {
   });
 });
 
-//  exporting modules
+// exporting modules
 module.exports = {
   registerUser,
   loginUser,

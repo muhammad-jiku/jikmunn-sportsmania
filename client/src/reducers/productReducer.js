@@ -1,3 +1,4 @@
+//  internal imports
 import {
   ADMIN_PRODUCT_FAIL,
   ADMIN_PRODUCT_REQUEST,
@@ -34,6 +35,7 @@ import {
   DELETE_REVIEW_RESET,
 } from '../constants/productConstant';
 
+//  all products reducer (including admin type)
 export const productsReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case ALL_PRODUCT_REQUEST:
@@ -73,7 +75,7 @@ export const productsReducer = (state = { products: [] }, action) => {
   }
 };
 
-// - (admin)
+// new product reducer - (admin)
 export const newProductReducer = (state = { product: {} }, action) => {
   switch (action.type) {
     case NEW_PRODUCT_REQUEST:
@@ -108,7 +110,7 @@ export const newProductReducer = (state = { product: {} }, action) => {
   }
 };
 
-// - (admin)
+// product reducer - (admin)
 export const productReducer = (state = {}, action) => {
   switch (action.type) {
     case DELETE_PRODUCT_REQUEST:
@@ -157,6 +159,7 @@ export const productReducer = (state = {}, action) => {
   }
 };
 
+//  product details reducer
 export const productDetailsReducer = (state = { product: {} }, action) => {
   switch (action.type) {
     case PRODUCT_DETAILS_REQUEST:
@@ -185,6 +188,7 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
   }
 };
 
+//  new review reducer
 export const newReviewReducer = (state = {}, action) => {
   switch (action.type) {
     case NEW_REVIEW_REQUEST:
@@ -218,6 +222,7 @@ export const newReviewReducer = (state = {}, action) => {
   }
 };
 
+//  product all reviews reducer
 export const productReviewsReducer = (state = { reviews: [] }, action) => {
   switch (action.type) {
     case ALL_REVIEW_REQUEST:
@@ -247,7 +252,7 @@ export const productReviewsReducer = (state = { reviews: [] }, action) => {
   }
 };
 
-//  - (admin)
+//  review reducer - (admin)
 export const reviewReducer = (state = {}, action) => {
   switch (action.type) {
     case DELETE_REVIEW_REQUEST:

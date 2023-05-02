@@ -1,6 +1,7 @@
 import React from 'react';
-import { Carts } from '../../components/Cart';
+//  internal imports
 import MetaData from '../../utils/MetaData';
+import { Carts } from '../../components/Cart';
 
 const MyCarts = () => {
   return (

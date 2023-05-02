@@ -1,4 +1,6 @@
+//  external import
 const express = require('express');
+//  internal imports
 const {
   getAllProducts,
   getAdminProducts,
@@ -43,4 +45,5 @@ productRouter
   .get(getProductReviews)
   .delete(isAuthenticatedUser, authorizeAdmin, deleteReview);
 
+//  exporting module
 module.exports = productRouter;

@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from 'react';
+//  external imports
+import { useAlert } from 'react-alert';
+import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Box,
   Button,
@@ -8,13 +14,9 @@ import {
   Rating,
   TextField,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
-import { useAlert } from 'react-alert';
-import { zodResolver } from '@hookform/resolvers/zod';
+//  internal imports
 import { reviewSchema } from '../../../utils/ValidationSchema';
 import { clearErrors, newReview } from '../../../actions/productAction';
-import { useParams } from 'react-router-dom';
 import { NEW_REVIEW_RESET } from '../../../constants/productConstant';
 
 const AddReview = ({ open, setOpen, handleClickClose }) => {

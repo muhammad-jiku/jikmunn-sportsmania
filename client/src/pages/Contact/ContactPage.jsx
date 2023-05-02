@@ -1,4 +1,5 @@
 import React from 'react';
+//  internal import
 import MetaData from '../../utils/MetaData';
 
 const ContactPage = () => {

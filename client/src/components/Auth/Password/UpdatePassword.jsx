@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
+//  external imports
+import { useAlert } from 'react-alert';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {
   Box,
   Button,
-  IconButton,
-  InputAdornment,
   TextField,
   Typography,
+  IconButton,
+  InputAdornment,
 } from '@mui/material';
+//  internal imports
 import { Loader } from '../../Shared';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
-import { useAlert } from 'react-alert';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { clearErrors, updatePassword } from '../../../actions/userAction';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { UPDATE_PASSWORD_RESET } from '../../../constants/userConstant';
 import { updatePasswordSchema } from '../../../utils/ValidationSchema';
+import { clearErrors, updatePassword } from '../../../actions/userAction';
+import { UPDATE_PASSWORD_RESET } from '../../../constants/userConstant';
 
 const UpdatePassword = () => {
   const alert = useAlert();
