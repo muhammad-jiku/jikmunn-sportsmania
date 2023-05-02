@@ -39,6 +39,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { Box } from '@mui/material';
 import { RequiredAdmin, RequiredAuth } from './components/Protected';
+import { handleDisableRightClick } from './utils/handleDisableRightClick';
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -63,6 +64,11 @@ function App() {
   useEffect(() => {
     sportsStore.dispatch(loadUser());
     getStripeApiKey();
+
+    //  disable right click
+    document.addEventListener('contextmenu', handleDisableRightClick);
+    //  enable right click
+    // document.removeEventListener('contextmenu', handleDisableRightClick);
   }, []);
 
   return (
