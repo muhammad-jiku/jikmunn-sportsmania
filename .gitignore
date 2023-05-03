@@ -5,6 +5,7 @@ client/node_modules
 server/node_modules
 client/.env
 server/.env
+userlist_of_sportsmania.json
 /.pnp
 .pnp.js
 
