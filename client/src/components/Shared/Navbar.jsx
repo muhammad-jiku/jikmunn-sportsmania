@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 //  external imports
 import { useAlert } from 'react-alert';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -22,10 +22,11 @@ import { logoutUser } from '../../actions/userAction';
 import person1 from '../../assets/images/avatar_1.png';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-const Navbar = ({ isAuthenticated, user }) => {
+const Navbar = () => {
   const alert = useAlert();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -75,7 +76,7 @@ const Navbar = ({ isAuthenticated, user }) => {
   ];
 
   return (
-    <AppBar position="static" className={styles.header} color="secondary">
+    <AppBar position='static' className={styles.header} color='secondary'>
       <Toolbar className={styles.toolbar}>
         <Box
           sx={{
@@ -92,7 +93,7 @@ const Navbar = ({ isAuthenticated, user }) => {
             }}
           >
             <Typography
-              variant="span"
+              variant='span'
               className={styles.headerText}
               sx={{
                 // mr: 2,
@@ -128,17 +129,17 @@ const Navbar = ({ isAuthenticated, user }) => {
             }}
           >
             <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              size='large'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color='inherit'
             >
               <MenuIcon />
             </IconButton>
             <Menu
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
@@ -157,7 +158,7 @@ const Navbar = ({ isAuthenticated, user }) => {
             >
               {pages.map(({ title, path }) => (
                 <MenuItem key={title} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
+                  <Typography textAlign='center'>
                     <Link
                       to={path}
                       style={{
@@ -177,7 +178,7 @@ const Navbar = ({ isAuthenticated, user }) => {
 
         {/*  Pages */}
         <Typography
-          variant="span"
+          variant='span'
           // noWrap
           // component="a"
           className={styles.headerText}
@@ -241,7 +242,7 @@ const Navbar = ({ isAuthenticated, user }) => {
           }}
         >
           {user?.role === 'user' && (
-            <Tooltip title="Cart">
+            <Tooltip title='Cart'>
               <IconButton
                 disableRipple={true}
                 style={{ color: 'white' }}
@@ -252,7 +253,7 @@ const Navbar = ({ isAuthenticated, user }) => {
             </Tooltip>
           )}
 
-          <Tooltip title="Open settings">
+          <Tooltip title='Open settings'>
             <IconButton
               onClick={handleOpenUserMenu}
               sx={{
@@ -269,7 +270,7 @@ const Navbar = ({ isAuthenticated, user }) => {
             sx={{
               mt: '45px',
             }}
-            id="menu-appbar"
+            id='menu-appbar'
             anchorEl={anchorElUser}
             anchorOrigin={{
               vertical: 'top',
@@ -287,7 +288,7 @@ const Navbar = ({ isAuthenticated, user }) => {
               {isAuthenticated && user ? (
                 <Box>
                   <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">
+                    <Typography textAlign='center'>
                       <Link
                         to={'/dashboard'}
                         style={{
@@ -302,14 +303,14 @@ const Navbar = ({ isAuthenticated, user }) => {
                   </MenuItem>
 
                   <MenuItem onClick={handleCloseUserMenu}>
-                    <Button variant="contained" onClick={handleLogoutUser}>
+                    <Button variant='contained' onClick={handleLogoutUser}>
                       Logout
                     </Button>
                   </MenuItem>
                 </Box>
               ) : (
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
+                  <Typography textAlign='center'>
                     <Link
                       to={'/login'}
                       style={{

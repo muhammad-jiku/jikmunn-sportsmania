@@ -2,10 +2,10 @@ import React from 'react';
 //  internal import
 import { ProductDetails } from '../../components/Products';
 
-const ProductDetailsPage = ({ user }) => {
+const ProductDetailsPage = () => {
   return (
     <>
-      <ProductDetails user={user} />
+      <ProductDetails />
     </>
   );
 };

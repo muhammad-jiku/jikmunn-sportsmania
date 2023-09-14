@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 //  external imports
 import axios from 'axios';
 import { Box } from '@mui/material';
-import { useSelector } from 'react-redux';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { Route, Routes } from 'react-router-dom';
@@ -44,8 +43,6 @@ import {
 } from './pages';
 
 function App() {
-  const { isAuthenticated, user } = useSelector((state) => state.user);
-
   const [stripeApiKey, setStripeApiKey] = useState('');
 
   axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
@@ -74,61 +71,61 @@ function App() {
   }, []);
 
   return (
-    <Box className="App">
-      <Navbar isAuthenticated={isAuthenticated} user={user} />
+    <Box className='App'>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductPage />} />
+        <Route path='/' element={<HomePage />} />
+        <Route path='/products' element={<ProductPage />} />
         <Route
-          path="/product/:id"
+          path='/product/:id'
           element={
-            <RequiredAuth isAuthenticated={isAuthenticated}>
-              <ProductDetailsPage user={user} />
+            <RequiredAuth>
+              <ProductDetailsPage />
             </RequiredAuth>
           }
         />
         {/* <Route path="/contact" element={<ContactPage />} /> */}
         {/* <Route path="/about" element={<AboutPage />} /> */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/password/forgot" element={<ForgetPassword />} />
-        <Route path="/password/reset/:token" element={<ResetPassword />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/password/forgot' element={<ForgetPassword />} />
+        <Route path='/password/reset/:token' element={<ResetPassword />} />
         <Route
-          path="/carts"
+          path='/carts'
           element={
-            <RequiredAuth isAuthenticated={isAuthenticated}>
+            <RequiredAuth>
               <MyCarts />
             </RequiredAuth>
           }
         />
         <Route
-          path="/shipping"
+          path='/shipping'
           element={
-            <RequiredAuth isAuthenticated={isAuthenticated}>
+            <RequiredAuth>
               <ShippingPage />
             </RequiredAuth>
           }
         />
         <Route
-          path="/order/confirm"
+          path='/order/confirm'
           element={
-            <RequiredAuth isAuthenticated={isAuthenticated}>
+            <RequiredAuth>
               <ConfirmOrderPage />
             </RequiredAuth>
           }
         />
         <Route
-          path="/success"
+          path='/success'
           element={
-            <RequiredAuth isAuthenticated={isAuthenticated}>
+            <RequiredAuth>
               <SuccessPage />
             </RequiredAuth>
           }
         />
         {stripeApiKey ? (
           <Route
-            path="/process/payment"
+            path='/process/payment'
             element={
-              <RequiredAuth isAuthenticated={isAuthenticated}>
+              <RequiredAuth>
                 <Elements stripe={loadStripe(stripeApiKey)}>
                   <PaymentPage />
                 </Elements>
@@ -137,9 +134,9 @@ function App() {
           />
         ) : null}
         <Route
-          path="/dashboard"
+          path='/dashboard'
           element={
-            <RequiredAuth isAuthenticated={isAuthenticated}>
+            <RequiredAuth>
               <MyDashboard />
             </RequiredAuth>
           }
@@ -147,110 +144,110 @@ function App() {
           <Route
             index
             element={
-              <RequiredAuth isAuthenticated={isAuthenticated}>
+              <RequiredAuth>
                 <MyProfile />
               </RequiredAuth>
             }
           />
           <Route
-            path="password/secure"
+            path='password/secure'
             element={
-              <RequiredAuth isAuthenticated={isAuthenticated}>
+              <RequiredAuth>
                 <SecureMyProfile />
               </RequiredAuth>
             }
           />
           <Route
-            path="admin"
+            path='admin'
             element={
-              <RequiredAdmin user={user}>
+              <RequiredAdmin>
                 <AdminPanelPage />
               </RequiredAdmin>
             }
           />
           <Route
-            path="admin/users"
+            path='admin/users'
             element={
-              <RequiredAdmin user={user}>
+              <RequiredAdmin>
                 <AllUsersPage />
               </RequiredAdmin>
             }
           />
           <Route
-            path="admin/user/update/:id"
+            path='admin/user/update/:id'
             element={
-              <RequiredAdmin user={user}>
+              <RequiredAdmin>
                 <UpdateUserPage />
               </RequiredAdmin>
             }
           />
           <Route
-            path="admin/products"
+            path='admin/products'
             element={
-              <RequiredAdmin user={user}>
+              <RequiredAdmin>
                 <AllProductsPage />
               </RequiredAdmin>
             }
           />
           <Route
-            path="admin/product/new"
+            path='admin/product/new'
             element={
-              <RequiredAdmin user={user}>
+              <RequiredAdmin>
                 <NewProductPage />
               </RequiredAdmin>
             }
           />
           <Route
-            path="admin/product/update/:id"
+            path='admin/product/update/:id'
             element={
-              <RequiredAdmin user={user}>
+              <RequiredAdmin>
                 <UpdateProductPage />
               </RequiredAdmin>
             }
           />
           <Route
-            path="admin/product/reviews/:id"
+            path='admin/product/reviews/:id'
             element={
-              <RequiredAdmin user={user}>
+              <RequiredAdmin>
                 <AllProductReviewsPage />
               </RequiredAdmin>
             }
           />
           <Route
-            path="admin/orders"
+            path='admin/orders'
             element={
-              <RequiredAdmin user={user}>
+              <RequiredAdmin>
                 <AllOrdersPage />
               </RequiredAdmin>
             }
           />
           <Route
-            path="admin/order/:id"
+            path='admin/order/:id'
             element={
-              <RequiredAdmin user={user}>
+              <RequiredAdmin>
                 <ProcessOrderPage />
               </RequiredAdmin>
             }
           />
           <Route
-            path="myorders"
+            path='myorders'
             element={
-              <RequiredAuth isAuthenticated={isAuthenticated}>
+              <RequiredAuth>
                 <MyOrders />
               </RequiredAuth>
             }
           />
           <Route
-            path="myorders/:id"
+            path='myorders/:id'
             element={
-              <RequiredAuth isAuthenticated={isAuthenticated}>
+              <RequiredAuth>
                 <MyOrderDetails />
               </RequiredAuth>
             }
           />
         </Route>
 
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </Box>

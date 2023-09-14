@@ -1,10 +1,23 @@
 import React from 'react';
-//  external import
-import { Navigate } from 'react-router-dom';
+//  external imports
+import { useSelector } from 'react-redux';
+import { Navigate, useLocation } from 'react-router-dom';
+//  internal import
+import { Loader } from '../Shared';
 
-const RequiredAuth = ({ isAuthenticated, children }) => {
+const RequiredAuth = ({ children }) => {
+  const location = useLocation();
+
+  const { error, loading, isAuthenticated, user } = useSelector(
+    (state) => state.user
+  );
+
+  if (loading) {
+    return <Loader />;
+  }
+
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to='/login' state={{ from: location }} replace />;
   }
 
   return children;

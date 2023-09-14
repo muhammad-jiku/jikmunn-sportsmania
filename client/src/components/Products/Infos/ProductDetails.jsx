@@ -22,14 +22,17 @@ import { ErrorNotFound, Loader } from '../../Shared';
 import { addItemsToCart } from '../../../actions/cartAction';
 import { clearErrors, getProductDetails } from '../../../actions/productAction';
 
-const ProductDetails = ({ user }) => {
+const ProductDetails = () => {
   const alert = useAlert();
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const { loading, error, product } = useSelector(
-    (state) => state.productDetails
-  );
+  const { error, loading, user } = useSelector((state) => state.user);
+  const {
+    loading: productLoading,
+    error: productError,
+    product,
+  } = useSelector((state) => state.productDetails);
 
   const sizes = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
@@ -69,8 +72,9 @@ const ProductDetails = ({ user }) => {
   };
 
   useEffect(() => {
-    if (error) {
+    if (error || productError) {
       // console.log(error);
+      // console.log(productError);
       alert.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
@@ -79,6 +83,7 @@ const ProductDetails = ({ user }) => {
   }, [
     dispatch,
     error,
+    productError,
     alert,
     id,
     product,
@@ -89,7 +94,7 @@ const ProductDetails = ({ user }) => {
 
   return (
     <Box sx={{ minHeight: '100vh' }}>
-      {loading ? (
+      {loading || productLoading ? (
         <Loader />
       ) : (
         <>
@@ -125,7 +130,7 @@ const ProductDetails = ({ user }) => {
                         alt={`${product?.name}`}
                         title={`${product?.name}`}
                         height={300}
-                        loading="lazy"
+                        loading='lazy'
                       />
                       <Box
                         sx={{ p: 1, display: 'flex', justifyContent: 'center' }}
@@ -137,7 +142,7 @@ const ProductDetails = ({ user }) => {
                             alt={`${product?.name}`}
                             title={`${product?.name}`}
                             height={100}
-                            loading="lazy"
+                            loading='lazy'
                             onClick={() => setSelectedImage(item?.url)}
                             style={{
                               margin: '2px',
@@ -165,24 +170,24 @@ const ProductDetails = ({ user }) => {
                   }}
                 >
                   {/*  Name */}
-                  <Typography variant="span" sx={{ fontWeight: 800 }}>
+                  <Typography variant='span' sx={{ fontWeight: 800 }}>
                     {product?.name}
                   </Typography>
 
                   {/*  Rating */}
                   <Typography
-                    variant="span"
+                    variant='span'
                     sx={{ ml: -0.5, display: 'flex', my: 1 }}
                   >
                     <Rating
-                      name="half-rating-read"
+                      name='half-rating-read'
                       defaultValue={product?.ratings}
                       precision={0.5}
                       readOnly
-                      size="small"
+                      size='small'
                     />
                     <Typography
-                      variant="span"
+                      variant='span'
                       sx={{ ml: 1, fontSize: '15px', fontWeight: 500 }}
                     >
                       (
@@ -194,12 +199,12 @@ const ProductDetails = ({ user }) => {
                   </Typography>
 
                   {/*  Price */}
-                  <Typography variant="span" sx={{ my: 0.5, fontWeight: 600 }}>
+                  <Typography variant='span' sx={{ my: 0.5, fontWeight: 600 }}>
                     ${product?.price}
                   </Typography>
 
                   {/*  Desc */}
-                  <Typography variant="span" sx={{ my: 1, fontWeight: 400 }}>
+                  <Typography variant='span' sx={{ my: 1, fontWeight: 400 }}>
                     {product?.description}
                   </Typography>
 
@@ -211,7 +216,7 @@ const ProductDetails = ({ user }) => {
                       alignItems: 'center',
                     }}
                   >
-                    <Typography variant="span" sx={{ my: 1, fontWeight: 600 }}>
+                    <Typography variant='span' sx={{ my: 1, fontWeight: 600 }}>
                       Size:
                     </Typography>{' '}
                     <TextField
@@ -221,12 +226,12 @@ const ProductDetails = ({ user }) => {
                       // label="Size"
                       // placeholder="Size"
                       // required
-                      size="small"
+                      size='small'
                       defaultValue={product?.size || size}
                       onChange={(e) => setSize(e.target.value)}
                       InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start">
+                          <InputAdornment position='start'>
                             <HeightIcon />
                           </InputAdornment>
                         ),
@@ -236,8 +241,8 @@ const ProductDetails = ({ user }) => {
                         <MenuItem
                           key={sz}
                           value={sz}
-                          label="Size"
-                          placeholder="Size"
+                          label='Size'
+                          placeholder='Size'
                         >
                           {sz || 'Choose Size'}
                         </MenuItem>
@@ -247,7 +252,7 @@ const ProductDetails = ({ user }) => {
 
                   {/*  Quantity */}
                   <Typography
-                    variant="span"
+                    variant='span'
                     sx={{
                       my: 1,
                       display: 'flex',
@@ -258,7 +263,7 @@ const ProductDetails = ({ user }) => {
                   >
                     Quantity:
                     <Button
-                      variant="outlined"
+                      variant='outlined'
                       sx={{
                         ml: 1,
                         fontSize: '15px',
@@ -269,15 +274,15 @@ const ProductDetails = ({ user }) => {
                     </Button>
                     <TextField
                       readOnly
-                      type="number"
+                      type='number'
                       sx={{
                         width: 70,
                       }}
                       value={quantity}
-                      size="small"
+                      size='small'
                     />
                     <Button
-                      variant="outlined"
+                      variant='outlined'
                       sx={{
                         fontSize: '15px',
                       }}
@@ -286,7 +291,7 @@ const ProductDetails = ({ user }) => {
                       +
                     </Button>
                     <Button
-                      variant="contained"
+                      variant='contained'
                       sx={{
                         p: 1,
                       }}
@@ -298,7 +303,7 @@ const ProductDetails = ({ user }) => {
                       onClick={handleAddProductToCart}
                     >
                       <Typography
-                        variant="span"
+                        variant='span'
                         sx={{
                           display: {
                             xs: 'none',
@@ -321,12 +326,12 @@ const ProductDetails = ({ user }) => {
                   </Typography>
 
                   {/*  Category */}
-                  <Typography variant="span" sx={{ my: 1, fontWeight: 600 }}>
+                  <Typography variant='span' sx={{ my: 1, fontWeight: 600 }}>
                     Category: {product?.category}
                   </Typography>
 
                   {/*  Stock */}
-                  <Typography variant="span" sx={{ mb: 1, fontWeight: 600 }}>
+                  <Typography variant='span' sx={{ mb: 1, fontWeight: 600 }}>
                     Availability:
                     {product?.stock <= 10 ? (
                       <span style={{ color: 'red' }}> Out of Stock</span>
@@ -337,7 +342,7 @@ const ProductDetails = ({ user }) => {
 
                   {/*  Review */}
                   <Button
-                    variant="outlined"
+                    variant='outlined'
                     disabled={user?.role === 'admin' ? true : false}
                     onClick={handleClickOpen}
                     sx={{
@@ -362,9 +367,9 @@ const ProductDetails = ({ user }) => {
               ) : (
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                   <Typography
-                    variant="span"
-                    color="red"
-                    textAlign="center"
+                    variant='span'
+                    color='red'
+                    textAlign='center'
                     sx={{
                       m: 4,
                       fontSize: '22px',
