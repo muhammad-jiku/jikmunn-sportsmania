@@ -64,10 +64,10 @@ function App() {
     sportsStore.dispatch(loadUser());
     getStripeApiKey();
 
-    //  enable right click
+    // disable right click
     document.addEventListener('contextmenu', handleDisableRightClick);
 
-    //  disable right click
+    // enable right click
     // document.removeEventListener('contextmenu', handleDisableRightClick);
   }, []);
 
