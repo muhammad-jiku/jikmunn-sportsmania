@@ -65,7 +65,7 @@ function App() {
     getStripeApiKey();
 
     //  enable right click
-    // document.addEventListener('contextmenu', handleDisableRightClick);
+    document.addEventListener('contextmenu', handleDisableRightClick);
 
     //  disable right click
     // document.removeEventListener('contextmenu', handleDisableRightClick);
